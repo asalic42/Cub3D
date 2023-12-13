@@ -6,20 +6,21 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 15:55:48 by asalic            #+#    #+#             */
-/*   Updated: 2023/12/13 19:57:01 by asalic           ###   ########.fr       */
+/*   Updated: 2023/12/13 20:54:14 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../cub.h"
 
-int	handle_error(t_parse* parsing, char *map)
+int	handle_error(t_parse* parsing, t_listmap *list, char *map)
 {
 	(void) *parsing;
 	int fd;
 
 	fd = open(map, O_RDONLY);
-	if (!error_map(fd))
+	if (error_map(fd))
 		return (1);
+	is_good_map(list, map);
 	return (0);
 }
 

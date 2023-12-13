@@ -1,12 +1,12 @@
 NAME 		= cub3D
 CC 			= cc
 CFLAGS		= -Wall -Wextra -Werror
-LIBS		= -Lminilibx-linux -lmlx -Llibft -lft -lGL -lXext -lX11 -lm
+LIBS		= -Lminilibx-linux -lmlx -Llibft -lft -lGL -lXext -lX11 -lm -g3
 PATH_MLX	= minilibx-linux/libmlx.a
 PATH_LIBFT	= libft/libft.a
 INCLUDES	= cub.h minilibx-linux/mlx.h libft/libft.h
 
-SRCS	+= main.c
+SRCS	+= cub.c garbage.c
 SRCS_DIR = map-parsing
 SRCS	:= $(foreach dir,$(SRCS_DIR),$(wildcard $(dir)/*.c)) $(SRCS)
 OBJ_DIR	 = obj
