@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 19:03:42 by raphael           #+#    #+#             */
-/*   Updated: 2023/12/12 20:08:32 by rciaze           ###   ########.fr       */
+/*   Updated: 2023/12/13 20:27:17 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 # include "basique_mlx_needed.h"
 
 # define ESC		65307
+
+# define WIDTH 1240
+# define HEIGHT 640
 
 typedef struct c_tmp_pixel
 {
@@ -52,10 +55,10 @@ typedef struct s_data_for_line
 }	t_data_for_line;
 
 void	stuff_for_line_draw(t_data_for_line *data, t_line *line, void *img);
-void	case_1(t_line *line, t_data_for_line *data, unsigned int color);
-void	case_2(t_line *line, t_data_for_line *data, unsigned int color);
+void	case_1(t_line *line, t_data_for_line *data, unsigned int color, int stop);
+void	case_2(t_line *line, t_data_for_line *data, unsigned int color, int stop);
 int		ft_abs(int n);
-void	draw_line(t_line line, void *img, int color);
+void	draw_line(t_line line, void *img, int color, int stop);
 void	draw_actual_pixels_case_1(t_data_for_line *data, t_line *line,
 			unsigned int color);
 void	draw_actual_pixels_case_2(t_data_for_line *data, t_line *line,	

@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 23:57:06 by raphael           #+#    #+#             */
-/*   Updated: 2023/10/17 15:20:12 by rciaze           ###   ########.fr       */
+/*   Updated: 2023/12/13 20:22:13 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 //	The breseham algorithm is here used with two cases.
 //	You could optimize it more by doing other cases, but it's not necessary.
 
-void	draw_line(t_line line, void *img, int color)
+void	draw_line(t_line line, void *img, int color, int stop)
 {
 	t_data_for_line	data;
 
 	stuff_for_line_draw(&data, &line, img);
 	if (data.dx2 > data.dy2)
-		case_1(&line, &data, color);
+		case_1(&line, &data, color, stop);
 	else
-		case_2(&line, &data, color);
+		case_2(&line, &data, color, stop);
 }
 
 //	These two function are used to calculate the alghorithm.
@@ -32,13 +32,15 @@ void	draw_line(t_line line, void *img, int color)
 //	I will not explain it here,
 //	but you can find very good explanations of it on youtube.
 
-void	case_1(t_line *line, t_data_for_line *data, unsigned int color)
+void	case_1(t_line *line, t_data_for_line *data, unsigned int color, int stop)
 {
 	int				i;
 
 	i = -1;
 	while (i <= data->dx2)
 	{
+		if (line->x1 < stop || line->x1 > WIDTH - stop || line->y1 < stop || line->y1 > HEIGHT - stop)
+			break ;
 		draw_actual_pixels_case_1(data, line, color);
 		i++;
 		line->x1 += data->x_incr;
@@ -51,13 +53,15 @@ void	case_1(t_line *line, t_data_for_line *data, unsigned int color)
 	}
 }
 
-void	case_2(t_line *line, t_data_for_line *data, unsigned int color)
+void	case_2(t_line *line, t_data_for_line *data, unsigned int color, int stop)
 {
 	int				i;
 
 	i = -1;
 	while (i <= data->dy2)
 	{
+		if (line->x1 < stop || line->x1 > WIDTH - stop || line->y1 < stop || line->y1 > HEIGHT - stop)
+			break ;
 		draw_actual_pixels_case_2(data, line, color);
 		i++;
 		line->y1 += data->y_incr;
