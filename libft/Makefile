@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+         #
+#    By: asalic <asalic@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/15 12:06:39 by rciaze            #+#    #+#              #
-#    Updated: 2023/06/14 17:13:51 by rciaze           ###   ########.fr        #
+#    Updated: 2023/12/13 16:56:31 by asalic           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 NAME = libft.a
-CFLAGS = -Wall -Wextra -Werror -c -g3
+CFLAGS = -Wall -Wextra -Werror -c -g3 -D BUFFER_SIZE=42
 COMP = cc $(FLAGS)
 all : $(NAME)
 CLEANF = rm -f *.o

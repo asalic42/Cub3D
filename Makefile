@@ -6,14 +6,16 @@ PATH_MLX	= minilibx-linux/libmlx.a
 PATH_LIBFT	= libft/libft.a
 INCLUDES	= cub.h minilibx-linux/mlx.h libft/libft.h
 
-SRCS	= main.c
-OBJ_DIR	= obj
-OBJ		= $(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
+SRCS	+= main.c
+SRCS_DIR = map-parsing
+SRCS	:= $(foreach dir,$(SRCS_DIR),$(wildcard $(dir)/*.c)) $(SRCS)
+OBJ_DIR	 = obj
+OBJ		 = $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRCS))
 
 all		: $(PATH_MLX) $(PATH_LIBFT) $(NAME) $(INCLUDES)
 
 $(OBJ_DIR)/%.o : %.c
-	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@echo "Generating obj...\n"
 

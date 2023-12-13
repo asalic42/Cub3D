@@ -6,17 +6,21 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:33:42 by asalic            #+#    #+#             */
-/*   Updated: 2023/12/12 19:53:35 by asalic           ###   ########.fr       */
+/*   Updated: 2023/12/13 19:51:03 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-int main(void)
+int main(int ac, char **av)
 {
-    char    str[7] = "coucou";
-    
-    printf("len = %zu\n", ft_strlen(str));
-    printf("ceci est un test de Makefile\n");
+    t_parse parsing;
+
+    if (ac != 2)
+    {
+        ft_printf(RED "Error : not enought args\n" NC);
+        return (0);
+    }
+    handle_error(&parsing, av[1]);
     return (0);
 }
