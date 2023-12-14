@@ -5,58 +5,101 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/13 20:03:04 by asalic            #+#    #+#             */
-/*   Updated: 2023/12/13 20:59:44 by asalic           ###   ########.fr       */
+/*   Created: 2023/12/14 12:38:31 by asalic            #+#    #+#             */
+/*   Updated: 2023/12/14 14:16:53 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../cub.h"
 
-/* A voir demain pour creer une liste qui contient map */
-
-// t_listmap	*create_arg(char *str, int token)
-// {
-// 	t_listmap	*new_arg;
-
-// 	new_arg = ft_calloc(1, sizeof(t_listmap));
-// 	if (!new_arg)
-// 		return (NULL);
-// 	new_arg->value = ;
-// 	new_arg->x = ;
-//     new_arg->y = ;
-// 	new_arg->next = NULL;
-// 	return (new_arg);
-// }
-
-// void	add_arg(t_listmap **list, char *str, int token)
-// {
-// 	t_listmap	*new_arg;
-// 	t_listmap	*current;
-
-// 	new_arg = create_arg(str, token);
-// 	if (!new_arg)
-// 		return ;
-// 	if (*list == NULL)
-// 		*list = copy_list(new_arg);
-// 	else
-// 	{
-// 		current = *list;
-// 		while (current->next != NULL)
-// 			current = current->next;
-// 		current->next = copy_list(new_arg);
-// 	}
-// 	free(new_arg);
-// }
-
-int     is_good_map(t_listmap *list, char *map)
+//If value == SPACE : check if around him, there is only 1 or SPACE or limits of the map
+int     is_contour(int x, int y, char **map, t_data *data)
 {
-    (void)*list;
-    int fd = open(map, O_RDONLY);
-    char *buff;
-    buff = get_next_line(fd);
-    while (buff)
-    {
-        // list = bu
-    }
-    return (0);
+	if (x < data->ptr.width && y < data->ptr.height && map[y][x] && map[y][x] != '1' \
+	&& map[y][x] != ' ')
+	{
+		ft_printf("x : %d, y : %d\n", x, y);
+		return (1);
+	}
+	ft_printf("je renvoie 0\n");
+	return (0);
 }
+
+int	space_check(t_data *data, char **map)
+{
+	if (is_contour(data->x-1, data->y+1, map, data) == 1)
+	{
+		ft_printf("je suis laaaaa 1\n");
+		return (1);
+	}
+	if (is_contour(data->x-1, data->y, map, data) == 1)
+	{
+		ft_printf("je suis laaaaa 2\n");
+		return (1);
+	}
+	if (is_contour(data->x-1, data->y-1, map, data) == 1)
+	{
+		ft_printf("je suis laaaaa3\n");
+		return (1);
+	}
+	if (is_contour(data->x, data->y+1, map, data) == 1)
+	{
+		ft_printf("je suis laaaaa4\n");
+		return (1);
+	}
+	if (is_contour(data->x, data->y-1, map, data) == 1)
+	{
+		ft_printf("je suis laaaaa5\n");
+		return (1);
+	}
+	if (is_contour(data->x+1, data->y+1, map, data) == 1)
+	{
+		ft_printf("je suis laaaaa6\n");
+		return (1);
+	}
+	if (is_contour(data->x+1, data->y, map, data) == 1)
+	{
+		ft_printf("je suis laaaaa7\n");
+		return (1);
+	}
+	if (is_contour(data->x+1, data->y-1, map, data) == 1)
+	{
+		ft_printf("je suis laaaaa8\n");
+		return (1);
+	}
+	return (0);
+}
+
+//Pour l'instant, part du principe que la map est rectangle, mais gere les spaces
+int	main_parse(char **map, t_data *data)
+{
+	data->y = 0;
+	while (map[data->y] && data->y < data->ptr.height)
+	{
+		data->x = 0;
+		while (map[data->y][data->x] && data->x < data->ptr.width)
+		{
+			if (data->y == 0 || data->y == data->ptr.height -1 || data->x == 0
+			|| data->x == data->ptr.width -1)
+			{
+				if (map[data->y][data->x] != '1' && map[data->y][data->x] != ' ')
+				{
+					return (1);
+				}
+				if (map[data->y][data->x] == ' ')
+				{
+					if (space_check(data, map) == 1)
+					{
+						ft_printf("je suis laaaaa\n");
+						return (1);
+					}
+				}
+			}
+			data->x ++;
+		}
+		data->y ++;
+	}
+	ft_printf("right here ?");
+	return (0);
+}
+

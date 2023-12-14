@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 20:48:52 by asalic            #+#    #+#             */
-/*   Updated: 2023/12/13 21:04:25 by asalic           ###   ########.fr       */
+/*   Updated: 2023/12/14 11:05:07 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,6 @@ void	malloc_failure(void)
 {
 	perror("Critical error: (malloc probably failed): ");
     exit (EXIT_FAILURE);
-	// ft_exit(EXIT_FAILURE, true);
 }
 
 void	*ft_malloc(size_t size)
