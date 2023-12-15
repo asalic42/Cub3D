@@ -73,12 +73,13 @@ typedef struct s_data
 }	t_data;
 
 //Errors handle
-int		handle_error(t_parse* parsing, t_listmap *list, char *map);
+int		handle_error(t_data *data, char *map);
 int		error_map(char *map);
 int		only_one_thing(char *check_line, int i, int len_player);
 int     is_good_map(t_listmap *list, char *map);
 void	close_error(t_data *data);
 void	count_error(t_data *data, t_parse *map, int fd);
+void	error_files(t_data *data, char *cub);
 
 //Garbage
 t_garbage		*start_garbage(void);
@@ -94,6 +95,12 @@ void			malloc_failure(void);
 void    print_list(t_listmap *list);
 char	**ft_maptab(char *map, t_data *data);
 void    print_tab(char **tab);
+
+//Utils
+int		is_in_char(char c);
+int		countmap_y(char	*mappy, t_data *data);
+void	countmap_x(char	*mappy, t_data *data);
+void	count_error(t_data *data, t_parse *map, int fd);
 
 int	main_parse(char **map, t_data *data);
 
