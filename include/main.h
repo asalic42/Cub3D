@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 20:37:16 by rciaze            #+#    #+#             */
-/*   Updated: 2023/12/13 20:34:53 by rciaze           ###   ########.fr       */
+/*   Updated: 2023/12/15 15:24:53 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@
 #define PI 3.1415926535
 #define PI2 PI/2
 #define PI3 3*PI/2
-#define DR 0.0174533/3
-
+#define DR 0.0174533/2
 extern float px,py, pdx, pdy, pa;
 extern int map_x, map_y, map_s;
 extern int map[];

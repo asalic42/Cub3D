@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 19:03:42 by raphael           #+#    #+#             */
-/*   Updated: 2023/12/13 20:27:17 by rciaze           ###   ########.fr       */
+/*   Updated: 2023/12/15 15:52:23 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 # define ESC		65307
 
-# define WIDTH 1240
+# define WIDTH 1280
 # define HEIGHT 640
 
 typedef struct c_tmp_pixel

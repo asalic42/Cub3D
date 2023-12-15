@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 23:57:06 by raphael           #+#    #+#             */
-/*   Updated: 2023/12/13 20:22:13 by rciaze           ###   ########.fr       */
+/*   Updated: 2023/12/15 17:37:42 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,18 +84,19 @@ void	draw_actual_pixels_case_1(t_data_for_line *data, t_line *line,
 	int				w;
 
 	pixel_offset = data->img_data + (line->y1 * data->img_width + line->x1)
-		* (data->bits_per_pixel / 8);
+		* (data->bits_per_pixel);
 	*(unsigned int *)pixel_offset = color;
 	w = 0;
 	while (++w <= line->width / 2)
 	{
 		pixel_offset = data->img_data + ((line->y1 - w)
-				* data->img_width + line->x1) * (data->bits_per_pixel / 8);
+				* data->img_width + line->x1) * (data->bits_per_pixel);
 		*(unsigned int *)pixel_offset = color;
 		if (w != line->width / 2 || line->width % 2 == 1)
 		{
 			pixel_offset = data->img_data + ((line->y1 + w)
-					* data->img_width + line->x1) * (data->bits_per_pixel / 8);
+					* data->img_width + line->x1) * (data->bits_per_pixel);
+			
 			*(unsigned int *)pixel_offset = color;
 		}
 	}
@@ -108,18 +109,18 @@ void	draw_actual_pixels_case_2(t_data_for_line *data, t_line *line,
 	int				w;
 
 	pixel_offset = data->img_data + (line->y1 * data->img_width + line->x1)
-		* (data->bits_per_pixel / 8);
+		* (data->bits_per_pixel);
 	*(unsigned int *)pixel_offset = color;
 	w = 0;
 	while (++w <= line->width / 2)
 	{
 		pixel_offset = data->img_data + (line->y1 * data->img_width
-				+ (line->x1 - w)) * (data->bits_per_pixel / 8);
+				+ (line->x1 - w)) * (data->bits_per_pixel);
 		*(unsigned int *)pixel_offset = color;
 		if (w != line->width / 2 || line->width % 2 == 1)
 		{
 			pixel_offset = data->img_data + (line->y1 * data->img_width
-					+ (line->x1 + w)) * (data->bits_per_pixel / 8);
+					+ (line->x1 + w)) * (data->bits_per_pixel);
 			*(unsigned int *)pixel_offset = color;
 		}
 	}

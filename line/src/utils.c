@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 00:06:16 by raphael           #+#    #+#             */
-/*   Updated: 2023/10/17 15:05:11 by rciaze           ###   ########.fr       */
+/*   Updated: 2023/12/15 17:20:55 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ void	stuff_for_line_draw(t_data_for_line *data, t_line *line, void *img)
 
 	data->img_data = mlx_get_data_addr(img, &tmp_p.bits_per_pixel,
 			&tmp_p.size_line, &tmp_p.endian);
-	data->img_width = tmp_p.size_line / 4;
-	data->bits_per_pixel = tmp_p.bits_per_pixel;
+	data->img_width = WIDTH;
+	data->bits_per_pixel = 4;
 	data->ex = ft_abs(line->x2 - line->x1);
 	data->ey = ft_abs(line->y2 - line->y1);
 	data->dx = data->ex * 2;
