@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 20:03:04 by asalic            #+#    #+#             */
-/*   Updated: 2023/12/14 13:30:13 by asalic           ###   ########.fr       */
+/*   Updated: 2023/12/15 15:20:11 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ char	*go_map(t_parse *put, t_data *data)
         tab[x] = put->buffer[x];
         x ++;
     }
+    tab[x] = '\0';
 	return (tab);
 }
 

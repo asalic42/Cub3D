@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:33:42 by asalic            #+#    #+#             */
-/*   Updated: 2023/12/14 14:04:42 by asalic           ###   ########.fr       */
+/*   Updated: 2023/12/15 15:26:33 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int print_error(char *str)
 }
 
 //Count of width
-int	countmap_x(char	*mappy, t_data *data)
+void	countmap_x(char	*mappy, t_data *data)
 {
 	int			width;
 	t_parse	    map;
@@ -28,23 +28,26 @@ int	countmap_x(char	*mappy, t_data *data)
 	fd = open(mappy, O_RDONLY);
 	if (fd == -1)
 		count_error(data, &map, fd);
-	width = 0;
 	map.buffer = get_next_line(fd);
-	while (map.buffer[width] && map.buffer[width] != '\n')
+	while (map.buffer)
 	{
-		if (map.buffer[width] != '1' && map.buffer[width] != '0'
-			&& map.buffer[width] != 'E' && map.buffer[width] != 'N'
-			&& map.buffer[width] != 'W' && map.buffer[width] != 'S' &&
-            map.buffer[width] != ' ')
-			count_error(data, &map, fd);
-		width ++;
-	}
-    while (map.buffer)
+		width = 0;
+		while (map.buffer[width] && map.buffer[width] != '\n')
+		{
+			if (map.buffer[width] != '1' && map.buffer[width] != '0'
+				&& map.buffer[width] != 'E' && map.buffer[width] != 'N'
+				&& map.buffer[width] != 'W' && map.buffer[width] != 'S' &&
+    	        map.buffer[width] != ' ')
+				count_error(data, &map, fd);
+			width ++;
+		}
+		if (data->ptr.width == 0 || width > data->ptr.width)
+			data->ptr.width = width;
         map.buffer = get_next_line(fd);
+	}
     map.buffer = NULL;
 	close(fd);
-    ft_printf("width = %d\n", width);
-	return (width);
+    ft_printf("final width = %d\n", data->ptr.width);
 }
 
 //Count of height
@@ -109,6 +112,14 @@ void	close_error(t_data *data)
 	exit (EXIT_FAILURE);
 }
 
+void	init_data(t_data *data)
+{
+	data->x = 0;
+	data->y = 0;
+	data->ptr.height = 0;
+	data->ptr.width = 0;
+}
+
 int main(int ac, char **av)
 {
     t_parse parsing;
@@ -117,14 +128,15 @@ int main(int ac, char **av)
     if (ac != 2)
         return (print_error(RED "Error : not enought args\n" NC));
     start_garbage();
+	init_data(&data);
     data.ptr.mlx = mlx_init();
     if (!data.ptr.mlx)
         return (1);
-    data.ptr.width = countmap_x(av[1], &data);
+    countmap_x(av[1], &data);
     data.ptr.height = countmap_y(av[1], &data);
     handle_error(&parsing, data.ptr.list, av[1]);
     data.ptr.map = ft_maptab(av[1], &data);
-    if (main_parse(data.ptr.map, &data) == 1)
+    if (!main_parse(data.ptr.map, &data))
     {
         ft_printf("C'est faux");
         return (1);
