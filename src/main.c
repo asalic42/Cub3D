@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2023/12/15 18:03:28 by rciaze           ###   ########.fr       */
+/*   Updated: 2023/12/19 17:21:48 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,176 +28,201 @@ int map[]=
 	1,1,1,1,1,1,1,1,1,1,
 	};
 
-float	distance(float ax, float ay, float bx, float by, float ang)
+float	distance(float ax, float ay, float bx, float by)
 {
-	(void)(ang);
 	return (sqrt((bx - ax) * (bx - ax) + (by - ay) * (by - ay)));
 }
+
+typedef struct s_all_stuff_for_ray_casting
+{
+	int				r;
+	int				mx;
+	int				my;
+	int				mp;
+	int				dof;
+	float			rx;
+	float			ry;
+	float			ra;
+	float			xo;
+	float			yo;
+	float			disH;
+	float			disT;
+	float			hx;
+	float			hy;
+	float			aTan;
+	float			disV;
+	float			vx;
+	float			vy;
+	float			nTan;
+	float			ca;
+	float			lineH;
+	float			lineO;
+	t_line			line;
+	unsigned int	color;
+} t_all_stuff_for_ray_casting;
+
 
 void cast_ray() 
 {
 	t_mlx_stuff *img = get_mlx_ptr();;
-	int r, mx, my, mp, dof;
-	float rx, ry, ra, xo, yo, disT;
-	t_line line;
-	ra = pa - DR * 64;
-	if (ra < 0)
-		ra += 2 * PI;
-	if (ra > 2 * PI)
-		ra -= 2 * PI;
-	for (r = 0; r<128; r++)
+	t_all_stuff_for_ray_casting	all_stuff;
+	all_stuff.ra = pa - DR * 64;
+	if (all_stuff.ra < 0)
+		all_stuff.ra += 2 * PI;
+	if (all_stuff.ra > 2 * PI)
+		all_stuff.ra -= 2 * PI;
+	for (all_stuff.r = 0; all_stuff.r<128; all_stuff.r++)
 	{	
-		dof = 0;
-		float disH = 1000000; // Big value so that the first intersection is always smaller
-		float hx = px; // We set the x coordinates of the intersection to the player's x coordinates
-		float hy = py; // We set the y coordinates of the intersection to the player's y coordinates
-		float aTan = -1/tan(ra); // We calculate the tangent of the angle
+		all_stuff.dof = 0;
+		all_stuff.disH = 1000000; // Big value so that the first intersection is always smaller
+		all_stuff.hx = px; // We set the x coordinates of the intersection to the player's x coordinates
+		all_stuff.hy = py; // We set the y coordinates of the intersection to the player's y coordinates
+		all_stuff.aTan = -1/tan(all_stuff.ra); // We calculate the tangent of the angle
 
-		if (ra > PI) // looking up
+		if (all_stuff.ra > PI) // looking up
 		{	
-			ry = (((int)py / 64) * 64) - 0.0001; // We substract a very small value to avoid rounding errors
-			rx = (py - ry) * aTan + px; // We calculate the x coordinate of the intersection
-			yo = -64; // We set the y offset to -64
-			xo = -yo * aTan; // We calculate the x offset
+			all_stuff.ry = (((int)py / 64) * 64) - 0.0001; // We substract a very small value to avoid rounding errors
+			all_stuff.rx = (py - all_stuff.ry) *all_stuff.aTan + px; // We calculate the x coordinate of the intersection
+			all_stuff.yo = -64; // We set the y offset to -64
+			all_stuff.xo = -all_stuff.yo * all_stuff.aTan; // We calculate the x offset
 		}
 
-		if (ra < PI) // looking down
+		if (all_stuff.ra < PI) // looking down
 		{
-			ry = (((int)py / 64) * 64) + 64; // We add 64 to avoid rounding errors
-			rx = (py - ry) * aTan + px; // We calculate the x coordinate of the intersection
-			yo = 64; // We set the y offset to 64
-			xo = -yo * aTan; // We calculate the x offset
+			all_stuff.ry = (((int)py / 64) * 64) + 64; // We add 64 to avoid rounding errors
+			all_stuff.rx = (py - all_stuff.ry) * all_stuff.aTan + px; // We calculate the x coordinate of the intersection
+			all_stuff.yo = 64; // We set the y offset to 64
+			all_stuff.xo = -all_stuff.yo * all_stuff.aTan; // We calculate the x offset
 		}
 		
-		if (ra == 0 || ra == PI) // looking straight left or right
+		if (all_stuff.ra == 0 || all_stuff.ra == PI) // looking straight left or right
 		{
-			rx = px; // We set the x coordinate of the intersection to the player's x coordinate
-			ry = py; // We set the y coordinate of the intersection to the player's y coordinate
-			dof = 10; // We set the depth of field to 10 to stop the loop
+			all_stuff.rx = px; // We set the x coordinate of the intersection to the player's x coordinate
+			all_stuff.ry = py; // We set the y coordinate of the intersection to the player's y coordinate
+			all_stuff.dof = 10; // We set the depth of field to 10 to stop the loop
 		}
 		
-		while (dof < 10) // Checking for horizontal intersections
+		while (all_stuff.dof < 10) // Checking for horizontal intersections
 		{
-			mx = (int)(rx) / 64; // Map x coordinate
-			my = (int) (ry) / 64; // Map y coordinate
-			mp = my * map_x + mx; // Position on map
-			if (mp > 0 && mp < map_x * map_y && map[mp] == 1) // If there is a wall
+			all_stuff.mx = (int)(all_stuff.rx) / 64; // Map x coordinate
+			all_stuff.my = (int) (all_stuff.ry) / 64; // Map y coordinate
+			all_stuff.mp = all_stuff.my * map_x + all_stuff.mx; // Position on map
+			if (all_stuff.mp > 0 && all_stuff.mp < map_x * map_y && map[all_stuff.mp] == 1) // If there is a wall
 			{
-				dof = 10; // Stop the loop
-				hx = rx; // Save the x coordinates of the intersection
-				hy = ry; // Save the y coordinates of the intersection
-				disH = distance(px, py, hx, hy, ra); // Calculate the distance between the player and the intersection
+				all_stuff.dof = 10; // Stop the loop
+				all_stuff.hx = all_stuff.rx; // Save the x coordinates of the intersection
+				all_stuff.hy = all_stuff.ry; // Save the y coordinates of the intersection
+				all_stuff.disH = distance(px, py, all_stuff.hx, all_stuff.hy); // Calculate the distance between the player and the intersection
 			}
 			else
 			{
-				rx += xo; // If there is no wall, we move to the next intersection
-				ry += yo; // same
-				dof += 1; // continue the loop
+				all_stuff.rx += all_stuff.xo; // If there is no wall, we move to the next intersection
+				all_stuff.ry += all_stuff.yo; // same
+				all_stuff.dof += 1; // continue the loop
 			}
 		}
 	
 		// same initialization as above
-		dof = 0; 
-		float disV = 1000000;  
-		float vx = px; 
-		float vy = py; 
-		float nTan = -tan(ra);
+		all_stuff.dof = 0; 
+		all_stuff.disV = 1000000;  
+		all_stuff.vx = px; 
+		all_stuff.vy = py; 
+		all_stuff.nTan = -tan(all_stuff.ra);
 
-		if (ra > PI2 && ra<PI3) // Looking left 
+		if (all_stuff.ra > PI2 && all_stuff.ra<PI3) // Looking left 
 		{
 			// same as above
-			rx = (((int)px / 64) * 64) - 0.0001; 
-			ry = (px - rx) * nTan + py; 
-			xo = -64; 
-			yo = -xo * nTan; 
+			all_stuff.rx = (((int)px / 64) * 64) - 0.0001; 
+			all_stuff.ry = (px - all_stuff.rx) * all_stuff.nTan + py; 
+			all_stuff.xo = -64; 
+			all_stuff.yo = -all_stuff.xo * all_stuff.nTan; 
 		}
 	
-		if (ra < PI2 || ra > PI3) // Looking right
+		if (all_stuff.ra < PI2 || all_stuff.ra > PI3) // Looking right
 		{
 			// same as above
-			rx = (((int)px / 64) * 64) + 64; 
-			ry = (px - rx) * nTan + py; 
-			xo = 64; 
-			yo = -xo * nTan; 
+			all_stuff.rx = (((int)px / 64) * 64) + 64; 
+			all_stuff.ry = (px - all_stuff.rx) * all_stuff.nTan + py; 
+			all_stuff.xo = 64; 
+			all_stuff.yo = -all_stuff.xo * all_stuff.nTan; 
 		}
 
-		if (ra == 0 || ra == PI) // Looking straight up or down
+		if (all_stuff.ra == 0 || all_stuff.ra == PI) // Looking straight up or down
 		{
 			// same as above
-			ry = py; 
-			rx = px; 
-			dof = 10; 
+			all_stuff.ry = py; 
+			all_stuff.rx = px; 
+			all_stuff.dof = 10; 
 		}
 	
-		while (dof < 10)
+		while (all_stuff.dof < 10)
 		{
-			mx = (int)(rx) / 64; // Map x coordinate
-			my = (int) (ry) / 64; // Map y coordinate
-			mp = my * map_x + mx; // Position on map
-			if (mp > 0 && mp < map_x * map_y && map[mp] == 1) // If there is a wall
+			all_stuff.mx = (int)(all_stuff.rx) / 64; // Map x coordinate
+			all_stuff.my = (int) (all_stuff.ry) / 64; // Map y coordinate
+			all_stuff.mp = all_stuff.my * map_x + all_stuff.mx; // Position on map
+			if (all_stuff.mp > 0 && all_stuff.mp < map_x * map_y && map[all_stuff.mp] == 1) // If there is a wall
 			{
-				dof = 10; // Stop the loop
-				vx = rx; // Save the x coordinates of the intersection
-				vy = ry; // Save the y coordinates of the intersection
-				disV = distance(px, py, vx, vy, ra); // Calculate the distance between the player and the intersection
+				all_stuff.dof = 10; // Stop the loop
+				all_stuff.vx = all_stuff.rx; // Save the x coordinates of the intersection
+				all_stuff.vy = all_stuff.ry; // Save the y coordinates of the intersection
+				all_stuff.disV = distance(px, py, all_stuff.vx, all_stuff.vy); // Calculate the distance between the player and the intersection
 			}
 			else
 			{
-				rx += xo; // If there is no wall, we move to the next intersection
-				ry += yo; // same
-				dof += 1; // continue the loop
+				all_stuff.rx += all_stuff.xo; // If there is no wall, we move to the next intersection
+				all_stuff.ry += all_stuff.yo; // same
+				all_stuff.dof += 1; // continue the loop
 			}
 		}
 	
-		unsigned int color = 0;
 
 		// We compare the distances to the horizontal and vertical intersections
 
-		if (disV < disH) // If the vertical intersection is closer
+		if (all_stuff.disV < all_stuff.disH) // If the vertical intersection is closer
 		{
-			rx = vx; // We set the x coordinates of the intersection to the vertical intersection's x coordinates
-			ry = vy; // We set the y coordinates of the intersection to the vertical intersection's y coordinates
-			disT = disV; // We set the distance to the intersection to the vertical intersection's distance
-			color = mlx_get_color_value(img->mlx_ptr, 0x0000A0); // We set the color to blue
+			all_stuff.rx = all_stuff.vx; // We set the x coordinates of the intersection to the vertical intersection's x coordinates
+			all_stuff.ry = all_stuff.vy; // We set the y coordinates of the intersection to the vertical intersection's y coordinates
+			all_stuff.disT = all_stuff.disV; // We set the distance to the intersection to the vertical intersection's distance
+			all_stuff.color = mlx_get_color_value(img->mlx_ptr, 0x0000A0); // We set the color to blue
 		}
-		else if (disH < disV) // If the horizontal intersection is closer
+		else if (all_stuff.disH < all_stuff.disV) // If the horizontal intersection is closer
 		{
-			rx = hx; // We set the x coordinates of the intersection to the horizontal intersection's x coordinates
-			ry = hy; // We set the y coordinates of the intersection to the horizontal intersection's y coordinates
-			disT = disH ; // We set the distance to the intersection to the horizontal intersection's distance
-			color = mlx_get_color_value(img->mlx_ptr, 0x0000FF); // We set the color to light blue
+			all_stuff.rx = all_stuff.hx; // We set the x coordinates of the intersection to the horizontal intersection's x coordinates
+			all_stuff.ry = all_stuff.hy; // We set the y coordinates of the intersection to the horizontal intersection's y coordinates
+			all_stuff.disT = all_stuff.disH ; // We set the distance to the intersection to the horizontal intersection's distance
+			all_stuff.color = mlx_get_color_value(img->mlx_ptr, 0x0000FF); // We set the color to light blue
 		}
 	
-		draw_line(init_rectangle(rx-1, ry-1, rx+2, ry+2), img->img_ptr, 0x00FF00, 0); // We draw a small square at the intersection
+		draw_line(init_rectangle(all_stuff.rx - 1, all_stuff.ry - 1 , all_stuff.rx + 2, all_stuff.ry + 2), img->img_ptr, 0x00FF00, 0); // We draw a small square at the intersection
 		
-		line = init_line(px, py, rx, ry); // We initialize the line that will draw the ray 
-		line.width = 1;
-		draw_line(line, img->img_ptr, 0x000050, 64); // We draw the line
+		all_stuff.line = init_line(px, py, all_stuff.rx, all_stuff.ry); // We initialize the line that will draw the ray 
+		all_stuff.line.width = 1;
+		draw_line(all_stuff.line, img->img_ptr, 0x000050, 64); // We draw the line
 	
-		float ca = pa - ra; // We calculate the angle between the player's angle and the ray's angle
+		all_stuff.ca = pa - all_stuff.ra; // We calculate the angle between the player's angle and the ray's angle
 
-		if (ca < 0) // We make sure the angle is between 0 and 2*PI
-			ca += 2 * PI; // We add 2*PI if the angle is negative
+		if (all_stuff.ca < 0) // We make sure the angle is between 0 and 2*PI
+			all_stuff.ca += 2 * PI; // We add 2*PI if the angle is negative
 
-		if (ca > 2 * PI) // We make sure the angle is between 0 and 2*PI
-			ca -= 2 * PI; // We substract 2*PI if the angle is positive
+		if (all_stuff. > 2 * PI) // We make sure the angle is between 0 and 2*PI
+			all_stuff. -= 2 * PI; // We substract 2*PI if the angle is positive
 
-		disT = disT * cos(ca); // We multiply the distance to the intersection by the cosine of the angle between the player's angle and the ray's angle
+		all_stuff.disT = all_stuff.disT * cos(all_stuff.ca); // We multiply the distance to the intersection by the cosine of the angle between the player's angle and the ray's angle
 	
-		float lineH = (map_s * 500) / disT; // 500 is the max height of a line
-		if (lineH > 500) // If the line is too big, we cut it.
-			lineH = 500;
-		float lineO = 320 - lineH / 2; // line offset (to center it)
+		all_stuff.lineH = (map_s * 500) / all_stuff.disT; // 500 is the max height of a line
+		if (all_stuff.lineH > 500) // If the line is too big, we cut it.
+			all_stuff.lineH = 500;
+		all_stuff.lineO = 320 - all_stuff.lineH / 2; // line offset (to center it)
 
-		line = init_line(r * 5 + 640, lineH + lineO, r * 5 + 640, lineO); // 5 is the width of the line, 640 is the center of the screen
-		line.width = 5;
-		draw_line(line, img->img_ptr, color, 0);
+		all_stuff.line = init_line(all_stuff.r * 5 + 640, all_stuff.lineH + all_stuff.lineO, all_stuff.r * 5 + 640, lineO); // 5 is the width of the line, 640 is the center of the screen
+		all_stuff.line.width = 5;
+		draw_line(all_stuff.line, img->img_ptr, all_stuff.color, 0);
 
-		ra += DR; // We increment the angle
-		if (ra < 0) // We make sure the angle is between 0 and 2*PI
-			ra += 2 * PI;
-		if (ra > 2 * PI) // We make sure the angle is between 0 and 2*PI
-			ra -= 2 * PI;
+		all_stuff.ra += DR; // We increment the angle
+		if (all_stuff.ra < 0) // We make sure the angle is between 0 and 2*PI
+			all_stuff.ra += 2 * PI;
+		if (all_stuff.ra > 2 * PI) // We make sure the angle is between 0 and 2*PI
+			all_stuff.ra -= 2 * PI;
 	}
 }
 
@@ -205,12 +230,9 @@ void draw_player(t_window *window)
 {	
 	t_line line;
 	
-	//unsigned color = mlx_get_color_value(window->mlx_ptr, 0x555555);
-	
 	draw_line(init_rectangle(0, 0, 640, 640), window->img_ptr, mlx_get_color_value(window->mlx_ptr, 0x555555), 0);
 	draw_line(init_rectangle(640, 0, 1280, 320), window->img_ptr, mlx_get_color_value(window->mlx_ptr, 0x651684), 0);
 	draw_line(init_rectangle(640, 320, 1280, 640), window->img_ptr, mlx_get_color_value(window->mlx_ptr, 0x665464), 0);
-	
 	if (px > 630)
 		px = 10;
 	if (py > 630)
@@ -222,17 +244,18 @@ void draw_player(t_window *window)
 	draw_map();
 	cast_ray();
 	draw_line(init_rectangle(px - 5, py - 5, px+5, py+5), window->img_ptr,0xFFFF00, 5);
-	
 	line = init_line(px, py, px + pdx * 5, py + pdy * 5);
 	line.width = 2;
 	draw_line(line, window->img_ptr, 0xFFFF00, 1);
 	mlx_put_image_to_window(window->mlx_ptr, window->win_ptr, window->img_ptr, 0, 0);
-	
 }
 
 void draw_map(void)
 {
-	int x, y, x0, y0;
+	int x;
+	int y;
+	int x0;
+	int y0;
 	t_mlx_stuff *img = get_mlx_ptr();
 	for (y = 0; y < map_y; y++)
 	{

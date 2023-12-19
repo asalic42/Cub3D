@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 20:36:44 by rciaze            #+#    #+#             */
-/*   Updated: 2023/12/13 20:30:10 by rciaze           ###   ########.fr       */
+/*   Updated: 2023/12/19 15:12:55 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ int	key_press(int keycode, t_window *window)
 	window->img_ptr = mlx_new_image(window->mlx_ptr, 1280, 640);
 	window->img_data = (mlx_get_data_addr(window->img_ptr, &(window->bits),
 				&(window->size_line_img), &(window->endian)));
-	//update_mlx_infos(window->mlx_ptr, window->win_ptr, window->img_ptr);
 	draw_player(window);
 	return (0);
 }
