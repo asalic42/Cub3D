@@ -1,6 +1,7 @@
 {
 	"files.associations": {
 		"unistd.h": "c",
-		"rectangle.h": "c"
+		"rectangle.h": "c",
+		"main.h": "c"
 	}
 }

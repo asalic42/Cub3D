@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 20:36:44 by rciaze            #+#    #+#             */
-/*   Updated: 2023/12/19 15:12:55 by rciaze           ###   ########.fr       */
+/*   Updated: 2023/12/19 18:11:10 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,42 +14,45 @@
 
 int	key_press(int keycode, t_window *window)
 {
+	t_player_pos	*player;
+
+	player = get_singleton_instance();
 	if (keycode == 65307)
-		return (mlx_destroy_window(window->mlx_ptr, window->win_ptr));
+		return (destroy_window(window));
 	if (keycode == 'a') 
 	{
-		pa -= 0.1;
-		if (pa < 0)
-			pa += 2* PI;
-		pdx = cos(pa) * 5;
-		pdy = sin(pa) * 5;
+		player->a -= 0.1;
+		if (player->a < 0)
+			player->a += 2* PI;
+		player->dx = cos(player->a) * 5;
+		player->dy = sin(player->a) * 5;
 	}
 	if (keycode == 'd')
 	{
-		pa += 0.1;
-		if (pa > 2 * PI)
-			pa -= 2 * PI;
-		pdx = cos(pa) * 5;
-		pdy = sin(pa) * 5;
+		player->a += 0.1;
+		if (player->a > 2 * PI)
+			player->a -= 2 * PI;
+		player->dx = cos(player->a) * 5;
+		player->dy = sin(player->a) * 5;
 	}
 	if (keycode == 'w')
 	{
-		px += pdx;
-		py += pdy;
+		player->x += player->dx;
+		player->y += player->dy;
 	}
 	if (keycode == 's')
 	{
-		px -= pdx;
-		py -= pdy;
+		player->x -= player->dx;
+		player->y -= player->dy;
 	}
-	if (py > 640)
-		py = 0;
-	if (py < 0)
-		py = 640;
-	if (px > 640)
-		px = 0;
-	if (px < 0)
-		px = 640;
+	if (player->y > 640)
+		player->y = 0;
+	if (player->y < 0)
+		player->y = 640;
+	if (player->x > 640)
+		player->x = 0;
+	if (player->x < 0)
+		player->x = 640;
 	mlx_destroy_image(window->mlx_ptr, window->img_ptr);
 	window->img_ptr = mlx_new_image(window->mlx_ptr, 1280, 640);
 	window->img_data = (mlx_get_data_addr(window->img_ptr, &(window->bits),
@@ -66,6 +69,9 @@ int	handle_no_event(void *window)
 
 int	create_window(t_window *window)
 {
+	t_player_pos	*player;
+
+	player = get_singleton_instance();	
 	window->bits = 3;
 	window->size_line_img = 1280;
 	window->mlx_ptr = mlx_init();
@@ -87,14 +93,15 @@ int	create_window(t_window *window)
 			(window->mlx_ptr, window->img_ptr), mlx_destroy_window
 			(window->mlx_ptr, window->win_ptr), mlx_destroy_display
 			(window->mlx_ptr), free(window->mlx_ptr), 0);
-	px = 300;
-	py = 300;
-	pdx = cos(pa) * 5;
-	pdy = sin(pa) * 5;
+	player->x = 300;
+	player->y = 300;
+	player->dx = cos(player->a) * 5;
+	player->dy = sin(player->a) * 5;
 	return (1);
 }
 
 int	destroy_window(t_window *window)
 {
+	printf("avg time by frame = %f, %d total frames rendered\n", prout / compteur, compteur);
 	return (mlx_destroy_window(window->mlx_ptr, window->win_ptr));
 }

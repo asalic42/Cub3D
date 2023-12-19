@@ -6,13 +6,16 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2023/12/19 17:21:48 by rciaze           ###   ########.fr       */
+/*   Updated: 2023/12/19 18:15:18 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/main.h"
 
-float px=100, py=100, pdx = 0, pdy = 0, pa = 0;
+#include <time.h> 
+
+double prout;int compteur = 0;
+
 int map_x=10, map_y=10, map_s=64;
 int map[]=          
 	{
@@ -47,7 +50,7 @@ typedef struct s_all_stuff_for_ray_casting
 	float			yo;
 	float			disH;
 	float			disT;
-	float			hx;
+	float			hx;	
 	float			hy;
 	float			aTan;
 	float			disV;
@@ -59,46 +62,48 @@ typedef struct s_all_stuff_for_ray_casting
 	float			lineO;
 	t_line			line;
 	unsigned int	color;
+	t_player_pos	*player;
 } t_all_stuff_for_ray_casting;
-
 
 void cast_ray() 
 {
 	t_mlx_stuff *img = get_mlx_ptr();;
 	t_all_stuff_for_ray_casting	all_stuff;
-	all_stuff.ra = pa - DR * 64;
+	all_stuff.player = get_singleton_instance();
+	all_stuff.ra = all_stuff.player->a - DR * 64;
 	if (all_stuff.ra < 0)
 		all_stuff.ra += 2 * PI;
 	if (all_stuff.ra > 2 * PI)
 		all_stuff.ra -= 2 * PI;
+	clock_t start = clock();
 	for (all_stuff.r = 0; all_stuff.r<128; all_stuff.r++)
 	{	
 		all_stuff.dof = 0;
 		all_stuff.disH = 1000000; // Big value so that the first intersection is always smaller
-		all_stuff.hx = px; // We set the x coordinates of the intersection to the player's x coordinates
-		all_stuff.hy = py; // We set the y coordinates of the intersection to the player's y coordinates
+		all_stuff.hx = all_stuff.player->x; // We set the x coordinates of the intersection to the player's x coordinates
+		all_stuff.hy = all_stuff.player->y; // We set the y coordinates of the intersection to the player's y coordinates
 		all_stuff.aTan = -1/tan(all_stuff.ra); // We calculate the tangent of the angle
 
 		if (all_stuff.ra > PI) // looking up
 		{	
-			all_stuff.ry = (((int)py / 64) * 64) - 0.0001; // We substract a very small value to avoid rounding errors
-			all_stuff.rx = (py - all_stuff.ry) *all_stuff.aTan + px; // We calculate the x coordinate of the intersection
+			all_stuff.ry = (((int)all_stuff.player->y / 64) * 64) - 0.0001; // We substract a very small value to avoid rounding errors
+			all_stuff.rx = (all_stuff.player->y - all_stuff.ry) *all_stuff.aTan + all_stuff.player->x; // We calculate the x coordinate of the intersection
 			all_stuff.yo = -64; // We set the y offset to -64
 			all_stuff.xo = -all_stuff.yo * all_stuff.aTan; // We calculate the x offset
 		}
 
 		if (all_stuff.ra < PI) // looking down
 		{
-			all_stuff.ry = (((int)py / 64) * 64) + 64; // We add 64 to avoid rounding errors
-			all_stuff.rx = (py - all_stuff.ry) * all_stuff.aTan + px; // We calculate the x coordinate of the intersection
+			all_stuff.ry = (((int)all_stuff.player->y / 64) * 64) + 64; // We add 64 to avoid rounding errors
+			all_stuff.rx = (all_stuff.player->y - all_stuff.ry) * all_stuff.aTan + all_stuff.player->x; // We calculate the x coordinate of the intersection
 			all_stuff.yo = 64; // We set the y offset to 64
 			all_stuff.xo = -all_stuff.yo * all_stuff.aTan; // We calculate the x offset
 		}
 		
 		if (all_stuff.ra == 0 || all_stuff.ra == PI) // looking straight left or right
 		{
-			all_stuff.rx = px; // We set the x coordinate of the intersection to the player's x coordinate
-			all_stuff.ry = py; // We set the y coordinate of the intersection to the player's y coordinate
+			all_stuff.rx = all_stuff.player->x; // We set the x coordinate of the intersection to the player's x coordinate
+			all_stuff.ry = all_stuff.player->y; // We set the y coordinate of the intersection to the player's y coordinate
 			all_stuff.dof = 10; // We set the depth of field to 10 to stop the loop
 		}
 		
@@ -112,7 +117,7 @@ void cast_ray()
 				all_stuff.dof = 10; // Stop the loop
 				all_stuff.hx = all_stuff.rx; // Save the x coordinates of the intersection
 				all_stuff.hy = all_stuff.ry; // Save the y coordinates of the intersection
-				all_stuff.disH = distance(px, py, all_stuff.hx, all_stuff.hy); // Calculate the distance between the player and the intersection
+				all_stuff.disH = distance(all_stuff.player->x, all_stuff.player->y, all_stuff.hx, all_stuff.hy); // Calculate the distance between the player and the intersection
 			}
 			else
 			{
@@ -125,15 +130,15 @@ void cast_ray()
 		// same initialization as above
 		all_stuff.dof = 0; 
 		all_stuff.disV = 1000000;  
-		all_stuff.vx = px; 
-		all_stuff.vy = py; 
+		all_stuff.vx = all_stuff.player->x; 
+		all_stuff.vy = all_stuff.player->y; 
 		all_stuff.nTan = -tan(all_stuff.ra);
 
 		if (all_stuff.ra > PI2 && all_stuff.ra<PI3) // Looking left 
 		{
 			// same as above
-			all_stuff.rx = (((int)px / 64) * 64) - 0.0001; 
-			all_stuff.ry = (px - all_stuff.rx) * all_stuff.nTan + py; 
+			all_stuff.rx = (((int)all_stuff.player->x / 64) * 64) - 0.0001; 
+			all_stuff.ry = (all_stuff.player->x - all_stuff.rx) * all_stuff.nTan + all_stuff.player->y; 
 			all_stuff.xo = -64; 
 			all_stuff.yo = -all_stuff.xo * all_stuff.nTan; 
 		}
@@ -141,8 +146,8 @@ void cast_ray()
 		if (all_stuff.ra < PI2 || all_stuff.ra > PI3) // Looking right
 		{
 			// same as above
-			all_stuff.rx = (((int)px / 64) * 64) + 64; 
-			all_stuff.ry = (px - all_stuff.rx) * all_stuff.nTan + py; 
+			all_stuff.rx = (((int)all_stuff.player->x / 64) * 64) + 64; 
+			all_stuff.ry = (all_stuff.player->x - all_stuff.rx) * all_stuff.nTan + all_stuff.player->y; 
 			all_stuff.xo = 64; 
 			all_stuff.yo = -all_stuff.xo * all_stuff.nTan; 
 		}
@@ -150,8 +155,8 @@ void cast_ray()
 		if (all_stuff.ra == 0 || all_stuff.ra == PI) // Looking straight up or down
 		{
 			// same as above
-			all_stuff.ry = py; 
-			all_stuff.rx = px; 
+			all_stuff.ry = all_stuff.player->y; 
+			all_stuff.rx = all_stuff.player->x; 
 			all_stuff.dof = 10; 
 		}
 	
@@ -165,7 +170,7 @@ void cast_ray()
 				all_stuff.dof = 10; // Stop the loop
 				all_stuff.vx = all_stuff.rx; // Save the x coordinates of the intersection
 				all_stuff.vy = all_stuff.ry; // Save the y coordinates of the intersection
-				all_stuff.disV = distance(px, py, all_stuff.vx, all_stuff.vy); // Calculate the distance between the player and the intersection
+				all_stuff.disV = distance(all_stuff.player->x, all_stuff.player->y, all_stuff.vx, all_stuff.vy); // Calculate the distance between the player and the intersection
 			}
 			else
 			{
@@ -195,17 +200,17 @@ void cast_ray()
 	
 		draw_line(init_rectangle(all_stuff.rx - 1, all_stuff.ry - 1 , all_stuff.rx + 2, all_stuff.ry + 2), img->img_ptr, 0x00FF00, 0); // We draw a small square at the intersection
 		
-		all_stuff.line = init_line(px, py, all_stuff.rx, all_stuff.ry); // We initialize the line that will draw the ray 
+		all_stuff.line = init_line(all_stuff.player->x, all_stuff.player->y, all_stuff.rx, all_stuff.ry); // We initialize the line that will draw the ray 
 		all_stuff.line.width = 1;
 		draw_line(all_stuff.line, img->img_ptr, 0x000050, 64); // We draw the line
 	
-		all_stuff.ca = pa - all_stuff.ra; // We calculate the angle between the player's angle and the ray's angle
+		all_stuff.ca = all_stuff.player->a - all_stuff.ra; // We calculate the angle between the player's angle and the ray's angle
 
 		if (all_stuff.ca < 0) // We make sure the angle is between 0 and 2*PI
 			all_stuff.ca += 2 * PI; // We add 2*PI if the angle is negative
 
-		if (all_stuff. > 2 * PI) // We make sure the angle is between 0 and 2*PI
-			all_stuff. -= 2 * PI; // We substract 2*PI if the angle is positive
+		if (all_stuff.ca > 2 * PI) // We make sure the angle is between 0 and 2*PI
+			all_stuff.ca -= 2 * PI; // We substract 2*PI if the angle is positive
 
 		all_stuff.disT = all_stuff.disT * cos(all_stuff.ca); // We multiply the distance to the intersection by the cosine of the angle between the player's angle and the ray's angle
 	
@@ -214,7 +219,7 @@ void cast_ray()
 			all_stuff.lineH = 500;
 		all_stuff.lineO = 320 - all_stuff.lineH / 2; // line offset (to center it)
 
-		all_stuff.line = init_line(all_stuff.r * 5 + 640, all_stuff.lineH + all_stuff.lineO, all_stuff.r * 5 + 640, lineO); // 5 is the width of the line, 640 is the center of the screen
+		all_stuff.line = init_line(all_stuff.r * 5 + 640, all_stuff.lineH + all_stuff.lineO, all_stuff.r * 5 + 640, all_stuff.lineO); // 5 is the width of the line, 640 is the center of the screen
 		all_stuff.line.width = 5;
 		draw_line(all_stuff.line, img->img_ptr, all_stuff.color, 0);
 
@@ -224,27 +229,32 @@ void cast_ray()
 		if (all_stuff.ra > 2 * PI) // We make sure the angle is between 0 and 2*PI
 			all_stuff.ra -= 2 * PI;
 	}
+	clock_t end = clock();
+	prout = (double)(end - start) / CLOCKS_PER_SEC;
+	compteur++;
 }
 
 void draw_player(t_window *window) 
 {	
 	t_line line;
-	
+	t_player_pos *player;
+
+	player = get_singleton_instance();	
 	draw_line(init_rectangle(0, 0, 640, 640), window->img_ptr, mlx_get_color_value(window->mlx_ptr, 0x555555), 0);
 	draw_line(init_rectangle(640, 0, 1280, 320), window->img_ptr, mlx_get_color_value(window->mlx_ptr, 0x651684), 0);
 	draw_line(init_rectangle(640, 320, 1280, 640), window->img_ptr, mlx_get_color_value(window->mlx_ptr, 0x665464), 0);
-	if (px > 630)
-		px = 10;
-	if (py > 630)
-		py = 10;
-	if (px < 10)
-		px = 630;
-	if (py < 10)
-		py = 630;
+	if (player->x > 630)
+		player->x = 10;
+	if (player->y > 630)
+		player->y = 10;
+	if (player->x < 10)
+		player->x = 630;
+	if (player->y < 10)
+		player->y = 630;
 	draw_map();
 	cast_ray();
-	draw_line(init_rectangle(px - 5, py - 5, px+5, py+5), window->img_ptr,0xFFFF00, 5);
-	line = init_line(px, py, px + pdx * 5, py + pdy * 5);
+	draw_line(init_rectangle(player->x - 5, player->y - 5, player->x+5, player->y+5), window->img_ptr,0xFFFF00, 5);
+	line = init_line(player->x, player->y, player->x + player->dx * 5, player->y + player->dy * 5);
 	line.width = 2;
 	draw_line(line, window->img_ptr, 0xFFFF00, 1);
 	mlx_put_image_to_window(window->mlx_ptr, window->win_ptr, window->img_ptr, 0, 0);
