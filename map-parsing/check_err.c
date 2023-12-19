@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 15:55:48 by asalic            #+#    #+#             */
-/*   Updated: 2023/12/15 15:57:17 by asalic           ###   ########.fr       */
+/*   Updated: 2023/12/19 14:50:03 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	handle_error(t_data *data, char *map)
 {
+	error_files(data, map);
 	if (!error_map(map))
 		return (0);
-	error_files(data, map);
 	return (1);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
+/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:41:32 by rciaze            #+#    #+#             */
-/*   Updated: 2022/11/23 15:34:55 by rciaze           ###   ########.fr       */
+/*   Updated: 2023/12/19 14:23:39 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	*ft_itoa(int n)
 		return (ft_strdup("-2147483648"));
 	boolean = 0;
 	i = how_many_digits(n) - 1;
-	str = malloc(how_many_digits(n) + 1 * sizeof(char));
+	str = ft_malloc(how_many_digits(n) + 1 * sizeof(char));
 	if (!str)
 		return (NULL);
 	str[how_many_digits(n)] = '\0';

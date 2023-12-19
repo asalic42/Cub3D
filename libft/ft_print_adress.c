@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_adress.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
+/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 09:00:21 by rciaze            #+#    #+#             */
-/*   Updated: 2022/12/02 11:37:48 by rciaze           ###   ########.fr       */
+/*   Updated: 2023/12/19 14:23:44 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	ft_print_adress(void *p, char *base, int i)
 		return (ft_putstr("(nil)"));
 	if ((long long int)p == -1)
 		return (ft_putstr("0xffffffffffffffff"));
-	str = malloc ((what_size_malloc(p) + 1) * sizeof(char));
+	str = ft_malloc ((what_size_malloc(p) + 1) * sizeof(char));
 	if (!str)
 		return (0);
 	if ((long long int)p < 0)

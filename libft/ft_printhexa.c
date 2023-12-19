@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printhexa.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
+/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 17:34:50 by zbp15             #+#    #+#             */
-/*   Updated: 2022/12/02 11:38:16 by rciaze           ###   ########.fr       */
+/*   Updated: 2023/12/19 14:23:50 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	ft_print_hexa(unsigned int n, char *base)
 	int		c;
 
 	c = how_many_digits3(n);
-	str = malloc ((c + 1) * sizeof(char));
+	str = ft_malloc ((c + 1) * sizeof(char));
 	if (!str)
 		return (0);
 	i = c;

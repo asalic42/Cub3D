@@ -80,6 +80,7 @@ int     is_good_map(t_listmap *list, char *map);
 void	close_error(t_data *data);
 void	count_error(t_data *data, t_parse *map, int fd);
 void	error_files(t_data *data, char *cub);
+int		close_wndo(t_data *data);
 
 //Garbage
 t_garbage		*start_garbage(void);

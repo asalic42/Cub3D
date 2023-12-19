@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 15:53:38 by asalic            #+#    #+#             */
-/*   Updated: 2023/12/15 15:58:29 by asalic           ###   ########.fr       */
+/*   Updated: 2023/12/19 14:50:19 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int	is_goodfile(char *cub)
 	fd = open(cub, O_RDONLY);
 	if (fd <= 0)
 	{
-		perror("Error");
-		close(fd);
+		perror(RED "Error");
+		ft_printf(NC);
 		return (0);
 	}
 	close(fd);
@@ -66,13 +66,10 @@ int	is_goodext(char *cub)
 void	error_files(t_data *data, char *cub)
 {
 	if (!is_goodfile(cub))
-	{
-		ft_printf(RED"Error: Mauvais fichier\n"NC);
 		close_error(data);
-	}
 	if (!is_goodext(cub))
 	{
-		ft_printf(RED"Error: Mauvaise extension\n"NC);
+		ft_printf(RED"Error: wrong extension\n"NC);
 		close_error(data);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:33:42 by asalic            #+#    #+#             */
-/*   Updated: 2023/12/15 15:57:28 by asalic           ###   ########.fr       */
+/*   Updated: 2023/12/19 14:40:22 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,26 @@ int print_error(char *str)
     return (1);
 }
 
+//Close and free everything
+int	close_wndo(t_data *data)
+{
+	int	i;
 
+	i = 0;
+	mlx_destroy_window(data->ptr.mlx, data->ptr.wndo);
+	ft_printf(GREEN "Window is closing\n" NC);
+	mlx_destroy_display(data->ptr.mlx);
+	free(data->ptr.mlx);
+    free_garbage();
+	exit (EXIT_FAILURE);
+}
 
 //Close in case of error
 void	close_error(t_data *data)
 {
 	mlx_destroy_display(data->ptr.mlx);
 	free(data->ptr.mlx);
+	free_garbage();
 	exit (EXIT_FAILURE);
 }
 
@@ -65,6 +78,6 @@ int main(int ac, char **av)
 		free(data.ptr.mlx);
 		return (0);
 	}
-    // close_wndow(&data);
+    close_wndo(&data);
     return (0);
 }

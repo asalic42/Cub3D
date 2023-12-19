@@ -3,27 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
+/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 11:38:36 by rciaze            #+#    #+#             */
-/*   Updated: 2023/02/01 12:13:46 by rciaze           ###   ########.fr       */
+/*   Updated: 2023/12/19 14:42:23 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*read_fail(char **str, char **buffer_string)
+char	*read_fail(char **str)
 {
 	char	*temp;
 	char	*temp2;
 	int		i;
 
-	free(*buffer_string);
 	if (!str[0][0])
-	{
-		free(str[0]);
 		return (NULL);
-	}
 	i = 0;
 	while (str[0][i] != '\n' && str[0][i])
 		i++;
@@ -96,7 +92,7 @@ char	*get_next_line(int fd)
 
 	if (BUFFER_SIZE < 0)
 		return (NULL);
-	buffer_string = malloc((BUFFER_SIZE + 1) * sizeof(char));
+	buffer_string = ft_malloc((BUFFER_SIZE + 1) * sizeof(char));
 	boolean = 0;
 	if (!buffer_string)
 		return (NULL);
@@ -104,11 +100,8 @@ char	*get_next_line(int fd)
 	if (!read(fd, buffer_string, BUFFER_SIZE))
 		boolean = 1;
 	if (boolean && static_string)
-		return (read_fail(&static_string, &buffer_string));
+		return (read_fail(&static_string));
 	else if (boolean || (!buffer_string[0] && !static_string))
-	{
-		free(buffer_string);
 		return (NULL);
-	}
 	return (cut_cut_cut(&static_string, &buffer_string, fd));
 }

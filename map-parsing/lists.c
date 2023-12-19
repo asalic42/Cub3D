@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 20:03:04 by asalic            #+#    #+#             */
-/*   Updated: 2023/12/15 15:20:11 by asalic           ###   ########.fr       */
+/*   Updated: 2023/12/19 13:43:53 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_listmap	*create_arg(int x, int y, int value)
 
 	new_arg = ft_malloc(sizeof(t_listmap));
 	if (!new_arg)
-		return (NULL);
+		return (free_garbage(), NULL);
 	new_arg->value = value;
 	new_arg->x = x;
     new_arg->y = y;
@@ -94,8 +94,10 @@ char	*go_map(t_parse *put, t_data *data)
 
 	tab = ft_malloc((data->ptr.width +1) * sizeof(char));
 	if (!tab)
+    {
+	    close_wndo(data);
         return (NULL);
-	// close_wndow(data);
+    }
     put->buffer = get_next_line(put->fd);
     while (put->buffer && put->buffer[x] != '\n' && put->buffer[x] != '\0')
     {
@@ -116,8 +118,10 @@ char	**ft_maptab(char *map, t_data *data)
 	put.fd = open(map, O_RDONLY);
 	realmap = ft_malloc((data->ptr.height * data->ptr.width+1) * sizeof(char *));
 	if (!realmap)
+    {
+	    close_wndo(data);
         return (NULL);
-	// close_wndow(data);
+    }
 	y = 0;
 	while (y < data->ptr.height)
 	{
