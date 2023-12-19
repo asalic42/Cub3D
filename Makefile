@@ -6,7 +6,7 @@
 #    By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/08 09:08:15 by rciaze            #+#    #+#              #
-#    Updated: 2023/12/19 18:14:47 by rciaze           ###   ########.fr        #
+#    Updated: 2023/12/19 18:44:01 by rciaze           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRCS 		= \
 				$(SRC)main.c \
 				$(SRC)utils.c \
 				$(SRC)design_p_player.c \
+				$(SRC)design_p_map.c \
 				$(LINE)utils.c \
 				$(LINE)draw_lines.c \
 				$(LINE)design_p_mlx.c \

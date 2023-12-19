@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 20:36:44 by rciaze            #+#    #+#             */
-/*   Updated: 2023/12/19 18:11:10 by rciaze           ###   ########.fr       */
+/*   Updated: 2023/12/19 18:43:49 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	key_press(int keycode, t_window *window)
 {
 	t_player_pos	*player;
 
-	player = get_singleton_instance();
+	player = get_player_instance();
 	if (keycode == 65307)
 		return (destroy_window(window));
 	if (keycode == 'a') 
@@ -71,7 +71,7 @@ int	create_window(t_window *window)
 {
 	t_player_pos	*player;
 
-	player = get_singleton_instance();	
+	player = get_player_instance();	
 	window->bits = 3;
 	window->size_line_img = 1280;
 	window->mlx_ptr = mlx_init();
@@ -97,6 +97,27 @@ int	create_window(t_window *window)
 	player->y = 300;
 	player->dx = cos(player->a) * 5;
 	player->dy = sin(player->a) * 5;
+	t_map	*map;
+
+	map = get_map_instance();
+	map->x = 10;
+	map->y = 10;
+	map->s = 64;
+	map->map = malloc(100 * sizeof(int));
+	
+	int prout[100] = 
+	{1,1,1,1,1,1,1,1,1,1,
+	1,0,1,0,0,0,0,0,0,1,
+	1,0,1,0,0,0,0,0,0,1,
+	1,0,1,0,0,1,1,1,0,1,
+	1,0,1,0,0,1,0,1,0,1,
+	1,0,0,0,0,1,0,1,0,1,
+	1,0,0,0,0,1,0,1,0,1,
+	1,0,1,0,0,0,0,0,0,1,
+	1,0,0,0,0,0,0,0,0,1,
+	1,1,1,1,1,1,1,1,1,1};
+
+	memcpy(map->map, prout, 100 * sizeof(int));
 	return (1);
 }
 
