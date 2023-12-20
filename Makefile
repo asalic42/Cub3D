@@ -6,7 +6,7 @@
 #    By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/08 09:08:15 by rciaze            #+#    #+#              #
-#    Updated: 2023/12/19 18:44:01 by rciaze           ###   ########.fr        #
+#    Updated: 2023/12/20 15:24:29 by rciaze           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,8 @@ SRCS 		= \
 				$(SRC)utils.c \
 				$(SRC)design_p_player.c \
 				$(SRC)design_p_map.c \
+				$(SRC)ray_casting_utils.c \
+				$(SRC)ray_casting_utils2.c \
 				$(LINE)utils.c \
 				$(LINE)draw_lines.c \
 				$(LINE)design_p_mlx.c \

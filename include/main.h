@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 20:37:16 by rciaze            #+#    #+#             */
-/*   Updated: 2023/12/19 18:49:45 by rciaze           ###   ########.fr       */
+/*   Updated: 2023/12/20 16:09:35 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@
 # include <stdlib.h>
 # include <string.h>
 
-#define PI 3.1415926535
-#define PI2 PI/2
-#define PI3 3*PI/2
-#define DR 0.0174533/2
+# define PI 3.1415926535
+# define PI2 PI / 2
+# define PI3 3*PI / 2
+# define DR 0.0174533 / 2
 extern double prout;
 extern int compteur;
 
@@ -47,16 +47,16 @@ typedef struct s_window
 	int		bits;
 	int		size_line_img;
 	int		endian;
-} t_window;
+}	t_window;
 
 typedef struct s_player_pos
 {
-	float x;
-	float y;
-	float dx;
-	float dy;
-	float a;
-} t_player_pos;
+	float	x;
+	float	y;
+	float	dx;
+	float	dy;
+	float	a;
+}	t_player_pos;
 
 typedef struct s_map
 {
@@ -64,7 +64,7 @@ typedef struct s_map
 	int		y;
 	int		s;
 	int 	*map;
-} t_map;
+}	t_map;
 
 typedef struct s_all_stuff_for_ray_casting
 {
@@ -78,25 +78,25 @@ typedef struct s_all_stuff_for_ray_casting
 	float			ra;
 	float			xo;
 	float			yo;
-	float			disH;
-	float			disT;
+	float			dist_h;
+	float			dist_t;
 	float			hx;	
 	float			hy;
-	float			aTan;
-	float			disV;
+	float			a_tan;
+	float			dist_v;
 	float			vx;
 	float			vy;
-	float			nTan;
+	float			n_tan;
 	float			ca;
-	float			lineH;
-	float			lineO;
+	float			line_h;
+	float			line_off;
 	t_line			line;
 	unsigned int	color;
 	t_player_pos	*player;
 	t_map			*map;
-} t_all_stuff_for_ray_casting;
+}	t_all_stuff_for_ray_casting;
 
-void			draw_map(void);
+void			draw_map(t_mlx_stuff *img, t_map *map);
 int				key_press(int keycode, t_window *window);
 int				handle_no_event(void *window);
 int				create_window(t_window *window);
@@ -104,5 +104,19 @@ int				destroy_window(t_window *window);
 void			draw_player(t_window *window);
 t_map			*get_map_instance(void);
 t_player_pos	*get_player_instance(void);
-
+void			up_or_down(t_all_stuff_for_ray_casting *all_stuff);
+void			find_closest_horizontal_intersection(
+					t_all_stuff_for_ray_casting *all_stuff);
+void			left_or_right(t_all_stuff_for_ray_casting *all_stuff);
+void			find_closest_vertical_intersection(
+					t_all_stuff_for_ray_casting *all_stuff);
+float			distance(float ax, float ay, float bx, float by);
+void			comp_distance(t_all_stuff_for_ray_casting *all_stuff,
+					t_mlx_stuff *img);
+float			distance(float ax, float ay, float bx, float by);
+void			init_ray(t_all_stuff_for_ray_casting *all_stuff);
+void			init_distances(t_all_stuff_for_ray_casting *all_stuff);
+void			calculate_line_height(t_all_stuff_for_ray_casting *all_stuff);
+void			increment_angle(t_all_stuff_for_ray_casting *all_stuff);
+void			is_player_out_of_bouds(t_player_pos *player);
 #endif
