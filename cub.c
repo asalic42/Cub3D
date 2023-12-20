@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:33:42 by asalic            #+#    #+#             */
-/*   Updated: 2023/12/19 14:40:22 by asalic           ###   ########.fr       */
+/*   Updated: 2023/12/20 16:17:29 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void	init_data(t_data *data)
 
 int main(int ac, char **av)
 {
-    // t_parse parsing;
     t_data  data;
 
     if (ac != 2)
@@ -66,9 +65,12 @@ int main(int ac, char **av)
     countmap_x(av[1], &data);
     data.ptr.height = countmap_y(av[1], &data);
     data.ptr.map = ft_maptab(av[1], &data);
+	if (!map_up_n_down(data.ptr.map, &data))
+		return (1);
     if (!main_parse(data.ptr.map, &data))
     {
         ft_printf(RED"Error : wrong map\n"NC);
+		close_error(&data);
         return (1);
     }
     data.ptr.wndo = mlx_new_window(data.ptr.mlx, data.ptr.width * 32,

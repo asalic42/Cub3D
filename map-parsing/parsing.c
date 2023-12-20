@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 12:38:31 by asalic            #+#    #+#             */
-/*   Updated: 2023/12/15 15:32:45 by asalic           ###   ########.fr       */
+/*   Updated: 2023/12/20 16:26:02 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int	space_check(t_data *data, char **map)
 	return (1);
 }
 
-//Pour l'instant, part du principe que la map est rectangle, mais gere les spaces
 int	main_parse(char **map, t_data *data)
 {
 	data->y = 0;
@@ -54,7 +53,7 @@ int	main_parse(char **map, t_data *data)
 		while (map[data->y][data->x] && data->x < data->ptr.width)
 		{
 			if (data->y == 0 || data->y == data->ptr.height -1 || data->x == 0
-			|| data->x == data->ptr.width -1)
+			|| data->x == data->ptr.width -1 || !map[data->y][data->x+1])
 			{
 				if (map[data->y][data->x] != '1' && map[data->y][data->x] != ' ')
 					return (0);
@@ -72,6 +71,36 @@ int	main_parse(char **map, t_data *data)
 			data->x ++;
 		}
 		data->y ++;
+	}
+	return (1);
+}
+
+int	map_up_n_down(char **map, t_data *data)
+{
+	data->y = 0;
+	data->x = 0;
+	while (data->y < data->ptr.height)
+	{
+		if (data->y == 0 && (!map[data->y][data->x] || (map[data->y][data->x] != '1' && map[data->y-1][data->x] != '1')))
+		{
+			ft_printf("Error : Bords de map hauts\n");
+			return (0);
+		}
+		else if (data->y == data->ptr.height -1 && (!map[data->y][data->x] || (map[data->y][data->x] != '1' && map[data->y+1][data->x] != '1')))
+		{
+			ft_printf("Error : Bords de map bas\n");
+			return (0);
+		}
+		data->x ++;
+		ft_printf("x = %d\n", data->x);
+		if (data->x == data->ptr.width -1)
+		{
+			data->x = 0;
+			if (data->y == 0)
+				data->y = data->ptr.height -1;
+			else
+				data->y = data->ptr.height;
+		}
 	}
 	return (1);
 }

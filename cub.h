@@ -104,5 +104,6 @@ void	countmap_x(char	*mappy, t_data *data);
 void	count_error(t_data *data, t_parse *map, int fd);
 
 int	main_parse(char **map, t_data *data);
+int	map_up_n_down(char **map, t_data *data);
 
 #endif
