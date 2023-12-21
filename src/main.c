@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
+/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2023/12/20 17:21:49 by rciaze           ###   ########.fr       */
+/*   Updated: 2023/12/21 18:05:15 by raphael          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,43 @@
 #include <time.h> 
 
 double prout;int compteur = 0;
+
+void	test2(int x, int y1, int y2, t_mlx_stuff *window, t_all_stuff_for_ray_casting *all_stuff)
+{
+	int		j;
+	void	*img_data;
+	t_tmp_pixel		tmp_p;
+	int		bits_per_pixel = 4;
+	char	*pixel;
+	int		tmp_x = x-1;
+	char *value;
+	int xpm_width;
+	int xpm_height;
+	img_data = mlx_get_data_addr(window->img_ptr, &tmp_p.bits_per_pixel,
+			&tmp_p.size_line, &tmp_p.endian);
+	void *xpm = mlx_xpm_file_to_image(window->mlx_ptr, "./textures/stone.xpm", &xpm_width, &xpm_height);
+	void *xpm_data = mlx_get_data_addr(xpm, &tmp_p.bits_per_pixel,
+			&tmp_p.size_line, &tmp_p.endian);
+	int coef = (all_stuff->line_h) / xpm_height;
+	value = xpm_data + (0 * 32 + (int)fmod(all_stuff->rx, 64)/2) * bits_per_pixel;
+	while(++tmp_x < x + 5)
+	{
+		int counter = 0;
+		j = y1;
+		while (++j < y2)
+		{
+
+			if (j % coef == 0)
+			{
+				printf("y = %d, x = %d\n", counter, (int)all_stuff->rx/32);
+				value = xpm_data + (counter * 32 + (int)all_stuff->rx/32) * bits_per_pixel;
+				counter++;
+			}
+			pixel = img_data + (j * WIDTH + tmp_x) * bits_per_pixel;
+			*(unsigned int *)pixel = *(unsigned int *)value;
+		}
+	}
+}
 
 void	cast_ray()
 {
@@ -28,7 +65,7 @@ void	cast_ray()
 	init_ray(&all_stuff);
 	all_stuff.r = -1;
 	start = clock();
-	while (++all_stuff.r < 128)
+	while (++all_stuff.r < 1)
 	{
 		init_distances(&all_stuff);
 		up_or_down(&all_stuff);
@@ -42,9 +79,10 @@ void	cast_ray()
 		draw_line(all_stuff.line, img->img_ptr, 0x000050, 64);
 		calculate_line_height(&all_stuff);
 		x = all_stuff.r * 5 + 640;
-		all_stuff.line = init_line(x, all_stuff.line_h + all_stuff.line_off,
-				x, all_stuff.line_off);
-		all_stuff.line.width = 5;
+		test2(x, all_stuff.line_off, all_stuff.line_h + all_stuff.line_off, img, &all_stuff);
+		//all_stuff.line = init_line(x, all_stuff.line_h + all_stuff.line_off,
+		//		x, all_stuff.line_off);
+		//all_stuff.line.width = 5;
 		draw_line(all_stuff.line, img->img_ptr, all_stuff.color, 0);
 		increment_angle(&all_stuff);
 	}

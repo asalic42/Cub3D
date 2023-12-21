@@ -2,6 +2,7 @@
 	"files.associations": {
 		"unistd.h": "c",
 		"rectangle.h": "c",
-		"main.h": "c"
+		"main.h": "c",
+		"stdio.h": "c"
 	}
 }
