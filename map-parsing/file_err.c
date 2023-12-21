@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 15:53:38 by asalic            #+#    #+#             */
-/*   Updated: 2023/12/21 16:46:35 by asalic           ###   ########.fr       */
+/*   Updated: 2023/12/21 17:55:06 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,19 @@ void	error_files(t_data *data, char *cub)
 		close_error(data, NULL);
 	if (!is_goodext(cub))
 		close_error(data, "Error: wrong extension\n");
+}
+
+//Error of 
+void	count_error(t_data *data, t_parse *map, int fd)
+{
+	if (map->buffer)
+		free(map->buffer);
+	if (fd != -1)
+	{
+		while (map->buffer)
+			map->buffer = get_next_line(fd);
+		map->buffer = NULL;
+		close(fd);
+	}
+	close_error(data, "Error : Longueur infinie ou nulle\n");
 }
