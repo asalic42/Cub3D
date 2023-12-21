@@ -6,11 +6,11 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 20:48:52 by asalic            #+#    #+#             */
-/*   Updated: 2023/12/14 11:05:07 by asalic           ###   ########.fr       */
+/*   Updated: 2023/12/21 17:26:26 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "cub.h"
+#include "../cub.h"
 
 // Doit etre call en debut de programme
 t_garbage	*start_garbage(void)
@@ -92,26 +92,4 @@ void	add_d_t_garbage(void **double_array, int len)
 	while (++i < len)
 		garbage_add((void *)double_array[i]);
 	garbage_add((void *)double_array);
-}
-t_garbage	*get_garbage(void)
-{
-	static t_garbage	instance;
-
-	return (&instance);
-}
-void	malloc_failure(void)
-{
-	perror("Critical error: (malloc probably failed): ");
-    exit (EXIT_FAILURE);
-}
-
-void	*ft_malloc(size_t size)
-{
-	void	*ptr;
-
-	ptr = malloc(size);
-	if (!ptr)
-		malloc_failure();
-	garbage_add(ptr);
-	return (ptr);
 }

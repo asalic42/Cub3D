@@ -6,11 +6,11 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 20:03:04 by asalic            #+#    #+#             */
-/*   Updated: 2023/12/19 13:43:53 by asalic           ###   ########.fr       */
+/*   Updated: 2023/12/21 16:58:08 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../cub.h"
+#include "../cub.h"
 
 //Transform map into list
 t_listmap	*create_arg(int x, int y, int value)
@@ -22,9 +22,9 @@ t_listmap	*create_arg(int x, int y, int value)
 		return (free_garbage(), NULL);
 	new_arg->value = value;
 	new_arg->x = x;
-    new_arg->y = y;
+	new_arg->y = y;
 	new_arg->next = NULL;
-    new_arg->prev = NULL;
+	new_arg->prev = NULL;
 	return (new_arg);
 }
 
@@ -42,104 +42,48 @@ void	add_arg(t_listmap **list, int x, int y, int value)
 	{
 		current = *list;
 		while (current->next != NULL)
-        {
-            current->prev = current;
+		{
+			current->prev = current;
 			current = current->next;
-        }
+		}
 		current->next = new_arg;
 	}
 }
 
-int     is_good_map(t_listmap *list, char *map)
+int	is_good_map(t_listmap *list, char *map)
 {
-    int     fd;
-    char    *buff;
-    int     x;
-    int     y;
-    
-    fd = open(map, O_RDONLY);
-    buff = get_next_line(fd);
-    x = 0;
-    y = 0;
-    while (buff)
-    {
-        while (buff[x] && buff[x] != '\n')
-        {
-            add_arg(&list, x, y, buff[x]);
-            x ++;
-        }
-        buff = get_next_line(fd);
-        x = 0;
-        y++;
-    }
-    print_list(list);
-    return (0);
-}
+	int		fd;
+	char	*buff;
+	int		x;
+	int		y;
 
-void    print_list(t_listmap *list)
-{
-    while (list)
-    {
-        ft_printf(" [%c]", list->value);
-        if (list->x == 5)
-            ft_printf("\n");
-        list = list->next;
-    }    
-}
-//Transform the map into tab
-char	*go_map(t_parse *put, t_data *data)
-{
-	char	*tab;
-	int		x=0;
-
-	tab = ft_malloc((data->ptr.width +1) * sizeof(char));
-	if (!tab)
-    {
-	    close_wndo(data);
-        return (NULL);
-    }
-    put->buffer = get_next_line(put->fd);
-    while (put->buffer && put->buffer[x] != '\n' && put->buffer[x] != '\0')
-    {
-        tab[x] = put->buffer[x];
-        x ++;
-    }
-    tab[x] = '\0';
-	return (tab);
-}
-
-//create the map in a char [x][y]
-char	**ft_maptab(char *map, t_data *data)
-{
-	t_parse	    put;
-	int			y;
-	char		**realmap;
-
-	put.fd = open(map, O_RDONLY);
-	realmap = ft_malloc((data->ptr.height * data->ptr.width+1) * sizeof(char *));
-	if (!realmap)
-    {
-	    close_wndo(data);
-        return (NULL);
-    }
+	fd = open(map, O_RDONLY);
+	buff = get_next_line(fd);
+	x = 0;
 	y = 0;
-	while (y < data->ptr.height)
+	while (buff)
 	{
-		realmap[y] = go_map(&put, data);
-		y ++;
+		while (buff[x] && buff[x] != '\n')
+		{
+			add_arg(&list, x, y, buff[x]);
+			x ++;
+		}
+		buff = get_next_line(fd);
+		x = 0;
+		y++;
 	}
-	realmap[y] = NULL;
-	close(put.fd);
-    print_tab(realmap);
-	return (realmap);
+	close(fd);
+	print_list(list);
+	return (0);
 }
 
-void    print_tab(char **tab)
+void	print_list(t_listmap *list)
 {
-    int i=0;
-    while (tab[i])
-    {
-        ft_printf("{%s}\n", tab[i]);
-        i ++;
-    }
+	while (list)
+	{
+		ft_printf(" [%c]", list->value);
+		if (list->x == 5)
+			ft_printf("\n");
+		list = list->next;
+	}
 }

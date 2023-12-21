@@ -6,7 +6,7 @@ PATH_MLX	= minilibx-linux/libmlx.a
 PATH_LIBFT	= libft/libft.a
 INCLUDES	= cub.h minilibx-linux/mlx.h libft/libft.h
 
-SRCS	+= cub.c garbage.c
+SRCS	+= cub.c
 SRCS_DIR = map-parsing utils
 SRCS	:= $(foreach dir,$(SRCS_DIR),$(wildcard $(dir)/*.c)) $(SRCS)
 OBJ_DIR	 = obj

@@ -6,11 +6,11 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 15:53:38 by asalic            #+#    #+#             */
-/*   Updated: 2023/12/19 14:50:19 by asalic           ###   ########.fr       */
+/*   Updated: 2023/12/21 16:46:35 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../cub.h"
+#include "../cub.h"
 
 //Is it the good file ?
 int	is_goodfile(char *cub)
@@ -66,10 +66,7 @@ int	is_goodext(char *cub)
 void	error_files(t_data *data, char *cub)
 {
 	if (!is_goodfile(cub))
-		close_error(data);
+		close_error(data, NULL);
 	if (!is_goodext(cub))
-	{
-		ft_printf(RED"Error: wrong extension\n"NC);
-		close_error(data);
-	}
+		close_error(data, "Error: wrong extension\n");
 }

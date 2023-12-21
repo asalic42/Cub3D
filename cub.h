@@ -72,17 +72,31 @@ typedef struct s_data
 	t_ptr ptr;
 }	t_data;
 
-//Errors handle
-int		handle_error(t_data *data, char *map);
-int		error_map(char *map);
-int		only_one_thing(char *check_line, int i, int len_player);
-int     is_good_map(t_listmap *list, char *map);
-void	close_error(t_data *data);
-void	count_error(t_data *data, t_parse *map, int fd);
+/* * * * ERROR HANDLE * * * */
 void	error_files(t_data *data, char *cub);
+void	handle_error(t_data *data, char *map);
+void	close_error(t_data *data, char *error);
 int		close_wndo(t_data *data);
+void	count_error(t_data *data, t_parse *map, int fd);
+int		print_error(char *str);
 
-//Garbage
+/* * * * CHECK ERRORS * * * */
+int	is_goodext(char *cub);
+int	end_filename(char *cub);
+int	is_goodfile(char *cub);
+int	only_one_thing(char *check_line, int i, int len_player);
+int	error_map(char *map);
+
+//Parsing
+int	map_up_n_down(char **map, t_data *data);
+int	is_zero(int y, char **map, t_data *data);
+int	first_line(t_data *data, char **map);
+int	main_parse(char **map, t_data *data);
+int	is_space(t_data *data, char **map);
+int	space_check(t_data *data, char **map);
+int	is_contour(int x, int y, char **map, t_data *data);
+
+/* * * * GARBAGE * * * */
 t_garbage		*start_garbage(void);
 t_garbage_lst	*new_elmt(void *pointer_to);
 void			garbage_add(void *pointer);
@@ -92,18 +106,23 @@ t_garbage		*get_garbage(void);
 void			*ft_malloc(size_t size);
 void			malloc_failure(void);
 
-//Affichage
-void    print_list(t_listmap *list);
-char	**ft_maptab(char *map, t_data *data);
-void    print_tab(char **tab);
-
-//Utils
+/* * * * UTILS * * * */
 int		is_in_char(char c);
 int		countmap_y(char	*mappy, t_data *data);
 void	countmap_x(char	*mappy, t_data *data);
-void	count_error(t_data *data, t_parse *map, int fd);
 
-int	main_parse(char **map, t_data *data);
-int	map_up_n_down(char **map, t_data *data);
+/* * * * * TAB MAP * * * */
+char	**ft_maptab(char *map, t_data *data);
+void	print_tab(char **tab);
+char	*go_map(t_parse *put, t_data *data);
+
+/* * * * LIST MAP * * * */
+void    	print_list(t_listmap *list);
+int			is_good_map(t_listmap *list, char *map);
+void		add_arg(t_listmap **list, int x, int y, int value);
+t_listmap	*create_arg(int x, int y, int value);
+
+//Main core
+void	init_data(t_data *data, char *av);
 
 #endif

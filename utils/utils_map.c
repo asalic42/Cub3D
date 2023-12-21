@@ -6,11 +6,31 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 15:42:22 by asalic            #+#    #+#             */
-/*   Updated: 2023/12/15 15:46:44 by asalic           ###   ########.fr       */
+/*   Updated: 2023/12/21 17:51:03 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../cub.h"
+#include "../cub.h"
+
+int	init_count(char *mappy, t_parse *map, t_data *data)
+{
+	int	fd;
+
+	fd = open(mappy, O_RDONLY);
+	if (fd == -1)
+		count_error(data, map, fd);
+	map->buffer = get_next_line(fd);
+	return (fd);
+}
+
+void	is_in_char_error(t_parse map, t_data *data, int fd, int width)
+{
+	if (map.buffer[width] != '1' && map.buffer[width] != '0' \
+	&& map.buffer[width] != 'E' && map.buffer[width] != 'N' \
+	&& map.buffer[width] != 'W' && map.buffer[width] != 'S' \
+    && map.buffer[width] != ' ')
+		count_error(data, &map, fd);
+}
 
 //Count of width
 void	countmap_x(char	*mappy, t_data *data)
@@ -28,18 +48,14 @@ void	countmap_x(char	*mappy, t_data *data)
 		width = 0;
 		while (map.buffer[width] && map.buffer[width] != '\n')
 		{
-			if (map.buffer[width] != '1' && map.buffer[width] != '0'
-				&& map.buffer[width] != 'E' && map.buffer[width] != 'N'
-				&& map.buffer[width] != 'W' && map.buffer[width] != 'S' &&
-    	        map.buffer[width] != ' ')
-				count_error(data, &map, fd);
+			is_in_char_error(map, data, fd, width);
 			width ++;
 		}
 		if (data->ptr.width == 0 || width > data->ptr.width)
 			data->ptr.width = width;
         map.buffer = get_next_line(fd);
 	}
-    map.buffer = NULL;
+	map.buffer = NULL;
 	close(fd);
     ft_printf("final width = %d\n", data->ptr.width);
 }
@@ -52,19 +68,12 @@ int	countmap_y(char	*mappy, t_data *data)
     int         fd;
 	t_parse	    map;
 
-	fd = open(mappy, O_RDONLY);
-	if (fd == -1)
-		count_error(data, &map, fd);
-    map.buffer = get_next_line(fd);
+	fd = init_count(mappy, &map, data);
 	height = 1;
     i = 0;
 	while (map.buffer[i] && map.buffer[i] != '\n')
 	{
-		if (map.buffer[i] != '1' && map.buffer[i] != '0'
-			&& map.buffer[i] != 'N' && map.buffer[i] != 'E'
-			&& map.buffer[i] != 'W' && map.buffer[i] != 'S'
-            && map.buffer[i] != ' ')
-			count_error(data, &map, fd);
+		is_in_char_error(map, data, fd, i);
         i ++;
 		if (map.buffer && map.buffer[i] == '\n')
         {
@@ -75,8 +84,7 @@ int	countmap_y(char	*mappy, t_data *data)
 	}
     while (map.buffer)
         map.buffer = get_next_line(fd);
-    map.buffer = NULL;
-	close(fd);
+		close(fd);
     ft_printf("height = %d\n", height);
 	return (height);
 }
@@ -91,11 +99,9 @@ void	count_error(t_data *data, t_parse *map, int fd)
         while (map->buffer)
             map->buffer = get_next_line(fd);
         map->buffer = NULL;
-        ft_printf("je suis close bro\n");
 		close(fd);
     }
-	ft_printf(RED"Error : Longueur infinie ou nulle\n"NC);
-	close_error(data);
+	close_error(data, "Error : Longueur infinie ou nulle\n");
 }
 
 int	is_in_char(char c)
