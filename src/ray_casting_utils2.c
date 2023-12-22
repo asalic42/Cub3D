@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:24:20 by rciaze            #+#    #+#             */
-/*   Updated: 2023/12/20 15:24:47 by rciaze           ###   ########.fr       */
+/*   Updated: 2023/12/22 19:17:03 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	init_ray(t_all_stuff_for_ray_casting *all_stuff)
 {
 	all_stuff->player = get_player_instance();
 	all_stuff->map = get_map_instance();
-	all_stuff->ra = all_stuff->player->a - DR * 64;
+	all_stuff->ra = all_stuff->player->a - DR * BLOCK_SIZE;
 	if (all_stuff->ra < 0)
 		all_stuff->ra += 2 * PI;
 	if (all_stuff->ra > 2 * PI)
@@ -49,9 +49,12 @@ void	calculate_line_height(t_all_stuff_for_ray_casting *all_stuff)
 	if (all_stuff->ca > 2 * PI)
 		all_stuff->ca -= 2 * PI;
 	all_stuff->dist_t = all_stuff->dist_t * cos(all_stuff->ca);
-	all_stuff->line_h = (all_stuff->map->s * 500) / all_stuff->dist_t;
-	if (all_stuff->line_h > 500)
-		all_stuff->line_h = 500;
+	all_stuff->line_h = (all_stuff->map->s * 640) / all_stuff->dist_t;
+	if (all_stuff->line_h > 640)
+	{
+		all_stuff->original_line_h = all_stuff->line_h;
+		all_stuff->line_h = 640;
+	}
 	all_stuff->line_off = 320 - all_stuff->line_h / 2;
 }
 

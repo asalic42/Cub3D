@@ -6,11 +6,17 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 20:36:44 by rciaze            #+#    #+#             */
-/*   Updated: 2023/12/20 17:24:45 by rciaze           ###   ########.fr       */
+/*   Updated: 2023/12/22 20:07:56 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/main.h"
+
+void	update_window(t_player_pos *player, t_window *window)
+{
+	is_player_out_of_bouds(player);
+	draw_player(window);
+}
 
 void	key_press_2(int keycode, t_window *window, t_player_pos *player)
 {
@@ -18,14 +24,14 @@ void	key_press_2(int keycode, t_window *window, t_player_pos *player)
 	{
 		player->x += player->dx;
 		player->y += player->dy;
+		update_window(player, window);
 	}
 	if (keycode == 's')
 	{
 		player->x -= player->dx;
 		player->y -= player->dy;
+		update_window(player, window);
 	}
-	is_player_out_of_bouds(player);
-	draw_player(window);
 }
 
 int	key_press(int keycode, t_window *window)
@@ -42,6 +48,7 @@ int	key_press(int keycode, t_window *window)
 			player->a += 2 * PI;
 		player->dx = cos(player->a) * 5;
 		player->dy = sin(player->a) * 5;
+		update_window(player, window);
 	}
 	if (keycode == 'd')
 	{
@@ -50,6 +57,7 @@ int	key_press(int keycode, t_window *window)
 			player->a -= 2 * PI;
 		player->dx = cos(player->a) * 5;
 		player->dy = sin(player->a) * 5;
+		update_window(player, window);
 	}
 	key_press_2(keycode, window, player);
 	return (0);
@@ -64,15 +72,15 @@ int	handle_no_event(void *window)
 int	mlx_init_stuff(t_window *window)
 {
 	window->bits = 3;
-	window->size_line_img = 1280;
+	window->size_line_img = WIDTH;
 	window->mlx_ptr = mlx_init();
 	if (window->mlx_ptr == NULL)
 		return (0);
-	window->win_ptr = mlx_new_window(window->mlx_ptr, 1280, 640, "cub");
+	window->win_ptr = mlx_new_window(window->mlx_ptr, WIDTH, HEIGHT, "cub");
 	if (window->win_ptr == NULL)
 		return (perror("Une erreur s'est produite "), mlx_destroy_display
 			(window->mlx_ptr), free(window->mlx_ptr), 0);
-	window->img_ptr = mlx_new_image(window->mlx_ptr, 1280, 640);
+	window->img_ptr = mlx_new_image(window->mlx_ptr, WIDTH, HEIGHT);
 	if (window->img_ptr == NULL)
 		return (perror("Une erreur s'est produite "), mlx_destroy_window
 			(window->mlx_ptr, window->win_ptr), mlx_destroy_display
@@ -91,11 +99,22 @@ int	create_window(t_window *window)
 {
 	t_player_pos	*player;
 	t_map			*map;
-	int				prout[100] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+	int prout[100] = 
+	{1,1,1,1,1,1,1,1,1,1,
+	1,0,1,0,0,0,0,0,0,1,
+	1,0,1,0,0,0,0,0,0,1,
+	1,0,1,0,0,0,0,0,0,1,
+	1,0,1,0,0,1,1,1,0,1,
+	1,0,0,0,0,1,0,1,0,1,
+	1,0,0,0,0,1,0,1,0,1,
+	1,0,1,0,0,1,0,1,0,1,
+	1,0,0,0,0,0,0,0,0,1,
+	1,1,1,1,1,1,1,1,1,1};
 
 	if (!mlx_init_stuff(window))
 		return (0);
 	player = get_player_instance();
+	player->a = DR;
 	player->x = 300;
 	player->y = 300;
 	player->dx = cos(player->a) * 5;
@@ -103,7 +122,7 @@ int	create_window(t_window *window)
 	map = get_map_instance();
 	map->x = 10;
 	map->y = 10;
-	map->s = 64;
+	map->s = BLOCK_SIZE;
 	map->map = malloc(100 * sizeof(int));
 	memcpy(map->map, prout, 100 * sizeof(int));
 	return (1);
