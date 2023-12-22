@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2023/12/22 20:14:11 by rciaze           ###   ########.fr       */
+/*   Updated: 2023/12/22 20:21:46 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void test2(int x, int start_y, int end_y, t_mlx_stuff *window, t_all_stuff_for_r
 	textures.tex_x = (int)(all_stuff->rx) % xpm_width;
 	if (textures.tex_x == 0 || textures.tex_x == xpm_width - 1 || textures.tex_x == xpm_width / 2)
 		textures.tex_x = (int)(all_stuff->ry) % xpm_width;
-	if (start_y == 0 && end_y == 640)
+	if (start_y == 0 && end_y == WIDTH / 2)
 	{
 		textures.texture_step = (float)xpm_height / all_stuff->original_line_h;
 		start_y = 320 - all_stuff->original_line_h / 2;
@@ -36,7 +36,7 @@ void test2(int x, int start_y, int end_y, t_mlx_stuff *window, t_all_stuff_for_r
 	{
 		textures.y = start_y;
 		textures.texture_position = 0;
-		while (textures.y < end_y && textures.y < 640)
+		while (textures.y < end_y && textures.y < WIDTH / 2)
 		{
 			if (textures.y >= 0)
 			{
@@ -62,12 +62,14 @@ void	cast_ray()
 	clock_t						end;
 	int							x;
 	int							comp;
+	void						*img_data;
 
 	img = get_mlx_ptr();
 	init_ray(&all_stuff);
 	all_stuff.r = -1;
 	start = clock();
 	all_stuff.player = get_player_instance();
+
 	int xpm_width1;
 	int xpm_height1;
 	t_tmp_pixel		tmp_p;
@@ -89,7 +91,8 @@ void	cast_ray()
 	void *xpm4 = mlx_xpm_file_to_image(img->mlx_ptr, "./textures/7sB6yU3.xpm", &xpm_width4, &xpm_height4);
 	void *xpm_data4 = mlx_get_data_addr(xpm4, &tmp_p.bits_per_pixel,
 			&tmp_p.size_line, &tmp_p.endian);
-	void *img_data = mlx_get_data_addr(img->img_ptr, &tmp_p.bits_per_pixel, &tmp_p.size_line, &tmp_p.endian);
+
+	img_data = mlx_get_data_addr(img->img_ptr, &tmp_p.bits_per_pixel, &tmp_p.size_line, &tmp_p.endian);
 	while (++all_stuff.r < 106)
 	{
 		init_distances(&all_stuff);
@@ -103,7 +106,7 @@ void	cast_ray()
 		all_stuff.line.width = 1;
 		draw_line(all_stuff.line, img->img_ptr, 0x000050, 64);
 		calculate_line_height(&all_stuff);
-		x = all_stuff.r * 6 + 640;
+		x = all_stuff.r * 6 + HEIGHT;
 		if (comp == 1)
 			test2(x, all_stuff.line_off, all_stuff.line_off + all_stuff.line_h, img, &all_stuff, xpm_data1, xpm_width1, xpm_height1, img_data);
 		else if (comp == 2)
@@ -121,14 +124,14 @@ void	cast_ray()
 
 void	is_player_out_of_bouds(t_player_pos *player)
 {
-	if (player->y > 640)
+	if (player->y > HEIGHT)
 		player->y = 0;
 	if (player->y < 0)
-		player->y = 640;
-	if (player->x > 640)
+		player->y = HEIGHT;
+	if (player->x > HEIGHT)
 		player->x = 0;
 	if (player->x < 0)
-		player->x = 640;
+		player->x = HEIGHT;
 }
 
 void	draw_player(t_window *window)
@@ -137,11 +140,11 @@ void	draw_player(t_window *window)
 	t_player_pos	*player;
 
 	player = get_player_instance();
-	draw_line(init_rectangle(0, 0, 640, 640), window->img_ptr,
+	draw_line(init_rectangle(0, 0, WIDTH / 2, HEIGHT), window->img_ptr,
 		mlx_get_color_value(window->mlx_ptr, 0x555555), 0);
-	draw_line(init_rectangle(640, 0, 1280, 320), window->img_ptr,
+	draw_line(init_rectangle(WIDTH / 2, 0, WIDTH, HEIGHT / 2), window->img_ptr,
 		mlx_get_color_value(window->mlx_ptr, 0x651684), 0);
-	draw_line(init_rectangle(640, 320, 1280, 640), window->img_ptr,
+	draw_line(init_rectangle(WIDTH / 2, HEIGHT / 2, WIDTH, HEIGHT), window->img_ptr,
 		mlx_get_color_value(window->mlx_ptr, 0x665464), 0);
 	is_player_out_of_bouds(player);
 	draw_map(get_mlx_ptr(), get_map_instance());

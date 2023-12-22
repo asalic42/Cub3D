@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 19:03:42 by raphael           #+#    #+#             */
-/*   Updated: 2023/12/22 19:04:38 by rciaze           ###   ########.fr       */
+/*   Updated: 2023/12/22 20:22:40 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 # define WIDTH 1280
 # define HEIGHT 640
-# define BLOCK_SIZE 64
+# define BLOCK_SIZE (WIDTH / 20)
 typedef struct c_tmp_pixel
 {
 	int	bits_per_pixel;
