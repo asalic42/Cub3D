@@ -3,6 +3,7 @@
 		"unistd.h": "c",
 		"rectangle.h": "c",
 		"main.h": "c",
-		"stdio.h": "c"
+		"stdio.h": "c",
+		"basique_mlx_needed.h": "c"
 	}
 }

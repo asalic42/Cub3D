@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   design_p_mlx.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
+/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 11:16:59 by wolf              #+#    #+#             */
-/*   Updated: 2023/12/12 20:06:13 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/05 13:36:16 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/basique_mlx_needed.h"
+#include "../../include/main.h"
 
 t_mlx_stuff	*mlx_instance(void)
 {

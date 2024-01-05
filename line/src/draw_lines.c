@@ -3,27 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   draw_lines.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
+/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 23:57:06 by raphael           #+#    #+#             */
-/*   Updated: 2023/12/15 17:37:42 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/05 13:36:04 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/line.h"
+#include "../../include/main.h"
 
 //	The breseham algorithm is here used with two cases.
 //	You could optimize it more by doing other cases, but it's not necessary.
 
-void	draw_line(t_line line, void *img, int color, int stop)
+void	draw_line(t_line line, void *img, int color, int stop, t_window *window)
 {
 	t_data_for_line	data;
 
-	stuff_for_line_draw(&data, &line, img);
+	stuff_for_line_draw(&data, &line, img, window);
 	if (data.dx2 > data.dy2)
-		case_1(&line, &data, color, stop);
+		case_1(&line, &data, color, stop, window);
 	else
-		case_2(&line, &data, color, stop);
+		case_2(&line, &data, color, stop, window);
 }
 
 //	These two function are used to calculate the alghorithm.
@@ -32,14 +32,14 @@ void	draw_line(t_line line, void *img, int color, int stop)
 //	I will not explain it here,
 //	but you can find very good explanations of it on youtube.
 
-void	case_1(t_line *line, t_data_for_line *data, unsigned int color, int stop)
+void	case_1(t_line *line, t_data_for_line *data, unsigned int color, int stop, t_window *window)
 {
 	int				i;
 
 	i = -1;
 	while (i <= data->dx2)
 	{
-		if (line->x1 < stop || line->x1 > WIDTH - stop || line->y1 < stop || line->y1 > HEIGHT - stop)
+		if (line->x1 < stop || line->x1 > (window->data.ptr.width*64) - stop || line->y1 < stop || line->y1 > (window->data.ptr.height*64) - stop)
 			break ;
 		draw_actual_pixels_case_1(data, line, color);
 		i++;
@@ -53,14 +53,14 @@ void	case_1(t_line *line, t_data_for_line *data, unsigned int color, int stop)
 	}
 }
 
-void	case_2(t_line *line, t_data_for_line *data, unsigned int color, int stop)
+void	case_2(t_line *line, t_data_for_line *data, unsigned int color, int stop, t_window *window)
 {
 	int				i;
 
 	i = -1;
 	while (i <= data->dy2)
 	{
-		if (line->x1 < stop || line->x1 > WIDTH - stop || line->y1 < stop || line->y1 > HEIGHT - stop)
+		if (line->x1 < stop || line->x1 > (window->data.ptr.width*64) - stop || line->y1 < stop || line->y1 > (window->data.ptr.height*64) - stop)
 			break ;
 		draw_actual_pixels_case_2(data, line, color);
 		i++;

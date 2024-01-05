@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   line.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
+/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 19:03:42 by raphael           #+#    #+#             */
-/*   Updated: 2023/12/22 20:22:40 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/05 13:38:38 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,15 @@
 # include <stdio.h>
 # include <unistd.h>
 # include "../../minilibx-linux/mlx.h"
+# include "../../include/main.h"
 # include "basique_mlx_needed.h"
 
 # define ESC		65307
 
-# define WIDTH 1280
-# define HEIGHT 640
-# define BLOCK_SIZE (WIDTH / 20)
+// # define WIDTH 1280
+// # define HEIGHT 640
+// # define BLOCK_SIZE (WIDTH / 20)
+
 typedef struct c_tmp_pixel
 {
 	int	bits_per_pixel;
@@ -54,9 +56,9 @@ typedef struct s_data_for_line
 	int		bits_per_pixel;
 }	t_data_for_line;
 
-void	stuff_for_line_draw(t_data_for_line *data, t_line *line, void *img);
-void	case_1(t_line *line, t_data_for_line *data, unsigned int color, int stop);
-void	case_2(t_line *line, t_data_for_line *data, unsigned int color, int stop);
+void	stuff_for_line_draw(t_data_for_line *data, t_line *line, void *img, t_window *window);
+void	case_1(t_line *line, t_data_for_line *data, unsigned int color, int stop, t_window *window);
+void	case_2(t_line *line, t_data_for_line *data, unsigned int color, int stop, t_window *window);
 int		ft_abs(int n);
 void	draw_line(t_line line, void *img, int color, int stop);
 void	draw_actual_pixels_case_1(t_data_for_line *data, t_line *line,

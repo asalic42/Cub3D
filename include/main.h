@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
+/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 20:37:16 by rciaze            #+#    #+#             */
-/*   Updated: 2023/12/22 20:14:39 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/05 13:52:09 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "../minilibx-linux/mlx.h"
 # include "../line/includes/line.h"
 # include "../rectangle/includes/rectangle.h"
+# include "../cub.h"
 # include <X11/X.h>
 # include <unistd.h>
 # include <math.h>
@@ -47,6 +48,7 @@ typedef struct s_window
 	int		bits;
 	int		size_line_img;
 	int		endian;
+	t_data 	data;
 }	t_window;
 
 typedef struct s_player_pos
@@ -138,5 +140,5 @@ void			init_ray(t_all_stuff_for_ray_casting *all_stuff);
 void			init_distances(t_all_stuff_for_ray_casting *all_stuff);
 void			calculate_line_height(t_all_stuff_for_ray_casting *all_stuff);
 void			increment_angle(t_all_stuff_for_ray_casting *all_stuff);
-void			is_player_out_of_bouds(t_player_pos *player);
+void			is_player_out_of_bouds(t_player_pos *player, t_window *window);
 #endif

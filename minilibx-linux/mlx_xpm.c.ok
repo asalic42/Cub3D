@@ -54,7 +54,7 @@ char	*mlx_int_static_line(char **xpm_data,int *pos,int size)
     {
       if (copy)
 	free(copy);
-      if (!(copy = malloc(len2+1)))
+      if (!(copy = ft_malloc(len2+1)))
 	return ((char *)0);
       len = len2;
     }
@@ -150,11 +150,11 @@ void	*mlx_int_parse_xpm(t_xvar *xvar,void *info,int info_size,char *(*f)())
   if (cpp<=2)
     {
       method = 1;
-      if (!(colors_direct = malloc((cpp==2?65536:256)*sizeof(int))))
+      if (!(colors_direct = ft_malloc((cpp==2?65536:256)*sizeof(int))))
 	RETURN;
     }
   else
-    if (!(colors = malloc(nc*sizeof(*colors))))
+    if (!(colors = ft_malloc(nc*sizeof(*colors))))
       RETURN;
 
   clip_data = 0;
@@ -172,7 +172,7 @@ void	*mlx_int_parse_xpm(t_xvar *xvar,void *info,int info_size,char *(*f)())
       
       if ((rgb_col = mlx_int_get_text_rgb(tab[j]))==-1)
 	{
-	  if (!(clip_data = malloc(4*width*height)) ||   /* ok, nice size .. */
+	  if (!(clip_data = ft_malloc(4*width*height)) ||   /* ok, nice size .. */
 	      !(clip_img = XCreateImage(xvar->display, xvar->visual,
 					1, XYPixmap, 0, clip_data,
 					width, height, 8, (width+7)/8)) )

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
+/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 20:36:44 by rciaze            #+#    #+#             */
-/*   Updated: 2023/12/22 20:07:56 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/05 13:21:41 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,15 +72,15 @@ int	handle_no_event(void *window)
 int	mlx_init_stuff(t_window *window)
 {
 	window->bits = 3;
-	window->size_line_img = WIDTH;
+	window->size_line_img = window->data.ptr.width*64;
 	window->mlx_ptr = mlx_init();
 	if (window->mlx_ptr == NULL)
 		return (0);
-	window->win_ptr = mlx_new_window(window->mlx_ptr, WIDTH, HEIGHT, "cub");
+	window->win_ptr = mlx_new_window(window->mlx_ptr, window->data.ptr.width*64, window->data.ptr.height*64, "cub");
 	if (window->win_ptr == NULL)
 		return (perror("Une erreur s'est produite "), mlx_destroy_display
 			(window->mlx_ptr), free(window->mlx_ptr), 0);
-	window->img_ptr = mlx_new_image(window->mlx_ptr, WIDTH, HEIGHT);
+	window->img_ptr = mlx_new_image(window->mlx_ptr, window->data.ptr.width*64, window->data.ptr.height*64);
 	if (window->img_ptr == NULL)
 		return (perror("Une erreur s'est produite "), mlx_destroy_window
 			(window->mlx_ptr, window->win_ptr), mlx_destroy_display
@@ -122,9 +122,9 @@ int	create_window(t_window *window)
 	map = get_map_instance();
 	map->x = 10;
 	map->y = 10;
-	map->s = BLOCK_SIZE;
-	map->map = malloc(100 * sizeof(int));
-	memcpy(map->map, prout, 100 * sizeof(int));
+	map->s = (window->data.ptr.width * 64)/20;
+	map->map = ft_malloc(100 * sizeof(int));
+	ft_memcpy(map->map, prout, 100 * sizeof(int));
 	return (1);
 }
 

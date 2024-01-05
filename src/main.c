@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
+/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2023/12/22 20:21:46 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/05 13:45:23 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,16 @@
 
 double prout;int compteur = 0;
 
-void test2(int x, int start_y, int end_y, t_mlx_stuff *window, t_all_stuff_for_ray_casting *all_stuff, char *xpm_data, int xpm_width, int xpm_height, void *img_data)
+void test2(int x, int start_y, int end_y, t_all_stuff_for_ray_casting *all_stuff, char *xpm_data, int xpm_width, int xpm_height, void *img_data, t_window *window)
 {
 	t_textures	textures;
 
-	(void)(window);
 	textures.current_x = x;
 	textures.texture_step = (float)xpm_height / all_stuff->line_h;
 	textures.tex_x = (int)(all_stuff->rx) % xpm_width;
 	if (textures.tex_x == 0 || textures.tex_x == xpm_width - 1 || textures.tex_x == xpm_width / 2)
 		textures.tex_x = (int)(all_stuff->ry) % xpm_width;
-	if (start_y == 0 && end_y == WIDTH / 2)
+	if (start_y == 0 && end_y == (window->data.ptr.width*64) / 2)
 	{
 		textures.texture_step = (float)xpm_height / all_stuff->original_line_h;
 		start_y = 320 - all_stuff->original_line_h / 2;
@@ -36,13 +35,13 @@ void test2(int x, int start_y, int end_y, t_mlx_stuff *window, t_all_stuff_for_r
 	{
 		textures.y = start_y;
 		textures.texture_position = 0;
-		while (textures.y < end_y && textures.y < WIDTH / 2)
+		while (textures.y < end_y && textures.y < (window->data.ptr.width*64) / 2)
 		{
 			if (textures.y >= 0)
 			{
 				textures.tex_y = (int)(textures.texture_position);
 				textures.value = xpm_data + (textures.tex_y * xpm_width + textures.tex_x) * (4);
-				textures.pixel = img_data + (textures.y * WIDTH + textures.current_x) * (4);
+				textures.pixel = img_data + (textures.y * (window->data.ptr.width*64) + textures.current_x) * (4);
 				*(unsigned int *)textures.pixel = *(unsigned int *)textures.value;
 			}
 			textures.texture_position += textures.texture_step;
@@ -54,7 +53,7 @@ void test2(int x, int start_y, int end_y, t_mlx_stuff *window, t_all_stuff_for_r
 
 
 
-void	cast_ray()
+void	cast_ray(t_window *window)
 {
 	t_mlx_stuff					*img;
 	t_all_stuff_for_ray_casting	all_stuff;
@@ -106,7 +105,7 @@ void	cast_ray()
 		all_stuff.line.width = 1;
 		draw_line(all_stuff.line, img->img_ptr, 0x000050, 64);
 		calculate_line_height(&all_stuff);
-		x = all_stuff.r * 6 + HEIGHT;
+		x = all_stuff.r * 6 + (window->data.ptr.height*64);
 		if (comp == 1)
 			test2(x, all_stuff.line_off, all_stuff.line_off + all_stuff.line_h, img, &all_stuff, xpm_data1, xpm_width1, xpm_height1, img_data);
 		else if (comp == 2)
@@ -122,16 +121,16 @@ void	cast_ray()
 	compteur++;
 }
 
-void	is_player_out_of_bouds(t_player_pos *player)
+void	is_player_out_of_bouds(t_player_pos *player, t_window *window)
 {
-	if (player->y > HEIGHT)
+	if (player->y > window->data.ptr.height*64)
 		player->y = 0;
 	if (player->y < 0)
-		player->y = HEIGHT;
-	if (player->x > HEIGHT)
+		player->y = window->data.ptr.height*64;
+	if (player->x > window->data.ptr.height*64)
 		player->x = 0;
 	if (player->x < 0)
-		player->x = HEIGHT;
+		player->x = window->data.ptr.height*64;
 }
 
 void	draw_player(t_window *window)
@@ -140,15 +139,15 @@ void	draw_player(t_window *window)
 	t_player_pos	*player;
 
 	player = get_player_instance();
-	draw_line(init_rectangle(0, 0, WIDTH / 2, HEIGHT), window->img_ptr,
+	draw_line(init_rectangle(0, 0, (window->data.ptr.width*64) / 2, window->data.ptr.height*64), window->img_ptr,
 		mlx_get_color_value(window->mlx_ptr, 0x555555), 0);
-	draw_line(init_rectangle(WIDTH / 2, 0, WIDTH, HEIGHT / 2), window->img_ptr,
+	draw_line(init_rectangle((window->data.ptr.width*64) / 2, 0, (window->data.ptr.width*64), (window->data.ptr.height*64) / 2), window->img_ptr,
 		mlx_get_color_value(window->mlx_ptr, 0x651684), 0);
-	draw_line(init_rectangle(WIDTH / 2, HEIGHT / 2, WIDTH, HEIGHT), window->img_ptr,
+	draw_line(init_rectangle((window->data.ptr.width*64) / 2, (window->data.ptr.height*64) / 2, window->data.ptr.width*64, window->data.ptr.height*64), window->img_ptr,
 		mlx_get_color_value(window->mlx_ptr, 0x665464), 0);
-	is_player_out_of_bouds(player);
+	is_player_out_of_bouds(player, window);
 	draw_map(get_mlx_ptr(), get_map_instance());
-	cast_ray();
+	cast_ray(window);
 	draw_line(init_rectangle(player->x - 5, player->y - 5, player->x + 5,
 			player->y + 5), window->img_ptr, 0xFFFF00, 5);
 	line = init_line(player->x, player->y, player->x + player->dx * 5,
@@ -184,10 +183,14 @@ void	draw_map(t_mlx_stuff *img, t_map *map)
 	}
 }
 
-int	main(void)
+int	main(int ac, char **av)
 {
 	t_window	window;
 
+	if (ac != 2)
+		return (print_error(RED "Error : not enought args\n" NC));
+	start_garbage();
+	handle_error(&window, av[1]);
 	if (!create_window(&window))
 		return (0);
 	update_mlx_infos(&window.mlx_ptr, &window.win_ptr, &window.img_ptr);
@@ -196,5 +199,6 @@ int	main(void)
 	mlx_hook(window.win_ptr, 17, KeyPressMask, &destroy_window, &window);
 	mlx_hook(window.win_ptr, 2, KeyPressMask, &key_press, &window);
 	mlx_loop(window.mlx_ptr);
+	close_wndo(window);
 	return (1);
 }

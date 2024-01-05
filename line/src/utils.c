@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
+/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 00:06:16 by raphael           #+#    #+#             */
-/*   Updated: 2023/12/15 17:20:55 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/05 13:36:25 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/line.h"
+#include "../../include/main.h"
 
 // This function is used to initialize a line structure.
 // It's not necessary, but it's cleaner to use it.
@@ -41,13 +41,13 @@ int	ft_abs(int n)
 //	This function simply initializes all the variables we need to draw the line,
 //	as well as storing some data on the img we are drawing to, for... the norm.
 
-void	stuff_for_line_draw(t_data_for_line *data, t_line *line, void *img)
+void	stuff_for_line_draw(t_data_for_line *data, t_line *line, void *img, t_window *window)
 {
 	t_tmp_pixel		tmp_p;
 
 	data->img_data = mlx_get_data_addr(img, &tmp_p.bits_per_pixel,
 			&tmp_p.size_line, &tmp_p.endian);
-	data->img_width = WIDTH;
+	data->img_width = (window->data.ptr.width*64);
 	data->bits_per_pixel = 4;
 	data->ex = ft_abs(line->x2 - line->x1);
 	data->ey = ft_abs(line->y2 - line->y1);

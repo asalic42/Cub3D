@@ -30,7 +30,7 @@ int	shm_att_pb(Display *d,XErrorEvent *ev)
 
 
 /*
-**  Data malloc :  width+32 ( bitmap_pad=32 ),    *4 = *32 / 8bit
+**  Data ft_malloc :  width+32 ( bitmap_pad=32 ),    *4 = *32 / 8bit
 */
 
 
@@ -39,7 +39,7 @@ void	*mlx_int_new_xshm_image(t_xvar *xvar,int width,int height,int format)
   t_img	*img;
   int	(*save_handler)();
 
-  if (!(img = malloc(sizeof(*img))))
+  if (!(img = ft_malloc(sizeof(*img))))
     return ((void *)0);
   bzero(img,sizeof(*img));
   img->data = 0;
@@ -108,9 +108,9 @@ void	*mlx_int_new_image(t_xvar *xvar,int width, int height,int format)
 {
   t_img	*img;
 
-  if (!(img = malloc(sizeof(*img))))
+  if (!(img = ft_malloc(sizeof(*img))))
     return ((void *)0);
-  if (!(img->data = malloc((width+32)*height*4)))
+  if (!(img->data = ft_malloc((width+32)*height*4)))
   {
     free(img);
     return ((void *)0);
