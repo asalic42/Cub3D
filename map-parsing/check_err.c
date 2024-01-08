@@ -6,11 +6,44 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 15:55:48 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/08 16:51:20 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/08 20:04:43 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub.h"
+#include "../include/main.h"
+
+int	*simple_tab_int(char **char_map, t_window *window)
+{
+	int *int_map;
+	int	x;
+	int y;
+	int	i;
+
+	y = 0;
+	i = 0;
+	int_map = ft_malloc((window->data.ptr.height * window->data.ptr.width) * \
+	sizeof(int));
+	while (y < window->data.ptr.height)
+	{
+		x = 0;
+		while (x < window->data.ptr.width)
+		{
+			
+			if (char_map[y][x] == 'N' || char_map[y][x] == 'E' || char_map[y][x] == 'W' || char_map[y][x] == 'S')
+				int_map[i] = 2;
+			else if (char_map[y][x] == ' ' || char_map[y][x] == '\0')
+				int_map[i] = 0;
+			else
+				int_map[i] = char_map[y][x] - 48;
+			ft_printf("%d,", int_map[i]);
+			i ++;
+			x ++;
+		}
+		ft_printf("\n");
+		y ++;
+	}
+	return (int_map);
+}
 
 void	handle_error(t_window *window, char *map)
 {

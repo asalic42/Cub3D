@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 20:37:16 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/08 16:27:54 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/08 19:04:00 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ void			draw_map(t_mlx_stuff *img, t_map *map, t_window *window);
 int				key_press(int keycode, t_window *window);
 int				handle_no_event(void *window);
 int				create_window(t_window *window);
+int				*simple_tab_int(char **char_map, t_window *window);
 int				destroy_window(t_window *window);
 void			draw_player(t_window *window);
 t_map			*get_map_instance(void);

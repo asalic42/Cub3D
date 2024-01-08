@@ -6,14 +6,14 @@
 #    By: asalic <asalic@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/21 18:01:21 by asalic            #+#    #+#              #
-#    Updated: 2024/01/08 17:02:09 by asalic           ###   ########.fr        #
+#    Updated: 2024/01/08 19:34:36 by asalic           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 		= cub3D
 CC 			= cc
-CFLAGS		= -Wall -Wextra -Werror
-LIBS		= -Lminilibx-linux -lmlx -Llibft -lft -lGL -lXext -lX11 -lm -g3 -O2
+CFLAGS		= -Wall -Wextra -Werror -g3
+LIBS		= -Lminilibx-linux -lmlx -Llibft -lft -lGL -lXext -lX11 -lm -O2
 PATH_MLX	= minilibx-linux/libmlx.a
 PATH_LIBFT	= libft/libft.a
 INCLUDES	= cub.h minilibx-linux/mlx.h libft/libft.h
