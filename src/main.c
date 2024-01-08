@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/08 16:43:02 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/08 19:24:05 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,32 +23,29 @@ void test2(int x, int start_y, int end_y, t_all_stuff_for_ray_casting *all_stuff
 
 	textures.current_x = x;
 	textures.texture_step = (float)xpm_height / all_stuff->line_h;
-	textures.tex_x = (int)(all_stuff->rx) % xpm_width;
-	if (textures.tex_x == 0 || textures.tex_x == xpm_width - 1 || textures.tex_x == xpm_width / 2)
+	if (all_stuff->dist_h > all_stuff->dist_v)
 		textures.tex_x = (int)(all_stuff->ry) % xpm_width;
+	if (all_stuff->dist_h < all_stuff->dist_v)
+		textures.tex_x = (int)(all_stuff->rx) % xpm_width;
 	if (start_y == 0 && end_y == HEIGHT)
 	{
 		textures.texture_step = (float)xpm_height / all_stuff->original_line_h;
 		start_y = HEIGHT / 2 - (all_stuff->original_line_h / 2);
 		end_y = all_stuff->original_line_h;	
 	}
-	while (textures.current_x < x + 1)
+	textures.y = start_y;
+	textures.texture_position = 0;
+	while (textures.y < end_y && textures.y < HEIGHT)
 	{
-		textures.y = start_y;
-		textures.texture_position = 0;
-		while (textures.y < end_y && textures.y < HEIGHT)
+		if (textures.y >= 0)
 		{
-			if (textures.y >= 0)
-			{
-				textures.tex_y = (int)(textures.texture_position);
-				textures.value = xpm_data + (textures.tex_y * xpm_width + textures.tex_x) * (4);
-				textures.pixel = img_data + (textures.y * (WIDTH) + textures.current_x) * (4);
-				*(unsigned int *)textures.pixel = *(unsigned int *)textures.value;
-			}
-			textures.texture_position += textures.texture_step;
-			textures.y++;
+			textures.tex_y = (int)(textures.texture_position);
+			textures.value = xpm_data + (textures.tex_y * xpm_width + textures.tex_x) * (4);
+			textures.pixel = img_data + (textures.y * (WIDTH) + textures.current_x) * (4);
+			*(unsigned int *)textures.pixel = *(unsigned int *)textures.value;
 		}
-		textures.current_x++;
+		textures.texture_position += textures.texture_step;
+		textures.y++;
 	}
 }
 
@@ -192,7 +189,7 @@ int	main(int ac, char **av)
 	//if (ac != 2)
 	//	return (print_error(RED "Error : not enought args\n" NC));
 	start_garbage();
-	handle_error(&window, av[1]);
+	//handle_error(&window, av[1]);
 	if (!create_window(&window))
 		return (0);
 	update_mlx_infos(&window.mlx_ptr, &window.win_ptr, &window.img_ptr);

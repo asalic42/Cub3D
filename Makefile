@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: asalic <asalic@student.42.fr>              +#+  +:+       +#+         #
+#    By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/21 18:01:21 by asalic            #+#    #+#              #
-#    Updated: 2024/01/08 17:02:09 by asalic           ###   ########.fr        #
+#    Updated: 2024/01/08 18:47:37 by rciaze           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,6 @@ $(PATH_MLX) :
 $(PATH_LIBFT) :
 	@make -s -C libft
 clean	:
-	@make -s -C minilibx-linux
 	@make -s clean -C libft
 	@rm -rf $(OBJ) $(OBJ_DIR)
 	@echo $(BOLD)$(LIGHT_GREEN)"Clean Done !\n"$(RESET)

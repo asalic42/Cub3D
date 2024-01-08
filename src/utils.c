@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 20:36:44 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/08 16:56:03 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/08 19:02:16 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,8 +117,8 @@ int	create_window(t_window *window)
 	player->a = DR;
 	player->x = 300;
 	player->y = 300;
-	player->dx = cos(player->a) * 8;
-	player->dy = sin(player->a) * 8;
+	player->dx = cos(player->a) * 10;
+	player->dy = sin(player->a) * 10;
 	map = get_map_instance();
 	map->x = 10;
 	map->y = 10;
