@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 20:36:44 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/08 19:02:16 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/08 19:30:41 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ int	create_window(t_window *window)
 
 int	destroy_window(t_window *window)
 {
+	free_mlx_infos();
 	printf("avg time by frame = %f, %d total frames rendered\n", prout / compteur, compteur);
 	return (mlx_destroy_window(window->mlx_ptr, window->win_ptr));
 }

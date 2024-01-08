@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   design_p_mlx.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 11:16:59 by wolf              #+#    #+#             */
-/*   Updated: 2024/01/08 14:37:48 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/08 19:28:44 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ void	free_mlx_infos(void)
 	t_mlx_stuff	*mlx_infos;
 
 	mlx_infos = mlx_instance();
-	mlx_destroy_window(mlx_infos->mlx_ptr, mlx_infos->win_ptr);
 	if (mlx_infos->img_ptr)
 		mlx_destroy_image(mlx_infos->mlx_ptr, mlx_infos->img_ptr);
+	mlx_destroy_window(mlx_infos->mlx_ptr, mlx_infos->win_ptr);
 	mlx_destroy_display(mlx_infos->mlx_ptr);
 	free(mlx_infos->mlx_ptr);
 }

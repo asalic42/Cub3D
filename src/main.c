@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/08 19:24:05 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/08 19:30:42 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,7 @@ void	draw_player(t_window *window)
 	//draw_line(line, window->img_ptr, 0xFFFF00, 1, window);
 	mlx_put_image_to_window(window->mlx_ptr, window->win_ptr,
 		window->img_ptr, 0, 0);
+	update_mlx_infos(window->mlx_ptr, window->win_ptr, window->img_ptr);
 }
 
 void	draw_map(t_mlx_stuff *img, t_map *map, t_window *window)
