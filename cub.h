@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:57:25 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/05 13:52:43 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/08 14:44:41 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <string.h>
 # include "minilibx-linux/mlx.h"
 # include "minilibx-linux/mlx_int.h"
-# include "include/main.h"
+// # include "include/main.h"
 # include "libft/libft.h"
 
 /* * * * MACROS * * * */
@@ -41,6 +41,7 @@
 // # define PX		64
 
 /* * * * STRUCTURES * * * */
+
 typedef struct s_garbage_lst
 {	
 	void					*pointer;
@@ -88,12 +89,24 @@ typedef struct s_data
 	t_ptr	ptr;
 }				t_data;
 
+typedef struct s_window
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
+	void	*img_ptr;
+	char	*img_data;
+	int		bits;
+	int		size_line_img;
+	int		endian;
+	t_data 	data;
+}	t_window;
+
 /* * * * ERROR HANDLE * * * */
 void			error_files(t_window *window, char *cub);
 void			handle_error(t_window *window, char *map);
 void			close_error(t_window *window, char *error);
 int				close_wndo(t_window *window);
-void			count_error(t_data *data, t_parse *map, int fd, t_window *window);
+void			count_error(t_parse *map, int fd, t_window *window);
 int				print_error(char *str);
 
 /* * * * CHECK ERRORS * * * */
@@ -124,10 +137,10 @@ void			malloc_failure(void);
 
 /* * * * UTILS * * * */
 int				is_in_char(char c);
-int				countmap_y(char	*mappy, t_data *data);
-void			countmap_x(char	*mappy, t_data *data);
-void			is_in_char_error(t_parse map, t_data *data, int fd, int width);
-int				init_count(char *mappy, t_parse *map, t_data *data);
+int				countmap_y(char	*mappy, t_window *window);
+void			countmap_x(char	*mappy, t_window *window);
+void			is_in_char_error(t_parse map, t_window *window, int fd, int width);
+int				init_count(char *mappy, t_parse *map, t_window *window);
 
 /* * * * * TAB MAP * * * */
 char			**ft_maptab(char *map, t_data *data, t_window *window);

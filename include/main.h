@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 20:37:16 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/05 13:52:09 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/08 16:27:54 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define MAIN_H
 
 # include "../minilibx-linux/mlx.h"
-# include "../line/includes/line.h"
-# include "../rectangle/includes/rectangle.h"
+# include "../formes/include/forme.h"
+// # include "../rectangle/includes/rectangle.h"
 # include "../cub.h"
 # include <X11/X.h>
 # include <unistd.h>
@@ -34,22 +34,10 @@
 # define PI 3.1415926535
 # define PI2 PI / 2
 # define PI3 3*PI / 2
-# define DR 0.0174533 / 2
+# define DR 0.00054541666
 
 extern double prout;
 extern int compteur;
-
-typedef struct s_window
-{
-	void	*mlx_ptr;
-	void	*win_ptr;
-	void	*img_ptr;
-	char	*img_data;
-	int		bits;
-	int		size_line_img;
-	int		endian;
-	t_data 	data;
-}	t_window;
 
 typedef struct s_player_pos
 {
@@ -118,7 +106,7 @@ typedef struct s_textures
 	int			tex_x;
 }	t_textures;
 
-void			draw_map(t_mlx_stuff *img, t_map *map);
+void			draw_map(t_mlx_stuff *img, t_map *map, t_window *window);
 int				key_press(int keycode, t_window *window);
 int				handle_no_event(void *window);
 int				create_window(t_window *window);
@@ -126,19 +114,19 @@ int				destroy_window(t_window *window);
 void			draw_player(t_window *window);
 t_map			*get_map_instance(void);
 t_player_pos	*get_player_instance(void);
-void			up_or_down(t_all_stuff_for_ray_casting *all_stuff);
+void			up_or_down(t_all_stuff_for_ray_casting *all_stuff, t_window *window);
 void			find_closest_horizontal_intersection(
-					t_all_stuff_for_ray_casting *all_stuff);
-void			left_or_right(t_all_stuff_for_ray_casting *all_stuff);
+					t_all_stuff_for_ray_casting *all_stuff, t_window *window);
+void			left_or_right(t_all_stuff_for_ray_casting *all_stuff, t_window *window);
 void			find_closest_vertical_intersection(
-					t_all_stuff_for_ray_casting *all_stuff);
+					t_all_stuff_for_ray_casting *all_stuff, t_window *window);
 float			distance(float ax, float ay, float bx, float by);
 int				comp_distance(t_all_stuff_for_ray_casting *all_stuff,
-					t_mlx_stuff *img);
+					t_mlx_stuff *img, t_window *window);
 float			distance(float ax, float ay, float bx, float by);
-void			init_ray(t_all_stuff_for_ray_casting *all_stuff);
+void			init_ray(t_all_stuff_for_ray_casting *all_stuff, t_window *window);
 void			init_distances(t_all_stuff_for_ray_casting *all_stuff);
-void			calculate_line_height(t_all_stuff_for_ray_casting *all_stuff);
+void			calculate_line_height(t_all_stuff_for_ray_casting *all_stuff, t_window *window);
 void			increment_angle(t_all_stuff_for_ray_casting *all_stuff);
 void			is_player_out_of_bouds(t_player_pos *player, t_window *window);
 #endif

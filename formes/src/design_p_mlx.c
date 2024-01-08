@@ -6,11 +6,11 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 11:16:59 by wolf              #+#    #+#             */
-/*   Updated: 2024/01/05 13:36:16 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/08 14:37:48 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/main.h"
+#include "../include/forme.h"
 
 t_mlx_stuff	*mlx_instance(void)
 {

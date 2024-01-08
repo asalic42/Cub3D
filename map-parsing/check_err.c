@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 15:55:48 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/05 13:50:51 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/08 16:51:20 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	handle_error(t_window *window, char *map)
 {
-	error_files(&window->data, map);
+	error_files(window, map);
 	if (!error_map(map))
 		close_error(window, NULL);
 	init_data(window, map);

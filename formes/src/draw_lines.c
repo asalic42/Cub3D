@@ -6,11 +6,11 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 23:57:06 by raphael           #+#    #+#             */
-/*   Updated: 2024/01/05 13:36:04 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/08 15:53:52 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/main.h"
+#include "../include/forme.h"
 
 //	The breseham algorithm is here used with two cases.
 //	You could optimize it more by doing other cases, but it's not necessary.
@@ -35,11 +35,12 @@ void	draw_line(t_line line, void *img, int color, int stop, t_window *window)
 void	case_1(t_line *line, t_data_for_line *data, unsigned int color, int stop, t_window *window)
 {
 	int				i;
+	(void)(window);
 
 	i = -1;
 	while (i <= data->dx2)
 	{
-		if (line->x1 < stop || line->x1 > (window->data.ptr.width*64) - stop || line->y1 < stop || line->y1 > (window->data.ptr.height*64) - stop)
+		if (line->x1 < stop || line->x1 > (WIDTH) - stop || line->y1 < stop || line->y1 > (HEIGHT) - stop)
 			break ;
 		draw_actual_pixels_case_1(data, line, color);
 		i++;
@@ -56,11 +57,12 @@ void	case_1(t_line *line, t_data_for_line *data, unsigned int color, int stop, t
 void	case_2(t_line *line, t_data_for_line *data, unsigned int color, int stop, t_window *window)
 {
 	int				i;
+	(void)(window);
 
 	i = -1;
 	while (i <= data->dy2)
 	{
-		if (line->x1 < stop || line->x1 > (window->data.ptr.width*64) - stop || line->y1 < stop || line->y1 > (window->data.ptr.height*64) - stop)
+		if (line->x1 < stop || line->x1 > (WIDTH) - stop || line->y1 < stop || line->y1 > (HEIGHT) - stop)
 			break ;
 		draw_actual_pixels_case_2(data, line, color);
 		i++;

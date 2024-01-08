@@ -6,7 +6,7 @@
 #    By: asalic <asalic@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/21 18:01:21 by asalic            #+#    #+#              #
-#    Updated: 2024/01/05 13:57:45 by asalic           ###   ########.fr        #
+#    Updated: 2024/01/08 17:02:09 by asalic           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ PATH_LIBFT	= libft/libft.a
 INCLUDES	= cub.h minilibx-linux/mlx.h libft/libft.h
 
 SRCS	+= cub.c
-SRCS_DIR = map-parsing utils src textures rectangle/src line/src
+SRCS_DIR = map-parsing utils src formes/src
 SRCS	:= $(foreach dir,$(SRCS_DIR),$(wildcard $(dir)/*.c)) $(SRCS)
 OBJ_DIR	 = obj
 OBJ		 = $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRCS))
@@ -42,18 +42,18 @@ $(NAME)	: $(OBJ)
 	@echo $(BOLD)$(LIGHT_GREEN)"Compilation Done !\n"$(RESET)
 
 $(PATH_MLX) :
-	@make -s -C minilibx-linux
+	@make -s -C minilibx-linux/	
 
 $(PATH_LIBFT) :
 	@make -s -C libft
 clean	:
-	@make -s clean -C minilibx-linux
+	@make -s -C minilibx-linux
 	@make -s clean -C libft
 	@rm -rf $(OBJ) $(OBJ_DIR)
 	@echo $(BOLD)$(LIGHT_GREEN)"Clean Done !\n"$(RESET)
 
 fclean	: clean
-	@make -s fclean -C libft
+	@make -s 	fclean -C libft
 	@rm -rf $(NAME)
 	@echo $(BOLD)$(LIGHT_GREEN)"FClean Done !\n"$(RESET)
 
