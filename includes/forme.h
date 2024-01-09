@@ -6,12 +6,12 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 19:03:42 by raphael           #+#    #+#             */
-/*   Updated: 2024/01/09 15:58:25 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/09 16:55:14 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LINE_H
-# define LINE_H
+#ifndef FORME_H
+# define FORME_H
 
 # include <stdio.h>
 # include <unistd.h>
@@ -32,7 +32,6 @@ typedef struct s_rectangle
 	int	middle_x2;
 	int	width;
 }	t_rectangle;
-
 
 typedef struct c_tmp_pixel
 {
@@ -66,8 +65,10 @@ typedef struct s_data_for_line
 }	t_data_for_line;
 
 void	stuff_for_line_draw(t_data_for_line *data, t_line *line, void *img);
-void	case_1(t_line *line, t_data_for_line *data, unsigned int color, int stop);
-void	case_2(t_line *line, t_data_for_line *data, unsigned int color, int stop);
+void	case_1(t_line *line, t_data_for_line *data, unsigned int color, \
+		int stop);
+void	case_2(t_line *line, t_data_for_line *data, unsigned int color, \
+		int stop);
 int		ft_abs(int n);
 void	draw_line(t_line line, void *img, int color, int stop);
 void	draw_actual_pixels_case_1(t_data_for_line *data, t_line *line,

@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 20:37:16 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/09 15:59:14 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/09 16:57:29 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@
 # define PI3 3*PI / 2
 # define DR 0.00054541666
 
-extern double prout;
-extern int compteur;
+extern double	prout;
+extern int		compteur;
 
 typedef struct s_player_pos
 {
@@ -53,7 +53,7 @@ typedef struct s_map
 	int		y;
 	int		s;
 	int		minimap_s;
-	int 	*map;
+	int		*map;
 }	t_map;
 
 typedef struct s_all_stuff_for_ray_casting
@@ -114,19 +114,23 @@ int				destroy_window(t_window *window);
 void			draw_player(t_window *window);
 t_map			*get_map_instance(void);
 t_player_pos	*get_player_instance(void);
-void			up_or_down(t_all_stuff_for_ray_casting *all_stuff, t_window *window);
+void			up_or_down(t_all_stuff_for_ray_casting *all_stuff, \
+					t_window *window);
 void			find_closest_horizontal_intersection(
 					t_all_stuff_for_ray_casting *all_stuff, t_window *window);
-void			left_or_right(t_all_stuff_for_ray_casting *all_stuff, t_window *window);
+void			left_or_right(t_all_stuff_for_ray_casting *all_stuff, \
+					t_window *window);
 void			find_closest_vertical_intersection(
 					t_all_stuff_for_ray_casting *all_stuff, t_window *window);
 float			distance(float ax, float ay, float bx, float by);
 int				comp_distance(t_all_stuff_for_ray_casting *all_stuff,
 					t_mlx_stuff *img, t_window *window);
 float			distance(float ax, float ay, float bx, float by);
-void			init_ray(t_all_stuff_for_ray_casting *all_stuff, t_window *window);
+void			init_ray(t_all_stuff_for_ray_casting *all_stuff, \
+					t_window *window);
 void			init_distances(t_all_stuff_for_ray_casting *all_stuff);
-void			calculate_line_height(t_all_stuff_for_ray_casting *all_stuff, t_window *window);
+void			calculate_line_height(t_all_stuff_for_ray_casting *all_stuff, \
+					t_window *window);
 void			increment_angle(t_all_stuff_for_ray_casting *all_stuff);
 void			is_player_out_of_bouds(t_player_pos *player, t_window *window);
 #endif

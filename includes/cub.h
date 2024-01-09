@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:57:25 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/09 15:57:19 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/09 16:51:10 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,21 +60,11 @@ typedef struct s_parse
 	char	**map;
 }				t_parse;
 
-typedef struct s_listmap
-{
-	int					x;
-	int					y;
-	int					value;
-	struct s_listmap	*next;
-	struct s_listmap	*prev;
-}				t_listmap;
-
 typedef struct s_ptr
 {
 	int			width;
 	int			height;
 	char		**map;
-	t_listmap	*list;
 }				t_ptr;
 
 typedef struct s_data
@@ -93,7 +83,7 @@ typedef struct s_window
 	int		bits;
 	int		size_line_img;
 	int		endian;
-	t_data 	data;
+	t_data	data;
 }	t_window;
 
 /* * * * ERROR HANDLE * * * */
@@ -134,19 +124,14 @@ void			malloc_failure(void);
 int				is_in_char(char c);
 int				countmap_y(char	*mappy, t_window *window);
 void			countmap_x(char	*mappy, t_window *window);
-void			is_in_char_error(t_parse map, t_window *window, int fd, int width);
+void			is_in_char_error(t_parse map, t_window *window, int fd, \
+				int width);
 int				init_count(char *mappy, t_parse *map, t_window *window);
 
 /* * * * * TAB MAP * * * */
 char			**ft_maptab(char *map, t_data *data, t_window *window);
 void			print_tab(char **tab);
 char			*go_map(t_parse *put, t_data *data, t_window *window);
-
-/* * * * LIST MAP * * * */
-void			print_list(t_listmap *list);
-int				is_good_map(t_listmap *list, char *map);
-void			add_arg(t_listmap **list, int x, int y, int value);
-t_listmap		*create_arg(int x, int y, int value);
 
 /* * * * MAIN CORE * * * */
 void			init_data(t_window *window, char *av);

@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 16:55:21 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/09 15:18:54 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/09 16:48:33 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,33 @@ void	print_tab(char **tab)
 		ft_printf("{%s}\n", tab[i]);
 		i ++;
 	}
+}
+
+int	*simple_tab_int(char **char_map, t_window *window)
+{
+	int	*int_map;
+	int	x;
+	int	y;
+	int	i;
+
+	y = -1;
+	i = 0;
+	int_map = ft_malloc((window->data.ptr.height * window->data.ptr.width) * \
+	sizeof(int));
+	while (++y < window->data.ptr.height)
+	{
+		x = -1;
+		while (++x < window->data.ptr.width)
+		{
+			if (char_map[y][x] == 'N' || char_map[y][x] == 'E' || \
+			char_map[y][x] == 'W' || char_map[y][x] == 'S')
+				int_map[i] = 2;
+			else if (char_map[y][x] == ' ' || char_map[y][x] == '\0')
+				int_map[i] = 0;
+			else
+				int_map[i] = char_map[y][x] - 48;
+			i ++;
+		}
+	}
+	return (int_map);
 }
