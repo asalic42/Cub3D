@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 19:03:42 by raphael           #+#    #+#             */
-/*   Updated: 2024/01/08 16:11:25 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/08 18:48:04 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include "../../minilibx-linux/mlx.h"
 // # include "../../include/main.h"
 # include "../../cub.h"
-# include "basique_mlx_needed.h"
+# include "../../basique_mlx_needed.h"
 
 # define ESC		65307
 

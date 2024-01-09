@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   basique_mlx_needed.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
+/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 12:35:55 by wolf              #+#    #+#             */
-/*   Updated: 2023/12/12 20:05:38 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/08 18:55:07 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define BASIQUE_MLX_NEEDED_H
 
 # include <stdlib.h>
-# include "../../minilibx-linux/mlx.h"
+# include "minilibx-linux/mlx.h"
 
 typedef struct s_mlx_stuff
 {

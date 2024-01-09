@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_casting_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
+/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:11:12 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/08 18:57:31 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/09 16:41:34 by raphael          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	up_or_down(t_all_stuff_for_ray_casting *all_stuff, t_window *window)
 	{
 		all_stuff->rx = all_stuff->player->x;
 		all_stuff->ry = all_stuff->player->y;
-		all_stuff->dof = 10;
+		all_stuff->dof = all_stuff->map->y;
 	}
 }
 
@@ -45,7 +45,7 @@ void	find_closest_horizontal_intersection(
 		t_all_stuff_for_ray_casting *all_stuff, t_window *window)
 {
 	(void)(window);
-	while (all_stuff->dof < 10)
+	while (all_stuff->dof < all_stuff->map->y)
 	{
 		all_stuff->mx = (int)(all_stuff->rx) / (BLOCK_SIZE);
 		all_stuff->my = (int)(all_stuff->ry) / (BLOCK_SIZE);
@@ -53,7 +53,7 @@ void	find_closest_horizontal_intersection(
 		if (all_stuff->mp > 0 && all_stuff->mp < all_stuff->map->x
 			* all_stuff->map->y && all_stuff->map->map[all_stuff->mp] == 1)
 		{
-			all_stuff->dof = 10;
+			all_stuff->dof = all_stuff->map->y;
 			all_stuff->hx = all_stuff->rx;
 			all_stuff->hy = all_stuff->ry;
 			all_stuff->dist_h = distance(all_stuff->player->x,
@@ -94,7 +94,7 @@ void	left_or_right(t_all_stuff_for_ray_casting *all_stuff, t_window *window)
 	{
 		all_stuff->ry = all_stuff->player->y;
 		all_stuff->rx = all_stuff->player->x;
-		all_stuff->dof = 10;
+		all_stuff->dof = all_stuff->map->x;
 	}
 }
 
@@ -102,7 +102,7 @@ void	find_closest_vertical_intersection(
 		t_all_stuff_for_ray_casting *all_stuff, t_window *window)
 {
 	(void)(window);
-	while (all_stuff->dof < 10)
+	while (all_stuff->dof < all_stuff->map->x)
 	{
 		all_stuff->mx = (int)(all_stuff->rx) / (BLOCK_SIZE);
 		all_stuff->my = (int)(all_stuff->ry) / (BLOCK_SIZE);
@@ -110,7 +110,7 @@ void	find_closest_vertical_intersection(
 		if (all_stuff->mp > 0 && all_stuff->mp < all_stuff->map->x
 			* all_stuff->map->y && all_stuff->map->map[all_stuff->mp] == 1)
 		{
-			all_stuff->dof = 10;
+			all_stuff->dof = all_stuff->map->x;
 			all_stuff->vx = all_stuff->rx;
 			all_stuff->vy = all_stuff->ry;
 			all_stuff->dist_v = distance(all_stuff->player->x,

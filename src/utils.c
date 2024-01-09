@@ -6,7 +6,7 @@
 /*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 20:36:44 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/09 16:22:51 by raphael          ###   ########.fr       */
+/*   Updated: 2024/01/09 16:41:52 by raphael          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,36 +95,59 @@ int	mlx_init_stuff(t_window *window)
 	return (1);
 }
 
+static void find_player_dir(t_player_pos *player, char dir)
+{
+	if (dir == 'N')
+		player->a = PI2;
+	else if (dir == 'E')
+		player->a = 0;
+	else if (dir == 'S')
+		player->a = PI3;
+	else if (dir == 'W')
+		player->a = PI;
+}
+
+static void	find_player(t_map *map, t_player_pos *player, char **char_map)
+{
+	int x;
+	int y;
+	
+	y = 0;
+	while (y < map->y)
+	{
+		x = 0;
+		while (x < map->x)
+		{
+			if (char_map[y][x] == 'N' || char_map[y][x] == 'E' || char_map[y][x] == 'W' || char_map[y][x] == 'S')
+			{
+				player->x = x * 64;
+				player->y = y * 64;
+				find_player_dir(player, char_map[y][x]);
+				return ;
+			}
+			x ++;
+		}
+		y ++;
+	}
+}
+
 int	create_window(t_window *window)
 {
 	t_player_pos	*player;
-	t_map			*map;
-	int prout[100] = 
-	{1,1,1,1,1,1,1,1,1,1,
-	1,0,1,0,0,0,0,0,0,1,
-	1,0,1,0,0,0,0,0,0,1,
-	1,0,1,0,0,0,0,0,0,1,
-	1,0,1,0,0,1,1,1,0,1,
-	1,0,0,0,0,1,0,1,0,1,
-	1,0,0,0,0,1,0,1,0,1,
-	1,0,1,0,0,1,0,1,0,1,
-	1,0,0,0,0,0,0,0,0,1,
-	1,1,1,1,1,1,1,1,1,1};
+	t_map			*mapp;
 
+	mapp = get_map_instance();
+	mapp->map = simple_tab_int(window->data.ptr.map, window);
 	if (!mlx_init_stuff(window))
 		return (0);
+	mapp->x = window->data.ptr.width;
+	mapp->y = window->data.ptr.height;
+	mapp->s = (WIDTH)/20;
 	player = get_player_instance();
-	player->a = DR;
-	player->x = 300;
-	player->y = 300;
-	player->dx = cos(player->a) * 10;
-	player->dy = sin(player->a) * 10;
-	map = get_map_instance();
-	map->x = 10;
-	map->y = 10;
-	map->s = (WIDTH)/20;
-	map->map = ft_malloc(100 * sizeof(int));
-	ft_memcpy(map->map, prout, 100 * sizeof(int));
+	find_player(mapp, player, window->data.ptr.map);
+	player->dx = cos(player->a) * 8;
+	player->dy = sin(player->a) * 8;
+	printf("x = %f, y = %f\n", player->x, player->y);
 	return (1);
 }
 
