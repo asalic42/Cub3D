@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 20:37:16 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/08 16:27:54 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/09 15:37:58 by raphael          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,28 @@ typedef struct s_map
 	int 	*map;
 }	t_map;
 
+typedef	struct s_textures_path
+{
+	int				xpm_width1;
+	int				xpm_height1;
+	void			*xpm1;
+	void			*xpm_data1;
+	int				xpm_width2;
+	int				xpm_height2;
+	void			*xpm2;
+	void			*xpm_data2;
+	int				xpm_width3;
+	int				xpm_height3;
+	void			*xpm3;
+	void			*xpm_data3;
+	int				xpm_width4;
+	int				xpm_height4;
+	void			*xpm4;
+	void			*xpm_data4;
+	int				is_init;
+}	t_textures_path;
+
+
 typedef struct s_all_stuff_for_ray_casting
 {
 	int				r;
@@ -106,6 +128,7 @@ typedef struct s_textures
 	int			tex_x;
 }	t_textures;
 
+t_textures_path	*get_textures_instance(void);
 void			draw_map(t_mlx_stuff *img, t_map *map, t_window *window);
 int				key_press(int keycode, t_window *window);
 int				handle_no_event(void *window);
