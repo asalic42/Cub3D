@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 23:57:06 by raphael           #+#    #+#             */
-/*   Updated: 2024/01/09 15:39:28 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/09 17:03:10 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,16 @@ void	draw_line(t_line line, void *img, int color, int stop)
 //	I will not explain it here,
 //	but you can find very good explanations of it on youtube.
 
-void	case_1(t_line *line, t_data_for_line *data, unsigned int color, int stop)
+void	case_1(t_line *line, t_data_for_line *data, unsigned int color, \
+				int stop)
 {
 	int				i;
 
 	i = -1;
 	while (i <= data->dx2)
 	{
-		if (line->x1 < stop || line->x1 > (WIDTH) - stop || line->y1 < stop || line->y1 > (HEIGHT) - stop)
+		if (line->x1 < stop || line->x1 > (WIDTH) - stop || line->y1 < stop \
+		|| line->y1 > (HEIGHT) - stop)
 			break ;
 		draw_actual_pixels_case_1(data, line, color);
 		i++;
@@ -53,14 +55,16 @@ void	case_1(t_line *line, t_data_for_line *data, unsigned int color, int stop)
 	}
 }
 
-void	case_2(t_line *line, t_data_for_line *data, unsigned int color, int stop)
+void	case_2(t_line *line, t_data_for_line *data, unsigned int color, \
+				int stop)
 {
-	int				i;
+	int	i;
 
 	i = -1;
 	while (i <= data->dy2)
 	{
-		if (line->x1 < stop || line->x1 > (WIDTH) - stop || line->y1 < stop || line->y1 > (HEIGHT) - stop)
+		if (line->x1 < stop || line->x1 > (WIDTH) - stop || line->y1 < stop \
+		|| line->y1 > (HEIGHT) - stop)
 			break ;
 		draw_actual_pixels_case_2(data, line, color);
 		i++;
@@ -96,7 +100,6 @@ void	draw_actual_pixels_case_1(t_data_for_line *data, t_line *line,
 		{
 			pixel_offset = data->img_data + ((line->y1 + w)
 					* data->img_width + line->x1) * (data->bits_per_pixel);
-			
 			*(unsigned int *)pixel_offset = color;
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 00:06:16 by raphael           #+#    #+#             */
-/*   Updated: 2024/01/09 15:38:34 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/09 17:01:30 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,3 @@ t_line	init_rectangle(int x1, int y1, int x2, int y2)
 	rectangle.width = ft_abs(y2 - y1);
 	return (rectangle);
 }
-
