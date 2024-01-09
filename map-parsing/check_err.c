@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 15:55:48 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/08 20:04:43 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/09 13:33:43 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ int	error_map(char *map)
 		}
 		check_line = get_next_line(fd);
 	}
+	if (len_player == -1)
+		return (print_error(RED "Error : no player detected\n" NC));
 	close(fd);
 	return (1);
 }

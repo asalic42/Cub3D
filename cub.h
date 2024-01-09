@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:57:25 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/08 14:44:41 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/09 13:49:55 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ int				is_zero(int y, char **map, t_data *data);
 int				first_line(t_data *data, char **map);
 int				main_parse(char **map, t_data *data);
 int				is_space(t_data *data, char **map);
-int				space_check(t_data *data, char **map);
+int				contour_check(t_data *data, char **map);
 int				is_contour(int x, int y, char **map, t_data *data);
 
 /* * * * GARBAGE * * * */
