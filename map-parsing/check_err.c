@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_err.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 15:55:48 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/08 16:51:20 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/09 13:49:10 by raphael          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,6 @@ int	only_one_thing(char *check_line, int i, int len_player)
 //Close and free everything
 int	close_wndo(t_window *window)
 {
-	int	i;
-
-	i = 0;
 	mlx_destroy_window(window->mlx_ptr, window->win_ptr);
 	ft_printf(GREEN"Window is closing\n"NC);
 	mlx_destroy_display(window->mlx_ptr);

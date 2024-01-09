@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+         #
+#    By: raphael <raphael@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/21 18:01:21 by asalic            #+#    #+#              #
-#    Updated: 2024/01/08 19:26:50 by rciaze           ###   ########.fr        #
+#    Updated: 2024/01/09 13:49:18 by raphael          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 		= cub3D
 CC 			= cc
 CFLAGS		= -Wall -Wextra -Werror -g3
-LIBS		= -Lminilibx-linux -lmlx -Llibft -lft -lGL -lXext -lX11 -lm -O2
+LIBS		= -Lminilibx-linux -lmlx -Llibft -lft -lXext -lX11 -lm -O2
 PATH_MLX	= minilibx-linux/libmlx.a
 PATH_LIBFT	= libft/libft.a
 INCLUDES	= cub.h minilibx-linux/mlx.h libft/libft.h
