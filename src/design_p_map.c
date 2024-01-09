@@ -6,11 +6,11 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 18:16:22 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/08 14:10:34 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/09 15:19:12 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/main.h"
+#include "../includes/main.h"
 
 t_map	*get_map_instance(void)
 {

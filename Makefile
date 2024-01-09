@@ -6,7 +6,7 @@
 #    By: asalic <asalic@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/21 18:01:21 by asalic            #+#    #+#              #
-#    Updated: 2024/01/08 19:34:36 by asalic           ###   ########.fr        #
+#    Updated: 2024/01/09 16:16:36 by asalic           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,10 +16,9 @@ CFLAGS		= -Wall -Wextra -Werror -g3
 LIBS		= -Lminilibx-linux -lmlx -Llibft -lft -lGL -lXext -lX11 -lm -O2
 PATH_MLX	= minilibx-linux/libmlx.a
 PATH_LIBFT	= libft/libft.a
-INCLUDES	= cub.h minilibx-linux/mlx.h libft/libft.h
+INCLUDES	= minilibx-linux/mlx.h libft/libft.h includes/main.h includes/cub.h includes/forme.h includes/basique_mlx_needed.h
 
-SRCS	+= cub.c
-SRCS_DIR = map-parsing utils src formes/src
+SRCS_DIR = map-parsing utils src formes
 SRCS	:= $(foreach dir,$(SRCS_DIR),$(wildcard $(dir)/*.c)) $(SRCS)
 OBJ_DIR	 = obj
 OBJ		 = $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRCS))
@@ -34,11 +33,11 @@ all		: $(PATH_MLX) $(PATH_LIBFT) $(NAME) $(INCLUDES)
 
 $(OBJ_DIR)/%.o : %.c
 	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -Iincludes -c $< -o $@
 	@echo $(BOLD)$(LIGHT_CYAN)"Generating obj...\n"$(RESET)
 
 $(NAME)	: $(OBJ)
-	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LIBS)
+	@$(CC) $(CFLAGS) -Iincludes $(OBJ) -o $(NAME) $(LIBS)
 	@echo $(BOLD)$(LIGHT_GREEN)"Compilation Done !\n"$(RESET)
 
 $(PATH_MLX) :

@@ -6,11 +6,11 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 00:06:16 by raphael           #+#    #+#             */
-/*   Updated: 2024/01/08 15:47:13 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/09 15:38:34 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/forme.h"
+#include "../includes/forme.h"
 
 // This function is used to initialize a line structure.
 // It's not necessary, but it's cleaner to use it.
@@ -41,9 +41,8 @@ int	ft_abs(int n)
 //	This function simply initializes all the variables we need to draw the line,
 //	as well as storing some data on the img we are drawing to, for... the norm.
 
-void	stuff_for_line_draw(t_data_for_line *data, t_line *line, void *img, t_window *window)
+void	stuff_for_line_draw(t_data_for_line *data, t_line *line, void *img)
 {
-	(void)(window);
 	t_tmp_pixel		tmp_p;
 
 	data->img_data = mlx_get_data_addr(img, &tmp_p.bits_per_pixel,

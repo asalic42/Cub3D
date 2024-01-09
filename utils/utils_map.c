@@ -6,11 +6,11 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 15:42:22 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/08 14:09:09 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/09 15:19:39 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub.h"
+#include "../includes/cub.h"
 
 int	init_count(char *mappy, t_parse *map, t_window *window)
 {

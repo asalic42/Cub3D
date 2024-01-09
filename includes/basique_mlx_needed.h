@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 12:35:55 by wolf              #+#    #+#             */
-/*   Updated: 2024/01/08 18:55:07 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/09 15:58:22 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define BASIQUE_MLX_NEEDED_H
 
 # include <stdlib.h>
-# include "minilibx-linux/mlx.h"
+# include "../minilibx-linux/mlx.h"
 
 typedef struct s_mlx_stuff
 {

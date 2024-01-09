@@ -6,11 +6,11 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 20:36:44 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/08 20:19:45 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/09 16:31:15 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/main.h"
+#include "../includes/main.h"
 
 void	update_window(t_player_pos *player, t_window *window)
 {
@@ -98,11 +98,11 @@ int	mlx_init_stuff(t_window *window)
 static void find_player_dir(t_player_pos *player, char dir)
 {
 	if (dir == 'N')
-		player->a = PI2;
+		player->a = PI3;
 	else if (dir == 'E')
 		player->a = 0;
 	else if (dir == 'S')
-		player->a = PI3;
+		player->a = PI2;
 	else if (dir == 'W')
 		player->a = PI;
 }
@@ -120,8 +120,8 @@ static void	find_player(t_map *map, t_player_pos *player, char **char_map)
 		{
 			if (char_map[y][x] == 'N' || char_map[y][x] == 'E' || char_map[y][x] == 'W' || char_map[y][x] == 'S')
 			{
-				player->x = x * 64;
-				player->y = y * 64;
+				player->x = x * 128;
+				player->y = y * 128;
 				find_player_dir(player, char_map[y][x]);
 				return ;
 			}

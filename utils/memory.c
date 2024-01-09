@@ -6,11 +6,11 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:14:36 by asalic            #+#    #+#             */
-/*   Updated: 2023/12/21 17:14:55 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/09 15:19:35 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub.h"
+#include "../includes/cub.h"
 
 t_garbage	*get_garbage(void)
 {

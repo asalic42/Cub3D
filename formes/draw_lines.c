@@ -6,24 +6,24 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 23:57:06 by raphael           #+#    #+#             */
-/*   Updated: 2024/01/08 15:53:52 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/09 15:39:28 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/forme.h"
+#include "../includes/forme.h"
 
 //	The breseham algorithm is here used with two cases.
 //	You could optimize it more by doing other cases, but it's not necessary.
 
-void	draw_line(t_line line, void *img, int color, int stop, t_window *window)
+void	draw_line(t_line line, void *img, int color, int stop)
 {
 	t_data_for_line	data;
 
-	stuff_for_line_draw(&data, &line, img, window);
+	stuff_for_line_draw(&data, &line, img);
 	if (data.dx2 > data.dy2)
-		case_1(&line, &data, color, stop, window);
+		case_1(&line, &data, color, stop);
 	else
-		case_2(&line, &data, color, stop, window);
+		case_2(&line, &data, color, stop);
 }
 
 //	These two function are used to calculate the alghorithm.
@@ -32,10 +32,9 @@ void	draw_line(t_line line, void *img, int color, int stop, t_window *window)
 //	I will not explain it here,
 //	but you can find very good explanations of it on youtube.
 
-void	case_1(t_line *line, t_data_for_line *data, unsigned int color, int stop, t_window *window)
+void	case_1(t_line *line, t_data_for_line *data, unsigned int color, int stop)
 {
 	int				i;
-	(void)(window);
 
 	i = -1;
 	while (i <= data->dx2)
@@ -54,10 +53,9 @@ void	case_1(t_line *line, t_data_for_line *data, unsigned int color, int stop, t
 	}
 }
 
-void	case_2(t_line *line, t_data_for_line *data, unsigned int color, int stop, t_window *window)
+void	case_2(t_line *line, t_data_for_line *data, unsigned int color, int stop)
 {
 	int				i;
-	(void)(window);
 
 	i = -1;
 	while (i <= data->dy2)

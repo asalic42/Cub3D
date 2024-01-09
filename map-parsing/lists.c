@@ -6,11 +6,11 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 20:03:04 by asalic            #+#    #+#             */
-/*   Updated: 2023/12/21 16:58:08 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/09 15:18:37 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub.h"
+#include "../includes/cub.h"
 
 //Transform map into list
 t_listmap	*create_arg(int x, int y, int value)

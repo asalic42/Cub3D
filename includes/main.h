@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 20:37:16 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/08 19:04:00 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/09 15:59:14 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 # define MAIN_H
 
 # include "../minilibx-linux/mlx.h"
-# include "../formes/include/forme.h"
-// # include "../rectangle/includes/rectangle.h"
-# include "../cub.h"
+# include "forme.h"
+# include "cub.h"
 # include <X11/X.h>
 # include <unistd.h>
 # include <math.h>
@@ -106,7 +105,7 @@ typedef struct s_textures
 	int			tex_x;
 }	t_textures;
 
-void			draw_map(t_mlx_stuff *img, t_map *map, t_window *window);
+void			draw_map(t_mlx_stuff *img, t_map *map);
 int				key_press(int keycode, t_window *window);
 int				handle_no_event(void *window);
 int				create_window(t_window *window);

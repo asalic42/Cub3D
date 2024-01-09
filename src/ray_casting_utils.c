@@ -6,11 +6,11 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:11:12 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/08 20:22:27 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/09 15:19:19 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/main.h"
+#include "../includes/main.h"
 
 void	up_or_down(t_all_stuff_for_ray_casting *all_stuff, t_window *window)
 {

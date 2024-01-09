@@ -6,14 +6,14 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 11:15:43 by rciaze            #+#    #+#             */
-/*   Updated: 2023/12/19 14:25:48 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/09 15:17:51 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# include "../cub.h"
+# include "../includes/cub.h"
 # include <stddef.h>
 # include <stdarg.h>
 # include <stdlib.h>

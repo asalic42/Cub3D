@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:57:25 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/09 13:49:55 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/09 15:57:19 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,9 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <string.h>
-# include "minilibx-linux/mlx.h"
-# include "minilibx-linux/mlx_int.h"
-// # include "include/main.h"
-# include "libft/libft.h"
+# include "../minilibx-linux/mlx.h"
+# include "../minilibx-linux/mlx_int.h"
+# include "../libft/libft.h"
 
 /* * * * MACROS * * * */
 
@@ -35,10 +34,6 @@
 # define MAGENTA  "\x1b[35;1m"
 # define CYAN     "\x1b[36;1m"
 # define WHITE    "\x1b[37;1m"
-
-// # define WIDTH	1024
-// # define HEIGHT	512
-// # define PX		64
 
 /* * * * STRUCTURES * * * */
 

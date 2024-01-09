@@ -9,6 +9,7 @@
 		"line.h": "c",
 		"forme.h": "c",
 		"cub.h": "c",
-		"stdlib.h": "c"
+		"stdlib.h": "c",
+		"x.h": "c"
 	}
 }

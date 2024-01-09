@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 19:03:42 by raphael           #+#    #+#             */
-/*   Updated: 2024/01/08 18:48:04 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/09 15:58:25 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,8 @@
 
 # include <stdio.h>
 # include <unistd.h>
-# include "../../minilibx-linux/mlx.h"
-// # include "../../include/main.h"
-# include "../../cub.h"
-# include "../../basique_mlx_needed.h"
+# include "../minilibx-linux/mlx.h"
+# include "basique_mlx_needed.h"
 
 # define ESC		65307
 
@@ -67,11 +65,11 @@ typedef struct s_data_for_line
 	int		bits_per_pixel;
 }	t_data_for_line;
 
-void	stuff_for_line_draw(t_data_for_line *data, t_line *line, void *img, t_window *window);
-void	case_1(t_line *line, t_data_for_line *data, unsigned int color, int stop, t_window *window);
-void	case_2(t_line *line, t_data_for_line *data, unsigned int color, int stop, t_window *window);
+void	stuff_for_line_draw(t_data_for_line *data, t_line *line, void *img);
+void	case_1(t_line *line, t_data_for_line *data, unsigned int color, int stop);
+void	case_2(t_line *line, t_data_for_line *data, unsigned int color, int stop);
 int		ft_abs(int n);
-void	draw_line(t_line line, void *img, int color, int stop, t_window *window);
+void	draw_line(t_line line, void *img, int color, int stop);
 void	draw_actual_pixels_case_1(t_data_for_line *data, t_line *line,
 			unsigned int color);
 void	draw_actual_pixels_case_2(t_data_for_line *data, t_line *line,	

@@ -6,13 +6,11 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/08 20:18:10 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/09 16:18:50 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/main.h"
-
-#include <time.h> 
+#include "../includes/main.h"
 
 double prout;int compteur = 0;
 
@@ -135,7 +133,7 @@ void	cast_ray(t_window *window)
 		//all_stuff.line = init_line(all_stuff.player->x, all_stuff.player->y,
 		//		all_stuff.rx, all_stuff.ry);
 		// all_stuff.line.width = 1;
-		//draw_line(all_stuff.line, img->img_ptr, 0x000050, 64, window);
+		//draw_line(all_stuff.line, img->img_ptr, 0x000050, 64);
 		calculate_line_height(&all_stuff, window);
 		x = all_stuff.r;
 		if (comp == 1)
@@ -173,26 +171,26 @@ void	draw_player(t_window *window)
 
 	player = get_player_instance();
 	//draw_line(init_rectangle(0, 0, (WIDTH) / 2, HEIGHT), window->img_ptr,
-	//	mlx_get_color_value(window->mlx_ptr, 0x555555), 0, window);
+	//	mlx_get_color_value(window->mlx_ptr, 0x555555), 0);
 	draw_line(init_rectangle(0, 0, (WIDTH), (HEIGHT) / 2), window->img_ptr,
-		mlx_get_color_value(window->mlx_ptr, 0x651684), 0, window);
+		mlx_get_color_value(window->mlx_ptr, 0x651684), 0);
 	draw_line(init_rectangle(0, (HEIGHT) / 2, WIDTH, HEIGHT), window->img_ptr,
-		mlx_get_color_value(window->mlx_ptr, 0x665464), 0, window);
+		mlx_get_color_value(window->mlx_ptr, 0x665464), 0);
 	is_player_out_of_bouds(player, window);
-	//draw_map(get_mlx_ptr(), get_map_instance(), window);
+	//draw_map(get_mlx_ptr(), get_map_instance());
 	(void)(line);
 	cast_ray(window);
 	//draw_line(init_rectangle(player->x - 5, player->y - 5, player->x + 5,
-	//		player->y + 5), window->img_ptr, 0xFFFF00, 5, window);
+	//		player->y + 5), window->img_ptr, 0xFFFF00, 5);
 	//line = init_line(player->x, player->y, player->x + player->dx * 5,
 	//		player->y + player->dy * 5);
 	//line.width = 2;
-	//draw_line(line, window->img_ptr, 0xFFFF00, 1, window);
+	//draw_line(line, window->img_ptr, 0xFFFF00, 1);
 	mlx_put_image_to_window(window->mlx_ptr, window->win_ptr,
 		window->img_ptr, 0, 0);
 }
 
-void	draw_map(t_mlx_stuff *img, t_map *map, t_window *window)
+void	draw_map(t_mlx_stuff *img, t_map *map)
 {
 	int			x;
 	int			y;
@@ -209,10 +207,10 @@ void	draw_map(t_mlx_stuff *img, t_map *map, t_window *window)
 			x0 = x * map->s;
 			if (map->map[y * map->x + x] == 1)
 				draw_line(init_rectangle(x0, y0, x0 + map->s - 3, y0
-						+ map->s - 1), img->img_ptr, 0x0F0F0F, 0, window);
+						+ map->s - 1), img->img_ptr, 0x0F0F0F, 0);
 			else
 				draw_line(init_rectangle(x0, y0, x0 + map->s - 3, y0
-						+ map->s - 1), img->img_ptr, 0xC0C0C0, 0, window);
+						+ map->s - 1), img->img_ptr, 0xC0C0C0, 0);
 		}
 	}
 }
@@ -222,8 +220,8 @@ int	main(int ac, char **av)
 	t_window	window;
 
 	(void)(ac);(void)(av);
-	//if (ac != 2)
-	//	return (print_error(RED "Error : not enought args\n" NC));
+	if (ac != 2)
+		return (print_error(RED "Error : not enought args\n" NC));
 	start_garbage();
 	handle_error(&window, av[1]);
 	if (!create_window(&window))

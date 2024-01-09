@@ -6,11 +6,12 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 12:38:31 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/09 13:54:18 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/09 15:18:49 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub.h"
+#include "../includes/cub.h"
+
 
 //If value == SPACE : check if around him, there is only 1
 // or SPACE or limits of the map
