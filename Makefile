@@ -6,14 +6,14 @@
 #    By: asalic <asalic@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/21 18:01:21 by asalic            #+#    #+#              #
-#    Updated: 2024/01/09 16:16:36 by asalic           ###   ########.fr        #
+#    Updated: 2024/01/10 18:52:04 by asalic           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 		= cub3D
 CC 			= cc
 CFLAGS		= -Wall -Wextra -Werror -g3
-LIBS		= -Lminilibx-linux -lmlx -Llibft -lft -lGL -lXext -lX11 -lm -O2
+LIBS		= -Lminilibx-linux -lmlx -Llibft -lft -lXext -lX11 -lm -O2
 PATH_MLX	= minilibx-linux/libmlx.a
 PATH_LIBFT	= libft/libft.a
 INCLUDES	= minilibx-linux/mlx.h libft/libft.h includes/main.h includes/cub.h includes/forme.h includes/basique_mlx_needed.h
@@ -46,7 +46,6 @@ $(PATH_MLX) :
 $(PATH_LIBFT) :
 	@make -s -C libft
 clean	:
-	@make -s -C minilibx-linux
 	@make -s clean -C libft
 	@rm -rf $(OBJ) $(OBJ_DIR)
 	@echo $(BOLD)$(LIGHT_GREEN)"Clean Done !\n"$(RESET)
