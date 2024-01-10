@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 20:36:44 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/09 16:41:52 by raphael          ###   ########.fr       */
+/*   Updated: 2024/01/10 18:38:15 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	update_window(t_player_pos *player, t_window *window)
 
 void	key_press_2(int keycode, t_window *window, t_player_pos *player)
 {
-	if (keycode == 'z')
+	if (keycode == 'w')
 	{
 		player->x += player->dx;
 		player->y += player->dy;
@@ -41,7 +41,7 @@ int	key_press(int keycode, t_window *window)
 	player = get_player_instance();
 	if (keycode == 65307)
 		return (destroy_window(window));
-	if (keycode == 'q')
+	if (keycode == 'a')
 	{
 		player->a -= 0.1;
 		if (player->a < 0)
