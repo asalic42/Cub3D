@@ -6,7 +6,7 @@
 #    By: asalic <asalic@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/21 18:01:21 by asalic            #+#    #+#              #
-#    Updated: 2024/01/10 18:52:04 by asalic           ###   ########.fr        #
+#    Updated: 2024/01/10 18:53:15 by asalic           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ $(PATH_LIBFT) :
 	@make -s -C libft
 clean	:
 	@make -s clean -C libft
+	@make -s clean -C minilibx-linux/
 	@rm -rf $(OBJ) $(OBJ_DIR)
 	@echo $(BOLD)$(LIGHT_GREEN)"Clean Done !\n"$(RESET)
 

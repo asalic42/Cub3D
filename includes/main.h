@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 20:37:16 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/10 18:51:53 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/10 18:54:04 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ typedef struct s_textures
 }	t_textures;
 
 t_textures_path	*get_textures_instance(void);
-void			draw_map(t_mlx_stuff *img, t_map *map, t_window *window);
+void			draw_map(t_mlx_stuff *img, t_map *map);
 int				key_press(int keycode, t_window *window);
 int				handle_no_event(void *window);
 int				create_window(t_window *window);

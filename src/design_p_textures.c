@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   design_p_textures.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 15:26:42 by raphael           #+#    #+#             */
-/*   Updated: 2024/01/09 15:40:04 by raphael          ###   ########.fr       */
+/*   Updated: 2024/01/10 18:53:45 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/main.h"
+#include "../includes/main.h"
 
 t_textures_path	*get_textures_instance(void)
 {
