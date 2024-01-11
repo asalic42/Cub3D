@@ -3,34 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   ray_casting_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:11:12 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/10 18:51:13 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/11 07:16:45 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/main.h"
+
 
 void	up_or_down(t_all_stuff_for_ray_casting *all_stuff, t_window *window)
 {
 	(void)(window);
 	if (all_stuff->ra > PI)
 	{	
-		all_stuff->ry = (((int)all_stuff->player->y / (BLOCK_SIZE)) * (BLOCK_SIZE))
+		all_stuff->ry = (((int)all_stuff->player->y / (blocksize)) * (blocksize))
 			- 0.0001;
 		all_stuff->rx = (all_stuff->player->y - all_stuff->ry)
 			* all_stuff->a_tan + all_stuff->player->x;
-		all_stuff->horizontal_yo = -(BLOCK_SIZE);
+		all_stuff->horizontal_yo = -(blocksize);
 		all_stuff->horizontal_xo = -all_stuff->horizontal_yo * all_stuff->a_tan;
 	}
 	if (all_stuff->ra < PI)
 	{
-		all_stuff->ry = (((int)all_stuff->player->y / (BLOCK_SIZE)) * (BLOCK_SIZE))
-			+ (BLOCK_SIZE);
+		all_stuff->ry = (((int)all_stuff->player->y / (blocksize)) * (blocksize))
+			+ (blocksize);
 		all_stuff->rx = (all_stuff->player->y - all_stuff->ry)
 			* all_stuff->a_tan + all_stuff->player->x;
-		all_stuff->horizontal_yo = (BLOCK_SIZE);
+		all_stuff->horizontal_yo = (blocksize);
 		all_stuff->horizontal_xo = -all_stuff->horizontal_yo * all_stuff->a_tan;
 	}
 	if (all_stuff->ra == 0 || all_stuff->ra == PI)
@@ -47,8 +48,8 @@ void	find_closest_horizontal_intersection(
 	(void)(window);
 	while (all_stuff->dof < all_stuff->map->y)
 	{
-		all_stuff->mx = (int)(all_stuff->rx) / (BLOCK_SIZE);
-		all_stuff->my = (int)(all_stuff->ry) / (BLOCK_SIZE);
+		all_stuff->mx = (int)(all_stuff->rx) / (blocksize);
+		all_stuff->my = (int)(all_stuff->ry) / (blocksize);
 		all_stuff->mp = all_stuff->my * all_stuff->map->x + all_stuff->mx;
 		if (all_stuff->mp > 0 && all_stuff->mp < all_stuff->map->x
 			* all_stuff->map->y && all_stuff->map->map[all_stuff->mp] == 1)
@@ -74,20 +75,20 @@ void	left_or_right(t_all_stuff_for_ray_casting *all_stuff, t_window *window)
 	all_stuff->dof = 0;
 	if (all_stuff->ra > PI2 && all_stuff->ra < PI3)
 	{
-		all_stuff->rx = (((int)all_stuff->player->x / (BLOCK_SIZE)) * (BLOCK_SIZE))
+		all_stuff->rx = (((int)all_stuff->player->x / (blocksize)) * (blocksize))
 			- 0.0001;
 		all_stuff->ry = (all_stuff->player->x - all_stuff->rx)
 			* all_stuff->n_tan + all_stuff->player->y;
-		all_stuff->vertical_xo = -(BLOCK_SIZE);
+		all_stuff->vertical_xo = -(blocksize);
 		all_stuff->vertical_yo = -all_stuff->vertical_xo * all_stuff->n_tan;
 	}
 	if (all_stuff->ra < PI2 || all_stuff->ra > PI3)
 	{
-		all_stuff->rx = (((int)all_stuff->player->x / (BLOCK_SIZE)) * (BLOCK_SIZE))
-			+ (BLOCK_SIZE);
+		all_stuff->rx = (((int)all_stuff->player->x / (blocksize)) * (blocksize))
+			+ (blocksize);
 		all_stuff->ry = (all_stuff->player->x - all_stuff->rx)
 			* all_stuff->n_tan + all_stuff->player->y;
-		all_stuff->vertical_xo = (BLOCK_SIZE);
+		all_stuff->vertical_xo = (blocksize);
 		all_stuff->vertical_yo = -all_stuff->vertical_xo * all_stuff->n_tan;
 	}
 	if (all_stuff->ra == 0 || all_stuff->ra == PI)
@@ -104,8 +105,8 @@ void	find_closest_vertical_intersection(
 	(void)(window);
 	while (all_stuff->dof < all_stuff->map->x)
 	{
-		all_stuff->mx = (int)(all_stuff->rx) / (BLOCK_SIZE);
-		all_stuff->my = (int)(all_stuff->ry) / (BLOCK_SIZE);
+		all_stuff->mx = (int)(all_stuff->rx) / (blocksize);
+		all_stuff->my = (int)(all_stuff->ry) / (blocksize);
 		all_stuff->mp = all_stuff->my * all_stuff->map->x + all_stuff->mx;
 		if (all_stuff->mp > 0 && all_stuff->mp < all_stuff->map->x
 			* all_stuff->map->y && all_stuff->map->map[all_stuff->mp] == 1)

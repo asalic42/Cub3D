@@ -3,17 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/10 18:51:17 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/11 07:42:49 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/main.h"
 
 double prout;int compteur = 0;
-
+int 		horizontal_blocksize;
+int 		vertical_blocksize;
+int 		blocksize;
 // void test2(int x, int start_y, int end_y, t_all_stuff_for_ray_casting *all_stuff, char *xpm_data, int xpm_width, int xpm_height, void *img_data, t_window *window)
 // {
 // 	(void)(window);
@@ -65,6 +67,8 @@ void test2(int x, int start_y, int end_y, t_all_stuff_for_ray_casting *all_stuff
 		start_y = HEIGHT / 2 - (all_stuff->original_line_h / 2);
 		end_y = all_stuff->original_line_h;	
 	}
+	if (textures.tex_x < 0)
+		textures.tex_x = 0;
 	textures.y = start_y;
 	textures.texture_position = 0;
 	while (textures.y < end_y && textures.y < HEIGHT)
@@ -109,7 +113,6 @@ void	cast_ray(t_window *window)
 	t_all_stuff_for_ray_casting	all_stuff;
 	clock_t						start;
 	clock_t						end;
-	int							x;
 	int							comp;
 	t_textures_path	*textures;
 
@@ -134,15 +137,14 @@ void	cast_ray(t_window *window)
 		// all_stuff.line.width = 1;
 		//draw_line(all_stuff.line, img->img_ptr, 0x000050, 64);
 		calculate_line_height(&all_stuff, window);
-		x = all_stuff.r;
 		if (comp == 1)
-			test2(x, all_stuff.line_off, all_stuff.line_off + all_stuff.line_h, &all_stuff, textures->xpm_data1, textures->xpm_width1, textures->xpm_height1, window->img_data, window);
+			test2(all_stuff.r, all_stuff.line_off, all_stuff.line_off + all_stuff.line_h, &all_stuff, textures->xpm_data1, textures->xpm_width1, textures->xpm_height1, window->img_data, window);
 		else if (comp == 2)
-			test2(x, all_stuff.line_off, all_stuff.line_off + all_stuff.line_h, &all_stuff, textures->xpm_data2, textures->xpm_width2, textures->xpm_height2, window->img_data, window);
+			test2(all_stuff.r, all_stuff.line_off, all_stuff.line_off + all_stuff.line_h, &all_stuff, textures->xpm_data2, textures->xpm_width2, textures->xpm_height2, window->img_data, window);
 		else if (comp == 3)
-			test2(x, all_stuff.line_off, all_stuff.line_off + all_stuff.line_h, &all_stuff, textures->xpm_data3, textures->xpm_width3, textures->xpm_height3, window->img_data, window);
+			test2(all_stuff.r, all_stuff.line_off, all_stuff.line_off + all_stuff.line_h, &all_stuff, textures->xpm_data3, textures->xpm_width3, textures->xpm_height3, window->img_data, window);
 		else if (comp == 4)
-			test2(x, all_stuff.line_off, all_stuff.line_off + all_stuff.line_h, &all_stuff, textures->xpm_data4, textures->xpm_width4, textures->xpm_height4, window->img_data, window);
+			test2(all_stuff.r, all_stuff.line_off, all_stuff.line_off + all_stuff.line_h, &all_stuff, textures->xpm_data4, textures->xpm_width4, textures->xpm_height4, window->img_data, window);
 		increment_angle(&all_stuff);
 	}
 	end = clock();
@@ -153,14 +155,28 @@ void	cast_ray(t_window *window)
 void	is_player_out_of_bouds(t_player_pos *player, t_window *window)
 {
 	(void)(window);
-	if (player->y > HEIGHT)
-		player->y = 0;
-	if (player->y < 0)
-		player->y = HEIGHT;
-	if (player->x > WIDTH)
-		player->x = 0;
-	if (player->x < 0)
-		player->x = WIDTH;
+	if ((int)player->y / vertical_blocksize > window->data.ptr.height)
+	{
+		printf("out top of vertical bounds\n");
+		player->y = vertical_blocksize;
+	}
+	else if ((int)player->y / vertical_blocksize <= 0)
+	{
+		printf("out bottom of vertical bounds\n");
+		player->y = HEIGHT - 1;
+	}
+	else if ((int)player->x / horizontal_blocksize > window->data.ptr.width)
+	{
+		printf("out right of horizontal bounds\n");
+		player->x = horizontal_blocksize;
+	}
+	else if ((int)player->x / horizontal_blocksize <= 0)
+	{
+		printf("out left of horizontal bounds\n");
+		player->x = WIDTH - 1;
+	}
+	printf("player is now at x = %d, y = %d, a = %f\n", (int)player->x / horizontal_blocksize, (int)player->y / vertical_blocksize, player->a);
+
 }
 
 void	draw_player(t_window *window)
@@ -224,7 +240,13 @@ int	main(int ac, char **av)
 		return (print_error(RED "Error : not enought args\n" NC));
 	start_garbage();
 	handle_error(&window, av[1]);
-	if (!create_window(&window))
+	horizontal_blocksize = WIDTH / window.data.ptr.width;
+	vertical_blocksize = HEIGHT / window.data.ptr.height;
+	if (horizontal_blocksize > vertical_blocksize)
+		blocksize = horizontal_blocksize;
+	else
+		blocksize = vertical_blocksize;
+	if (!create_window(&window))	
 		return (0);
 	update_mlx_infos(&window.mlx_ptr, &window.win_ptr, &window.img_ptr);
 	init_textures("./textures/wall_1.xpm", "./textures/wall_2.xpm", "./textures/wall_3.xpm", "./textures/wall_4.xpm");

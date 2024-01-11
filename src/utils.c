@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 20:36:44 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/10 18:51:06 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/11 07:36:23 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	key_press_2(int keycode, t_window *window, t_player_pos *player)
 	{
 		player->x -= player->dx;
 		player->y -= player->dy;
+		printf("player is now at x = %f, y = %f, a = %f\n", player->x, player->y, player->a);
 		update_window(player, window);
 	}
 }
@@ -46,8 +47,8 @@ int	key_press(int keycode, t_window *window)
 		player->a -= 0.1;
 		if (player->a < 0)
 			player->a += 2 * PI;
-		player->dx = cos(player->a) * 5;
-		player->dy = sin(player->a) * 5;
+		player->dx = cos(player->a) * 8;
+		player->dy = sin(player->a) * 8;
 		update_window(player, window);
 	}
 	if (keycode == 'd')
@@ -55,8 +56,8 @@ int	key_press(int keycode, t_window *window)
 		player->a += 0.1;
 		if (player->a > 2 * PI)
 			player->a -= 2 * PI;
-		player->dx = cos(player->a) * 5;
-		player->dy = sin(player->a) * 5;
+		player->dx = cos(player->a) * 8;
+		player->dy = sin(player->a) * 8;
 		update_window(player, window);
 	}
 	key_press_2(keycode, window, player);
@@ -71,7 +72,7 @@ int	handle_no_event(void *window)
 
 int	mlx_init_stuff(t_window *window)
 {
-	window->bits = 3;
+	window->bits = 4;
 	window->size_line_img = WIDTH;
 	window->mlx_ptr = mlx_init();
 	if (window->mlx_ptr == NULL)
@@ -120,8 +121,8 @@ static void	find_player(t_map *map, t_player_pos *player, char **char_map)
 		{
 			if (char_map[y][x] == 'N' || char_map[y][x] == 'E' || char_map[y][x] == 'W' || char_map[y][x] == 'S')
 			{
-				player->x = x * 128;
-				player->y = y * 128;
+				player->x = x * horizontal_blocksize;
+				player->y = y * vertical_blocksize;
 				find_player_dir(player, char_map[y][x]);
 				return ;
 			}
@@ -142,12 +143,12 @@ int	create_window(t_window *window)
 		return (0);
 	mapp->x = window->data.ptr.width;
 	mapp->y = window->data.ptr.height;
-	mapp->s = (WIDTH)/20;
+	mapp->s = horizontal_blocksize;
 	player = get_player_instance();
 	find_player(mapp, player, window->data.ptr.map);
 	player->dx = cos(player->a) * 8;
 	player->dy = sin(player->a) * 8;
-	printf("x = %f, y = %f\n", player->x, player->y);
+	printf("player found at x = %f, y = %f, a = %f\n", player->x, player->y, player->a);
 	return (1);
 }
 
