@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/10 18:51:17 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/11 07:48:22 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,7 +227,7 @@ int	main(int ac, char **av)
 	if (!create_window(&window))
 		return (0);
 	update_mlx_infos(&window.mlx_ptr, &window.win_ptr, &window.img_ptr);
-	init_textures("./textures/wall_1.xpm", "./textures/wall_2.xpm", "./textures/wall_3.xpm", "./textures/wall_4.xpm");
+	init_textures(window.north, window.west, window.south, window.east);
 	draw_player(&window);
 	mlx_loop_hook(window.mlx_ptr, &handle_no_event, &window);
 	mlx_hook(window.win_ptr, 17, KeyPressMask, &destroy_window, &window);

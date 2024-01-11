@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 11:15:43 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/09 15:17:51 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/11 05:52:38 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <limits.h>
 # include <fcntl.h>
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 0
+#  define BUFFER_SIZE 1
 # endif 
 typedef struct s_list
 {
@@ -89,4 +89,11 @@ size_t	ft_strlen_gnl(const char *str);
 char	*get_next_line(int fd);
 char	*ft_strdup_gnl(const char *s);
 char	*ft_strjoin_gnl(char *s1, char *s2);
+
+char	*get_next_line(int fd);
+int		count_to(char *str, int c);
+char	*go_malloc(size_t size);
+// char	*ft_strjoin(char *s1, char *s2);
+char	*dup_to_n(char *str, int c);
+char	*find_n(char *str);
 #endif

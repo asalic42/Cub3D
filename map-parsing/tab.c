@@ -6,14 +6,14 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 16:55:21 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/09 16:48:33 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/11 06:07:34 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
 
 //Transform the map into tab
-char	*go_map(t_parse *put, t_data *data, t_window *window)
+char	*go_map(t_parse *put, t_data *data, t_window *window, int tour)
 {
 	char	*tab;
 	int		x;
@@ -25,7 +25,10 @@ char	*go_map(t_parse *put, t_data *data, t_window *window)
 		close_wndo(window);
 		return (NULL);
 	}
-	put->buffer = get_next_line(put->fd);
+	if (tour == 1)
+		put->buffer = loop_gnl(put);
+	else
+		put->buffer = get_next_line(put->fd);
 	while (put->buffer && put->buffer[x] != '\n' && put->buffer[x] != '\0')
 	{
 		tab[x] = put->buffer[x];
@@ -58,7 +61,10 @@ char	**ft_maptab(char *map, t_data *data, t_window *window)
 	y = 0;
 	while (y < data->ptr.height)
 	{
-		realmap[y] = go_map(&put, data, window);
+		if (y == 0)
+			realmap[y] = go_map(&put, data, window, 1);
+		else
+			realmap[y] = go_map(&put, data, window, 0);
 		y ++;
 	}
 	realmap[y] = NULL;

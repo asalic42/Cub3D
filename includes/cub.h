@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:57:25 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/09 16:51:10 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/11 07:53:40 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,12 @@ typedef struct s_window
 	int		size_line_img;
 	int		endian;
 	t_data	data;
+	char	*north;
+	char	*south;
+	char	*west;
+	char	*east;
+	char	*floor;
+	char	*ceiling;
 }	t_window;
 
 /* * * * ERROR HANDLE * * * */
@@ -109,6 +115,10 @@ int				main_parse(char **map, t_data *data);
 int				is_space(t_data *data, char **map);
 int				contour_check(t_data *data, char **map);
 int				is_contour(int x, int y, char **map, t_data *data);
+int				is_mapfile(char *map, t_window *window);
+char			*loop_gnl(t_parse *parser);
+int				is_good_color(char *comp, char *str, t_window *window);
+int				is_good_txture(char *comp, char *str, t_window *window);
 
 /* * * * GARBAGE * * * */
 t_garbage		*start_garbage(void);
@@ -127,11 +137,13 @@ void			countmap_x(char	*mappy, t_window *window);
 void			is_in_char_error(t_parse map, t_window *window, int fd, \
 				int width);
 int				init_count(char *mappy, t_parse *map, t_window *window);
+char			*cut_until(char *str, char cut);
+char			*cut_from(char *str, char cut);
 
 /* * * * * TAB MAP * * * */
 char			**ft_maptab(char *map, t_data *data, t_window *window);
 void			print_tab(char **tab);
-char			*go_map(t_parse *put, t_data *data, t_window *window);
+char			*go_map(t_parse *put, t_data *data, t_window *window, int tour);
 
 /* * * * MAIN CORE * * * */
 void			init_data(t_window *window, char *av);
