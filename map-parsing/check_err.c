@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 15:55:48 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/11 07:53:05 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/12 12:21:19 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,99 @@ int is_good_txture(char *comp, char *str, t_window *window)
 	return (1);
 }
 
+char	*convert_hexa(unsigned int nb, char *base)
+{
+	int		i;
+	int		c;
+	char	*str;
+	
+
+	c = how_many_digits3(nb);
+	str = ft_malloc((c + 1) * sizeof(char));
+	i = c;
+	if (i == 1)
+	{
+		while (i >= 0)
+		{
+			str[i] = '0';
+			i --;
+		}
+		str[c+1] = '\0';
+	}
+	else
+	{
+		while (i-- > 0)
+		{
+			str[i] = base[nb%16];
+			nb /= 16;
+		}
+		str[c] = '\0';
+	}
+	return (str);
+}
+
+char	*convert_rgb_to_hexa(char **rgb)
+{
+	char	*buf;
+	int		hexa;
+	int		i;
+
+	hexa = 0;
+	i = 0;
+	buf = NULL;
+	while (rgb[i])
+	{
+		hexa = ft_atoi(rgb[i]);
+		if (!buf)
+			buf = convert_hexa(hexa, "0123456789ABCDEF");
+		else
+			buf = ft_strjoin(buf, convert_hexa(hexa, "0123456789ABCDEF"));
+		i ++;
+	}
+	return (buf);
+}
+
+#include <stdio.h>
+
+int hexCharToDecimal(char hexChar)
+{
+	ft_printf("char = %c\n", hexChar);
+    if (hexChar >= '0' && hexChar <= '9')
+        return hexChar - '0';
+	else if (hexChar >= 'A' && hexChar <= 'F')
+        return hexChar - 'A' + 10;
+	else
+        return -1;
+}
+
+long hexadecimalToDecimal(const char *hexadecimal)
+{
+    long result = 0;
+
+    while (*hexadecimal != '\0')
+	{
+        int digitValue = hexCharToDecimal(*hexadecimal);
+        if (digitValue == -1)
+		{
+            ft_printf("Caractère non hexadécimal trouvé : %c\n", *hexadecimal);
+            return -1;
+        }
+        result = result * 16 + digitValue;
+        hexadecimal++;
+    }
+    return result;
+}
+
 int	is_good_color(char *comp, char *str, t_window *window)
 {
 	char	*from_space;
+	long int rgb_to_hexa;
 	char	**dot_split;
 	char	*until_space;
 	int		tour;
 	int		i;
 	
+	(void)*window;
 	until_space = cut_until(str, ' ');
 	if (ft_strncmp(comp, until_space, ft_strlen(until_space) + ft_strlen(comp)) != 0)
 		return (print_error(RED "Error : wrong notation in the .cub file" NC));
@@ -68,10 +153,14 @@ int	is_good_color(char *comp, char *str, t_window *window)
 	}
 	if (tour != 3)
 		return (print_error(RED "Error : wrong colors in the .cub file" NC));
+	rgb_to_hexa = hexadecimalToDecimal(convert_rgb_to_hexa(dot_split));
+	ft_printf("rgb to hexa = %d\n", rgb_to_hexa);
 	if (comp[0] == 'F')
-		window->floor = from_space;
+		window->floor = rgb_to_hexa;
 	else if (comp[0] == 'C')
-		window->ceiling = from_space;
+	{
+		window->ceiling = rgb_to_hexa;
+	}
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:57:25 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/11 07:53:40 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/12 11:35:31 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,8 @@ typedef struct s_window
 	char	*south;
 	char	*west;
 	char	*east;
-	char	*floor;
-	char	*ceiling;
+	int		floor;
+	int		ceiling;
 }	t_window;
 
 /* * * * ERROR HANDLE * * * */

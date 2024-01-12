@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/11 07:48:22 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/12 12:21:05 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,9 +172,9 @@ void	draw_player(t_window *window)
 	//draw_line(init_rectangle(0, 0, (WIDTH) / 2, HEIGHT), window->img_ptr,
 	//	mlx_get_color_value(window->mlx_ptr, 0x555555), 0);
 	draw_line(init_rectangle(0, 0, (WIDTH), (HEIGHT) / 2), window->img_ptr,
-		mlx_get_color_value(window->mlx_ptr, 0x651684), 0);
+		mlx_get_color_value(window->mlx_ptr, window->ceiling), 0);
 	draw_line(init_rectangle(0, (HEIGHT) / 2, WIDTH, HEIGHT), window->img_ptr,
-		mlx_get_color_value(window->mlx_ptr, 0x665464), 0);
+		mlx_get_color_value(window->mlx_ptr, window->floor), 0);
 	is_player_out_of_bouds(player, window);
 	//draw_map(get_mlx_ptr(), get_map_instance());
 	(void)(line);
