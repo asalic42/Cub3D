@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/12 19:05:22 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/12 19:50:49 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,6 +242,8 @@ int	main(int ac, char **av)
 	handle_error(&window, av[1]);
 	horizontal_blocksize = WIDTH / window.data.ptr.width;
 	vertical_blocksize = HEIGHT / window.data.ptr.height;
+	printf("horizontal_blocksize  = %d, vertical_blocksize = %d\n", horizontal_blocksize, vertical_blocksize);
+	printf("window.data.ptr.width  = %d, window.data.ptr.height = %d\n", window.data.ptr.width, window.data.ptr.height);
 	if (horizontal_blocksize > vertical_blocksize)
 		blocksize = horizontal_blocksize;
 	else
