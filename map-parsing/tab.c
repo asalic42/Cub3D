@@ -6,11 +6,11 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 16:55:21 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/11 06:07:34 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/15 18:20:42 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub.h"
+#include "../includes/main.h"
 
 //Transform the map into tab
 char	*go_map(t_parse *put, t_data *data, t_window *window, int tour)
@@ -22,7 +22,7 @@ char	*go_map(t_parse *put, t_data *data, t_window *window, int tour)
 	tab = ft_malloc((data->ptr.width +1) * sizeof(char));
 	if (!tab)
 	{
-		close_wndo(window);
+		destroy_window(window);
 		return (NULL);
 	}
 	if (tour == 1)
@@ -55,7 +55,7 @@ char	**ft_maptab(char *map, t_data *data, t_window *window)
 	sizeof(char *));
 	if (!realmap)
 	{
-		close_wndo(window);
+		destroy_window(window);
 		return (NULL);
 	}
 	y = 0;

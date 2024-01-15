@@ -6,12 +6,13 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 15:55:48 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/15 17:09:08 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/15 18:34:54 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/main.h"
 
+/* Check if N/S/E/W aren't the same textures */
 int	is_same_texture(t_window *window, char *new_one, char dir)
 {
 	if (dir == 'S')
@@ -39,7 +40,7 @@ int	is_same_texture(t_window *window, char *new_one, char dir)
 	return (1);
 }
 
-
+/* Check if the textures exists and if yes, assign them into struct window */
 int is_good_txture(char *comp, char *str, t_window *window)
 {
 	char *from_space;
@@ -67,13 +68,14 @@ int is_good_txture(char *comp, char *str, t_window *window)
 	return (1);
 }
 
+/* Convert the rgb color into hexadecimal color
+	(step 1 : rgb by rgb) */
 char	*convert_hexa(unsigned int nb, char *base)
 {
 	int		i;
 	int		c;
 	char	*str;
 	
-
 	c = how_many_digits3(nb);
 	str = ft_malloc((c + 1) * sizeof(char));
 	i = c;
@@ -97,7 +99,8 @@ char	*convert_hexa(unsigned int nb, char *base)
 	}
 	return (str);
 }
-
+/* Conversion of all the rgb into hexadecimal color
+	(step 2: all of rgb into one chain) */
 char	*convert_rgb_to_hexa(char **rgb)
 {
 	char	*buf;
@@ -121,6 +124,8 @@ char	*convert_rgb_to_hexa(char **rgb)
 
 #include <stdio.h>
 
+/* Check if the character is a number or an alphabetic
+	(used in the conversion into hexdecimal case) */
 int hexCharToDecimal(char hexChar)
 {
     if (hexChar >= '0' && hexChar <= '9')
@@ -130,7 +135,8 @@ int hexCharToDecimal(char hexChar)
 	else
         return (-1);
 }
-
+/* Convert the hexadecimal color into a decimal
+	to be used in the mlx function that demands an int */
 long hexadecimalToDecimal(const char *hexadecimal)
 {
     long	result;
@@ -151,6 +157,8 @@ long hexadecimalToDecimal(const char *hexadecimal)
     return (result);
 }
 
+/*  Check if the color of the floor and the ceiling is not the same
+	Check if the color is in rgb and exists */
 int	is_good_color(char *comp, char *str, t_window *window)
 {
 	char	*from_space;
@@ -195,6 +203,7 @@ int	is_good_color(char *comp, char *str, t_window *window)
 	return (1);
 }
 
+/* Check if the description of the textures are good */
 int	is_mapfile(char *map, t_window *window)
 {
 	int	fd;
@@ -233,6 +242,7 @@ int	is_mapfile(char *map, t_window *window)
 	return (1);
 }
 
+/* Check all cases of error in the parsing part */
 void	handle_error(t_window *window, char *map)
 {
 	error_files(window, map);
@@ -249,6 +259,7 @@ void	handle_error(t_window *window, char *map)
 		close_error(window, "Error : wrong map\n");
 }
 
+/* Loop of gnl while it isn't the description of the map */
 char	*loop_gnl(t_parse *parser)
 {
 	int i;
@@ -273,7 +284,7 @@ char	*loop_gnl(t_parse *parser)
 	return(buf);
 }
 
-//Check if all element of the map are valid (1, 0, N/S/E/W)
+/* Check if all element of the map are valid (1, 0, N/S/E/W) */
 int	error_map(char *map)
 {
 	char	*check_line;
@@ -303,7 +314,7 @@ int	error_map(char *map)
 	return (1);
 }
 
-//Check if there is only one player
+/* Check if there is only one player */
 int	only_one_thing(char *check_line, int i, int len_player)
 {
 	if (check_line[i] == 'N' || check_line[i] == 'S' \
