@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 17:34:50 by zbp15             #+#    #+#             */
-/*   Updated: 2023/12/19 14:23:50 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/15 17:08:46 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,5 @@ int	ft_print_hexa(unsigned int n, char *base)
 	}
 	str[c] = '\0';
 	ft_putstr(str);
-	free(str);
 	return (c);
 }

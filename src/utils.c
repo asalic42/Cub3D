@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 20:36:44 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/10 18:51:06 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/15 17:26:06 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,7 @@ int	create_window(t_window *window)
 int	destroy_window(t_window *window)
 {
 	free_mlx_infos();
+	(void)window;
 	printf("avg time by frame = %f, %d total frames rendered\n", prout / compteur, compteur);
-	return (mlx_destroy_window(window->mlx_ptr, window->win_ptr));
+	exit(EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 09:00:21 by rciaze            #+#    #+#             */
-/*   Updated: 2023/12/19 14:23:44 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/15 17:08:40 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,5 @@ int	ft_print_adress(void *p, char *base, int i)
 	str[what_size_malloc(p)] = '\0';
 	ft_putstr("0x");
 	ft_putstr(str);
-	free(str);
 	return (what_size_malloc(p) + 2);
 }

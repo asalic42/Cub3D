@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 11:16:59 by wolf              #+#    #+#             */
-/*   Updated: 2024/01/10 18:51:56 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/15 17:24:31 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,5 @@ void	free_mlx_infos(void)
 		mlx_destroy_image(mlx_infos->mlx_ptr, mlx_infos->img_ptr);
 	mlx_destroy_window(mlx_infos->mlx_ptr, mlx_infos->win_ptr);
 	mlx_destroy_display(mlx_infos->mlx_ptr);
-	free(mlx_infos->mlx_ptr);
+	// free(mlx_infos->mlx_ptr);
 }

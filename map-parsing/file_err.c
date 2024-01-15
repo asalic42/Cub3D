@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 15:53:38 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/09 15:17:13 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/15 17:09:44 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	error_files(t_window *window, char *cub)
 void	count_error(t_parse *map, int fd, t_window *window)
 {
 	if (map->buffer)
-		free(map->buffer);
+		map->buffer = NULL;
 	if (fd != -1)
 	{
 		while (map->buffer)

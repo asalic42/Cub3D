@@ -6,11 +6,39 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 15:55:48 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/12 12:21:19 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/15 17:09:08 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/main.h"
+
+int	is_same_texture(t_window *window, char *new_one, char dir)
+{
+	if (dir == 'S')
+	{
+		if (ft_strncmp(window->north, new_one, ft_strlen(window->north) + \
+		ft_strlen(new_one)) == 0)
+			return (print_error(RED "Error : Same textures" NC));
+	}
+	else if (dir == 'W')
+	{
+		if (ft_strncmp(window->north, new_one, ft_strlen(window->north) + \
+		ft_strlen(new_one)) == 0 || ft_strncmp(window->south, new_one, \
+		ft_strlen(window->south) + ft_strlen(new_one)) == 0)
+			return (print_error(RED "Error : Same textures" NC));
+	}
+	else if (dir == 'E')
+	{
+		if (ft_strncmp(window->north, new_one, ft_strlen(window->north) + \
+		ft_strlen(new_one)) == 0 || ft_strncmp(window->west, new_one, \
+		ft_strlen(window->west) + ft_strlen(new_one)) == 0 || \
+		ft_strncmp(window->south, new_one, ft_strlen(window->south) + \
+		ft_strlen(new_one)) == 0)
+			return (print_error(RED "Error : Same textures" NC));
+	}
+	return (1);
+}
+
 
 int is_good_txture(char *comp, char *str, t_window *window)
 {
@@ -33,6 +61,8 @@ int is_good_txture(char *comp, char *str, t_window *window)
 		window->west = from_space;
 	else if (comp[0] == 'E')
 		window->east = from_space;
+	if (!is_same_texture(window, from_space, comp[0]))
+		return (0);
 	close(fd);
 	return (1);
 }
@@ -93,31 +123,32 @@ char	*convert_rgb_to_hexa(char **rgb)
 
 int hexCharToDecimal(char hexChar)
 {
-	ft_printf("char = %c\n", hexChar);
     if (hexChar >= '0' && hexChar <= '9')
-        return hexChar - '0';
+        return (hexChar - '0');
 	else if (hexChar >= 'A' && hexChar <= 'F')
-        return hexChar - 'A' + 10;
+        return (hexChar - 'A' + 10);
 	else
-        return -1;
+        return (-1);
 }
 
 long hexadecimalToDecimal(const char *hexadecimal)
 {
-    long result = 0;
+    long	result;
+	int		digit_value;
 
+	result = 0;
     while (*hexadecimal != '\0')
 	{
-        int digitValue = hexCharToDecimal(*hexadecimal);
-        if (digitValue == -1)
+        digit_value = hexCharToDecimal(*hexadecimal);
+        if (digit_value == -1)
 		{
-            ft_printf("Caractère non hexadécimal trouvé : %c\n", *hexadecimal);
-            return -1;
+			ft_printf(RED"Error : not a character hexadecimal"NC);
+            return (-1);
         }
-        result = result * 16 + digitValue;
+        result = result * 16 + digit_value;
         hexadecimal++;
     }
-    return result;
+    return (result);
 }
 
 int	is_good_color(char *comp, char *str, t_window *window)
@@ -129,7 +160,6 @@ int	is_good_color(char *comp, char *str, t_window *window)
 	int		tour;
 	int		i;
 	
-	(void)*window;
 	until_space = cut_until(str, ' ');
 	if (ft_strncmp(comp, until_space, ft_strlen(until_space) + ft_strlen(comp)) != 0)
 		return (print_error(RED "Error : wrong notation in the .cub file" NC));
@@ -154,12 +184,13 @@ int	is_good_color(char *comp, char *str, t_window *window)
 	if (tour != 3)
 		return (print_error(RED "Error : wrong colors in the .cub file" NC));
 	rgb_to_hexa = hexadecimalToDecimal(convert_rgb_to_hexa(dot_split));
-	ft_printf("rgb to hexa = %d\n", rgb_to_hexa);
 	if (comp[0] == 'F')
 		window->floor = rgb_to_hexa;
 	else if (comp[0] == 'C')
 	{
 		window->ceiling = rgb_to_hexa;
+		if (window->ceiling == window->floor)
+			return (print_error(RED"Error : floor and ceiling has the same color"NC));
 	}
 	return (1);
 }
@@ -228,7 +259,6 @@ char	*loop_gnl(t_parse *parser)
 	while (buf)
 	{
 		i = 0;
-		ft_printf("line : %s\n", buf);
 		while (buf[i])
 		{
 			if (buf[0] == 'N' || buf[0] == 'S' || buf[0] == 'W' || buf[0] == 'E' \
@@ -238,7 +268,6 @@ char	*loop_gnl(t_parse *parser)
 				return (buf);
 			i ++;
 		}
-		free(buf);
 		buf = get_next_line(parser->fd);
 	}
 	return(buf);
@@ -258,7 +287,6 @@ int	error_map(char *map)
 	while (check_line)
 	{
 		i = -1;
-		ft_printf("%s\n", check_line);
 		while (check_line[++i] && check_line[i] != '\n')
 		{
 			if (!is_in_char(check_line[i]))
@@ -267,7 +295,6 @@ int	error_map(char *map)
 			if (len_player == 1)
 				return (0);
 		}
-		free(check_line);
 		check_line = get_next_line(parser.fd);
 	}
 	if (len_player == -1)

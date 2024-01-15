@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/12 12:21:05 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/15 17:24:07 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,6 +233,6 @@ int	main(int ac, char **av)
 	mlx_hook(window.win_ptr, 17, KeyPressMask, &destroy_window, &window);
 	mlx_hook(window.win_ptr, 2, KeyPressMask, &key_press, &window);
 	mlx_loop(window.mlx_ptr);
-	close_wndo(&window);
+	// close_wndo(&window);
 	return (1);
 }
