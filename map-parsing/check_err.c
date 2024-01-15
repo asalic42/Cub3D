@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 15:55:48 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/15 18:34:54 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/15 19:07:57 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,15 +203,30 @@ int	is_good_color(char *comp, char *str, t_window *window)
 	return (1);
 }
 
+/* char	**set_direction_tab(void)
+{
+	char *tab_dir[6];
+	
+	tab_dir[0] = "NO";
+	tab_dir[1] = "SO";
+	tab_dir[2] = "WE";
+	tab_dir[3] = "EA";
+	tab_dir[4] = "F";
+	tab_dir[5] = "C";
+	return (tab_dir);
+} */
+
 /* Check if the description of the textures are good */
 int	is_mapfile(char *map, t_window *window)
 {
 	int	fd;
 	char *buff;
+	// char **tab_dir;
 	char *tab_dir[6];
 	int i;
 
 	fd = open(map, O_RDONLY);
+	// tab_dir = set_direction_tab();
 	tab_dir[0] = "NO";
 	tab_dir[1] = "SO";
 	tab_dir[2] = "WE";
@@ -225,20 +240,16 @@ int	is_mapfile(char *map, t_window *window)
 		if (buff[0] && buff[0] != '\n' && buff[0] != ' ' && buff[0] != '\t')
 		{	
 			if (i > 3 && !is_good_color(tab_dir[i], buff, window))
-			{
-				close(fd);
-				return (0);
-			}
+				break ;
 			if (i < 4 && !is_good_txture(tab_dir[i], buff, window))
-			{
-				close(fd);
-				return (0);
-			}
+				break ;
 			i ++;
 		}
 		buff = get_next_line(fd);
 	}
 	close(fd);
+	if (i < 6)
+		return (0);
 	return (1);
 }
 
