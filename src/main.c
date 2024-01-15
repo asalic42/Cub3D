@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/15 18:26:38 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/15 19:00:20 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ void test2(int x, int start_y, int end_y, t_all_stuff_for_ray_casting *all_stuff
 
 	textures.current_x = x;
 	textures.texture_step = (float)xpm_height / all_stuff->line_h;
-	if (all_stuff->dist_v / horizontal_blocksize < all_stuff->dist_h / vertical_blocksize)
+	if (all_stuff->dist_h > all_stuff->dist_v)
 		textures.tex_x = (int)(all_stuff->ry) % xpm_width;
-	if (all_stuff->dist_v / horizontal_blocksize > all_stuff->dist_h / vertical_blocksize)
+	if (all_stuff->dist_h < all_stuff->dist_v)
 		textures.tex_x = (int)(all_stuff->rx) % xpm_width;
 	if (start_y == 0 && end_y == HEIGHT)
 	{
@@ -71,10 +71,10 @@ void test2(int x, int start_y, int end_y, t_all_stuff_for_ray_casting *all_stuff
 		textures.tex_x = 0;
 	textures.y = start_y;
 	textures.texture_position = 0;
-	if (start_y < 0 || start_y > HEIGHT)
+	if (start_y < 0)
 	{
-		textures.texture_position += textures.texture_step * (end_y - start_y);
-		textures.y += end_y - start_y;
+		textures.texture_position += textures.texture_step * (-start_y);
+		textures.y += -start_y;
 	}
 	while (textures.y < end_y && textures.y < HEIGHT)
 	{
@@ -247,6 +247,8 @@ int	main(int ac, char **av)
 	handle_error(&window, av[1]);
 	horizontal_blocksize = WIDTH / window.data.ptr.width;
 	vertical_blocksize = HEIGHT / window.data.ptr.height;
+	vertical_blocksize = WIDTH / (horizontal_blocksize + vertical_blocksize);
+	horizontal_blocksize = vertical_blocksize;
 	printf("horizontal_blocksize  = %d, vertical_blocksize = %d\n", horizontal_blocksize, vertical_blocksize);
 	printf("window.data.ptr.width  = %d, window.data.ptr.height = %d\n", window.data.ptr.width, window.data.ptr.height);
 	//if (horizontal_blocksize > vertical_blocksize)

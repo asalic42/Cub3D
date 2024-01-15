@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:24:20 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/15 18:12:47 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/15 18:44:53 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	calculate_line_height(t_all_stuff_for_ray_casting *all_stuff, t_window *win
 	if (all_stuff->ca > 2 * PI)
 		all_stuff->ca -= 2 * PI;
 	all_stuff->dist_t = all_stuff->dist_t * cos(all_stuff->ca);
-	if (all_stuff->dist_v / horizontal_blocksize < all_stuff->dist_h / vertical_blocksize)
+	if (all_stuff->dist_v < all_stuff->dist_h)
 		all_stuff->line_h = (vertical_blocksize * (HEIGHT)) / all_stuff->dist_t;
 	else
 		all_stuff->line_h = (horizontal_blocksize * (HEIGHT)) / all_stuff->dist_t;
