@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/12 19:50:49 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/15 18:26:38 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ void test2(int x, int start_y, int end_y, t_all_stuff_for_ray_casting *all_stuff
 
 	textures.current_x = x;
 	textures.texture_step = (float)xpm_height / all_stuff->line_h;
-	if (all_stuff->dist_h > all_stuff->dist_v)
+	if (all_stuff->dist_v / horizontal_blocksize < all_stuff->dist_h / vertical_blocksize)
 		textures.tex_x = (int)(all_stuff->ry) % xpm_width;
-	if (all_stuff->dist_h < all_stuff->dist_v)
+	if (all_stuff->dist_v / horizontal_blocksize > all_stuff->dist_h / vertical_blocksize)
 		textures.tex_x = (int)(all_stuff->rx) % xpm_width;
 	if (start_y == 0 && end_y == HEIGHT)
 	{
@@ -71,6 +71,11 @@ void test2(int x, int start_y, int end_y, t_all_stuff_for_ray_casting *all_stuff
 		textures.tex_x = 0;
 	textures.y = start_y;
 	textures.texture_position = 0;
+	if (start_y < 0 || start_y > HEIGHT)
+	{
+		textures.texture_position += textures.texture_step * (end_y - start_y);
+		textures.y += end_y - start_y;
+	}
 	while (textures.y < end_y && textures.y < HEIGHT)
 	{
 		if (textures.y >= 0)
@@ -163,7 +168,7 @@ void	is_player_out_of_bouds(t_player_pos *player, t_window *window)
 	else if ((int)player->y / vertical_blocksize <= 0)
 	{
 		printf("out bottom of vertical bounds\n");
-		player->y = HEIGHT - 1;
+		player->y = vertical_blocksize * (window->data.ptr.height - 1);
 	}
 	else if ((int)player->x / horizontal_blocksize > window->data.ptr.width)
 	{
@@ -173,7 +178,7 @@ void	is_player_out_of_bouds(t_player_pos *player, t_window *window)
 	else if ((int)player->x / horizontal_blocksize <= 0)
 	{
 		printf("out left of horizontal bounds\n");
-		player->x = WIDTH - 1;
+		player->x = horizontal_blocksize * (window->data.ptr.width - 1);
 	}
 	printf("player is now at x = %d, y = %d, a = %f\n", (int)player->x / horizontal_blocksize, (int)player->y / vertical_blocksize, player->a);
 
@@ -244,10 +249,10 @@ int	main(int ac, char **av)
 	vertical_blocksize = HEIGHT / window.data.ptr.height;
 	printf("horizontal_blocksize  = %d, vertical_blocksize = %d\n", horizontal_blocksize, vertical_blocksize);
 	printf("window.data.ptr.width  = %d, window.data.ptr.height = %d\n", window.data.ptr.width, window.data.ptr.height);
-	if (horizontal_blocksize > vertical_blocksize)
-		blocksize = horizontal_blocksize;
-	else
-		blocksize = vertical_blocksize;
+	//if (horizontal_blocksize > vertical_blocksize)
+	//	blocksize = horizontal_blocksize;
+	//else
+	//	blocksize = vertical_blocksize;
 	if (!create_window(&window))	
 		return (0);
 	update_mlx_infos(&window.mlx_ptr, &window.win_ptr, &window.img_ptr);

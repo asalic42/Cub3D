@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:11:12 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/12 19:52:03 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/15 18:07:00 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,8 @@ void	up_or_down(t_all_stuff_for_ray_casting *all_stuff, t_window *window)
 	(void)(window);
 	if (all_stuff->ra > PI)
 	{	
-		all_stuff->ry = ((all_stuff->player->y / (vertical_blocksize)) * (vertical_blocksize))
+		all_stuff->ry = (((int)all_stuff->player->y / (vertical_blocksize)) * (vertical_blocksize))
 			- 0.0001;
-		printf("all_stuff->ry = %f\n", all_stuff->ry);
 		all_stuff->rx = (all_stuff->player->y - all_stuff->ry)
 			* all_stuff->a_tan + all_stuff->player->x;
 		all_stuff->horizontal_yo = -(vertical_blocksize);
@@ -28,7 +27,7 @@ void	up_or_down(t_all_stuff_for_ray_casting *all_stuff, t_window *window)
 	}
 	if (all_stuff->ra < PI)
 	{
-		all_stuff->ry = ((all_stuff->player->y / (vertical_blocksize)) * (vertical_blocksize))
+		all_stuff->ry = (((int)all_stuff->player->y / (vertical_blocksize)) * (vertical_blocksize))
 			+ (vertical_blocksize);
 		all_stuff->rx = (all_stuff->player->y - all_stuff->ry)
 			* all_stuff->a_tan + all_stuff->player->x;
@@ -76,7 +75,7 @@ void	left_or_right(t_all_stuff_for_ray_casting *all_stuff, t_window *window)
 	all_stuff->dof = 0;
 	if (all_stuff->ra > PI2 && all_stuff->ra < PI3)
 	{
-		all_stuff->rx = ((all_stuff->player->x / (horizontal_blocksize)) * (horizontal_blocksize))
+		all_stuff->rx = ((int)(all_stuff->player->x / (horizontal_blocksize)) * (horizontal_blocksize))
 			- 0.0001;
 		all_stuff->ry = (all_stuff->player->x - all_stuff->rx)
 			* all_stuff->n_tan + all_stuff->player->y;
@@ -85,7 +84,7 @@ void	left_or_right(t_all_stuff_for_ray_casting *all_stuff, t_window *window)
 	}
 	if (all_stuff->ra < PI2 || all_stuff->ra > PI3)
 	{
-		all_stuff->rx = ((all_stuff->player->x / (horizontal_blocksize)) * (horizontal_blocksize))
+		all_stuff->rx = ((int)(all_stuff->player->x / (horizontal_blocksize)) * (horizontal_blocksize))
 			+ (horizontal_blocksize);
 		all_stuff->ry = (all_stuff->player->x - all_stuff->rx)
 			* all_stuff->n_tan + all_stuff->player->y;
@@ -132,7 +131,7 @@ int	comp_distance(t_all_stuff_for_ray_casting *all_stuff, t_mlx_stuff *img, t_wi
 	int	return_value;
 
 	return_value = 0;
-	if (all_stuff->dist_v < all_stuff->dist_h)
+	if (all_stuff->dist_v / horizontal_blocksize < all_stuff->dist_h / vertical_blocksize)
 	{
 		all_stuff->rx = all_stuff->vx;
 		all_stuff->ry = all_stuff->vy;
