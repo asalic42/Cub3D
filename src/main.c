@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/16 15:34:49 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/16 20:02:25 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,39 +16,6 @@ double prout;int compteur = 0;
 int 		horizontal_blocksize;
 int 		vertical_blocksize;
 int 		blocksize;
-// void test2(int x, int start_y, int end_y, t_all_stuff_for_ray_casting *all_stuff, char *xpm_data, int xpm_width, int xpm_height, void *img_data, t_window *window)
-// {
-// 	(void)(window);
-// 	t_textures	textures;
-
-// 	textures.current_x = x;
-// 	textures.texture_step = (float)xpm_height / all_stuff->line_h;
-// 	textures.tex_x = (int)(all_stuff->rx) % xpm_width;
-// 	if (textures.tex_x == 0 || textures.tex_x == xpm_width - 1 || textures.tex_x == xpm_width / 2)
-// 		textures.tex_x = (int)(all_stuff->ry) % xpm_width;
-// 	if (start_y == 0 && end_y == HEIGHT)
-// 	{
-// 		textures.texture_step = (float)xpm_height / all_stuff->original_line_h;
-// 		start_y = HEIGHT / 2 - (all_stuff->original_line_h / 2);
-// 		end_y = all_stuff->original_line_h;	
-// 	}
-	
-// 	textures.y = start_y;
-// 	textures.texture_position = 0;
-// 	while (textures.y < end_y && textures.y < HEIGHT)
-// 	{
-// 		if (textures.y >= 0)
-// 		{
-// 			textures.tex_y = (int)(textures.texture_position);
-// 			textures.value = xpm_data + (textures.tex_y * xpm_width + textures.tex_x) * (4);
-// 			textures.pixel = img_data + (textures.y * (WIDTH) + textures.current_x) * (4);
-// 			*(unsigned int *)textures.pixel = *(unsigned int *)textures.value;
-// 		}
-// 		textures.texture_position += textures.texture_step;
-// 		textures.y++;
-// 	}
-// 	textures.current_x++;
-// }
 
 void test2(int x, int start_y, int end_y, t_all_stuff_for_ray_casting *all_stuff, char *xpm_data, int xpm_width, int xpm_height, void *img_data, t_window *window)
 {
@@ -154,27 +121,27 @@ void	cast_ray(t_window *window)
 void	is_player_out_of_bouds(t_player_pos *player, t_window *window)
 {
 	(void)(window);
-	if ((int)player->y / vertical_blocksize > window->data.ptr.height)
+	if ((int)player->y / 64 > window->data.ptr.height)
 	{
 		printf("out top of vertical bounds\n");
-		player->y = vertical_blocksize;
+		player->y = 64;
 	}
-	else if ((int)player->y / vertical_blocksize <= 0)
+	else if ((int)player->y / 64 <= 0)
 	{
 		printf("out bottom of vertical bounds\n");
-		player->y = vertical_blocksize * (window->data.ptr.height - 1);
+		player->y = 64 * (window->data.ptr.height - 1);
 	}
-	else if ((int)player->x / horizontal_blocksize > window->data.ptr.width)
+	else if ((int)player->x / 64 > window->data.ptr.width)
 	{
 		printf("out right of horizontal bounds\n");
-		player->x = horizontal_blocksize;
+		player->x = 64;
 	}
-	else if ((int)player->x / horizontal_blocksize <= 0)
+	else if ((int)player->x / 64 <= 0)
 	{
 		printf("out left of horizontal bounds\n");
-		player->x = horizontal_blocksize * (window->data.ptr.width - 1);
+		player->x = 64 * (window->data.ptr.width - 1);
 	}
-	printf("player is now at x = %d, y = %d, a = %f\n", (int)player->x / horizontal_blocksize, (int)player->y / vertical_blocksize, player->a);
+	printf("player is now at x = %d, y = %d, a = %f\n", (int)player->x / 64, (int)player->y / 64, player->a);
 
 }
 
@@ -182,6 +149,7 @@ void	draw_player(t_window *window)
 {	
 	t_line			line;
 	t_player_pos	*player;
+	t_map			*map = get_map_instance();
 
 	player = get_player_instance();
 	//draw_line(init_rectangle(0, 0, (WIDTH) / 2, HEIGHT), window->img_ptr,
@@ -190,9 +158,24 @@ void	draw_player(t_window *window)
 		mlx_get_color_value(window->mlx_ptr, 0x651684), 0);
 	draw_line(init_rectangle(0, (HEIGHT) / 2, WIDTH, HEIGHT), window->img_ptr,
 		mlx_get_color_value(window->mlx_ptr, 0x665464), 0);
-	is_player_out_of_bouds(player, window);
+	//is_player_out_of_bouds(player, window);
 	//draw_map(get_mlx_ptr(), get_map_instance());
 	(void)(line);
+	for (int i = 0; i < window->data.ptr.height; i++) {
+		for (int j = 0; j < window->data.ptr.width; j++) {
+			if (i == (int)(((((player->y) / (64)) / 1) * 1) - 0.0001) && j == (int)(((((player->x) / (64)) / 1) * 1) - 0.0001)) {
+				write(0, RED, 8);
+				char *str = ft_itoa(map->map[i * window->data.ptr.width + j]);
+				write(0, str, strlen(str));
+				write(0, NC, 5);
+			}
+			else {
+				char *str = ft_itoa(map->map[i * window->data.ptr.width + j]);
+				write(0, str, strlen(str));
+			}
+		}
+		write(0, "\n", 1);
+	}
 	cast_ray(window);
 	//draw_line(init_rectangle(player->x - 5, player->y - 5, player->x + 5,
 	//		player->y + 5), window->img_ptr, 0xFFFF00, 5);
@@ -241,8 +224,6 @@ int	main(int ac, char **av)
 	handle_error(&window, av[1]);
 	horizontal_blocksize = WIDTH / window.data.ptr.width;
 	vertical_blocksize = HEIGHT / window.data.ptr.height;
-	vertical_blocksize = WIDTH / (horizontal_blocksize + vertical_blocksize);
-	horizontal_blocksize = vertical_blocksize;
 	printf("horizontal_blocksize  = %d, vertical_blocksize = %d\n", horizontal_blocksize, vertical_blocksize);
 	printf("window.data.ptr.width  = %d, window.data.ptr.height = %d\n", window.data.ptr.width, window.data.ptr.height);
 	//if (horizontal_blocksize > vertical_blocksize)

@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 20:36:44 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/15 17:03:25 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/16 20:02:01 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,8 +121,8 @@ static void	find_player(t_map *map, t_player_pos *player, char **char_map)
 		{
 			if (char_map[y][x] == 'N' || char_map[y][x] == 'E' || char_map[y][x] == 'W' || char_map[y][x] == 'S')
 			{
-				player->x = x * horizontal_blocksize;
-				player->y = y * vertical_blocksize;
+				player->x = x * 64;
+				player->y = y * 64;
 				find_player_dir(player, char_map[y][x]);
 				return ;
 			}
