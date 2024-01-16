@@ -6,17 +6,11 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 15:55:48 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/16 16:27:46 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/16 16:43:27 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/main.h"
-
-int	error_cases(void)
-{
-	free_garbage();
-	exit(EXIT_FAILURE);
-}
 
 /* Check all cases of error in the parsing part */
 void	handle_error(t_window *window, char *map)
@@ -44,9 +38,9 @@ static char	**set_direction_tab(void)
 	int		i;
 
 	i = 0;
-	tab_dir = ft_malloc(7*sizeof(char *));
+	tab_dir = ft_malloc(7 * sizeof(char *));
 	while (i < 6)
-		tab_dir[i++] = ft_malloc(3*sizeof(char));
+		tab_dir[i++] = ft_malloc(3 * sizeof(char));
 	tab_dir[0] = "NO";
 	tab_dir[1] = "SO";
 	tab_dir[2] = "WE";
@@ -59,10 +53,10 @@ static char	**set_direction_tab(void)
 /* Check if the description of the textures are good */
 int	is_mapfile(char *map, t_window *window)
 {
-	int	fd;
-	char *buff;
-	char **tab_dir;
-	int i;
+	int		fd;
+	int		i;
+	char	*buff;
+	char	**tab_dir;
 
 	fd = open(map, O_RDONLY);
 	tab_dir = set_direction_tab();

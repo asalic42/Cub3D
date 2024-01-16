@@ -6,11 +6,11 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 15:47:57 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/16 16:14:11 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/16 16:44:52 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../includes/main.h"
+#include "../includes/main.h"
 
 /* Check if N/S/E/W aren't the same textures */
 static int	is_same_texture(t_window *window, char *new_one, char dir)
@@ -41,11 +41,11 @@ static int	is_same_texture(t_window *window, char *new_one, char dir)
 }
 
 /* Check if the textures exists and if yes, assign them into struct window */
-int is_good_txture(char *comp, char *str, t_window *window)
+int	is_good_txture(char *comp, char *str, t_window *window)
 {
-	char *from_space;
-	char *until_space;
-	int fd;
+	char	*from_space;
+	char	*until_space;
+	int		fd;
 
 	until_space = cut_until(str, ' ');
 	if (ft_strncmp(comp, until_space, ft_strlen(until_space)) != 0)
@@ -71,13 +71,13 @@ int is_good_txture(char *comp, char *str, t_window *window)
 /* Create a chain until we encounter the cut in the chain */
 char	*cut_until(char *str, char cut)
 {
-	int i;
-	char *new_cut;
+	int		i;
+	char	*new_cut;
 
 	i = 0;
 	while (str[i] && str[i] != cut)
 		i ++;
-	new_cut = ft_malloc((i+1) * sizeof(char));
+	new_cut = ft_malloc((i +1) * sizeof(char));
 	i = 0;
 	while (str[i] && str[i] != cut)
 	{
@@ -91,10 +91,10 @@ char	*cut_until(char *str, char cut)
 /* Create a chain from the cut (exclude) to the end of str */
 char	*cut_from(char *str, char cut)
 {
-	int i;
-	char *new_cut;
-	int j;
-	
+	int		i;
+	char	*new_cut;
+	int		j;
+
 	i = 0;
 	while (str[i] && str[i] != cut)
 		i ++;
@@ -105,5 +105,5 @@ char	*cut_from(char *str, char cut)
 	while (str[i] && str[i] != '\n')
 		new_cut[j++] = str[i++];
 	new_cut[j] = '\0';
-	return (new_cut);		
+	return (new_cut);
 }

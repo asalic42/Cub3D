@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 12:38:31 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/16 16:15:58 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/16 16:41:35 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 /* Loop of gnl while it isn't the description of the map */
 char	*loop_gnl(t_parse *parser)
 {
-	int i;
-	char *buf;
+	int		i;
+	char	*buf;
 
 	i = 0;
 	buf = get_next_line(parser->fd);
@@ -25,8 +25,8 @@ char	*loop_gnl(t_parse *parser)
 		i = 0;
 		while (buf[i])
 		{
-			if (buf[0] == 'N' || buf[0] == 'S' || buf[0] == 'W' || buf[0] == 'E' \
-				|| buf[0] == 'F' || buf[0] == 'C')
+			if (buf[0] == 'N' || buf[0] == 'S' || buf[0] == 'W' \
+			|| buf[0] == 'E' || buf[0] == 'F' || buf[0] == 'C')
 				break ;
 			else if (buf && buf[i] == '1')
 				return (buf);
@@ -34,7 +34,7 @@ char	*loop_gnl(t_parse *parser)
 		}
 		buf = get_next_line(parser->fd);
 	}
-	return(buf);
+	return (buf);
 }
 
 //If value == SPACE : check if around him, there is only 1

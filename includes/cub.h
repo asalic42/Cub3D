@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:57:25 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/16 16:29:47 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/16 16:46:44 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,9 +122,7 @@ char			*loop_gnl(t_parse *parser);
 int				is_good_color(char *comp, char *str, t_window *window);
 int				is_good_txture(char *comp, char *str, t_window *window);
 char			*convert_rgb_to_hexa(char **rgb);
-int				hexCharToDecimal(char hexChar);
-long			hexadecimalToDecimal(const char *hexadecimal);
-char			*convert_hexa(unsigned int nb, char *base);
+long			hexa_to_decimal(const char *hexadecimal);
 
 /* * * * GARBAGE * * * */
 t_garbage		*start_garbage(void);

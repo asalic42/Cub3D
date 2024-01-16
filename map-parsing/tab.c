@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 16:55:21 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/15 18:20:42 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/16 16:43:30 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,7 @@ char	*go_map(t_parse *put, t_data *data, t_window *window, int tour)
 	x = 0;
 	tab = ft_malloc((data->ptr.width +1) * sizeof(char));
 	if (!tab)
-	{
 		destroy_window(window);
-		return (NULL);
-	}
 	if (tour == 1)
 		put->buffer = loop_gnl(put);
 	else
@@ -54,10 +51,7 @@ char	**ft_maptab(char *map, t_data *data, t_window *window)
 	realmap = ft_malloc((data->ptr.height * data->ptr.width +1) * \
 	sizeof(char *));
 	if (!realmap)
-	{
 		destroy_window(window);
-		return (NULL);
-	}
 	y = 0;
 	while (y < data->ptr.height)
 	{
@@ -113,4 +107,10 @@ int	*simple_tab_int(char **char_map, t_window *window)
 		}
 	}
 	return (int_map);
+}
+
+int	error_cases(void)
+{
+	free_garbage();
+	exit(EXIT_FAILURE);
 }
