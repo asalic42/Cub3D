@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/15 19:00:20 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/16 15:34:49 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,8 +124,6 @@ void	cast_ray(t_window *window)
 	textures = get_textures_instance();	
 	img = get_mlx_ptr();
 	init_ray(&all_stuff, window);
-	//for (int i = 0; i < all_stuff.map->x * all_stuff.map->y; i++)
-	//	printf("all_stuff->map->map [%d] = %d\n", i, all_stuff.map->map[i]);
 	all_stuff.r = -1;
 	start = clock();
 	all_stuff.player = get_player_instance();
@@ -137,10 +135,6 @@ void	cast_ray(t_window *window)
 		left_or_right(&all_stuff, window);
 		find_closest_vertical_intersection(&all_stuff, window);
 		comp = comp_distance(&all_stuff, img, window);
-		//all_stuff.line = init_line(all_stuff.player->x, all_stuff.player->y,
-		//		all_stuff.rx, all_stuff.ry);
-		// all_stuff.line.width = 1;
-		//draw_line(all_stuff.line, img->img_ptr, 0x000050, 64);
 		calculate_line_height(&all_stuff, window);
 		if (comp == 1)
 			test2(all_stuff.r, all_stuff.line_off, all_stuff.line_off + all_stuff.line_h, &all_stuff, textures->xpm_data1, textures->xpm_width1, textures->xpm_height1, window->img_data, window);
