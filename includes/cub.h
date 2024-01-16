@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:57:25 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/12 11:35:31 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/16 16:29:47 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,12 @@ typedef struct s_window
 }	t_window;
 
 /* * * * ERROR HANDLE * * * */
-void			error_files(t_window *window, char *cub);
+void			error_files(char *cub);
 void			handle_error(t_window *window, char *map);
 void			close_error(t_window *window, char *error);
 int				close_wndo(t_window *window);
-void			count_error(t_parse *map, int fd, t_window *window);
+void			count_error(t_parse *map, int fd);
+int				error_cases(void);
 int				print_error(char *str);
 
 /* * * * CHECK ERRORS * * * */
@@ -117,8 +118,13 @@ int				contour_check(t_data *data, char **map);
 int				is_contour(int x, int y, char **map, t_data *data);
 int				is_mapfile(char *map, t_window *window);
 char			*loop_gnl(t_parse *parser);
+
 int				is_good_color(char *comp, char *str, t_window *window);
 int				is_good_txture(char *comp, char *str, t_window *window);
+char			*convert_rgb_to_hexa(char **rgb);
+int				hexCharToDecimal(char hexChar);
+long			hexadecimalToDecimal(const char *hexadecimal);
+char			*convert_hexa(unsigned int nb, char *base);
 
 /* * * * GARBAGE * * * */
 t_garbage		*start_garbage(void);
@@ -132,11 +138,10 @@ void			malloc_failure(void);
 
 /* * * * UTILS * * * */
 int				is_in_char(char c);
-int				countmap_y(char	*mappy, t_window *window);
+int				countmap_y(char	*mappy);
 void			countmap_x(char	*mappy, t_window *window);
-void			is_in_char_error(t_parse map, t_window *window, int fd, \
-				int width);
-int				init_count(char *mappy, t_parse *map, t_window *window);
+void			is_in_char_error(t_parse map, int fd, int width);
+int				init_count(char *mappy, t_parse *map);
 char			*cut_until(char *str, char cut);
 char			*cut_from(char *str, char cut);
 

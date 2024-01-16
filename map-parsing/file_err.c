@@ -6,11 +6,11 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 15:53:38 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/15 17:09:44 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/16 16:27:35 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub.h"
+#include "../includes/main.h"
 
 //Is it the good file ?
 int	is_goodfile(char *cub)
@@ -63,16 +63,19 @@ int	is_goodext(char *cub)
 }
 
 //Global errors files
-void	error_files(t_window *window, char *cub)
+void	error_files(char *cub)
 {
 	if (!is_goodfile(cub))
-		close_error(window, NULL);
+		error_cases();
 	if (!is_goodext(cub))
-		close_error(window, "Error: wrong extension\n");
+	{
+		ft_printf(RED"Error : wrong extension file\n"NC);
+		error_cases();
+	}
 }
 
 //Error of 
-void	count_error(t_parse *map, int fd, t_window *window)
+void	count_error(t_parse *map, int fd)
 {
 	if (map->buffer)
 		map->buffer = NULL;
@@ -83,5 +86,6 @@ void	count_error(t_parse *map, int fd, t_window *window)
 		map->buffer = NULL;
 		close(fd);
 	}
-	close_error(window, "Error : Longueur infinie ou nulle\n");
+	ft_printf(RED"Error : Longueur infinie ou nulle\n"NC);
+	error_cases();
 }
