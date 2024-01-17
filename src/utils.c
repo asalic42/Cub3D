@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 20:36:44 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/16 20:02:01 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/17 18:01:34 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	update_window(t_player_pos *player, t_window *window)
 {
 	is_player_out_of_bouds(player, window);
+	printf("player is now at x = %d, y = %d, a = %f\n", (int)player->x / 64, (int)player->y / 64, player->a);
 	draw_player(window);
 }
 
@@ -24,15 +25,23 @@ void	key_press_2(int keycode, t_window *window, t_player_pos *player)
 	{
 		player->x += player->dx;
 		player->y += player->dy;
-		update_window(player, window);
 	}
 	if (keycode == 's')
 	{
 		player->x -= player->dx;
 		player->y -= player->dy;
-		printf("player is now at x = %f, y = %f, a = %f\n", player->x, player->y, player->a);
-		update_window(player, window);
 	}
+	if (keycode == 'a')
+	{
+		player->y -= player->dx;
+		player->x += player->dy;
+	}
+	if (keycode == 'd')
+	{
+		player->y += player->dx;
+		player->x -= player->dy;
+	}
+	update_window(player, window);
 }
 
 int	key_press(int keycode, t_window *window)
@@ -42,23 +51,21 @@ int	key_press(int keycode, t_window *window)
 	player = get_player_instance();
 	if (keycode == 65307)
 		return (destroy_window(window));
-	if (keycode == 'a')
+	if (keycode == 65361)
 	{
 		player->a -= 0.1;
 		if (player->a < 0)
 			player->a += 2 * PI;
 		player->dx = cos(player->a) * 8;
 		player->dy = sin(player->a) * 8;
-		update_window(player, window);
 	}
-	if (keycode == 'd')
+	if (keycode == 65363)
 	{
 		player->a += 0.1;
 		if (player->a > 2 * PI)
 			player->a -= 2 * PI;
 		player->dx = cos(player->a) * 8;
 		player->dy = sin(player->a) * 8;
-		update_window(player, window);
 	}
 	key_press_2(keycode, window, player);
 	return (0);
@@ -106,6 +113,9 @@ static void find_player_dir(t_player_pos *player, char dir)
 		player->a = PI2;
 	else if (dir == 'W')
 		player->a = PI;
+	player->a = 3.083188;
+	player->x = 41*64;
+	player->y = 10*64;
 }
 
 static void	find_player(t_map *map, t_player_pos *player, char **char_map)

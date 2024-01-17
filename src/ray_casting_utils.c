@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:11:12 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/16 19:58:09 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/17 16:20:27 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,18 @@ void	up_or_down(t_all_stuff_for_ray_casting *all_stuff, t_window *window)
 	(void)(window);
 	if (all_stuff->ra > PI)
 	{	
-		all_stuff->ry = (((int)all_stuff->player->y / (64)) * (64))
-			- 0.0001;
+		all_stuff->ry = (((int)all_stuff->player->y / 64) * 64) - 0.0001;
 		all_stuff->rx = (all_stuff->player->y - all_stuff->ry)
 			* all_stuff->a_tan + all_stuff->player->x;
-		all_stuff->horizontal_yo = -(64);
+		all_stuff->horizontal_yo = -64;
 		all_stuff->horizontal_xo = -all_stuff->horizontal_yo * all_stuff->a_tan;
 	}
 	if (all_stuff->ra < PI)
 	{
-		all_stuff->ry = (((int)all_stuff->player->y / (64)) * (64))
-			+ (64);
+		all_stuff->ry = (((int)all_stuff->player->y / 64) * 64) + 64;
 		all_stuff->rx = (all_stuff->player->y - all_stuff->ry)
 			* all_stuff->a_tan + all_stuff->player->x;
-		all_stuff->horizontal_yo = (64);
+		all_stuff->horizontal_yo = 64;
 		all_stuff->horizontal_xo = -all_stuff->horizontal_yo * all_stuff->a_tan;
 	}
 	if (all_stuff->ra == 0 || all_stuff->ra == PI)
@@ -48,8 +46,8 @@ void	find_closest_horizontal_intersection(
 	(void)(window);
 	while (all_stuff->dof < all_stuff->map->y)
 	{
-		all_stuff->mx = (int)(all_stuff->rx) / (64);
-		all_stuff->my = (int)(all_stuff->ry) / (64);
+		all_stuff->mx = (int)all_stuff->rx / 64;
+		all_stuff->my = (int)all_stuff->ry / 64;
 		all_stuff->mp = all_stuff->my * all_stuff->map->x + all_stuff->mx;
 		if (all_stuff->mp > 0 && all_stuff->mp < all_stuff->map->x
 			* all_stuff->map->y && all_stuff->map->map[all_stuff->mp] == 1)
@@ -75,20 +73,18 @@ void	left_or_right(t_all_stuff_for_ray_casting *all_stuff, t_window *window)
 	all_stuff->dof = 0;
 	if (all_stuff->ra > PI2 && all_stuff->ra < PI3)
 	{
-		all_stuff->rx = ((int)(all_stuff->player->x / (64)) * (64))
-			- 0.0001;
+		all_stuff->rx = ((int)(all_stuff->player->x / 64) * 64) - 0.0001;
 		all_stuff->ry = (all_stuff->player->x - all_stuff->rx)
 			* all_stuff->n_tan + all_stuff->player->y;
-		all_stuff->vertical_xo = -(64);
+		all_stuff->vertical_xo = -64;
 		all_stuff->vertical_yo = -all_stuff->vertical_xo * all_stuff->n_tan;
 	}
 	if (all_stuff->ra < PI2 || all_stuff->ra > PI3)
 	{
-		all_stuff->rx = ((int)(all_stuff->player->x / (64)) * (64))
-			+ (64);
+		all_stuff->rx = ((int)(all_stuff->player->x / 64) * 64) + 64;
 		all_stuff->ry = (all_stuff->player->x - all_stuff->rx)
 			* all_stuff->n_tan + all_stuff->player->y;
-		all_stuff->vertical_xo = (64);
+		all_stuff->vertical_xo = 64;
 		all_stuff->vertical_yo = -all_stuff->vertical_xo * all_stuff->n_tan;
 	}
 	if (all_stuff->ra == 0 || all_stuff->ra == PI)
@@ -105,8 +101,8 @@ void	find_closest_vertical_intersection(
 	(void)(window);
 	while (all_stuff->dof < all_stuff->map->x)
 	{
-		all_stuff->mx = (int)(all_stuff->rx) / (64);
-		all_stuff->my = (int)(all_stuff->ry) / (64);
+		all_stuff->mx = (int)all_stuff->rx / 64;
+		all_stuff->my = (int)all_stuff->ry / 64;
 		all_stuff->mp = all_stuff->my * all_stuff->map->x + all_stuff->mx;
 		if (all_stuff->mp > 0 && all_stuff->mp < all_stuff->map->x
 			* all_stuff->map->y && all_stuff->map->map[all_stuff->mp] == 1)
@@ -141,7 +137,7 @@ int	comp_distance(t_all_stuff_for_ray_casting *all_stuff, t_mlx_stuff *img, t_wi
 		else
 			return_value = 4;
 	}
-	else if (all_stuff->dist_h < all_stuff->dist_v)
+	else
 	{
 		all_stuff->rx = all_stuff->hx;
 		all_stuff->ry = all_stuff->hy;
