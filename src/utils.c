@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 20:36:44 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/17 18:01:34 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/17 19:23:34 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	update_window(t_player_pos *player, t_window *window)
 {
-	is_player_out_of_bouds(player, window);
+	//is_player_out_of_bouds(player, window);
 	printf("player is now at x = %d, y = %d, a = %f\n", (int)player->x / 64, (int)player->y / 64, player->a);
 	draw_player(window);
 }
@@ -113,9 +113,6 @@ static void find_player_dir(t_player_pos *player, char dir)
 		player->a = PI2;
 	else if (dir == 'W')
 		player->a = PI;
-	player->a = 3.083188;
-	player->x = 41*64;
-	player->y = 10*64;
 }
 
 static void	find_player(t_map *map, t_player_pos *player, char **char_map)

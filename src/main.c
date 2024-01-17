@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/17 18:12:46 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/17 19:15:49 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,7 @@ void	draw_player(t_window *window)
 {	
 	t_line			line;
 	t_player_pos	*player;
-	t_map			*map = get_map_instance();
+	// t_map			*map = get_map_instance();
 
 	player = get_player_instance();
 	//draw_line(init_rectangle(0, 0, (WIDTH) / 2, HEIGHT), window->img_ptr,
@@ -156,10 +156,10 @@ void	draw_player(t_window *window)
 		mlx_get_color_value(window->mlx_ptr, 0x651684), 0);
 	draw_line(init_rectangle(0, (HEIGHT) / 2, WIDTH, HEIGHT), window->img_ptr,
 		mlx_get_color_value(window->mlx_ptr, 0x665464), 0);
-	//is_player_out_of_bouds(player, window);
+	is_player_out_of_bouds(player, window);
 	//draw_map(get_mlx_ptr(), get_map_instance());
 	(void)(line);
-	for (int i = 0; i < window->data.ptr.height; i++) {
+ 	/* for (int i = 0; i < window->data.ptr.height; i++) {
 		for (int j = 0; j < window->data.ptr.width; j++) {
 			if (i == (int)player->y / 64 && j == (int)player->x / 64) {
 				write(0, RED, 8);
@@ -173,7 +173,7 @@ void	draw_player(t_window *window)
 			}
 		}
 		write(0, "\n", 1);
-	}
+	} */
 	cast_ray(window);
 	//draw_line(init_rectangle(player->x - 5, player->y - 5, player->x + 5,
 	//		player->y + 5), window->img_ptr, 0xFFFF00, 5);
