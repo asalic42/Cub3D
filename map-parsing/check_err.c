@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 15:55:48 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/16 16:43:27 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/17 17:13:10 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,22 @@ static char	**set_direction_tab(void)
 	return (tab_dir);
 }
 
+int	is_buffer_good(char *buf)
+{
+	int	i;
+
+	i = 0;
+	while (buf[i] && (buf[i] == ' ' || buf[i] == '\t') && buf[i] != '\n')
+	{
+		i ++;
+		if (!buf[i])
+			return (0);
+	}
+	if (buf[i] == '\n')
+		return (0);
+	return (1);
+}
+
 /* Check if the description of the textures are good */
 int	is_mapfile(char *map, t_window *window)
 {
@@ -64,7 +80,7 @@ int	is_mapfile(char *map, t_window *window)
 	i = 0;
 	while (buff && i < 6)
 	{
-		if (buff[0] && buff[0] != '\n' && buff[0] != ' ' && buff[0] != '\t')
+		if (is_buffer_good(buff))
 		{	
 			if (i > 3 && !is_good_color(tab_dir[i], buff, window))
 				break ;
@@ -78,51 +94,4 @@ int	is_mapfile(char *map, t_window *window)
 	if (i < 6)
 		return (0);
 	return (1);
-}
-
-/* Check if all element of the map are valid (1, 0, N/S/E/W) */
-int	error_map(char *map)
-{
-	char	*check_line;
-	int		len_player;
-	t_parse	parser;
-	int		i;
-
-	parser.fd = open(map, O_RDONLY);
-	len_player = -1;
-	check_line = loop_gnl(&parser);
-	while (check_line)
-	{
-		i = -1;
-		while (check_line[++i] && check_line[i] != '\n')
-		{
-			if (!is_in_char(check_line[i]))
-				return (print_error(RED "Error : forbidden element\n"NC));
-			len_player = only_one_thing(check_line, i, len_player);
-			if (len_player == 1)
-				return (0);
-		}
-		check_line = get_next_line(parser.fd);
-	}
-	if (len_player == -1)
-		return (print_error(RED "Error : no player detected\n" NC));
-	close(parser.fd);
-	return (1);
-}
-
-/* Check if there is only one player */
-int	only_one_thing(char *check_line, int i, int len_player)
-{
-	if (check_line[i] == 'N' || check_line[i] == 'S' \
-	|| check_line[i] == 'W' || check_line[i] == 'E')
-	{
-		if (len_player == -1)
-			return (0);
-		else
-		{
-			ft_printf(RED"Error : too much players detected in the map\n"NC);
-			return (1);
-		}
-	}
-	return (len_player);
 }

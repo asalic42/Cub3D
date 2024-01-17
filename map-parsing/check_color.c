@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 15:50:21 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/16 16:37:14 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/17 17:11:06 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,16 @@ static int	is_wrong_notation(char *comp, char *str)
 {
 	char	*from_space;
 	char	*until_space;
+	int		i;
 
-	until_space = cut_until(str, ' ');
+	i = 0;
+	while (str[i] && (str[i] == ' ' || str[i] == '\t'))
+		i ++;
+	until_space = cut_until(str + i, ' ');
 	if (ft_strncmp(comp, until_space, ft_strlen(until_space) + \
 		ft_strlen(comp)) != 0)
 		return (print_error(RED "Error : wrong notation in the .cub file" NC));
-	from_space = cut_from(str, ' ');
+	from_space = cut_from(str + i, ' ');
 	if (!ft_strchr(from_space, ','))
 		return (print_error(RED "Error : wrong colors in the .cub file" NC));
 	return (1);
@@ -70,10 +74,15 @@ int	is_good_color(char *comp, char *str, t_window *window)
 {
 	char	**dot_split;
 	int		tour;
+	int		i;
 
 	if (!is_wrong_notation(comp, str))
 		return (0);
-	dot_split = ft_split(cut_from(str, ' '), ',');
+	i = 0;
+	while (str[i] && (str[i] == ' ' || str[i] == '\t'))
+		i ++;
+	dot_split = ft_split(cut_from(str + i, ' '), ',');
+	ft_printf("je suis la et split vaut : %s\n", dot_split[0]);
 	tour = 0;
 	while (dot_split[tour])
 	{

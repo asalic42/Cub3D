@@ -6,47 +6,13 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/15 18:21:18 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/17 17:23:00 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/main.h"
 
 double prout;int compteur = 0;
-
-// void test2(int x, int start_y, int end_y, t_all_stuff_for_ray_casting *all_stuff, char *xpm_data, int xpm_width, int xpm_height, void *img_data, t_window *window)
-// {
-// 	(void)(window);
-// 	t_textures	textures;
-
-// 	textures.current_x = x;
-// 	textures.texture_step = (float)xpm_height / all_stuff->line_h;
-// 	textures.tex_x = (int)(all_stuff->rx) % xpm_width;
-// 	if (textures.tex_x == 0 || textures.tex_x == xpm_width - 1 || textures.tex_x == xpm_width / 2)
-// 		textures.tex_x = (int)(all_stuff->ry) % xpm_width;
-// 	if (start_y == 0 && end_y == HEIGHT)
-// 	{
-// 		textures.texture_step = (float)xpm_height / all_stuff->original_line_h;
-// 		start_y = HEIGHT / 2 - (all_stuff->original_line_h / 2);
-// 		end_y = all_stuff->original_line_h;	
-// 	}
-	
-// 	textures.y = start_y;
-// 	textures.texture_position = 0;
-// 	while (textures.y < end_y && textures.y < HEIGHT)
-// 	{
-// 		if (textures.y >= 0)
-// 		{
-// 			textures.tex_y = (int)(textures.texture_position);
-// 			textures.value = xpm_data + (textures.tex_y * xpm_width + textures.tex_x) * (4);
-// 			textures.pixel = img_data + (textures.y * (WIDTH) + textures.current_x) * (4);
-// 			*(unsigned int *)textures.pixel = *(unsigned int *)textures.value;
-// 		}
-// 		textures.texture_position += textures.texture_step;
-// 		textures.y++;
-// 	}
-// 	textures.current_x++;
-// }
 
 void test2(int x, int start_y, int end_y, t_all_stuff_for_ray_casting *all_stuff, char *xpm_data, int xpm_width, int xpm_height, void *img_data, t_window *window)
 {
@@ -116,8 +82,6 @@ void	cast_ray(t_window *window)
 	textures = get_textures_instance();	
 	img = get_mlx_ptr();
 	init_ray(&all_stuff, window);
-	//for (int i = 0; i < all_stuff.map->x * all_stuff.map->y; i++)
-	//	printf("all_stuff->map->map [%d] = %d\n", i, all_stuff.map->map[i]);
 	all_stuff.r = -1;
 	start = clock();
 	all_stuff.player = get_player_instance();
@@ -129,10 +93,6 @@ void	cast_ray(t_window *window)
 		left_or_right(&all_stuff, window);
 		find_closest_vertical_intersection(&all_stuff, window);
 		comp = comp_distance(&all_stuff, img, window);
-		//all_stuff.line = init_line(all_stuff.player->x, all_stuff.player->y,
-		//		all_stuff.rx, all_stuff.ry);
-		// all_stuff.line.width = 1;
-		//draw_line(all_stuff.line, img->img_ptr, 0x000050, 64);
 		calculate_line_height(&all_stuff, window);
 		x = all_stuff.r;
 		if (comp == 1)
@@ -169,22 +129,13 @@ void	draw_player(t_window *window)
 	t_player_pos	*player;
 
 	player = get_player_instance();
-	//draw_line(init_rectangle(0, 0, (WIDTH) / 2, HEIGHT), window->img_ptr,
-	//	mlx_get_color_value(window->mlx_ptr, 0x555555), 0);
 	draw_line(init_rectangle(0, 0, (WIDTH), (HEIGHT) / 2), window->img_ptr,
 		mlx_get_color_value(window->mlx_ptr, window->ceiling), 0);
 	draw_line(init_rectangle(0, (HEIGHT) / 2, WIDTH, HEIGHT), window->img_ptr,
 		mlx_get_color_value(window->mlx_ptr, window->floor), 0);
 	is_player_out_of_bouds(player, window);
-	//draw_map(get_mlx_ptr(), get_map_instance());
 	(void)(line);
 	cast_ray(window);
-	//draw_line(init_rectangle(player->x - 5, player->y - 5, player->x + 5,
-	//		player->y + 5), window->img_ptr, 0xFFFF00, 5);
-	//line = init_line(player->x, player->y, player->x + player->dx * 5,
-	//		player->y + player->dy * 5);
-	//line.width = 2;
-	//draw_line(line, window->img_ptr, 0xFFFF00, 1);
 	mlx_put_image_to_window(window->mlx_ptr, window->win_ptr,
 		window->img_ptr, 0, 0);
 	update_mlx_infos(window->mlx_ptr, window->win_ptr, window->img_ptr);
