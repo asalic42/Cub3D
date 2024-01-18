@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/17 19:15:49 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/18 16:50:32 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void test2(int x, int start_y, int end_y, t_all_stuff_for_ray_casting *all_stuff
 	textures.current_x = x;
 	textures.texture_step = (float)xpm_height / all_stuff->line_h;
 	if (all_stuff->dist_h > all_stuff->dist_v)
-		textures.tex_x = (int)(all_stuff->ry) % xpm_width;
+		textures.tex_x = (int)(all_stuff->ry * xpm_width) % xpm_width;
 	else
-		textures.tex_x = (int)(all_stuff->rx) % xpm_width;
+		textures.tex_x = (int)(all_stuff->rx * xpm_width) % xpm_width;
 	if (start_y == 0 && end_y == HEIGHT)
 	{
 		textures.texture_step = (float)xpm_height / all_stuff->original_line_h;
@@ -81,7 +81,6 @@ void	init_textures(char *path1, char *path2, char *path3, char *path4)
 
 void	cast_ray(t_window *window)
 {
-	t_mlx_stuff					*mlx;
 	t_all_stuff_for_ray_casting	all_stuff;
 	clock_t						start;
 	clock_t						end;
@@ -89,7 +88,6 @@ void	cast_ray(t_window *window)
 	t_textures_path	*textures;
 
 	textures = get_textures_instance();	
-	mlx = get_mlx_ptr();
 	init_ray(&all_stuff, window);
 	all_stuff.r = -1;
 	start = clock();
@@ -101,7 +99,7 @@ void	cast_ray(t_window *window)
 		find_closest_horizontal_intersection(&all_stuff, window);
 		left_or_right(&all_stuff, window);
 		find_closest_vertical_intersection(&all_stuff, window);
-		comp = comp_distance(&all_stuff, mlx, window);
+		comp = comp_distance(&all_stuff);
 		calculate_line_height(&all_stuff, window);
 		if (comp == 1)
 			test2(all_stuff.r, all_stuff.line_off, all_stuff.line_off + all_stuff.line_h, &all_stuff, textures->xpm_data1, textures->xpm_width1, textures->xpm_height1, window->img_data, window);
@@ -121,25 +119,25 @@ void	cast_ray(t_window *window)
 void	is_player_out_of_bouds(t_player_pos *player, t_window *window)
 {
 	(void)(window);
-	if ((int)player->y / 64 > window->data.ptr.height)
+	if ((int)player->y / 1 > window->data.ptr.height)
 	{
 		printf("out top of vertical bounds\n");
-		player->y = 64;
+		player->y = 1;
 	}
-	else if ((int)player->y / 64 <= 0)
+	else if ((int)player->y / 1 <= 0)
 	{
 		printf("out bottom of vertical bounds\n");
-		player->y = 64 * (window->data.ptr.height - 1);
+		player->y = 1 * (window->data.ptr.height - 1);
 	}
-	else if ((int)player->x / 64 > window->data.ptr.width)
+	else if ((int)player->x / 1 > window->data.ptr.width)
 	{
 		printf("out right of horizontal bounds\n");
-		player->x = 64;
+		player->x = 1;
 	}
-	else if ((int)player->x / 64 <= 0)
+	else if ((int)player->x / 1 <= 0)
 	{
 		printf("out left of horizontal bounds\n");
-		player->x = 64 * (window->data.ptr.width - 1);
+		player->x = 1 * (window->data.ptr.width - 1);
 	}
 }
 
@@ -161,7 +159,7 @@ void	draw_player(t_window *window)
 	(void)(line);
  	/* for (int i = 0; i < window->data.ptr.height; i++) {
 		for (int j = 0; j < window->data.ptr.width; j++) {
-			if (i == (int)player->y / 64 && j == (int)player->x / 64) {
+			if (i == (int)player->y / 1 && j == (int)player->x / 1) {
 				write(0, RED, 8);
 				char *str = ft_itoa(map->map[i * window->data.ptr.width + j]);
 				write(0, str, strlen(str));
@@ -231,7 +229,7 @@ int	main(int ac, char **av)
 	if (!create_window(&window))	
 		return (0);
 	update_mlx_infos(&window.mlx_ptr, &window.win_ptr, &window.img_ptr);
-	init_textures("./textures/wall_1.xpm", "./textures/wall_2.xpm", "./textures/wall_3.xpm", "./textures/wall_4.xpm");
+	init_textures("./textures/grunge-brick-wall-background-_1_.xpm", "./textures/brick-wall-background-texture-_1_.xpm", "./textures/pale-gray-brick-wall-template.xpm", "./textures/abstract-grunge-cement-texture-background.xpm");
 	draw_player(&window);
 	mlx_loop_hook(window.mlx_ptr, &handle_no_event, &window);
 	mlx_hook(window.win_ptr, 17, KeyPressMask, &destroy_window, &window);

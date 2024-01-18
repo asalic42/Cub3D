@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 20:36:44 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/17 19:23:34 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/18 16:27:06 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	update_window(t_player_pos *player, t_window *window)
 {
 	//is_player_out_of_bouds(player, window);
-	printf("player is now at x = %d, y = %d, a = %f\n", (int)player->x / 64, (int)player->y / 64, player->a);
+	printf("player is now at x = %d, y = %d, a = %f\n", (int)player->x / 1, (int)player->y / 1, player->a);
 	draw_player(window);
 }
 
@@ -56,16 +56,16 @@ int	key_press(int keycode, t_window *window)
 		player->a -= 0.1;
 		if (player->a < 0)
 			player->a += 2 * PI;
-		player->dx = cos(player->a) * 8;
-		player->dy = sin(player->a) * 8;
+		player->dx = cos(player->a) * 0.125;
+		player->dy = sin(player->a) * 0.125;
 	}
 	if (keycode == 65363)
 	{
 		player->a += 0.1;
 		if (player->a > 2 * PI)
 			player->a -= 2 * PI;
-		player->dx = cos(player->a) * 8;
-		player->dy = sin(player->a) * 8;
+		player->dx = cos(player->a) * 0.125;
+		player->dy = sin(player->a) * 0.125;
 	}
 	key_press_2(keycode, window, player);
 	return (0);
@@ -128,8 +128,8 @@ static void	find_player(t_map *map, t_player_pos *player, char **char_map)
 		{
 			if (char_map[y][x] == 'N' || char_map[y][x] == 'E' || char_map[y][x] == 'W' || char_map[y][x] == 'S')
 			{
-				player->x = x * 64;
-				player->y = y * 64;
+				player->x = x * 1;
+				player->y = y * 1;
 				find_player_dir(player, char_map[y][x]);
 				return ;
 			}
@@ -153,8 +153,8 @@ int	create_window(t_window *window)
 	mapp->s = horizontal_blocksize;
 	player = get_player_instance();
 	find_player(mapp, player, window->data.ptr.map);
-	player->dx = cos(player->a) * 8;
-	player->dy = sin(player->a) * 8;
+	player->dx = cos(player->a) * 0.125;
+	player->dy = sin(player->a) * 0.125;
 	printf("player found at x = %f, y = %f, a = %f\n", player->x, player->y, player->a);
 	return (1);
 }

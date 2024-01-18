@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/12 20:37:16 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/17 17:59:44 by rciaze           ###   ########.fr       */
+/*   Created: Invalid date        by rciaze            #+#    #+#             */
+/*   Updated: 2024/01/18 16:10:17 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,8 +149,7 @@ void			left_or_right(t_all_stuff_for_ray_casting *all_stuff, \
 void			find_closest_vertical_intersection(
 					t_all_stuff_for_ray_casting *all_stuff, t_window *window);
 float			distance(float ax, float ay, float bx, float by);
-int				comp_distance(t_all_stuff_for_ray_casting *all_stuff,
-					t_mlx_stuff *img, t_window *window);
+int				comp_distance(t_all_stuff_for_ray_casting *all_stuff);
 float			distance(float ax, float ay, float bx, float by);
 void			init_ray(t_all_stuff_for_ray_casting *all_stuff, \
 					t_window *window);
