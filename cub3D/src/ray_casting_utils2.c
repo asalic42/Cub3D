@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_casting_utils2.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:24:20 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/09 15:19:20 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/18 16:26:21 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,13 @@ void	calculate_line_height(t_all_stuff_for_ray_casting *all_stuff, t_window *win
 	if (all_stuff->ca > 2 * PI)
 		all_stuff->ca -= 2 * PI;
 	all_stuff->dist_t = all_stuff->dist_t * cos(all_stuff->ca);
-	all_stuff->line_h = (all_stuff->map->s * (HEIGHT)) / all_stuff->dist_t;
+	if (all_stuff->dist_v < all_stuff->dist_h)
+		all_stuff->line_h = (1 * (HEIGHT)) / all_stuff->dist_t;
+	else
+		all_stuff->line_h = (1 * (HEIGHT)) / all_stuff->dist_t;
+	all_stuff->original_line_h = all_stuff->line_h;
 	if (all_stuff->line_h > (HEIGHT))
-	{
-		all_stuff->original_line_h = all_stuff->line_h;
 		all_stuff->line_h = (HEIGHT);
-	}
 	all_stuff->line_off = (HEIGHT) / 2  - all_stuff->line_h / 2;
 }
 
