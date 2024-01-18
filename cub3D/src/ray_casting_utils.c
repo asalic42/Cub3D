@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_casting_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:11:12 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/18 18:32:01 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/18 18:54:14 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void	find_closest_horizontal_intersection(
 	(void)(window);
 	while (all_stuff->dof < all_stuff->map->y)
 	{
-		all_stuff->mx = (int)all_stuff->rx / 1;
-		all_stuff->my = (int)all_stuff->ry / 1;
+		all_stuff->mx = (int)all_stuff->rx;
+		all_stuff->my = (int)all_stuff->ry;
 		all_stuff->mp = all_stuff->my * all_stuff->map->x + all_stuff->mx;
 		if (all_stuff->mp > 0 && all_stuff->mp < all_stuff->map->x
 			* all_stuff->map->y && all_stuff->map->map[all_stuff->mp] == 1)
@@ -101,8 +101,8 @@ void	find_closest_vertical_intersection(
 	(void)(window);
 	while (all_stuff->dof < all_stuff->map->x)
 	{
-		all_stuff->mx = (int)all_stuff->rx / 1;
-		all_stuff->my = (int)all_stuff->ry / 1;
+		all_stuff->mx = (int)all_stuff->rx;
+		all_stuff->my = (int)all_stuff->ry;
 		all_stuff->mp = all_stuff->my * all_stuff->map->x + all_stuff->mx;
 		if (all_stuff->mp > 0 && all_stuff->mp < all_stuff->map->x
 			* all_stuff->map->y && all_stuff->map->map[all_stuff->mp] == 1)

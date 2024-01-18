@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/18 18:19:08 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/18 20:07:51 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@
 
 extern double	prout;
 extern int		compteur;
-
+extern	clock_t						all_start;
+extern	clock_t						all_end;
 typedef struct s_player_pos
 {
 	float	x;
@@ -125,6 +126,7 @@ typedef struct s_textures
 	int			tex_x;
 }	t_textures;
 
+int				key_press_2(t_window *window);
 t_textures_path	*get_textures_instance(void);
 void			draw_map(t_mlx_stuff *img, t_map *map);
 int				key_press(int keycode, t_window *window);

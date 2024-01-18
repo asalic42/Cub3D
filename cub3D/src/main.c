@@ -3,16 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/18 18:19:03 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/18 20:10:42 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/main.h"
 
 double prout;int compteur = 0;
+
+clock_t						all_start;
+clock_t						all_end;
 
 void test2(int x, int start_y, int end_y, t_all_stuff_for_ray_casting *all_stuff, char *xpm_data, int xpm_width, int xpm_height, void *img_data, t_window *window)
 {
@@ -82,7 +85,7 @@ void	cast_ray(t_window *window)
 	clock_t						start;
 	clock_t						end;
 	int							comp;
-	t_textures_path	*textures;
+	t_textures_path				*textures;
 
 	textures = get_textures_instance();	
 	init_ray(&all_stuff, window);
@@ -116,26 +119,14 @@ void	cast_ray(t_window *window)
 void	is_player_out_of_bouds(t_player_pos *player, t_window *window)
 {
 	(void)(window);
-	if ((int)player->y / 1 > window->data.ptr.height)
-	{
-		printf("out top of vertical bounds\n");
+	if ((int)player->y > window->data.ptr.height)
 		player->y = 1;
-	}
-	else if ((int)player->y / 1 <= 0)
-	{
-		printf("out bottom of vertical bounds\n");
-		player->y = 1 * (window->data.ptr.height - 1);
-	}
-	else if ((int)player->x / 1 > window->data.ptr.width)
-	{
-		printf("out right of horizontal bounds\n");
+	else if ((int)player->y <= 0)
+		player->y = (window->data.ptr.height - 1);
+	else if ((int)player->x > window->data.ptr.width)
 		player->x = 1;
-	}
-	else if ((int)player->x / 1 <= 0)
-	{
-		printf("out left of horizontal bounds\n");
-		player->x = 1 * (window->data.ptr.width - 1);
-	}
+	else if ((int)player->x <= 0)
+		player->x = (window->data.ptr.width - 1);
 }
 
 void	draw_player(t_window *window)
@@ -157,6 +148,35 @@ void	draw_player(t_window *window)
 	update_mlx_infos(window->mlx_ptr, window->win_ptr, window->img_ptr);
 }
 
+int test(int keycode, t_window *window)
+{
+	if (window->keys.w && keycode == 'w') {
+		ft_printf("setting w to false\n");
+		window->keys.w = false;
+	}
+	if (window->keys.a && keycode == 'a') {
+		ft_printf("setting a to false\n");
+		window->keys.a = false;
+	}
+	if (window->keys.s && keycode == 's') {
+		ft_printf("setting s to false\n");
+		window->keys.s = false;
+	}
+	if (window->keys.d && keycode == 'd') {
+		ft_printf("setting d to false\n");
+		window->keys.d = false;
+	}
+	if (window->keys.left && keycode == 65361) {
+		ft_printf("setting left to false\n");
+		window->keys.left = false;
+	}
+	if (window->keys.right && keycode == 65363) {
+		ft_printf("setting right to false\n");
+		window->keys.right = false;
+	}
+	return(1);
+}
+
 int	main(int ac, char **av)
 {
 	t_window	window;
@@ -170,10 +190,12 @@ int	main(int ac, char **av)
 		return (0);
 	update_mlx_infos(&window.mlx_ptr, &window.win_ptr, &window.img_ptr);
 	init_textures(window.north, window.west, window.south, window.east);
-	draw_player(&window);
-	mlx_loop_hook(window.mlx_ptr, &handle_no_event, &window);
+	// draw_player(&window);
+	all_start = clock();
+	mlx_loop_hook(window.mlx_ptr, &key_press_2, &window);
 	mlx_hook(window.win_ptr, 17, KeyPressMask, &destroy_window, &window);
-	mlx_hook(window.win_ptr, 2, KeyPressMask, &key_press, &window);
+	mlx_hook(window.win_ptr, KeyPress, 0, &key_press, &window);
+	mlx_hook(window.win_ptr, KeyRelease, KeyReleaseMask, &test, &window);
 	mlx_loop(window.mlx_ptr);
 	return (1);
 }

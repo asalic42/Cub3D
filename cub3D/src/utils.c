@@ -3,45 +3,72 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 20:36:44 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/18 18:18:33 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/18 20:19:43 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/main.h"
 
-void	update_window(t_player_pos *player, t_window *window)
+int	key_press_2(t_window *window)
 {
-	//is_player_out_of_bouds(player, window);
-	printf("player is now at x = %d, y = %d, a = %f\n", (int)player->x / 1, (int)player->y / 1, player->a);
-	draw_player(window);
-}
-
-void	key_press_2(int keycode, t_window *window, t_player_pos *player)
-{
-	if (keycode == 'w')
+	t_player_pos *player = get_player_instance();
+	if (window->keys.left)
 	{
-		player->x += player->dx;
-		player->y += player->dy;
+		player->a -= 0.03;
+		if (player->a < 0)
+			player->a += 2 * PI;
+		player->dx = cos(player->a) * 0.08;
+		player->dy = sin(player->a) * 0.08;
 	}
-	if (keycode == 's')
+	if (window->keys.right)
 	{
-		player->x -= player->dx;
-		player->y -= player->dy;
+		player->a += 0.03;
+		if (player->a > 2 * PI)
+			player->a -= 2 * PI;
+		player->dx = cos(player->a) * 0.08;
+		player->dy = sin(player->a) * 0.08;
 	}
-	if (keycode == 'a')
+	if (window->keys.w)
+	{
+		if (window->keys.a || window->keys.d)
+		{
+			player->x += player->dx / 1.5;
+			player->y += player->dy / 1.5;	
+		}
+		else
+		{
+			player->x += player->dx;
+			player->y += player->dy;
+		}
+	}
+	if (window->keys.s)
+	{
+		if (window->keys.a || window->keys.d)
+		{
+			player->x -= player->dx / 1.5;
+			player->y -= player->dy / 1.5;	
+		}
+		else
+		{
+			player->x -= player->dx;
+			player->y -= player->dy;
+		}
+	}
+	if (window->keys.a)
 	{
 		player->y -= player->dx;
 		player->x += player->dy;
 	}
-	if (keycode == 'd')
+	if (window->keys.d)
 	{
 		player->y += player->dx;
 		player->x -= player->dy;
 	}
-	update_window(player, window);
+	draw_player(window);
+	return (0);
 }
 
 int	key_press(int keycode, t_window *window)
@@ -51,23 +78,30 @@ int	key_press(int keycode, t_window *window)
 	player = get_player_instance();
 	if (keycode == 65307)
 		return (destroy_window(window));
-	if (keycode == 65361)
-	{
-		player->a -= 0.1;
-		if (player->a < 0)
-			player->a += 2 * PI;
-		player->dx = cos(player->a) * 0.125;
-		player->dy = sin(player->a) * 0.125;
+	if (!window->keys.w && keycode == 'w') {
+		ft_printf("setting w to true\n");
+		window->keys.w = true;
 	}
-	if (keycode == 65363)
-	{
-		player->a += 0.1;
-		if (player->a > 2 * PI)
-			player->a -= 2 * PI;
-		player->dx = cos(player->a) * 0.125;
-		player->dy = sin(player->a) * 0.125;
+	if (!window->keys.a && keycode == 'a') {
+		ft_printf("setting a to true\n");
+		window->keys.a = true;
 	}
-	key_press_2(keycode, window, player);
+	if (!window->keys.s && keycode == 's') {
+		ft_printf("setting s to true\n");
+		window->keys.s = true;
+	}
+	if (!window->keys.d && keycode == 'd') {
+		ft_printf("setting d to true\n");
+		window->keys.d = true;
+	}
+	if (!window->keys.left && keycode == 65361) {
+		ft_printf("setting left to true\n");
+		window->keys.left = true;
+	}
+	if (!window->keys.right && keycode == 65363) {
+		ft_printf("setting right to true\n");
+		window->keys.right = true;
+	}
 	return (0);
 }
 
@@ -128,8 +162,8 @@ static void	find_player(t_map *map, t_player_pos *player, char **char_map)
 		{
 			if (char_map[y][x] == 'N' || char_map[y][x] == 'E' || char_map[y][x] == 'W' || char_map[y][x] == 'S')
 			{
-				player->x = x * 1;
-				player->y = y * 1;
+				player->x = x + 0.5;
+				player->y = y + 0.5;
 				find_player_dir(player, char_map[y][x]);
 				return ;
 			}
@@ -152,16 +186,16 @@ int	create_window(t_window *window)
 	mapp->y = window->data.ptr.height;
 	player = get_player_instance();
 	find_player(mapp, player, window->data.ptr.map);
-	player->dx = cos(player->a) * 0.125;
-	player->dy = sin(player->a) * 0.125;
-	printf("player found at x = %f, y = %f, a = %f\n", player->x, player->y, player->a);
+	player->dx = cos(player->a) * 0.08;
+	player->dy = sin(player->a) * 0.08;
 	return (1);
 }
 
 int	destroy_window(t_window *window)
 {
+	all_end = clock();
 	free_mlx_infos();
 	(void)window;
-	printf("avg time by frame = %f, %d total frames rendered\n", prout / compteur, compteur);
+	printf("avg time by frame = %f, %d total frames rendered, average of %f fps\n", prout / compteur, compteur, compteur / ((double)(all_end - all_start) / CLOCKS_PER_SEC));
 	exit(EXIT_SUCCESS);
 }

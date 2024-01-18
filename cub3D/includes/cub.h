@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:57:25 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/17 18:09:50 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/18 19:22:00 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include "../minilibx-linux/mlx.h"
 # include "../minilibx-linux/mlx_int.h"
 # include "../libft/libft.h"
+# include <stdbool.h>
 
 /* * * * MACROS * * * */
 
@@ -74,6 +75,17 @@ typedef struct s_data
 	t_ptr	ptr;
 }				t_data;
 
+typedef	struct s_keys
+{
+	bool	w;
+	bool	a;
+	bool	s;
+	bool	d;
+	bool	right;
+	bool	left;
+}				t_keys;
+
+
 typedef struct s_window
 {
 	void	*mlx_ptr;
@@ -90,6 +102,7 @@ typedef struct s_window
 	char	*east;
 	int		floor;
 	int		ceiling;
+	t_keys	keys;
 }	t_window;
 
 /* * * * ERROR HANDLE * * * */
