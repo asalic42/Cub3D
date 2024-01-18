@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:24:20 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/18 16:26:21 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/18 21:11:43 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ float	distance(float ax, float ay, float bx, float by)
 	return (sqrt((bx - ax) * (bx - ax) + (by - ay) * (by - ay)));
 }
 
-void	init_ray(t_all_stuff_for_ray_casting *all_stuff, t_window *window)
+void	init_ray(t_stuff_for_ray_casting *all_stuff, t_window *window)
 {
 	(void)(window);
 	all_stuff->player = get_player_instance();
@@ -29,7 +29,7 @@ void	init_ray(t_all_stuff_for_ray_casting *all_stuff, t_window *window)
 		all_stuff->ra -= 2 * PI;
 }
 
-void	init_distances(t_all_stuff_for_ray_casting *all_stuff)
+void	init_distances(t_stuff_for_ray_casting *all_stuff)
 {
 	all_stuff->dof = 0;
 	all_stuff->dist_h = 1000000;
@@ -42,7 +42,8 @@ void	init_distances(t_all_stuff_for_ray_casting *all_stuff)
 	all_stuff->n_tan = -tan(all_stuff->ra);
 }
 
-void	calculate_line_height(t_all_stuff_for_ray_casting *all_stuff, t_window *window)
+void	calculate_line_height(t_stuff_for_ray_casting *all_stuff,
+	t_window *window)
 {
 	(void)(window);
 	all_stuff->ca = all_stuff->player->a - all_stuff->ra;
@@ -55,13 +56,10 @@ void	calculate_line_height(t_all_stuff_for_ray_casting *all_stuff, t_window *win
 		all_stuff->line_h = (1 * (HEIGHT)) / all_stuff->dist_t;
 	else
 		all_stuff->line_h = (1 * (HEIGHT)) / all_stuff->dist_t;
-	all_stuff->original_line_h = all_stuff->line_h;
-	if (all_stuff->line_h > (HEIGHT))
-		all_stuff->line_h = (HEIGHT);
-	all_stuff->line_off = (HEIGHT) / 2  - all_stuff->line_h / 2;
+	all_stuff->line_off = (HEIGHT) / 2 - all_stuff->line_h / 2;
 }
 
-void	increment_angle(t_all_stuff_for_ray_casting *all_stuff)
+void	increment_angle(t_stuff_for_ray_casting *all_stuff)
 {
 	all_stuff->ra += DR;
 	if (all_stuff->ra < 0)

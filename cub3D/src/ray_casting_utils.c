@@ -6,14 +6,13 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:11:12 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/18 18:54:14 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/18 21:11:43 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/main.h"
 
-
-void	up_or_down(t_all_stuff_for_ray_casting *all_stuff, t_window *window)
+void	up_or_down(t_stuff_for_ray_casting *all_stuff, t_window *window)
 {
 	(void)(window);
 	if (all_stuff->ra > PI)
@@ -41,7 +40,7 @@ void	up_or_down(t_all_stuff_for_ray_casting *all_stuff, t_window *window)
 }
 
 void	find_closest_horizontal_intersection(
-		t_all_stuff_for_ray_casting *all_stuff, t_window *window)
+		t_stuff_for_ray_casting *all_stuff, t_window *window)
 {
 	(void)(window);
 	while (all_stuff->dof < all_stuff->map->y)
@@ -67,7 +66,7 @@ void	find_closest_horizontal_intersection(
 	}
 }
 
-void	left_or_right(t_all_stuff_for_ray_casting *all_stuff, t_window *window)
+void	left_or_right(t_stuff_for_ray_casting *all_stuff, t_window *window)
 {
 	(void)(window);
 	all_stuff->dof = 0;
@@ -96,7 +95,7 @@ void	left_or_right(t_all_stuff_for_ray_casting *all_stuff, t_window *window)
 }
 
 void	find_closest_vertical_intersection(
-		t_all_stuff_for_ray_casting *all_stuff, t_window *window)
+		t_stuff_for_ray_casting *all_stuff, t_window *window)
 {
 	(void)(window);
 	while (all_stuff->dof < all_stuff->map->x)
@@ -122,7 +121,7 @@ void	find_closest_vertical_intersection(
 	}
 }
 
-int	comp_distance(t_all_stuff_for_ray_casting *all_stuff)
+int	comp_distance(t_stuff_for_ray_casting *all_stuff)
 {
 	int	return_value;
 

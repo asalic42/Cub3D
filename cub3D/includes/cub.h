@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:57:25 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/18 19:22:00 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/18 21:14:58 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ typedef struct s_data
 	t_ptr	ptr;
 }				t_data;
 
-typedef	struct s_keys
+typedef struct s_keys
 {
 	bool	w;
 	bool	a;
@@ -84,7 +84,6 @@ typedef	struct s_keys
 	bool	right;
 	bool	left;
 }				t_keys;
-
 
 typedef struct s_window
 {

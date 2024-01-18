@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/18 20:07:51 by rciaze           ###   ########.fr       */
+/*   Created: 2024/01/18 21:15:27 by rciaze            #+#    #+#             */
+/*   Updated: 2024/01/18 21:20:31 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,15 @@
 # include <stdlib.h>
 # include <string.h>
 # define PI 3.1415926535
-# define PI2 PI / 2
-# define PI3 3*PI / 2
+# define PI2 1.57079632675
+# define PI3 4.71238898025
 # define DR 0.00054541666
 
-extern double	prout;
+/* extern double	prout;
 extern int		compteur;
 extern	clock_t						all_start;
-extern	clock_t						all_end;
+extern	clock_t						all_end; */
+
 typedef struct s_player_pos
 {
 	float	x;
@@ -55,29 +56,23 @@ typedef struct s_map
 	int		*map;
 }	t_map;
 
-typedef	struct s_textures_path
+typedef struct s_texture_details
 {
-	int				xpm_width1;
-	int				xpm_height1;
-	void			*xpm1;
-	void			*xpm_data1;
-	int				xpm_width2;
-	int				xpm_height2;
-	void			*xpm2;
-	void			*xpm_data2;
-	int				xpm_width3;
-	int				xpm_height3;
-	void			*xpm3;
-	void			*xpm_data3;
-	int				xpm_width4;
-	int				xpm_height4;
-	void			*xpm4;
-	void			*xpm_data4;
-	int				is_init;
+	int				width;
+	int				height;
+	void			*xpm;
+	void			*xpm_data;
+}	t_texture_details;
+
+typedef struct s_textures_path
+{
+	t_texture_details	xpm1;
+	t_texture_details	xpm2;
+	t_texture_details	xpm3;
+	t_texture_details	xpm4;
 }	t_textures_path;
 
-
-typedef struct s_all_stuff_for_ray_casting
+typedef struct s_stuff_for_ray_casting
 {
 	int				r;
 	int				mx;
@@ -110,9 +105,9 @@ typedef struct s_all_stuff_for_ray_casting
 	unsigned int	color;
 	t_player_pos	*player;
 	t_map			*map;
-}	t_all_stuff_for_ray_casting;
+}	t_stuff_for_ray_casting;
 
-typedef struct s_textures
+typedef struct s_put_texture_to_img_data
 {
 	int			y;
 	void		*img_data;
@@ -124,9 +119,25 @@ typedef struct s_textures
 	float		texture_step;
 	int			tex_y;
 	int			tex_x;
-}	t_textures;
+}	t_put_texture_to_img_data;
 
-int				key_press_2(t_window *window);
+void			wich_texture(int comp, t_textures_path *textures,
+					t_window *window, t_stuff_for_ray_casting *all_stuff);
+void			texture_to_screen(t_stuff_for_ray_casting *all_stuff,
+					t_texture_details *xpm, void *img_data);
+void			calculations(t_put_texture_to_img_data *variables,
+					t_stuff_for_ray_casting *all_stuff, int *end_y,
+					t_texture_details *xpm);
+void			find_player(t_map *map, t_player_pos *player, char **char_map);
+void			init_textures(char *path1, char *path2, char *path3,
+					char *path4);
+int				move_player(t_window *window);
+void			rotation(t_player_pos *player, t_window	*window);
+void			move_up(t_player_pos *player, t_window *window);
+void			move_down(t_player_pos *player, t_window *window);
+void			move_right_left(t_player_pos *player, t_window *window);
+int				key_release(int keycode, t_window *window);
+int				move_player(t_window *window);
 t_textures_path	*get_textures_instance(void);
 void			draw_map(t_mlx_stuff *img, t_map *map);
 int				key_press(int keycode, t_window *window);
@@ -137,22 +148,22 @@ int				destroy_window(t_window *window);
 void			draw_player(t_window *window);
 t_map			*get_map_instance(void);
 t_player_pos	*get_player_instance(void);
-void			up_or_down(t_all_stuff_for_ray_casting *all_stuff, \
+void			up_or_down(t_stuff_for_ray_casting *all_stuff, \
 					t_window *window);
 void			find_closest_horizontal_intersection(
-					t_all_stuff_for_ray_casting *all_stuff, t_window *window);
-void			left_or_right(t_all_stuff_for_ray_casting *all_stuff, \
+					t_stuff_for_ray_casting *all_stuff, t_window *window);
+void			left_or_right(t_stuff_for_ray_casting *all_stuff, \
 					t_window *window);
 void			find_closest_vertical_intersection(
-					t_all_stuff_for_ray_casting *all_stuff, t_window *window);
+					t_stuff_for_ray_casting *all_stuff, t_window *window);
 float			distance(float ax, float ay, float bx, float by);
-int				comp_distance(t_all_stuff_for_ray_casting *all_stuff);
+int				comp_distance(t_stuff_for_ray_casting *all_stuff);
 float			distance(float ax, float ay, float bx, float by);
-void			init_ray(t_all_stuff_for_ray_casting *all_stuff, \
+void			init_ray(t_stuff_for_ray_casting *all_stuff, \
 					t_window *window);
-void			init_distances(t_all_stuff_for_ray_casting *all_stuff);
-void			calculate_line_height(t_all_stuff_for_ray_casting *all_stuff, \
+void			init_distances(t_stuff_for_ray_casting *all_stuff);
+void			calculate_line_height(t_stuff_for_ray_casting *all_stuff, \
 					t_window *window);
-void			increment_angle(t_all_stuff_for_ray_casting *all_stuff);
+void			increment_angle(t_stuff_for_ray_casting *all_stuff);
 void			is_player_out_of_bouds(t_player_pos *player, t_window *window);
 #endif

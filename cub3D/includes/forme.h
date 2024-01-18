@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 19:03:42 by raphael           #+#    #+#             */
-/*   Updated: 2024/01/11 05:41:48 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/18 21:15:09 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 
 # define WIDTH 1920
 # define HEIGHT 1080
-# define BLOCK_SIZE (WIDTH / 20)
 
 typedef struct s_rectangle
 {
