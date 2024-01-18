@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 16:07:55 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/16 16:39:37 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/18 16:08:21 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static char	*convert_hexa(unsigned int nb, char *base)
 	char	*str;
 
 	c = how_many_digits3(nb);
-	str = ft_malloc((c + 1) * sizeof(char));
+	str = ft_malloc((c + 2) * sizeof(char));
 	i = c;
 	if (i == 1)
 	{
@@ -47,18 +47,23 @@ char	*convert_rgb_to_hexa(char **rgb)
 {
 	char	*buf;
 	int		hexa;
+	char	*tmp;
 	int		i;
 
 	hexa = 0;
 	i = 0;
 	buf = NULL;
+	tmp = NULL;
 	while (rgb[i])
 	{
 		hexa = ft_atoi(rgb[i]);
-		if (!buf)
+		if (buf == NULL)
 			buf = convert_hexa(hexa, "0123456789ABCDEF");
 		else
-			buf = ft_strjoin(buf, convert_hexa(hexa, "0123456789ABCDEF"));
+		{
+			tmp = convert_hexa(hexa, "0123456789ABCDEF");
+			buf = ft_strjoin(buf, tmp);
+		}
 		i ++;
 	}
 	return (buf);
