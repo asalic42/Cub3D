@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 13:48:19 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/18 19:12:46 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/18 20:28:42 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ int	is_zero(int y, char **map, t_data *data)
 	if (data->x < data->ptr.width && map[y] && map[y][data->x] && \
 	map[y][data->x] != '1' && map[y][data->x] != ' ')
 		return (0);
-	ft_printf("map = %s\n", map[y]);
 	if (data->x -1 < data->ptr.width && map[y] && map[y][data->x -1] && \
 	map[y][data->x -1] != '1' && map[y][data->x -1] != ' ')
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:57:25 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/18 21:14:58 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/18 21:21:48 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,6 @@ typedef struct s_window
 /* * * * ERROR HANDLE * * * */
 void			error_files(char *cub);
 void			handle_error(t_window *window, char *map);
-void			close_error(t_window *window, char *error);
-int				close_wndo(t_window *window);
 void			count_error(t_parse *map, int fd);
 int				error_cases(void);
 int				print_error(char *str);
