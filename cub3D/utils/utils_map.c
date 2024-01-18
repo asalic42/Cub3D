@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 15:42:22 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/18 18:28:21 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/18 19:25:05 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,13 @@ int	countmap_y(char	*mappy)
 	t_parse		map;
 
 	map.fd = init_count(mappy, &map);
-	height = 1;
+	height = 0;
 	i = 0;
 	while (map.buffer && map.buffer[i] && map.buffer[i] != '\n')
 	{
 		is_in_char_error(map, map.fd, i);
 		i ++;
-		if (map.buffer && map.buffer[i] == '\n')
+		if (map.buffer && (map.buffer[i] == '\0' || map.buffer[i] == '\n'))
 		{
 			i = 0;
 			height ++;

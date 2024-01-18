@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 13:48:19 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/17 17:12:56 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/18 19:12:46 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	map_up_n_down(char **map, t_data *data)
 			return (print_error(RED"Error : wrong down borders\n"NC));
 		else if (data->y == data->ptr.height -1 && !map[data->y][data->x])
 		{
-			if (!is_zero(data->y -1, map, data))
+			if (!is_zero(data->y, map, data))
 				return (print_error(RED"Error : wrong borders\n"NC));
 		}
 		data->x ++;
@@ -56,13 +56,14 @@ int	map_up_n_down(char **map, t_data *data)
 
 int	is_zero(int y, char **map, t_data *data)
 {
-	if (data->x < data->ptr.width && map[y][data->x] && \
+	if (data->x < data->ptr.width && map[y] && map[y][data->x] && \
 	map[y][data->x] != '1' && map[y][data->x] != ' ')
 		return (0);
-	if (data->x -1 < data->ptr.width && map[y][data->x -1] && \
+	ft_printf("map = %s\n", map[y]);
+	if (data->x -1 < data->ptr.width && map[y] && map[y][data->x -1] && \
 	map[y][data->x -1] != '1' && map[y][data->x -1] != ' ')
 		return (0);
-	if (data->x +1 < data->ptr.width && map[y][data->x +1] && \
+	if (data->x +1 < data->ptr.width && map[y] && map[y][data->x +1] && \
 	map[y][data->x +1] != '1' && map[y][data->x +1] != ' ')
 		return (0);
 	return (1);
