@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/18 18:15:50 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/18 18:19:03 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,50 +151,10 @@ void	draw_player(t_window *window)
 		mlx_get_color_value(window->mlx_ptr, window->floor), 0);
 	is_player_out_of_bouds(player, window);
 	(void)(line);
- 	/* for (int i = 0; i < window->data.ptr.height; i++) {
-		for (int j = 0; j < window->data.ptr.width; j++) {
-			if (i == (int)player->y / 1 && j == (int)player->x / 1) {
-				write(0, RED, 8);
-				char *str = ft_itoa(map->map[i * window->data.ptr.width + j]);
-				write(0, str, strlen(str));
-				write(0, NC, 5);
-			}
-			else {
-				char *str = ft_itoa(map->map[i * window->data.ptr.width + j]);
-				write(0, str, strlen(str));
-			}
-		}
-		write(0, "\n", 1);
-	} */
 	cast_ray(window);
 	mlx_put_image_to_window(window->mlx_ptr, window->win_ptr,
 		window->img_ptr, 0, 0);
 	update_mlx_infos(window->mlx_ptr, window->win_ptr, window->img_ptr);
-}
-
-void	draw_map(t_mlx_stuff *img, t_map *map)
-{
-	int			x;
-	int			y;
-	int			x0;
-	int			y0;
-
-	y = -1;
-	while (++y < map->y)
-	{
-		y0 = y * map->s;
-		x = -1;
-		while (++x < map->x)
-		{
-			x0 = x * map->s;
-			if (map->map[y * map->x + x] == 1)
-				draw_line(init_rectangle(x0, y0, x0 + map->s - 3, y0
-						+ map->s - 1), img->img_ptr, 0x0F0F0F, 0);
-			else
-				draw_line(init_rectangle(x0, y0, x0 + map->s - 3, y0
-						+ map->s - 1), img->img_ptr, 0xC0C0C0, 0);
-		}
-	}
 }
 
 int	main(int ac, char **av)
@@ -206,14 +166,6 @@ int	main(int ac, char **av)
 		return (print_error(RED "Error : not enought args\n" NC));
 	start_garbage();
 	handle_error(&window, av[1]);
-	horizontal_blocksize = WIDTH / window.data.ptr.width;
-	vertical_blocksize = HEIGHT / window.data.ptr.height;
-	printf("horizontal_blocksize  = %d, vertical_blocksize = %d\n", horizontal_blocksize, vertical_blocksize);
-	printf("window.data.ptr.width  = %d, window.data.ptr.height = %d\n", window.data.ptr.width, window.data.ptr.height);
-	//if (horizontal_blocksize > vertical_blocksize)
-	//	blocksize = horizontal_blocksize;
-	//else
-	//	blocksize = vertical_blocksize;
 	if (!create_window(&window))	
 		return (0);
 	update_mlx_infos(&window.mlx_ptr, &window.win_ptr, &window.img_ptr);

@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 20:36:44 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/18 18:15:58 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/18 18:18:33 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,6 @@ int	create_window(t_window *window)
 		return (0);
 	mapp->x = window->data.ptr.width;
 	mapp->y = window->data.ptr.height;
-	mapp->s = horizontal_blocksize;
 	player = get_player_instance();
 	find_player(mapp, player, window->data.ptr.map);
 	player->dx = cos(player->a) * 0.125;

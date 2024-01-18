@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
+/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/18 16:10:17 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/18 18:19:08 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,6 @@
 
 extern double	prout;
 extern int		compteur;
-extern int 		horizontal_blocksize;
-extern int 		vertical_blocksize;
-extern int 		blocksize;
 
 typedef struct s_player_pos
 {
@@ -54,8 +51,6 @@ typedef struct s_map
 {
 	int		x;
 	int		y;
-	int		s;
-	int		minimap_s;
 	int		*map;
 }	t_map;
 
