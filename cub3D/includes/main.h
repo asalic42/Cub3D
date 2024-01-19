@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 21:15:27 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/18 21:20:31 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/19 13:17:54 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@
 # define PI3 4.71238898025
 # define DR 0.00054541666
 
-/* extern double	prout;
+extern double	prout;
 extern int		compteur;
 extern	clock_t						all_start;
-extern	clock_t						all_end; */
+extern	clock_t						all_end;
 
 typedef struct s_player_pos
 {
