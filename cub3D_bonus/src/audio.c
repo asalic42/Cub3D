@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   audio.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 19:02:46 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/18 21:12:09 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/19 17:20:35 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	initializer_audio(t_window *window)
 		ft_printf(RED"Error : music init\n"NC);
 		destroy_window(window);
 	}
-	if (SDL_LoadWAV("/mnt/nfs/homes/asalic/Documents/Cursus42/Cub3D_doc/Cub3D/cub3D_bonus/utils/Palladio.wav", &window->sound.wav_spec, &window->sound.wav_buffer, &window->sound.wav_lenght) == NULL)
+	if (SDL_LoadWAV("./utils/Palladio.wav", &window->sound.wav_spec, &window->sound.wav_buffer, &window->sound.wav_lenght) == NULL)
 	{
 		ft_printf(RED"Error : music loading\n"NC);
 		destroy_window(window);

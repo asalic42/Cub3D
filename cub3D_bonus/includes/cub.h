@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:57:25 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/18 21:16:04 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/19 17:15:41 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include "../minilibx-linux/mlx.h"
 # include "../minilibx-linux/mlx_int.h"
 # include "../libft/libft.h"
+# include <stdbool.h>
 
 /* * * * MACROS * * * */
 
@@ -86,6 +87,16 @@ typedef struct s_music
 	Uint8				*wav_buffer;
 }				t_music;
 
+typedef struct s_keys
+{
+	bool	w;
+	bool	a;
+	bool	s;
+	bool	d;
+	bool	right;
+	bool	left;
+}				t_keys;
+
 typedef struct s_window
 {
 	void	*mlx_ptr;
@@ -103,6 +114,7 @@ typedef struct s_window
 	int		floor;
 	int		ceiling;
 	t_music	sound;
+	t_keys	keys;
 }	t_window;
 
 /* * * * ERROR HANDLE * * * */

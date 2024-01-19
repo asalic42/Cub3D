@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: asalic <asalic@student.42.fr>              +#+  +:+       +#+         #
+#    By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/21 18:01:21 by asalic            #+#    #+#              #
-#    Updated: 2024/01/18 20:10:46 by asalic           ###   ########.fr        #
+#    Updated: 2024/01/19 17:14:43 by rciaze           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ PATH_MLX	= minilibx-linux/libmlx.a
 PATH_LIBFT	= libft/libft.a
 INCLUDES	= minilibx-linux/mlx.h libft/libft.h includes/main.h includes/cub.h includes/forme.h includes/basique_mlx_needed.h
 
-SRCS_DIR = map-parsing utils src formes
+SRCS_DIR = map-parsing utils src formes src/design_p
 SRCS	:= $(foreach dir,$(SRCS_DIR),$(wildcard $(dir)/*.c)) $(SRCS)
 OBJ_DIR	 = obj
 OBJ		 = $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRCS))
