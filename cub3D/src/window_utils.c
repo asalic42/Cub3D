@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:30:50 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/18 20:44:52 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/19 16:39:38 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,12 @@ int	create_window(t_window *window)
 	find_player(mapp, player, window->data.ptr.map);
 	player->dx = cos(player->a) * 0.08;
 	player->dy = sin(player->a) * 0.08;
+	window->keys.a = false;
+	window->keys.s = false;
+	window->keys.w = false;
+	window->keys.d = false;
+	window->keys.left = false;
+	window->keys.right = false;
 	return (1);
 }
 
