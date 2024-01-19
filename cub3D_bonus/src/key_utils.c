@@ -6,11 +6,29 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:32:15 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/18 20:46:54 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/19 19:08:17 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/main.h"
+
+void	colision(t_player_pos *player, float dx, float dy)
+{
+	t_map	*map;
+	int		mx;
+	int		my;
+	int		mp;
+
+	map = get_map_instance();
+	mx = (int)player->x ;
+	my = (int)player->y ;
+	mp = my * map->x + mx;
+	if (map->map[mp] == 1)
+	{
+		player->y -= dy;
+		player->x -= dx;
+	}
+}
 
 int	key_release(int keycode, t_window *window)
 {

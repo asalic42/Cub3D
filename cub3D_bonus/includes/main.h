@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/19 18:08:17 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/19 18:51:38 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ typedef struct s_put_texture_to_img_data
 	int			tex_x;
 }	t_put_texture_to_img_data;
 
+void			colision(t_player_pos *player, float dx, float dy);
 void			wich_texture(int comp, t_textures_path *textures,
 					t_window *window, t_stuff_for_ray_casting *all_stuff);
 void			texture_to_screen(t_stuff_for_ray_casting *all_stuff,

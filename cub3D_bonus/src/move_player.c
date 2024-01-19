@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:40:31 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/18 20:46:49 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/19 18:59:59 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,13 @@ void	move_up(t_player_pos *player, t_window *window)
 		{
 			player->x += player->dx / 1.5;
 			player->y += player->dy / 1.5;
+			colision(player, player->dx / 1.5, player->dy / 1.5);
 		}
 		else
 		{
 			player->x += player->dx;
 			player->y += player->dy;
+			colision(player, player->dx, player->dy);
 		}
 	}
 }
@@ -70,11 +72,13 @@ void	move_down(t_player_pos *player, t_window *window)
 		{
 			player->x -= player->dx / 1.5;
 			player->y -= player->dy / 1.5;
+			colision(player, -(player->dx / 1.5), -(player->dy / 1.5));
 		}
 		else
 		{
 			player->x -= player->dx;
 			player->y -= player->dy;
+			colision(player, -(player->dx), -(player->dy));
 		}
 	}
 }
@@ -85,10 +89,12 @@ void	move_right_left(t_player_pos *player, t_window *window)
 	{
 		player->y -= player->dx;
 		player->x += player->dy;
+		colision(player, player->dy, -player->dx);
 	}
 	if (window->keys.d)
 	{
 		player->y += player->dx;
 		player->x -= player->dy;
+		colision(player, -player->dy, player->dx);
 	}
 }
