@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/19 17:17:19 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/19 18:45:20 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ clock_t						all_end;
 void	cast_ray(t_window *window)
 {
 	t_stuff_for_ray_casting		all_stuff;
-	clock_t						start;
-	clock_t						end;
 	int							comp;
 	t_textures_path				*textures;
 
@@ -29,7 +27,6 @@ void	cast_ray(t_window *window)
 	textures = get_textures_instance();
 	all_stuff.r = -1;
 	all_stuff.player = get_player_instance();
-	start = clock();
 	while (++all_stuff.r < 1920)
 	{
 		init_distances(&all_stuff);
@@ -42,8 +39,6 @@ void	cast_ray(t_window *window)
 		wich_texture(comp, textures, window, &all_stuff);
 		increment_angle(&all_stuff);
 	}
-	end = clock();
-	prout = (double)(end - start) / CLOCKS_PER_SEC;
 	compteur++;
 }
 
@@ -63,6 +58,9 @@ void	is_player_out_of_bouds(t_player_pos *player, t_window *window)
 void	draw_player(t_window *window)
 {	
 	t_player_pos	*player;
+	static clock_t						start;
+	static clock_t						end;
+	static int							t_compteur = 0;
 
 	player = get_player_instance();
 	draw_line(init_rectangle(0, 0, (WIDTH), (HEIGHT) / 2), window->img_ptr,
@@ -70,9 +68,25 @@ void	draw_player(t_window *window)
 	draw_line(init_rectangle(0, (HEIGHT) / 2, WIDTH, HEIGHT), window->img_ptr,
 		mlx_get_color_value(window->mlx_ptr, window->floor), 0);
 	is_player_out_of_bouds(player, window);
+	if (compteur % 30)
+	{
+		start = clock();
+		t_compteur = 0;
+	}
 	cast_ray(window);
+	t_compteur++;
+	float temps = 0;
+	end = clock();
+	temps = (t_compteur / ((double)(end - start) / CLOCKS_PER_SEC));
+
 	mlx_put_image_to_window(window->mlx_ptr, window->win_ptr,
 		window->img_ptr, 0, 0);
+
+	char texte[50];
+	char *str;
+	snprintf(texte, sizeof(texte), "%f", temps);
+	str = ft_strjoin("Fps = ", texte);
+	mlx_string_put(window->mlx_ptr, window->win_ptr, 50, 50, 0xFF00AA, str);
 	update_mlx_infos(window->mlx_ptr, window->win_ptr, window->img_ptr);
 }
 
