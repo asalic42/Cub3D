@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_textures_to_screen.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
+/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 21:09:49 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/18 21:12:36 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/22 18:46:03 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,14 @@ void	calculations(t_put_texture_to_img_data *variables,
 }
 
 void	texture_to_screen(t_stuff_for_ray_casting *all_stuff,
-	t_texture_details *xpm, void *img_data)
+	t_texture_details *xpm, void *img_data, int comp)
 {
 	t_put_texture_to_img_data	variables;
 	int							end_y;
 
 	calculations(&variables, all_stuff, &end_y, xpm);
+	if (comp == 2 || comp == 3)
+		variables.tex_x = xpm->width - variables.tex_x;
 	while (variables.y < end_y && variables.y < HEIGHT)
 	{
 		if (variables.y >= 0)
@@ -61,11 +63,13 @@ void	wich_texture(int comp, t_textures_path *textures, t_window *window,
 	t_stuff_for_ray_casting *all_stuff)
 {
 	if (comp == 1)
-		texture_to_screen(all_stuff, &textures->xpm1, window->img_data);
+		texture_to_screen(all_stuff, &textures->xpm1, window->img_data, comp);
 	else if (comp == 2)
-		texture_to_screen(all_stuff, &textures->xpm2, window->img_data);
+		texture_to_screen(all_stuff, &textures->xpm2, window->img_data, comp);
 	else if (comp == 3)
-		texture_to_screen(all_stuff, &textures->xpm3, window->img_data);
+		texture_to_screen(all_stuff, &textures->xpm3, window->img_data, comp);
 	else if (comp == 4)
-		texture_to_screen(all_stuff, &textures->xpm4, window->img_data);
+		texture_to_screen(all_stuff, &textures->xpm4, window->img_data, comp);
+	else if (comp == 5)
+		texture_to_screen(all_stuff, &textures->xpm_door, window->img_data, comp);
 }

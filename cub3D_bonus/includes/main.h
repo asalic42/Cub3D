@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
+/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/19 18:51:38 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/22 18:44:22 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct s_textures_path
 	t_texture_details	xpm2;
 	t_texture_details	xpm3;
 	t_texture_details	xpm4;
+	t_texture_details	xpm_door;
 }	t_textures_path;
 
 typedef struct s_stuff_for_ray_casting
@@ -125,14 +126,14 @@ void			colision(t_player_pos *player, float dx, float dy);
 void			wich_texture(int comp, t_textures_path *textures,
 					t_window *window, t_stuff_for_ray_casting *all_stuff);
 void			texture_to_screen(t_stuff_for_ray_casting *all_stuff,
-					t_texture_details *xpm, void *img_data);
+					t_texture_details *xpm, void *img_data, int comp);
 void			calculations(t_put_texture_to_img_data *variables,
 					t_stuff_for_ray_casting *all_stuff, int *end_y,
 					t_texture_details *xpm);
 void			find_player(t_map *map, t_player_pos *player, char **char_map);
-void			init_textures(char *path1, char *path2, char *path3,
-					char *path4);
+void			init_textures(t_window *window, char *door);
 int				move_player(t_window *window);
+void			open_door();
 void			rotation(t_player_pos *player, t_window	*window);
 void			move_up(t_player_pos *player, t_window *window);
 void			move_down(t_player_pos *player, t_window *window);
