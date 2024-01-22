@@ -1,7 +1,7 @@
 NO ./textures/bluestone.xpm
-SO ./textures/grunge-brick-wall-background.xpm
-WE ./textures/rock-wall-256x256.xpm
-EA ./textures/brick-wall-background-texture-_1_.xpm
+SO ./textures/south.xpm
+WE ./textures/west.xpm
+EA ./textures/east.xpm
 
 F 0,0,0
 C 0,50,50

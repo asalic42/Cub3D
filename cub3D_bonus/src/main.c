@@ -6,13 +6,13 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/19 18:45:20 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/22 18:21:25 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/main.h"
 
-double prout;int compteur = 0;
+int compteur = 0;
 
 clock_t						all_start;
 clock_t						all_end;
@@ -68,16 +68,20 @@ void	draw_player(t_window *window)
 	draw_line(init_rectangle(0, (HEIGHT) / 2, WIDTH, HEIGHT), window->img_ptr,
 		mlx_get_color_value(window->mlx_ptr, window->floor), 0);
 	is_player_out_of_bouds(player, window);
-	if (compteur % 30)
+
+	if (((double)(end - start) / CLOCKS_PER_SEC) > 1.5)
 	{
 		start = clock();
 		t_compteur = 0;
 	}
 	cast_ray(window);
+
 	t_compteur++;
 	float temps = 0;
 	end = clock();
 	temps = (t_compteur / ((double)(end - start) / CLOCKS_PER_SEC));
+
+	draw_map(window, player, get_map_instance());
 
 	mlx_put_image_to_window(window->mlx_ptr, window->win_ptr,
 		window->img_ptr, 0, 0);
@@ -86,7 +90,8 @@ void	draw_player(t_window *window)
 	char *str;
 	snprintf(texte, sizeof(texte), "%f", temps);
 	str = ft_strjoin("Fps = ", texte);
-	mlx_string_put(window->mlx_ptr, window->win_ptr, 50, 50, 0xFF00AA, str);
+	mlx_string_put(window->mlx_ptr, window->win_ptr, 50, 250, 0xFFFFFFFF, str);
+
 	update_mlx_infos(window->mlx_ptr, window->win_ptr, window->img_ptr);
 }
 

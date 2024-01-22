@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/19 18:51:38 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/22 18:23:40 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,8 @@
 # define PI 3.1415926535
 # define PI2 1.57079632675
 # define PI3 4.71238898025
-# define DR 0.00054541666
+# define DR 0.0006363179
 
-extern double	prout;
 extern int		compteur;
 extern	clock_t						all_start;
 extern	clock_t						all_end;
@@ -58,7 +57,6 @@ typedef struct s_map
 
 typedef struct s_texture_details
 {
-	int				width;
 	int				height;
 	void			*xpm;
 	void			*xpm_data;
@@ -121,6 +119,16 @@ typedef struct s_put_texture_to_img_data
 	int			tex_x;
 }	t_put_texture_to_img_data;
 
+typedef	struct s_minimap
+{
+	int		j;
+	int		i;
+	int		cptr_y;
+	int		cptr_x;
+	t_line	line;
+}	t_minimap;
+
+void			draw_map(t_window *window, t_player_pos	*player, t_map *map);
 void			colision(t_player_pos *player, float dx, float dy);
 void			wich_texture(int comp, t_textures_path *textures,
 					t_window *window, t_stuff_for_ray_casting *all_stuff);
@@ -140,7 +148,6 @@ void			move_right_left(t_player_pos *player, t_window *window);
 int				key_release(int keycode, t_window *window);
 int				move_player(t_window *window);
 t_textures_path	*get_textures_instance(void);
-void			draw_map(t_mlx_stuff *img, t_map *map);
 int				key_press(int keycode, t_window *window);
 int				handle_no_event(void *window);
 int				create_window(t_window *window);

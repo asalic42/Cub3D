@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:30:50 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/19 18:16:24 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/22 18:47:16 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,11 @@ int	destroy_window(t_window *window)
 	free_mlx_infos();
 	(void)window;
 	if (window->sound.wav_buffer)
-    	SDL_FreeWAV(window->sound.wav_buffer);
+		SDL_FreeWAV(window->sound.wav_buffer);
 	if (window->sound.audio_device)
 		SDL_CloseAudioDevice(window->sound.audio_device);
 	if (window->sound.init)
-    	SDL_Quit();
-	printf("avg time by frame = %f, %d total frames rendered, average of %f fps\n", prout / compteur, compteur, compteur / ((double)(all_end - all_start) / CLOCKS_PER_SEC));
+		SDL_Quit();
+	printf("%d total frames rendered, average of %f fps\n", compteur, compteur / ((double)(all_end - all_start) / CLOCKS_PER_SEC));
 	exit(EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:24:20 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/19 16:34:05 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/22 16:28:27 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	init_ray(t_stuff_for_ray_casting *all_stuff, t_window *window)
 	(void)(window);
 	all_stuff->player = get_player_instance();
 	all_stuff->map = get_map_instance();
-	all_stuff->ra = all_stuff->player->a - 0.523599;
+	all_stuff->ra = all_stuff->player->a - 0.610865;
 	if (all_stuff->ra < 0)
 		all_stuff->ra += 2 * PI;
 	if (all_stuff->ra > 2 * PI)
@@ -51,7 +51,7 @@ void	calculate_line_height(t_stuff_for_ray_casting *all_stuff,
 		all_stuff->ca += 2 * PI;
 	if (all_stuff->ca > 2 * PI)
 		all_stuff->ca -= 2 * PI;
-	all_stuff->dist_t = all_stuff->dist_t * cos(all_stuff->ca) / 1.8;
+	all_stuff->dist_t = all_stuff->dist_t * cos(all_stuff->ca) / 1.5;
 	all_stuff->line_h = (HEIGHT) / all_stuff->dist_t;
 	all_stuff->line_off = (HEIGHT) / 2 - all_stuff->line_h / 2;
 }
