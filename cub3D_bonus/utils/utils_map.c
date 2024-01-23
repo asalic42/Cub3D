@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 15:42:22 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/22 15:26:20 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/23 14:36:56 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,6 @@ int	is_in_char(char c)
 {
 	if (c != '1' && c != '0' && c != 'N' && c != 'W' && c != 'E'
 		&& c != 'S' && c != ' ' && c != 'D')
-		return (0);
+		return (print_error(RED "Error : forbidden element\n"NC));
 	return (1);
 }
