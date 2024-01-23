@@ -6,11 +6,11 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 12:38:31 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/17 16:29:41 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/23 18:31:53 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub.h"
+#include "../../includes/main.h"
 
 /* Loop of gnl while it isn't the description of the map */
 char	*loop_gnl(t_parse *parser)

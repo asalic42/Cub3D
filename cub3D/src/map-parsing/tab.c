@@ -6,11 +6,11 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 16:55:21 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/16 16:43:30 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/23 18:31:44 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/main.h"
+#include "../../includes/main.h"
 
 //Transform the map into tab
 char	*go_map(t_parse *put, t_data *data, t_window *window, int tour)

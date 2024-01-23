@@ -6,11 +6,11 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 23:57:06 by raphael           #+#    #+#             */
-/*   Updated: 2024/01/09 17:03:10 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/23 18:32:52 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/forme.h"
+#include "../../includes/forme.h"
 
 //	The breseham algorithm is here used with two cases.
 //	You could optimize it more by doing other cases, but it's not necessary.

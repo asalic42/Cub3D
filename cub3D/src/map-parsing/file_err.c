@@ -6,11 +6,11 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 15:53:38 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/16 16:27:35 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/23 18:31:58 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/main.h"
+#include "../../includes/main.h"
 
 //Is it the good file ?
 int	is_goodfile(char *cub)

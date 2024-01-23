@@ -6,11 +6,11 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 15:47:57 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/17 17:15:41 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/23 18:32:01 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/main.h"
+#include "../../includes/main.h"
 
 /* Check if N/S/E/W aren't the same textures */
 static int	is_same_texture(t_window *window, char *new_one, char dir)

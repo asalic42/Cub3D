@@ -6,11 +6,11 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 13:48:19 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/18 20:28:42 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/23 18:31:56 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub.h"
+#include "../../includes/main.h"
 
 int	first_line(t_data *data, char **map)
 {

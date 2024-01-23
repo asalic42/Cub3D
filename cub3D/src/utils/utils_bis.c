@@ -1,37 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memory.c                                           :+:      :+:    :+:   */
+/*   utils_bis.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/21 17:14:36 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/09 15:19:35 by asalic           ###   ########.fr       */
+/*   Created: 2024/01/09 16:15:34 by asalic            #+#    #+#             */
+/*   Updated: 2024/01/23 18:31:37 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub.h"
+#include "../../includes/main.h"
 
-t_garbage	*get_garbage(void)
+int	print_error(char *str)
 {
-	static t_garbage	instance;
-
-	return (&instance);
+	ft_printf("%s\n", str);
+	return (0);
 }
 
-void	malloc_failure(void)
+void	init_data(t_window *window, char *av)
 {
-	perror("Critical error: (malloc probably failed): ");
-	exit (EXIT_FAILURE);
-}
-
-void	*ft_malloc(size_t size)
-{
-	void	*ptr;
-
-	ptr = malloc(size);
-	if (!ptr)
-		malloc_failure();
-	garbage_add(ptr);
-	return (ptr);
+	window->data.x = 0;
+	window->data.y = 0;
+	window->data.ptr.width = 0;
+	window->data.ptr.height = countmap_y(av);
+	countmap_x(av, window);
+	ft_maptab(av, &window->data, window);
 }

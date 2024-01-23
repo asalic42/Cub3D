@@ -6,11 +6,11 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 15:50:21 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/17 17:11:06 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/23 18:32:06 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/main.h"
+#include "../../includes/main.h"
 
 /* Basic notation error cases for colors */
 static int	is_wrong_notation(char *comp, char *str)

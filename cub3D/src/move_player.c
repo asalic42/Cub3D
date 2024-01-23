@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:40:31 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/23 15:09:58 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/23 18:44:36 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,16 @@ void	rotation(t_player_pos *player, t_window	*window)
 		player->a -= 0.03;
 		if (player->a < 0)
 			player->a += 2 * PI;
-		player->dx = cos(player->a) * 0.8;
-		player->dy = sin(player->a) * 0.8;
+		player->dx = cos(player->a) * 0.08;
+		player->dy = sin(player->a) * 0.08;
 	}
 	if (window->keys.right)
 	{
 		player->a += 0.03;
 		if (player->a > 2 * PI)
 			player->a -= 2 * PI;
-		player->dx = cos(player->a) * 0.8;
-		player->dy = sin(player->a) * 0.8;
+		player->dx = cos(player->a) * 0.08;
+		player->dy = sin(player->a) * 0.08;
 	}
 }
 
