@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/23 16:02:06 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/23 17:52:05 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	cast_ray(t_window *window)
 	textures = get_textures_instance();
 	all_stuff.r = -1;
 	all_stuff.player = get_player_instance();
-	while (++all_stuff.r < 1920)
+	while (++all_stuff.r < 960)
 	{
 		init_distances(&all_stuff);
 		up_or_down(&all_stuff, window);

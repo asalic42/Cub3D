@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_textures_to_screen.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 21:09:49 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/22 18:46:03 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/23 17:52:51 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	calculations(t_put_texture_to_img_data *variables,
 {
 	variables->y = all_stuff->line_off;
 	*end_y = variables->y + all_stuff->line_h;
-	variables->current_x = all_stuff->r;
+	variables->current_x = all_stuff->r + all_stuff->r;
 	variables->texture_step = (float)xpm->height / all_stuff->line_h;
 	if (all_stuff->dist_h > all_stuff->dist_v)
 		variables->tex_x = (int)(all_stuff->ry * xpm->width) % xpm->width;
@@ -28,7 +28,7 @@ void	calculations(t_put_texture_to_img_data *variables,
 	variables->texture_position = 0;
 	if (variables->y < 0)
 	{
-		variables->texture_position += variables->texture_step
+		variables->texture_position = variables->texture_step
 			* (-variables->y);
 		variables->y += -variables->y;
 	}
@@ -45,15 +45,14 @@ void	texture_to_screen(t_stuff_for_ray_casting *all_stuff,
 		variables.tex_x = xpm->width - variables.tex_x;
 	while (variables.y < end_y && variables.y < HEIGHT)
 	{
-		if (variables.y >= 0)
-		{
-			variables.tex_y = (int)(variables.texture_position);
-			variables.value = xpm->xpm_data
-				+ (variables.tex_y * xpm->width + variables.tex_x) * (4);
-			variables.pixel = img_data
-				+ (variables.y * (WIDTH) + variables.current_x) * (4);
-			*(unsigned int *)variables.pixel = *(unsigned int *)variables.value;
-		}
+		variables.tex_y = (int)(variables.texture_position);
+
+		variables.value = xpm->xpm_data
+			+ (variables.tex_y * xpm->width + variables.tex_x) * (4);
+		variables.pixel = img_data
+			+ (variables.y * (WIDTH) + variables.current_x) * (4);
+		*(unsigned int *)variables.pixel = *(unsigned int *)variables.value;
+		*(unsigned int *)(variables.pixel + 4) = *(unsigned int *)variables.value;
 		variables.texture_position += variables.texture_step;
 		variables.y++;
 	}
