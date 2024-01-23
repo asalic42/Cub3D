@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
+/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:32:15 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/19 19:08:17 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/23 14:50:25 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,21 @@ void	colision(t_player_pos *player, float dx, float dy)
 	int		mx;
 	int		my;
 	int		mp;
+	int		i;
 
 	map = get_map_instance();
-	mx = (int)player->x ;
-	my = (int)player->y ;
-	mp = my * map->x + mx;
-	if (map->map[mp] == 1)
+	i = -1;
+	while (++i < 7)
 	{
-		player->y -= dy;
-		player->x -= dx;
+		mx = (int)(player->x + (i * player->dx));
+		my = (int)(player->y + (i * player->dy));
+		mp = my * map->x + mx;
+		if (map->map[mp] == 1 || map->map[mp] == 3)
+		{
+			player->x -= dx;
+			player->y -= dy;
+			break ;
+		}
 	}
 }
 
@@ -47,6 +53,35 @@ int	key_release(int keycode, t_window *window)
 	return (1);
 }
 
+void	open_door()
+{
+	t_map	*map;
+	int		mp;
+	int		mx;
+	int		my;
+	int		i;
+
+	t_player_pos *player = get_player_instance();
+	map = get_map_instance();
+	i = -1;
+	while (++i < 30)
+	{
+		mx = (int)(player->x + (i * player->dx));
+		my = (int)(player->y + (i * player->dy));
+		mp = my * map->x + mx;
+		if (map->map[mp] == 3)
+		{
+			map->map[mp] = 4;
+			break ;
+		}
+		else if (map->map[mp] == 4)
+		{
+			map->map[mp] = 3;
+			break ;
+		}
+	}
+}
+
 int	key_press(int keycode, t_window *window)
 {
 	t_player_pos	*player;
@@ -62,6 +97,8 @@ int	key_press(int keycode, t_window *window)
 		window->keys.s = true;
 	if (!window->keys.d && keycode == 'd')
 		window->keys.d = true;
+	if (keycode == 'e')
+		open_door();
 	if (!window->keys.left && keycode == 65361)
 		window->keys.left = true;
 	if (!window->keys.right && keycode == 65363)

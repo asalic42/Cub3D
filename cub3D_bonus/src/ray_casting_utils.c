@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_casting_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
+/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:11:12 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/19 13:21:45 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/22 17:02:12 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	find_closest_horizontal_intersection(
 		all_stuff->my = (int)all_stuff->ry;
 		all_stuff->mp = all_stuff->my * all_stuff->map->x + all_stuff->mx;
 		if (all_stuff->mp > 0 && all_stuff->mp < all_stuff->map->x
-			* all_stuff->map->y && all_stuff->map->map[all_stuff->mp] == 1)
+			* all_stuff->map->y && (all_stuff->map->map[all_stuff->mp] == 1 || all_stuff->map->map[all_stuff->mp] == 3))
 		{
 			all_stuff->dof = all_stuff->map->y;
 			all_stuff->hx = all_stuff->rx;
@@ -104,7 +104,7 @@ void	find_closest_vertical_intersection(
 		all_stuff->my = (int)all_stuff->ry;
 		all_stuff->mp = all_stuff->my * all_stuff->map->x + all_stuff->mx;
 		if (all_stuff->mp > 0 && all_stuff->mp < all_stuff->map->x
-			* all_stuff->map->y && all_stuff->map->map[all_stuff->mp] == 1)
+			* all_stuff->map->y && (all_stuff->map->map[all_stuff->mp] == 1 || all_stuff->map->map[all_stuff->mp] == 3))
 		{
 			all_stuff->dof = all_stuff->map->x;
 			all_stuff->vx = all_stuff->rx;
@@ -144,5 +144,7 @@ int	comp_distance(t_stuff_for_ray_casting *all_stuff)
 		else
 			return_value = 3;
 	}
+	if (all_stuff->map->map[(int)all_stuff->ry * all_stuff->map->x + (int)all_stuff->rx] == 3)
+		return_value = 5;
 	return (return_value);
 }

@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 16:55:21 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/16 16:43:30 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/22 17:03:26 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ int	*simple_tab_int(char **char_map, t_window *window)
 			if (char_map[y][x] == 'N' || char_map[y][x] == 'E' || \
 			char_map[y][x] == 'W' || char_map[y][x] == 'S')
 				int_map[i] = 2;
+			else if (char_map[y][x] == 'D')
+				int_map[i] = 3;
 			else if (char_map[y][x] == ' ' || char_map[y][x] == '\0')
 				int_map[i] = 0;
 			else

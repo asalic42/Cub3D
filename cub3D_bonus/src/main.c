@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
+/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/22 18:21:25 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/23 14:54:45 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,12 +85,11 @@ void	draw_player(t_window *window)
 
 	mlx_put_image_to_window(window->mlx_ptr, window->win_ptr,
 		window->img_ptr, 0, 0);
-
 	char texte[50];
 	char *str;
 	snprintf(texte, sizeof(texte), "%f", temps);
 	str = ft_strjoin("Fps = ", texte);
-	mlx_string_put(window->mlx_ptr, window->win_ptr, 50, 250, 0xFFFFFFFF, str);
+	mlx_string_put(window->mlx_ptr, window->win_ptr, 1800, 50, 0xFFFFFFFF, str);
 
 	update_mlx_infos(window->mlx_ptr, window->win_ptr, window->img_ptr);
 }
@@ -106,7 +105,7 @@ int	main(int ac, char **av)
 	if (!create_window(&window))
 		return (0);
 	update_mlx_infos(&window.mlx_ptr, &window.win_ptr, &window.img_ptr);
-	init_textures(window.north, window.west, window.south, window.east);
+	init_textures(&window, "./textures/door.xpm");
 	all_start = clock();
 	initializer_audio(&window);
 	pthread_create(&window.sound.audio, NULL, (void *(*)(void *))play_music, &window);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
+/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:57:25 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/19 17:15:41 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/22 16:09:47 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ typedef struct s_keys
 	bool	a;
 	bool	s;
 	bool	d;
+	bool	e;
 	bool	right;
 	bool	left;
 }				t_keys;
@@ -174,6 +175,7 @@ char			*go_map(t_parse *put, t_data *data, t_window *window, int tour);
 /* * * * MAIN CORE * * * */
 void			init_data(t_window *window, char *av);
 
+/* * * * * BONUS * * * * */
 void			play_music(void *data);
 void			initializer_audio(t_window *window);
 

@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 15:42:22 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/18 19:25:05 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/23 14:36:56 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	is_in_char_error(t_parse map, int fd, int width)
 	if (map.buffer[width] != '1' && map.buffer[width] != '0' \
 	&& map.buffer[width] != 'E' && map.buffer[width] != 'N' \
 	&& map.buffer[width] != 'W' && map.buffer[width] != 'S' \
-	&& map.buffer[width] != ' ')
+	&& map.buffer[width] != ' ' && map.buffer[width] != 'D')
 		count_error(&map, fd);
 }
 
@@ -89,7 +89,7 @@ int	countmap_y(char	*mappy)
 int	is_in_char(char c)
 {
 	if (c != '1' && c != '0' && c != 'N' && c != 'W' && c != 'E'
-		&& c != 'S' && c != ' ')
-		return (0);
+		&& c != 'S' && c != ' ' && c != 'D')
+		return (print_error(RED "Error : forbidden element\n"NC));
 	return (1);
 }
