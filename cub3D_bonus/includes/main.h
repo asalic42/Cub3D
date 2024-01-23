@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 17:34:24 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/23 17:53:35 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/23 19:07:45 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,7 @@ typedef struct s_minimap
 	t_line	line;
 }	t_minimap;
 
+int				handle_no_event(void *window);
 void			draw_map(t_window *window, t_player_pos	*player, t_map *map);
 void			colision(t_player_pos *player, float dx, float dy);
 void			wich_texture(int comp, t_textures_path *textures,

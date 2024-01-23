@@ -1,7 +1,7 @@
 NO ./textures/game_texture.xpm
 SO ./textures/green_wall.xpm
-WE ./textures/color_wall.xpm
-EA ./textures/purple_wall.xpm
+WE ./textures/purple_wall.xpm
+EA ./textures/color_wall.xpm
 
 F 0,0,0
 C 101,22,132

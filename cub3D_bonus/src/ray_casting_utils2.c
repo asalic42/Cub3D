@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:24:20 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/22 16:28:27 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/23 18:41:51 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	calculate_line_height(t_stuff_for_ray_casting *all_stuff,
 
 void	increment_angle(t_stuff_for_ray_casting *all_stuff)
 {
-	all_stuff->ra += DR;
+	all_stuff->ra += DR + DR;
 	if (all_stuff->ra < 0)
 		all_stuff->ra += 2 * PI;
 	if (all_stuff->ra > 2 * PI)

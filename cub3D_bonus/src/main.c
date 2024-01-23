@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/23 19:06:46 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/23 19:08:08 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	cast_ray(t_window *window)
 	textures = get_textures_instance();
 	all_stuff.r = -1;
 	all_stuff.player = get_player_instance();
-	while (++all_stuff.r < 1920)
+	while (++all_stuff.r < 960)
 	{
 		init_distances(&all_stuff);
 		up_or_down(&all_stuff, window);
@@ -60,6 +60,7 @@ void	draw_player(t_window *window)
 {	
 	t_player_pos	*player;
 	static	clock_t						start;
+	static	clock_t						start2;
 	static	clock_t						end;
 	static	int							t_compteur = 0;
 	static	t_line						ceilling;
@@ -80,10 +81,12 @@ void	draw_player(t_window *window)
 		start = clock();
 		t_compteur = 0;
 	}
+	start2 = clock();
 	cast_ray(window);
+	
+	end = clock();
 	t_compteur++;
 	int temps = 0;
-	end = clock();
 	temps = (int)(t_compteur / ((double)(end - start) / CLOCKS_PER_SEC));
 
 	draw_map(window, player, get_map_instance());

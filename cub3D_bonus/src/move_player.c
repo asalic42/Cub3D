@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:40:31 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/23 17:51:53 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/23 19:08:13 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,15 @@
 int	move_player(t_window *window)
 {
 	t_player_pos	*player;
+	static clock_t	start;
+	static clock_t	end;
+	float			time;
 
+	end = clock();
+	time = (float)(end - start) / CLOCKS_PER_SEC;
+	if (time > 0 && time < (double)1 / 60)
+		usleep ((((double)1 / 60) - time) * 1000000);
+	start = clock();
 	player = get_player_instance();
 	rotation(player, window);
 	move_up(player, window);
