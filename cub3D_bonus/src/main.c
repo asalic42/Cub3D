@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/23 14:54:45 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/23 16:02:06 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,20 @@ void	is_player_out_of_bouds(t_player_pos *player, t_window *window)
 void	draw_player(t_window *window)
 {	
 	t_player_pos	*player;
-	static clock_t						start;
-	static clock_t						end;
-	static int							t_compteur = 0;
+	static	clock_t						start;
+	static	clock_t						end;
+	static	int							t_compteur = 0;
+	static	t_line						ceilling;
+	static	t_line						floor;
 
 	player = get_player_instance();
-	draw_line(init_rectangle(0, 0, (WIDTH), (HEIGHT) / 2), window->img_ptr,
+	if (!ceilling.width)
+		ceilling = init_rectangle(0, 0, (WIDTH), (HEIGHT) / 2);
+	if (!floor.width)
+		floor = init_rectangle(0, (HEIGHT) / 2, WIDTH, HEIGHT);
+	draw_line(ceilling, window->img_ptr,
 		mlx_get_color_value(window->mlx_ptr, window->ceiling), 0);
-	draw_line(init_rectangle(0, (HEIGHT) / 2, WIDTH, HEIGHT), window->img_ptr,
+	draw_line(floor, window->img_ptr,
 		mlx_get_color_value(window->mlx_ptr, window->floor), 0);
 	is_player_out_of_bouds(player, window);
 
@@ -77,18 +83,16 @@ void	draw_player(t_window *window)
 	cast_ray(window);
 
 	t_compteur++;
-	float temps = 0;
+	int temps = 0;
 	end = clock();
-	temps = (t_compteur / ((double)(end - start) / CLOCKS_PER_SEC));
+	temps = (int)(t_compteur / ((double)(end - start) / CLOCKS_PER_SEC));
 
 	draw_map(window, player, get_map_instance());
 
 	mlx_put_image_to_window(window->mlx_ptr, window->win_ptr,
 		window->img_ptr, 0, 0);
-	char texte[50];
 	char *str;
-	snprintf(texte, sizeof(texte), "%f", temps);
-	str = ft_strjoin("Fps = ", texte);
+	str = ft_strjoin("Fps = ", ft_itoa(temps));
 	mlx_string_put(window->mlx_ptr, window->win_ptr, 1800, 50, 0xFFFFFFFF, str);
 
 	update_mlx_infos(window->mlx_ptr, window->win_ptr, window->img_ptr);
