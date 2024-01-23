@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/23 14:55:50 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/23 18:45:01 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ typedef	struct s_minimap
 	t_line	line;
 }	t_minimap;
 
+int				handle_no_event(void *window);
 void			draw_map(t_window *window, t_player_pos	*player, t_map *map);
 void			colision(t_player_pos *player, float dx, float dy);
 void			wich_texture(int comp, t_textures_path *textures,
