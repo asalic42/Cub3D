@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/23 14:54:10 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/23 14:55:50 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_map
 
 typedef struct s_texture_details
 {
+	int				width;
 	int				height;
 	void			*xpm;
 	void			*xpm_data;
