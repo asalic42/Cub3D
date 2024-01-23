@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 12:38:31 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/22 15:04:42 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/23 16:31:58 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,18 @@ int	is_space(t_data *data, char **map)
 	return (1);
 }
 
+int	is_door_access(t_data *data, char **map)
+{
+	ft_printf("cette fonction marche \n");
+	if (map[data->y][data->x -1] != '1' && map[data->y][data->x -1] != '1' \
+	&& map[data->y +1][data->x] == '1' && map[data->y -1][data->x] == '1')
+		return (1);
+	if (map[data->y -1][data->x] != '1' && map[data->y +1][data->x] != '1' \
+	&& map[data->y][data->x +1] == '1' && map[data->y][data->x -1] == '1')
+		return (1);
+	return (0);
+}
+
 int	main_parse(char **map, t_data *data)
 {
 	data->y = 0;
@@ -95,6 +107,8 @@ int	main_parse(char **map, t_data *data)
 					return (0);
 			}
 			if (!is_space(data, map))
+				return (0);
+			if (map[data->y][data->x] == 'D' && !is_door_access(data, map))
 				return (0);
 			data->x ++;
 		}
