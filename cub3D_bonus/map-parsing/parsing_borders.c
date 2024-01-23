@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 13:48:19 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/23 14:34:03 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/23 15:31:28 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,13 @@ int	first_line(t_data *data, char **map)
 	return (1);
 }
 
+// int	is_door_access(t_data *data, char **map)
+// {
+// 	if (map[data->y][data->x +1] != '1' && map[data->y][data->x -1] != '1' && map[data->y -1][data->x] != '1' && map[data->y +1][data->x] != '1')
+// 		return (0);
+// 	if (map[data->y][data->x +1] != '1' && )
+// }
+
 int	map_up_n_down(char **map, t_data *data)
 {
 	while (data->y < data->ptr.height)
@@ -41,6 +48,8 @@ int	map_up_n_down(char **map, t_data *data)
 			if (!is_zero(data->y, map, data))
 				return (print_error(RED"Error : wrong borders\n"NC));
 		}
+		// if (map[data->y][data->x] == 'D' && !is_door_access(data, map))
+		// 	return (0);
 		data->x ++;
 		if (data->x == data->ptr.width -1)
 		{
