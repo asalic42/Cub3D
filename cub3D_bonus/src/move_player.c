@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:40:31 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/23 15:11:39 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/23 17:51:53 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,30 @@ int	move_player(t_window *window)
 
 void	rotation(t_player_pos *player, t_window	*window)
 {
-	if (window->keys.left)
+	int	current_x;
+	int	current_y;
+
+	current_x = window->win.mouse_x;
+	current_y = window->win.mouse_y;
+	mlx_mouse_get_pos(window->mlx_ptr, window->win_ptr, &window->win.mouse_x, \
+	&window->win.mouse_y);
+	if (window->keys.left || window->win.mouse_x < current_x || \
+	window->win.mouse_x <= 0)
 	{
 		player->a -= 0.05;
 		if (player->a < 0)
 			player->a += 2 * PI;
-		player->dx = cos(player->a) * 0.08;
-		player->dy = sin(player->a) * 0.08;
+		player->dx = cos(player->a) * 0.12;
+		player->dy = sin(player->a) * 0.12;
 	}
-	if (window->keys.right)
+	if (window->keys.right || window->win.mouse_x > current_x || \
+	window->win.mouse_x >= 1919)
 	{
 		player->a += 0.05;
 		if (player->a > 2 * PI)
 			player->a -= 2 * PI;
-		player->dx = cos(player->a) * 0.08;
-		player->dy = sin(player->a) * 0.08;
+		player->dx = cos(player->a) * 0.12;
+		player->dy = sin(player->a) * 0.12;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:30:50 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/23 15:10:51 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/23 17:52:20 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int	destroy_window(t_window *window)
 		SDL_CloseAudioDevice(window->sound.audio_device);
 	if (window->sound.init)
 		SDL_Quit();
-	printf("%d total frames rendered, average of %f fps\n", compteur, compteur / ((double)(all_end - all_start) / CLOCKS_PER_SEC));
+	printf("%d total frames rendered, average of %f fps\n", \
+	compteur, compteur / ((double)(all_end - all_start) / CLOCKS_PER_SEC));
 	exit(EXIT_SUCCESS);
 }

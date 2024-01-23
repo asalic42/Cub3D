@@ -6,13 +6,13 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/23 14:54:45 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/23 17:57:28 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/main.h"
 
-int compteur = 0;
+int	compteur = 0;
 
 clock_t						all_start;
 clock_t						all_end;
@@ -55,12 +55,13 @@ void	is_player_out_of_bouds(t_player_pos *player, t_window *window)
 		player->x = (window->data.ptr.width - 1);
 }
 
+/* A normer !!!! */
 void	draw_player(t_window *window)
 {	
 	t_player_pos	*player;
-	static clock_t						start;
-	static clock_t						end;
-	static int							t_compteur = 0;
+	static clock_t	start;
+	static clock_t	end;
+	static int		t_compteur = 0;
 
 	player = get_player_instance();
 	draw_line(init_rectangle(0, 0, (WIDTH), (HEIGHT) / 2), window->img_ptr,
@@ -68,21 +69,17 @@ void	draw_player(t_window *window)
 	draw_line(init_rectangle(0, (HEIGHT) / 2, WIDTH, HEIGHT), window->img_ptr,
 		mlx_get_color_value(window->mlx_ptr, window->floor), 0);
 	is_player_out_of_bouds(player, window);
-
 	if (((double)(end - start) / CLOCKS_PER_SEC) > 1.5)
 	{
 		start = clock();
 		t_compteur = 0;
 	}
 	cast_ray(window);
-
 	t_compteur++;
 	float temps = 0;
 	end = clock();
 	temps = (t_compteur / ((double)(end - start) / CLOCKS_PER_SEC));
-
 	draw_map(window, player, get_map_instance());
-
 	mlx_put_image_to_window(window->mlx_ptr, window->win_ptr,
 		window->img_ptr, 0, 0);
 	char texte[50];
@@ -90,7 +87,6 @@ void	draw_player(t_window *window)
 	snprintf(texte, sizeof(texte), "%f", temps);
 	str = ft_strjoin("Fps = ", texte);
 	mlx_string_put(window->mlx_ptr, window->win_ptr, 1800, 50, 0xFFFFFFFF, str);
-
 	update_mlx_infos(window->mlx_ptr, window->win_ptr, window->img_ptr);
 }
 
@@ -108,7 +104,10 @@ int	main(int ac, char **av)
 	init_textures(&window, "./textures/door.xpm");
 	all_start = clock();
 	initializer_audio(&window);
-	pthread_create(&window.sound.audio, NULL, (void *(*)(void *))play_music, &window);
+	window.win.mouse_x = 0;
+	window.win.mouse_y = 0;
+	pthread_create(&window.sound.audio, NULL, (void *(*)(void *))play_music, \
+	&window);
 	mlx_loop_hook(window.mlx_ptr, &move_player, &window);
 	mlx_hook(window.win_ptr, 17, KeyPressMask, &destroy_window, &window);
 	mlx_hook(window.win_ptr, KeyPress, 0, &key_press, &window);

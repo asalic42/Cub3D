@@ -6,11 +6,11 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 16:55:21 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/22 17:03:26 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/23 18:15:05 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/main.h"
+#include "../../includes/main.h"
 
 //Transform the map into tab
 char	*go_map(t_parse *put, t_data *data, t_window *window, int tour)
@@ -64,20 +64,20 @@ char	**ft_maptab(char *map, t_data *data, t_window *window)
 	realmap[y] = NULL;
 	close(put.fd);
 	data->ptr.map = realmap;
-	print_tab(realmap);
 	return (realmap);
 }
 
-void	print_tab(char **tab)
+int	add_to_tab_int(char c)
 {
-	int	i;
-
-	i = 0;
-	while (tab[i])
-	{
-		ft_printf("{%s}\n", tab[i]);
-		i ++;
-	}
+	if (c == 'N' || c == 'E' || \
+	c == 'W' || c == 'S')
+		return (2);
+	else if (c == 'D')
+		return (3);
+	else if (c == ' ' || c == '\0')
+		return (0);
+	else
+		return (c - 48);
 }
 
 int	*simple_tab_int(char **char_map, t_window *window)
@@ -96,15 +96,7 @@ int	*simple_tab_int(char **char_map, t_window *window)
 		x = -1;
 		while (++x < window->data.ptr.width)
 		{
-			if (char_map[y][x] == 'N' || char_map[y][x] == 'E' || \
-			char_map[y][x] == 'W' || char_map[y][x] == 'S')
-				int_map[i] = 2;
-			else if (char_map[y][x] == 'D')
-				int_map[i] = 3;
-			else if (char_map[y][x] == ' ' || char_map[y][x] == '\0')
-				int_map[i] = 0;
-			else
-				int_map[i] = char_map[y][x] - 48;
+			int_map[i] = add_to_tab_int(char_map[y][x]);
 			i ++;
 		}
 	}

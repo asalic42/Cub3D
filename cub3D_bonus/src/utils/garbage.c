@@ -6,11 +6,11 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 20:48:52 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/09 15:19:31 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/23 18:27:39 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub.h"
+#include "../../includes/main.h"
 
 // Doit etre call en debut de programme
 t_garbage	*start_garbage(void)

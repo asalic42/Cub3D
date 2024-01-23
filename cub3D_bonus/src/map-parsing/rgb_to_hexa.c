@@ -6,11 +6,11 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 16:07:55 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/18 16:08:21 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/23 18:15:00 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/main.h"
+#include "../../includes/main.h"
 
 /* Convert the rgb color into hexadecimal color
 	(step 1 : rgb by rgb) */

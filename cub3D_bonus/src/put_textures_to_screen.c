@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 21:09:49 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/22 18:46:03 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/23 17:58:01 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,6 @@ void	wich_texture(int comp, t_textures_path *textures, t_window *window,
 	else if (comp == 4)
 		texture_to_screen(all_stuff, &textures->xpm4, window->img_data, comp);
 	else if (comp == 5)
-		texture_to_screen(all_stuff, &textures->xpm_door, window->img_data, comp);
+		texture_to_screen(all_stuff, &textures->xpm_door, window->img_data, \
+		comp);
 }

@@ -6,11 +6,11 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 00:06:16 by raphael           #+#    #+#             */
-/*   Updated: 2024/01/09 17:01:30 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/23 18:25:28 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/forme.h"
+#include "../../includes/main.h"
 
 // This function is used to initialize a line structure.
 // It's not necessary, but it's cleaner to use it.

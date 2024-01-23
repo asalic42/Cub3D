@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/23 14:55:50 by asalic           ###   ########.fr       */
+/*   Created: 2024/01/23 17:34:24 by asalic            #+#    #+#             */
+/*   Updated: 2024/01/23 17:53:35 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@
 # define PI3 4.71238898025
 # define DR 0.0006363179
 
-extern int		compteur;
-extern	clock_t						all_start;
-extern	clock_t						all_end;
+extern int			compteur;
+extern clock_t		all_start;
+extern clock_t		all_end;
 
 typedef struct s_player_pos
 {
@@ -50,6 +50,9 @@ typedef struct s_player_pos
 
 typedef struct s_map
 {
+	int		mp;
+	int		mx;
+	int		my;
 	int		x;
 	int		y;
 	int		*map;
@@ -121,7 +124,7 @@ typedef struct s_put_texture_to_img_data
 	int			tex_x;
 }	t_put_texture_to_img_data;
 
-typedef	struct s_minimap
+typedef struct s_minimap
 {
 	int		j;
 	int		i;
@@ -142,7 +145,6 @@ void			calculations(t_put_texture_to_img_data *variables,
 void			find_player(t_map *map, t_player_pos *player, char **char_map);
 void			init_textures(t_window *window, char *door);
 int				move_player(t_window *window);
-void			open_door();
 void			rotation(t_player_pos *player, t_window	*window);
 void			move_up(t_player_pos *player, t_window *window);
 void			move_down(t_player_pos *player, t_window *window);

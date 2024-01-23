@@ -6,11 +6,11 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 15:50:21 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/17 17:11:06 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/23 18:24:49 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/main.h"
+#include "../../includes/main.h"
 
 /* Basic notation error cases for colors */
 static int	is_wrong_notation(char *comp, char *str)
@@ -82,7 +82,6 @@ int	is_good_color(char *comp, char *str, t_window *window)
 	while (str[i] && (str[i] == ' ' || str[i] == '\t'))
 		i ++;
 	dot_split = ft_split(cut_from(str + i, ' '), ',');
-	ft_printf("je suis la et split vaut : %s\n", dot_split[0]);
 	tour = 0;
 	while (dot_split[tour])
 	{

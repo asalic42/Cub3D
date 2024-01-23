@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:32:15 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/23 14:50:25 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/23 17:54:30 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,30 +53,28 @@ int	key_release(int keycode, t_window *window)
 	return (1);
 }
 
-void	open_door()
+static void	open_door(void)
 {
-	t_map	*map;
-	int		mp;
-	int		mx;
-	int		my;
-	int		i;
+	t_map			*map;
+	t_player_pos	*player;
+	int				i;
 
-	t_player_pos *player = get_player_instance();
+	player = get_player_instance();
 	map = get_map_instance();
 	i = -1;
 	while (++i < 30)
 	{
-		mx = (int)(player->x + (i * player->dx));
-		my = (int)(player->y + (i * player->dy));
-		mp = my * map->x + mx;
-		if (map->map[mp] == 3)
+		map->mx = (int)(player->x + (i * player->dx));
+		map->my = (int)(player->y + (i * player->dy));
+		map->mp = map->my * map->x + map->mx;
+		if (map->map[map->mp] == 3)
 		{
-			map->map[mp] = 4;
+			map->map[map->mp] = 4;
 			break ;
 		}
-		else if (map->map[mp] == 4)
+		else if (map->map[map->mp] == 4)
 		{
-			map->map[mp] = 3;
+			map->map[map->mp] = 3;
 			break ;
 		}
 	}
