@@ -6,7 +6,7 @@
 /*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/24 15:30:04 by raphael          ###   ########.fr       */
+/*   Updated: 2024/01/24 17:13:14 by raphael          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,15 @@ void	cast_ray(t_window *window)
 		comp = comp_distance(&all_stuff);
 		calculate_line_height(&all_stuff, window);
 		wich_texture(comp, textures, window, &all_stuff);
+		if (all_stuff.ennemy.is_ennemy_here)
+		{
+			all_stuff.rx = all_stuff.ennemy.ray_hit_x;
+			all_stuff.ry = all_stuff.ennemy.ray_hit_y;
+			all_stuff.dist_t = all_stuff.ennemy.dist_e;
+			calculate_line_height(&all_stuff, window);
+			texture_to_screen(&all_stuff, &textures->xpm_ennemy, window->img_data, comp);
+			all_stuff.ennemy.is_ennemy_here = false;
+		}
 		increment_angle(&all_stuff);
 	}
 	compteur++;
@@ -44,7 +53,6 @@ void	cast_ray(t_window *window)
 
 void	is_player_out_of_bouds(t_player_pos *player, t_window *window)
 {
-	(void)(window);
 	if ((int)player->y > window->data.ptr.height)
 		player->y = 1;
 	else if ((int)player->y <= 0)
@@ -112,7 +120,7 @@ int	main(int ac, char **av)
 	initializer_audio(&window);
 	window.win.mouse_x = 0;
 	window.win.mouse_y = 0;
-	pthread_create(&window.sound.audio, NULL, (void (*))play_music, &window);
+	//pthread_create(&window.sound.audio, NULL, (void (*))play_music, &window);
 	mlx_loop_hook(window.mlx_ptr, &move_player, &window);
 	mlx_hook(window.win_ptr, 17, KeyPressMask, &destroy_window, &window);
 	mlx_hook(window.win_ptr, KeyPress, 0, &key_press, &window);

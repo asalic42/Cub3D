@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 17:34:24 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/23 19:07:45 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/24 16:45:06 by raphael          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,16 @@ typedef struct s_map
 	int		*map;
 }	t_map;
 
+typedef	struct s_ennemy
+{
+	float	x;
+	float	y;
+	float	ray_hit_x;
+	float	ray_hit_y;
+	int		dist_e;
+	bool	is_ennemy_here;
+}	t_ennemy;
+
 typedef struct s_texture_details
 {
 	int				width;
@@ -73,6 +83,7 @@ typedef struct s_textures_path
 	t_texture_details	xpm3;
 	t_texture_details	xpm4;
 	t_texture_details	xpm_door;
+	t_texture_details	xpm_ennemy;
 }	t_textures_path;
 
 typedef struct s_stuff_for_ray_casting
@@ -108,6 +119,7 @@ typedef struct s_stuff_for_ray_casting
 	unsigned int	color;
 	t_player_pos	*player;
 	t_map			*map;
+	t_ennemy		ennemy;
 }	t_stuff_for_ray_casting;
 
 typedef struct s_put_texture_to_img_data
