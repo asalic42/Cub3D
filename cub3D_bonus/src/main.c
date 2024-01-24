@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/23 19:08:08 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/24 15:46:23 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	cast_ray(t_window *window)
 		increment_angle(&all_stuff);
 	}
 	compteur++;
+	// if (compteur % 2 == 0)
+		// mlx_mouse_move(window->mlx_ptr, window->win_ptr, WIDTH / 2, HEIGHT / 2);
 }
 
 void	is_player_out_of_bouds(t_player_pos *player, t_window *window)
