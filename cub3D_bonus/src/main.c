@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/23 19:08:08 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/24 15:30:04 by raphael          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void	draw_player(t_window *window)
 {	
 	t_player_pos	*player;
 	static	clock_t						start;
-	static	clock_t						start2;
 	static	clock_t						end;
 	static	int							t_compteur = 0;
 	static	t_line						ceilling;
@@ -81,7 +80,6 @@ void	draw_player(t_window *window)
 		start = clock();
 		t_compteur = 0;
 	}
-	start2 = clock();
 	cast_ray(window);
 	
 	end = clock();
@@ -114,8 +112,7 @@ int	main(int ac, char **av)
 	initializer_audio(&window);
 	window.win.mouse_x = 0;
 	window.win.mouse_y = 0;
-	pthread_create(&window.sound.audio, NULL, (void *(*)(void *))play_music, \
-	&window);
+	pthread_create(&window.sound.audio, NULL, (void (*))play_music, &window);
 	mlx_loop_hook(window.mlx_ptr, &move_player, &window);
 	mlx_hook(window.win_ptr, 17, KeyPressMask, &destroy_window, &window);
 	mlx_hook(window.win_ptr, KeyPress, 0, &key_press, &window);

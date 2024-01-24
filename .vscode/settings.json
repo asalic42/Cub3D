@@ -10,6 +10,8 @@
 		"forme.h": "c",
 		"cub.h": "c",
 		"stdlib.h": "c",
-		"x.h": "c"
+		"x.h": "c",
+		"mlx_int.h": "c",
+		"pthread.h": "c"
 	}
 }
