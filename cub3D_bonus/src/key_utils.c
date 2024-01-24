@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
+/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:32:15 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/23 18:04:46 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/24 15:20:46 by raphael          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,6 @@ void	open_door()
 
 int	key_press(int keycode, t_window *window)
 {
-	t_player_pos	*player;
-
-	player = get_player_instance();
 	if (keycode == 65307)
 		return (destroy_window(window));
 	if (!window->keys.w && keycode == 'w')
