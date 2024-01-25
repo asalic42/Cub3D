@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:57:25 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/23 17:32:53 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/25 18:07:28 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,12 @@ typedef struct s_music
 	Uint8				*wav_buffer;
 }				t_music;
 
+typedef	struct s_ennemy
+{
+	float	x;
+	float	y;
+}	t_ennemy;
+
 typedef struct s_keys
 {
 	bool	w;
@@ -123,6 +129,7 @@ typedef struct s_window
 	t_music	sound;
 	t_keys	keys;
 	t_mouse	win;
+	t_ennemy	ennemy;
 }	t_window;
 
 /* * * * ERROR HANDLE * * * */

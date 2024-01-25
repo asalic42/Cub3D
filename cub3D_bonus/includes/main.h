@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 17:34:24 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/23 19:07:45 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/25 18:02:26 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ typedef struct s_textures_path
 	t_texture_details	xpm3;
 	t_texture_details	xpm4;
 	t_texture_details	xpm_door;
+	t_texture_details	xpm_ennemy;
 }	t_textures_path;
 
 typedef struct s_stuff_for_ray_casting

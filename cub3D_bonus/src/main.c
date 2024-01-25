@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/24 15:30:04 by raphael          ###   ########.fr       */
+/*   Updated: 2024/01/25 19:37:12 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,21 @@ void	cast_ray(t_window *window)
 		wich_texture(comp, textures, window, &all_stuff);
 		increment_angle(&all_stuff);
 	}
+	float x_vector, y_vector, x_direction, y_direction;
+	x_vector = window->ennemy.x - all_stuff.player->x;
+	y_vector = window->ennemy.y - all_stuff.player->y;
+	float lenght = sqrt(x_vector * x_vector + y_vector * y_vector);
+	x_vector = x_vector / lenght;
+	y_vector = y_vector / lenght;
+	x_direction = cos(all_stuff.player->a);
+	y_direction = sin(all_stuff.player->a);
+	float dot = x_vector * x_direction + y_vector * y_direction;
+	float ang_to_target = fabs(acos(dot));
+	if (ang_to_target * (180/PI) <= 70/2)
+		printf("Ennemy visible because\n");
+	else
+		printf("Ennemy NOT visible because\n");
+	printf(" %f\n", ang_to_target * (180/PI));
 	compteur++;
 }
 
@@ -112,6 +127,8 @@ int	main(int ac, char **av)
 	initializer_audio(&window);
 	window.win.mouse_x = 0;
 	window.win.mouse_y = 0;
+	window.ennemy.x = 41;
+	window.ennemy.y = 13;
 	pthread_create(&window.sound.audio, NULL, (void (*))play_music, &window);
 	mlx_loop_hook(window.mlx_ptr, &move_player, &window);
 	mlx_hook(window.win_ptr, 17, KeyPressMask, &destroy_window, &window);
