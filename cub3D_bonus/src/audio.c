@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 19:02:46 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/23 18:26:56 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/25 19:05:08 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_window	*get_window_instance(void)
 
 void	initializer_audio(t_window *window)
 {
+	window->stop = false;
 	window->sound.init = SDL_Init(SDL_INIT_AUDIO);
 	if (window->sound.init < 0)
 	{
@@ -44,10 +45,12 @@ void	initializer_audio(t_window *window)
 
 void	play_music(void *data)
 {
-	t_window	*window;
+	t_window		*window;
+	Uint32			limit;
+	Uint32			ms;
 
 	window = (t_window *)data;
-	while (1)
+	while (window->stop == false)
 	{
 		if (SDL_QueueAudio(window->sound.audio_device, \
 		window->sound.wav_buffer, window->sound.wav_lenght) == -1)
@@ -56,9 +59,14 @@ void	play_music(void *data)
 			destroy_window(window);
 		}
 		SDL_PauseAudioDevice(window->sound.audio_device, 0);
-		SDL_Delay((window->sound.wav_lenght / (2 * \
-		window->sound.wav_spec.channels)) * 1000 / \
-		window->sound.wav_spec.freq);
+		ms = 0;
+		limit = (window->sound.wav_lenght / (2 * \
+			window->sound.wav_spec.channels)) * 1000 / \
+			window->sound.wav_spec.freq;
+		while (ms < limit && window->stop == false)
+			SDL_Delay(ms++);
+		if (window->stop != false)
+			pthread_exit(NULL);
 		usleep(2000);
 	}
 	pthread_exit(NULL);

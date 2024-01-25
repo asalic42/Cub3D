@@ -6,16 +6,11 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:40:31 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/24 15:56:40 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/25 18:51:54 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/main.h"
-
-// void	mouse_center(t_window *window)
-// {
-// 	compteur
-// }
 
 int	move_player(t_window *window)
 {
@@ -36,41 +31,6 @@ int	move_player(t_window *window)
 	move_right_left(player, window);
 	draw_player(window);
 	return (0);
-}
-
-void	rotation(t_player_pos *player, t_window	*window)
-{
-	int	current_x;
-
-	current_x = window->win.mouse_x;
-	if (current_x == 1919 || current_x == 0)
-	{
-		mlx_mouse_move(window->mlx_ptr, window->win_ptr, WIDTH / 2, HEIGHT / 2);
-		mlx_mouse_get_pos(window->mlx_ptr, window->win_ptr, &window->win.mouse_x, \
-		&window->win.mouse_y);
-	}
-	else
-	{
-		mlx_mouse_get_pos(window->mlx_ptr, window->win_ptr, &window->win.mouse_x, \
-		&window->win.mouse_y);
-		
-		if (window->keys.left || window->win.mouse_x < current_x)
-		{
-			player->a -= 0.05;
-			if (player->a < 0)
-				player->a += 2 * PI;
-			player->dx = cos(player->a) * 0.12;
-			player->dy = sin(player->a) * 0.12;
-		}
-		if (window->keys.right || window->win.mouse_x > current_x)
-		{
-			player->a += 0.05;
-			if (player->a > 2 * PI)
-				player->a -= 2 * PI;
-			player->dx = cos(player->a) * 0.12;
-			player->dy = sin(player->a) * 0.12;
-		}
-	}
 }
 
 void	move_up(t_player_pos *player, t_window *window)

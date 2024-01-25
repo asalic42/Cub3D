@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 17:34:24 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/23 19:07:45 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/25 17:09:49 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
+# include <signal.h>
 # define PI 3.1415926535
 # define PI2 1.57079632675
 # define PI3 4.71238898025
@@ -38,7 +39,6 @@
 extern int			compteur;
 extern clock_t		all_start;
 extern clock_t		all_end;
-
 typedef struct s_player_pos
 {
 	float	x;

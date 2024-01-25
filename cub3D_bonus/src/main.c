@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/25 15:38:37 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/25 19:03:41 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ void	cast_ray(t_window *window)
 		increment_angle(&all_stuff);
 	}
 	compteur++;
-	// if (compteur % 2 == 0)
-		// mlx_mouse_move(window->mlx_ptr, window->win_ptr, WIDTH / 2, HEIGHT / 2);
 }
 
 void	is_player_out_of_bouds(t_player_pos *player, t_window *window)
@@ -57,15 +55,38 @@ void	is_player_out_of_bouds(t_player_pos *player, t_window *window)
 		player->x = (window->data.ptr.width - 1);
 }
 
+void	fps_count(t_window *window, t_player_pos *player)
+{
+	static clock_t		start;
+	static clock_t		end;
+	static int			t_compteur;
+	int					temps;
+
+	temps = 0;
+	if (!t_compteur)
+		t_compteur = 0;
+	if (((double)(end - start) / CLOCKS_PER_SEC) > 1.5)
+	{
+		start = clock();
+		t_compteur = 0;
+	}
+	cast_ray(window);
+	end = clock();
+	t_compteur++;
+	temps = (int)(t_compteur / ((double)(end - start) / CLOCKS_PER_SEC));
+	draw_map(window, player, get_map_instance());
+	mlx_put_image_to_window(window->mlx_ptr, window->win_ptr,
+		window->img_ptr, 0, 0);
+	mlx_string_put(window->mlx_ptr, window->win_ptr, 1800, 50, 0xFFFFFFFF, \
+	ft_strjoin("Fps = ", ft_itoa(temps)));
+}
+
 /* A normer !!!! */
 void	draw_player(t_window *window)
 {	
-	t_player_pos	*player;
-	static	clock_t						start;
-	static	clock_t						end;
-	static	int							t_compteur = 0;
-	static	t_line						ceilling;
-	static	t_line						floor;
+	t_player_pos		*player;
+	static t_line		ceilling;
+	static t_line		floor;
 
 	player = get_player_instance();
 	if (!ceilling.width)
@@ -77,24 +98,7 @@ void	draw_player(t_window *window)
 	draw_line(floor, window->img_ptr,
 		mlx_get_color_value(window->mlx_ptr, window->floor), 0);
 	is_player_out_of_bouds(player, window);
-	if (((double)(end - start) / CLOCKS_PER_SEC) > 1.5)
-	{
-		start = clock();
-		t_compteur = 0;
-	}
-	cast_ray(window);
-	
-	end = clock();
-	t_compteur++;
-	int temps = 0;
-	temps = (int)(t_compteur / ((double)(end - start) / CLOCKS_PER_SEC));
-
-	draw_map(window, player, get_map_instance());
-	mlx_put_image_to_window(window->mlx_ptr, window->win_ptr,
-		window->img_ptr, 0, 0);
-	char *str;
-	str = ft_strjoin("Fps = ", ft_itoa(temps));
-	mlx_string_put(window->mlx_ptr, window->win_ptr, 1800, 50, 0xFFFFFFFF, str);
+	fps_count(window, player);
 	update_mlx_infos(window->mlx_ptr, window->win_ptr, window->img_ptr);
 }
 
@@ -120,7 +124,6 @@ int	main(int ac, char **av)
 	mlx_hook(window.win_ptr, KeyPress, 0, &key_press, &window);
 	mlx_hook(window.win_ptr, KeyRelease, KeyReleaseMask, &key_release, &window);
 	mlx_loop(window.mlx_ptr);
-	pthread_join(window.sound.audio, NULL);
 	destroy_window(&window);
 	return (1);
 }

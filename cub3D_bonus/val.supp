@@ -1,0 +1,20 @@
+{
+   ignore_libreadline_leaks
+   Memcheck:Leak
+   ...
+   obj:*/libSDL2-2.0.so.*
+}
+
+{
+   ignore_pulse_leaks
+   Memcheck:Leak
+   ...
+   obj:*/libpulse.so.*
+}
+
+{
+   ignore_bus_leaks
+   Memcheck:Leak
+   ...
+   obj:*/libdbus-1.so.*
+}

@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 15:42:22 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/23 18:27:52 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/25 18:49:49 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	init_count(char *mappy, t_parse *map)
 	if (map->fd == -1)
 		count_error(map, map->fd);
 	map->buffer = loop_gnl(map);
-	ft_printf("buff : %s\n", map->buffer);
 	return (map->fd);
 }
 
@@ -55,7 +54,6 @@ void	countmap_x(char	*mappy, t_window *window)
 	}
 	map.buffer = NULL;
 	close(map.fd);
-	ft_printf("final width = %d\n", window->data.ptr.width);
 }
 
 //Count of height
@@ -82,7 +80,6 @@ int	countmap_y(char	*mappy)
 	while (map.buffer)
 		map.buffer = get_next_line(map.fd);
 	close(map.fd);
-	ft_printf("height = %d\n", height);
 	return (height);
 }
 
