@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/24 16:20:13 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/25 15:38:37 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int	main(int ac, char **av)
 	if (!create_window(&window))
 		return (0);
 	update_mlx_infos(&window.mlx_ptr, &window.win_ptr, &window.img_ptr);
-	init_textures(&window, "./textures/door.xpm");
+	init_textures(&window, "./textures/door_eye_blood.xpm");
 	all_start = clock();
 	initializer_audio(&window);
 	window.win.mouse_x = 0;
