@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:40:31 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/23 19:08:13 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/24 15:39:36 by raphael          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,8 @@ int	move_player(t_window *window)
 void	rotation(t_player_pos *player, t_window	*window)
 {
 	int	current_x;
-	int	current_y;
 
 	current_x = window->win.mouse_x;
-	current_y = window->win.mouse_y;
 	mlx_mouse_get_pos(window->mlx_ptr, window->win_ptr, &window->win.mouse_x, \
 	&window->win.mouse_y);
 	if (window->keys.left || window->win.mouse_x < current_x || \

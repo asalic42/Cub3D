@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_casting_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:11:12 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/23 19:08:23 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/24 17:07:23 by raphael          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,26 @@ void	up_or_down(t_stuff_for_ray_casting *all_stuff, t_window *window)
 	}
 }
 
+void	save_value_for_ennemy(t_stuff_for_ray_casting	*all_stuff)
+{
+	all_stuff->ennemy.is_ennemy_here = true;
+	all_stuff->ennemy.ray_hit_x = all_stuff->rx;
+	all_stuff->ennemy.ray_hit_y = all_stuff->ry;
+	all_stuff->ennemy.dist_e = distance(all_stuff->player->x,
+					all_stuff->player->y, all_stuff->rx, all_stuff->ry);
+}
+
 void	find_closest_horizontal_intersection(
 		t_stuff_for_ray_casting *all_stuff, t_window *window)
 {
 	(void)(window);
 	while (all_stuff->dof < all_stuff->map->y)
 	{
+		if (((int)all_stuff->rx << 8 == (int)all_stuff->ennemy.x << 8) && (int)all_stuff->ry << 8== (int)all_stuff->ennemy.y << 8)
+		{
+			save_value_for_ennemy(all_stuff);
+			ft_printf("hit\n");
+		}
 		all_stuff->mx = (int)all_stuff->rx;
 		all_stuff->my = (int)all_stuff->ry;
 		all_stuff->mp = all_stuff->my * all_stuff->map->x + all_stuff->mx;
@@ -101,6 +115,11 @@ void	find_closest_vertical_intersection(
 	(void)(window);
 	while (all_stuff->dof < all_stuff->map->x)
 	{
+		if (((int)all_stuff->rx  == (int)all_stuff->ennemy.x) && (int)all_stuff->ry == (int)all_stuff->ennemy.y)
+		{
+			save_value_for_ennemy(all_stuff);
+			ft_printf("hit\n");
+		}
 		all_stuff->mx = (int)all_stuff->rx;
 		all_stuff->my = (int)all_stuff->ry;
 		all_stuff->mp = all_stuff->my * all_stuff->map->x + all_stuff->mx;
@@ -109,10 +128,8 @@ void	find_closest_vertical_intersection(
 		all_stuff->map->map[all_stuff->mp] == 3))
 		{
 			all_stuff->dof = all_stuff->map->x;
-			all_stuff->vx = all_stuff->rx;
-			all_stuff->vy = all_stuff->ry;
 			all_stuff->dist_v = distance(all_stuff->player->x,
-					all_stuff->player->y, all_stuff->vx, all_stuff->vy);
+					all_stuff->player->y, all_stuff->rx, all_stuff->ry);
 		}
 		else
 		{

@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 17:34:24 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/25 18:02:26 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/25 19:52:23 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,16 @@ typedef struct s_map
 	int		y;
 	int		*map;
 }	t_map;
+
+typedef	struct s_ennemy
+{
+	float	x;
+	float	y;
+	float	ray_hit_x;
+	float	ray_hit_y;
+	int		dist_e;
+	bool	is_ennemy_here;
+}	t_ennemy;
 
 typedef struct s_texture_details
 {
@@ -109,6 +119,7 @@ typedef struct s_stuff_for_ray_casting
 	unsigned int	color;
 	t_player_pos	*player;
 	t_map			*map;
+	t_ennemy		ennemy;
 }	t_stuff_for_ray_casting;
 
 typedef struct s_put_texture_to_img_data

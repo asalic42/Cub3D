@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/25 19:37:12 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/25 19:52:40 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,15 @@ void	cast_ray(t_window *window)
 		comp = comp_distance(&all_stuff);
 		calculate_line_height(&all_stuff, window);
 		wich_texture(comp, textures, window, &all_stuff);
+		if (all_stuff.ennemy.is_ennemy_here)
+		{
+			all_stuff.rx = all_stuff.ennemy.ray_hit_x;
+			all_stuff.ry = all_stuff.ennemy.ray_hit_y;
+			all_stuff.dist_t = all_stuff.ennemy.dist_e;
+			calculate_line_height(&all_stuff, window);
+			texture_to_screen(&all_stuff, &textures->xpm_ennemy, window->img_data, comp);
+			all_stuff.ennemy.is_ennemy_here = false;
+		}
 		increment_angle(&all_stuff);
 	}
 	float x_vector, y_vector, x_direction, y_direction;
@@ -59,7 +68,6 @@ void	cast_ray(t_window *window)
 
 void	is_player_out_of_bouds(t_player_pos *player, t_window *window)
 {
-	(void)(window);
 	if ((int)player->y > window->data.ptr.height)
 		player->y = 1;
 	else if ((int)player->y <= 0)
