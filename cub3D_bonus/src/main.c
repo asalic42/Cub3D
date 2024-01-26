@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/26 12:10:40 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/26 14:10:23 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@ int	compteur = 0;
 
 clock_t						all_start;
 clock_t						all_end;
+
+float normalizeAngle(float angle) {
+    while (angle < 0) angle += 2 * PI;
+    while (angle >= 2 * PI) angle -= 2 * PI;
+    return angle;
+}
 
 void	cast_ray(t_window *window)
 {
@@ -35,25 +41,33 @@ void	cast_ray(t_window *window)
 		left_or_right(&all_stuff, window);
 		find_closest_vertical_intersection(&all_stuff, window);
 		comp = comp_distance(&all_stuff);
+		all_stuff.lenght_tab[all_stuff.r] = (int)all_stuff.dist_t;
 		calculate_line_height(&all_stuff, window);
 		wich_texture(comp, textures, window, &all_stuff);
 		increment_angle(&all_stuff);
 	}
-	float x_vector, y_vector, x_direction, y_direction;
+	float x_vector, y_vector;
 	x_vector = window->ennemy.x - all_stuff.player->x;
 	y_vector = window->ennemy.y - all_stuff.player->y;
 	float lenght = sqrt(x_vector * x_vector + y_vector * y_vector);
-	x_vector = x_vector / lenght;
-	y_vector = y_vector / lenght;
-	x_direction = cos(all_stuff.player->a);
-	y_direction = sin(all_stuff.player->a);
-	float dot = x_vector * x_direction + y_vector * y_direction;
-	float ang_to_target = fabs(acos(dot));
-	if (ang_to_target * (180/PI) <= 70/2)
-		printf("Ennemy visible because\n");
-	else
-		printf("Ennemy NOT visible because\n");
-	printf(" %f\n", ang_to_target * (180/PI));
+	x_vector /= lenght;
+	y_vector /= lenght;
+	float target_angle = atan2(y_vector, x_vector);
+	float relative_angle = target_angle - all_stuff.player->a;
+	relative_angle = normalizeAngle(relative_angle);
+	if (relative_angle > 5.67232 && relative_angle < 6.283185)
+		relative_angle -= 6.283185;
+	relative_angle *= -1;
+	relative_angle += 0.6108652;
+	relative_angle = 1.22173 - relative_angle;
+    printf("angle  = %f\n", relative_angle * (180 / PI));
+	printf("colomn = %d\n", 960/70 * (int)(relative_angle * (180 / PI)) * 2);
+	if (relative_angle >= 0 && relative_angle <= 1.22173)
+	{
+		if ((int)(distance(all_stuff.player->x, all_stuff.player->y, window->ennemy.x, window->ennemy.y)) < all_stuff.lenght_tab[960/70 * (int)(relative_angle * (180 / PI))])
+			printf("on voit\n");
+	}
+	// all_stuff.rx = all_stuff.player->x;
 	compteur++;
 }
 
@@ -128,8 +142,8 @@ int	main(int ac, char **av)
 	initializer_audio(&window);
 	window.win.mouse_x = 0;
 	window.win.mouse_y = 0;
-	window.ennemy.x = 41;
-	window.ennemy.y = 13;
+	window.ennemy.x = 41.0;
+	window.ennemy.y = 13.0;
 	pthread_create(&window.sound.audio, NULL, (void (*))play_music, &window);
 	mlx_loop_hook(window.mlx_ptr, &move_player, &window);
 	mlx_hook(window.win_ptr, 17, KeyPressMask, &destroy_window, &window);
