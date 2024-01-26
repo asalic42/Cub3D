@@ -6,7 +6,11 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 17:34:24 by asalic            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/01/26 12:13:24 by rciaze           ###   ########.fr       */
+=======
+/*   Updated: 2024/01/25 19:52:23 by rciaze           ###   ########.fr       */
+>>>>>>> 12fb6c136253481090755ff217fdfd3c5124c9b5
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +61,16 @@ typedef struct s_map
 	int		y;
 	int		*map;
 }	t_map;
+
+typedef	struct s_ennemy
+{
+	float	x;
+	float	y;
+	float	ray_hit_x;
+	float	ray_hit_y;
+	int		dist_e;
+	bool	is_ennemy_here;
+}	t_ennemy;
 
 typedef struct s_texture_details
 {
@@ -109,7 +123,11 @@ typedef struct s_stuff_for_ray_casting
 	unsigned int	color;
 	t_player_pos	*player;
 	t_map			*map;
+<<<<<<< HEAD
 	int				lenght_tab[960];
+=======
+	t_ennemy		ennemy;
+>>>>>>> 12fb6c136253481090755ff217fdfd3c5124c9b5
 }	t_stuff_for_ray_casting;
 
 typedef struct s_put_texture_to_img_data

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_casting_utils2.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
+/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:24:20 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/23 18:41:51 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/24 17:19:28 by raphael          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	init_ray(t_stuff_for_ray_casting *all_stuff, t_window *window)
 		all_stuff->ra += 2 * PI;
 	if (all_stuff->ra > 2 * PI)
 		all_stuff->ra -= 2 * PI;
+	all_stuff->ennemy.x = 42;
+	all_stuff->ennemy.y = 13;
 }
 
 void	init_distances(t_stuff_for_ray_casting *all_stuff)
