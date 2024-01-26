@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/25 19:37:12 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/26 12:10:40 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	cast_ray(t_window *window)
 void	is_player_out_of_bouds(t_player_pos *player, t_window *window)
 {
 	(void)(window);
+
 	if ((int)player->y > window->data.ptr.height)
 		player->y = 1;
 	else if ((int)player->y <= 0)
