@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/26 14:10:23 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/26 18:11:41 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,65 @@ void	cast_ray(t_window *window)
 	relative_angle *= -1;
 	relative_angle += 0.6108652;
 	relative_angle = 1.22173 - relative_angle;
-    printf("angle  = %f\n", relative_angle * (180 / PI));
-	printf("colomn = %d\n", 960/70 * (int)(relative_angle * (180 / PI)) * 2);
-	if (relative_angle >= 0 && relative_angle <= 1.22173)
+	relative_angle = relative_angle *180/PI;
+	int save = relative_angle * (960 / 70);
+	if (relative_angle >= 0 && relative_angle <= 70)
 	{
-		if ((int)(distance(all_stuff.player->x, all_stuff.player->y, window->ennemy.x, window->ennemy.y)) < all_stuff.lenght_tab[960/70 * (int)(relative_angle * (180 / PI))])
-			printf("on voit\n");
+		float	dist = (distance(all_stuff.player->x, all_stuff.player->y, window->ennemy.x, window->ennemy.y));
+		if (dist < all_stuff.lenght_tab[save])
+		{
+			all_stuff.line_h = (HEIGHT) / dist;
+			float texture_step = (float)textures->xpm_ennemy.height / all_stuff.line_h;
+			int start_x, end_x;
+			float position_x = 0;
+			start_x = save * 2;
+			end_x = start_x + all_stuff.line_h;
+			if (start_x < 0)
+			{
+				position_x = texture_step * start_x;
+				start_x += -start_x;
+			}
+			while (start_x < end_x && start_x < WIDTH)
+			{
+				if (dist < all_stuff.lenght_tab[start_x/2])
+				{
+					int		end_y, y;
+					int		tex_x;
+					int		tex_y;
+					float	texture_position;
+					y = (HEIGHT) / 2 - all_stuff.line_h / 2;
+					end_y = y + all_stuff.line_h;
+					tex_x = (int)(position_x);
+					texture_position = 0;
+					if (y < 0)
+					{
+						texture_position = texture_step * y;
+						y += -y;
+					}
+					if (texture_position < 0)
+						texture_position = 0;
+					char		*value;
+					char		*pixel;
+					while (y < end_y && y < HEIGHT)
+					{
+						tex_y = (int)(texture_position);
+				
+						value = textures->xpm_ennemy.xpm_data
+							+ (tex_y * textures->xpm_ennemy.width + tex_x) * (4);
+						if (*(unsigned int *)value != 0x00FF00)
+						{
+							pixel = window->img_data + (y * (WIDTH) + start_x) * (4);
+							*(unsigned int *)pixel = *(unsigned int *)value;
+							*(unsigned int *)(pixel + 4) = *(unsigned int *)value;
+						}
+						texture_position += texture_step;
+						y++;
+					}
+				}
+				position_x += texture_step;
+				start_x++;
+			}
+		}
 	}
 	// all_stuff.rx = all_stuff.player->x;
 	compteur++;
@@ -143,7 +196,7 @@ int	main(int ac, char **av)
 	window.win.mouse_x = 0;
 	window.win.mouse_y = 0;
 	window.ennemy.x = 41.0;
-	window.ennemy.y = 13.0;
+	window.ennemy.y = 12.75;
 	pthread_create(&window.sound.audio, NULL, (void (*))play_music, &window);
 	mlx_loop_hook(window.mlx_ptr, &move_player, &window);
 	mlx_hook(window.win_ptr, 17, KeyPressMask, &destroy_window, &window);
