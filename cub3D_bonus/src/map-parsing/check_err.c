@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 15:55:48 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/23 18:14:40 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/26 15:34:44 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	handle_error(t_window *window, char *map)
 		ft_printf(RED"Error : wrong map\n"NC);
 		error_cases();
 	}
+	parsing_ennemy(window->data.ptr.map, window);
 }
 
 static char	**set_direction_tab(void)

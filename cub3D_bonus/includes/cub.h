@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:57:25 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/25 18:21:47 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/26 15:34:19 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,22 @@ typedef struct s_parse
 	char	*buffer;
 	char	**map;
 }				t_parse;
+
+typedef struct s_ennemy
+{
+	int		*savex;
+	int 	*savey;
+	char	*cross_count;
+	char	dir;
+	int		bad_posx[10];
+	int		bad_posy[10];
+	int		play_posx;
+	int		play_posy;
+	int 	x;
+	int 	y;
+	int		ennemies;
+	int		crosspass;	
+}				t_ennemy;
 
 typedef struct s_ptr
 {
@@ -186,5 +202,6 @@ void			init_data(t_window *window, char *av);
 /* * * * * BONUS * * * * */
 void			play_music(void *data);
 void			initializer_audio(t_window *window);
+int				parsing_ennemy(char **map, t_window *window);
 
 #endif

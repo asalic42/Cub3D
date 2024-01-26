@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:11:12 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/23 19:08:23 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/26 15:30:26 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,5 +149,8 @@ int	comp_distance(t_stuff_for_ray_casting *all_stuff)
 	if (all_stuff->map->map[(int)all_stuff->ry * all_stuff->map->x + \
 		(int)all_stuff->rx] == 3)
 		return_value = 5;
+	if (all_stuff->map->map[(int)all_stuff->ry * all_stuff->map->x + \
+		(int)all_stuff->rx] == 5)
+		return_value = 6;
 	return (return_value);
 }

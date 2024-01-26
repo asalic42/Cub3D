@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 16:55:21 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/23 18:15:05 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/26 15:46:46 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ int	add_to_tab_int(char c)
 		return (2);
 	else if (c == 'D')
 		return (3);
+	else if (c == 'B')
+		return (5);
 	else if (c == ' ' || c == '\0')
 		return (0);
 	else
@@ -97,8 +99,10 @@ int	*simple_tab_int(char **char_map, t_window *window)
 		while (++x < window->data.ptr.width)
 		{
 			int_map[i] = add_to_tab_int(char_map[y][x]);
+			printf("%d\n", int_map[i]);
 			i ++;
 		}
+		printf("\n");
 	}
 	return (int_map);
 }
