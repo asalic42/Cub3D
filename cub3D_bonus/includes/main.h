@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 17:34:24 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/29 15:26:03 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/29 17:44:57 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,7 @@ typedef	struct s_print_ennemy
 	float	texture_position;
 	char	*value;
 	char	*pixel;
+	int		i;
 }	t_print_ennemy;
 
 typedef	struct s_fps

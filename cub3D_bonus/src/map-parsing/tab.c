@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tab.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 16:55:21 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/29 14:36:18 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/29 18:30:42 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,12 +93,19 @@ int	*simple_tab_int(char **char_map, t_window *window)
 	i = 0;
 	int_map = ft_malloc((window->data.ptr.height * window->data.ptr.width) * \
 	sizeof(int));
+	window->ennemies_count = 0;
 	while (++y < window->data.ptr.height)
 	{
 		x = -1;
 		while (++x < window->data.ptr.width)
 		{
 			int_map[i] = add_to_tab_int(char_map[y][x]);
+			if (int_map[i] == 5 && window->ennemies_count < 128)
+			{
+				window->ennemies[window->ennemies_count].x = x;
+				window->ennemies[window->ennemies_count].y = y;
+				window->ennemies_count++;
+			}
 			i ++;
 		}
 	}

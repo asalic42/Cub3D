@@ -6,26 +6,17 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 11:27:15 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/29 14:22:38 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/29 18:27:45 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/main.h"
 
-float	normalize_angle(float angle)
-{	
-	while (angle < 0)
-		angle += 2 * PI;
-	while (angle >= 2 * PI)
-		angle -= 2 * PI;
-	return (angle);
-}
-
 void	calculate_angle(t_window *window, t_print_ennemy *data,
 	t_stuff_for_ray_casting *all_stuff)
 {
-	data->x_vector = window->ennemy.x - all_stuff->player->x;
-	data->y_vector = window->ennemy.y - all_stuff->player->y;
+	data->x_vector = window->ennemies[data->i].x - all_stuff->player->x;
+	data->y_vector = window->ennemies[data->i].y - all_stuff->player->y;
 	data->lenght = sqrt(data->x_vector * data->x_vector + data->y_vector
 			* data->y_vector);
 	data->x_vector /= data->lenght;
@@ -68,6 +59,7 @@ void	x_loop(t_window *window, t_print_ennemy *data, t_textures_path *textures
 	{
 		if (data->dist < all_stuff->lenght_tab[data->start_x / 2])
 		{
+			all_stuff->lenght_tab[data->start_x / 2] = 100000;
 			data->y = ((HEIGHT) / 2) - all_stuff->line_h / 2;
 			data->end_y = data->y + all_stuff->line_h;
 			data->tex_x = (int)(data->position_x);
@@ -86,27 +78,54 @@ void	x_loop(t_window *window, t_print_ennemy *data, t_textures_path *textures
 	}
 }
 
+void	calculate_distance(t_window *window, t_print_ennemy *data, t_textures_path *textures
+	, t_stuff_for_ray_casting *all_stuff)
+{
+	data->dist = window->ennemies[data->i].dist_to_player;
+	all_stuff->line_h = (HEIGHT + 650) / data->dist;
+	data->texture_step = (float)textures->xpm_ennemy.height
+		/ all_stuff->line_h;
+	data->position_x = 0;
+	data->start_x = data->save * 2;
+	data->end_x = data->start_x + all_stuff->line_h;
+	if (data->start_x < 0)
+	{
+		data->position_x = data->texture_step * data->start_x;
+		data->start_x += -data->start_x;
+	}	
+}
+
+int comparator(const void* p1, const void* p2)
+{
+	float	cpy1;
+	float	cpy2;
+
+	cpy1 = ((t_ennemy *)p1)->dist_to_player;
+	cpy2 = ((t_ennemy *)p2)->dist_to_player;
+	if (cpy1 < cpy2)
+		return (1);
+	else if (cpy1 > cpy2)
+		return (-1);
+	return (0);
+}
+
 void	ennemy(t_textures_path *textures, t_stuff_for_ray_casting *all_stuff,
 	t_window *window)
 {
 	t_print_ennemy	data;
 
-	calculate_angle(window, &data, all_stuff);
-	if (data.relative_angle >= 0 && data.relative_angle <= 70)
+	data.i = -1;
+	while (++data.i < window->ennemies_count)
+		window->ennemies[data.i].dist_to_player = distance(all_stuff->player->x, all_stuff->player->y, window->ennemies[data.i].x, window->ennemies[data.i].y);
+	qsort((void *)window->ennemies, sizeof(window->ennemies) / sizeof(*window->ennemies) / 128 * window->ennemies_count, sizeof(*window->ennemies), comparator);
+	data.i = -1;
+	while (++data.i < window->ennemies_count)
 	{
-		data.dist = (distance(all_stuff->player->x, all_stuff->player->y,
-					window->ennemy.x, window->ennemy.y));
-		all_stuff->line_h = (HEIGHT + 650) / data.dist;
-		data.texture_step = (float)textures->xpm_ennemy.height
-			/ all_stuff->line_h;
-		data.position_x = 0;
-		data.start_x = data.save * 2;
-		data.end_x = data.start_x + all_stuff->line_h;
-		if (data.start_x < 0)
+		calculate_angle(window, &data, all_stuff);
+		if (data.relative_angle >= 0 && data.relative_angle <= 70)
 		{
-			data.position_x = data.texture_step * data.start_x;
-			data.start_x += -data.start_x;
+			calculate_distance(window, &data, textures, all_stuff);
+			x_loop(window, &data, textures, all_stuff);
 		}
-		x_loop(window, &data, textures, all_stuff);
 	}
 }

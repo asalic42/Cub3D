@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:57:25 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/29 15:39:47 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/29 18:26:51 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ typedef	struct s_ennemy
 {
 	float	x;
 	float	y;
+	float	dist_to_player;
 }	t_ennemy;
 
 typedef struct s_keys
@@ -129,24 +130,25 @@ typedef struct s_mouse
 
 typedef struct s_window
 {
-	void	*mlx_ptr;
-	void	*win_ptr;
-	void	*img_ptr;
-	char	*img_data;
-	int		bits;
-	int		size_line_img;
-	int		endian;
-	t_data	data;
-	char	*north;
-	char	*south;
-	char	*west;
-	char	*east;
-	int		floor;
-	int		ceiling;
-	t_music	sound;
-	t_keys	keys;
-	t_mouse	win;
-	t_ennemy	ennemy;
+	void		*mlx_ptr;
+	void		*win_ptr;
+	void		*img_ptr;
+	char		*img_data;
+	int			bits;
+	int			size_line_img;
+	int			endian;
+	t_data		data;
+	char		*north;
+	char		*south;
+	char		*west;
+	char		*east;
+	int			floor;
+	int			ceiling;
+	t_music		sound;
+	t_keys		keys;
+	t_mouse		win;
+	t_ennemy	ennemies[128];
+	int			ennemies_count;
 	bool		stop;
 }	t_window;
 

@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:30:50 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/29 15:33:24 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/29 17:34:29 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,6 @@ int	create_window(t_window *window)
 	window->keys.right = false;
 	window->win.mouse_x = 0;
 	window->win.mouse_y = 0;
-	window->ennemy.x = 41;
-	window->ennemy.y = 12;
 	return (1);
 }
 

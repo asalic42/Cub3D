@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_ennemy.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 14:14:19 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/29 15:39:37 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/29 17:27:09 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,13 +96,13 @@ int parsing_ennemy(char **map, t_window *window, t_parse_ennemy *enmy)
 {
 	int			i;
 
-    enmy->savex = ft_malloc((window->data.ptr.width * window->data.ptr.height +1) * sizeof(int));
-    enmy->savey = ft_malloc((window->data.ptr.width * window->data.ptr.height +1) * sizeof(int));
-	enmy->cross_count = ft_malloc((window->data.ptr.width * window->data.ptr.height +1) * sizeof(char));
-	enmy->from_pass = ft_malloc((window->data.ptr.width * window->data.ptr.height +1) * sizeof(char));
+    enmy->savex = ft_malloc((window->data.ptr.width * window->data.ptr.height + 1) * sizeof(int));
+    enmy->savey = ft_malloc((window->data.ptr.width * window->data.ptr.height + 1) * sizeof(int));
+	enmy->cross_count = ft_malloc((window->data.ptr.width * window->data.ptr.height + 1) * sizeof(char));
+	enmy->from_pass = ft_malloc((window->data.ptr.width * window->data.ptr.height + 1) * sizeof(char));
 	i = 0;
-	enmy->y = enmy->bad_posy[enmy->ennemies -1];
-	enmy->x = enmy->bad_posx[enmy->ennemies -1];
+	enmy->y = enmy->bad_posy[enmy->ennemies - 1];
+	enmy->x = enmy->bad_posx[enmy->ennemies - 1];
 	while (enmy->ennemies > 0)
 	{
 		// print_map_color(map, enmy->x, enmy->y);
