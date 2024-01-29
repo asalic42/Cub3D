@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:30:50 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/23 17:52:20 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/29 14:57:42 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,20 @@ int	mlx_init_stuff(t_window *window)
 	return (1);
 }
 
+void	fps_init(void)
+{
+	t_fps			*fps;
+
+	fps = get_fps_instance();
+	fps->compteur = 0;
+}
+
 int	create_window(t_window *window)
 {
 	t_player_pos	*player;
 	t_map			*mapp;
 
+	fps_init();
 	mapp = get_map_instance();
 	mapp->map = simple_tab_int(window->data.ptr.map, window);
 	if (!mlx_init_stuff(window))
@@ -59,12 +68,15 @@ int	create_window(t_window *window)
 	window->keys.d = false;
 	window->keys.left = false;
 	window->keys.right = false;
+	window->win.mouse_x = 0;
+	window->win.mouse_y = 0;
+	window->ennemy.x = 41;
+	window->ennemy.y = 12;
 	return (1);
 }
 
 int	destroy_window(t_window *window)
 {
-	all_end = clock();
 	free_mlx_infos();
 	(void)window;
 	if (window->sound.wav_buffer)
@@ -73,7 +85,5 @@ int	destroy_window(t_window *window)
 		SDL_CloseAudioDevice(window->sound.audio_device);
 	if (window->sound.init)
 		SDL_Quit();
-	printf("%d total frames rendered, average of %f fps\n", \
-	compteur, compteur / ((double)(all_end - all_start) / CLOCKS_PER_SEC));
 	exit(EXIT_SUCCESS);
 }

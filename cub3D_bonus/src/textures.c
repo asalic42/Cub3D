@@ -6,13 +6,13 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:28:16 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/29 13:53:27 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/29 14:42:33 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/main.h"
 
-void	init_textures_two(t_window *window, char *door)
+void	init_textures_two(t_window *window, char *door, char *ennemy)
 {
 	t_textures_path	*textures;
 	t_mlx_stuff		*mlx;
@@ -28,18 +28,17 @@ void	init_textures_two(t_window *window, char *door)
 			&tmp_p.bits_per_pixel, &tmp_p.size_line, &tmp_p.endian);
 	mlx_string_put(mlx->mlx_ptr, mlx->win_ptr, 50, 250, 0xFF00AA, \
 		"Loading door texture...");
-	textures->xpm_door.xpm = mlx_xpm_file_to_image(mlx->mlx_ptr, door,
-			&textures->xpm_door.width, &textures->xpm_door.height);
+	textures->xpm_door.xpm = mlx_xpm_file_to_image(mlx->mlx_ptr, door, \
+		&textures->xpm_door.width, &textures->xpm_door.height);
 	textures->xpm_door.xpm_data = mlx_get_data_addr(textures->xpm_door.xpm, \
 		&tmp_p.bits_per_pixel, &tmp_p.size_line, &tmp_p.endian);
-	textures->xpm_ennemy.xpm = mlx_xpm_file_to_image(mlx->mlx_ptr,
-			"./textures/ennemy.xpm", &textures->xpm_ennemy.width,
-			&textures->xpm_ennemy.height);
+	textures->xpm_ennemy.xpm = mlx_xpm_file_to_image(mlx->mlx_ptr, ennemy, \
+		&textures->xpm_ennemy.width, &textures->xpm_ennemy.height);
 	textures->xpm_ennemy.xpm_data = mlx_get_data_addr(textures->xpm_ennemy.xpm, \
 		&tmp_p.bits_per_pixel, &tmp_p.size_line, &tmp_p.endian);
 }
 
-void	init_textures(t_window *window, char *door)
+void	init_textures(t_window *window, char *door, char *ennemy)
 {
 	t_textures_path	*textures;
 	t_mlx_stuff		*mlx;
@@ -65,5 +64,5 @@ void	init_textures(t_window *window, char *door)
 			&textures->xpm3.width, &textures->xpm3.height);
 	textures->xpm3.xpm_data = mlx_get_data_addr(textures->xpm3.xpm,
 			&tmp_p.bits_per_pixel, &tmp_p.size_line, &tmp_p.endian);
-	init_textures_two(window, door);
+	init_textures_two(window, door, ennemy);
 }

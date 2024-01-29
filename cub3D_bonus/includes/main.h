@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 17:34:24 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/29 14:19:07 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/29 15:04:18 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,17 @@ typedef	struct s_print_ennemy
 	char	*pixel;
 }	t_print_ennemy;
 
+typedef	struct s_fps
+{
+	clock_t	start;
+	clock_t	end;
+	int		t_compteur;
+	int		compteur;
+	char	*str;
+}	t_fps;
 
+
+t_fps			*get_fps_instance(void);
 float			normalize_angle(float angle);
 void			ennemy(t_textures_path *textures, t_stuff_for_ray_casting *all_stuff, t_window *window);
 int				handle_no_event(void *window);
@@ -171,7 +181,7 @@ void			calculations(t_put_texture_to_img_data *variables,
 					t_stuff_for_ray_casting *all_stuff, int *end_y,
 					t_texture_details *xpm);
 void			find_player(t_map *map, t_player_pos *player, char **char_map);
-void			init_textures(t_window *window, char *door);
+void			init_textures(t_window *window, char *door, char *ennemy);
 int				move_player(t_window *window);
 void			rotation(t_player_pos *player, t_window	*window);
 void			move_up(t_player_pos *player, t_window *window);

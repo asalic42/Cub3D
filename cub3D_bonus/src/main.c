@@ -6,23 +6,20 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/29 14:23:54 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/29 15:19:30 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/main.h"
-
-int	compteur = 0;
-
-clock_t						all_start;
-clock_t						all_end;
 
 void	cast_ray(t_window *window)
 {
 	t_stuff_for_ray_casting		all_stuff;
 	int							comp;
 	t_textures_path				*textures;
+	t_fps						*fps;
 
+	fps = get_fps_instance();
 	init_ray(&all_stuff, window);
 	textures = get_textures_instance();
 	all_stuff.r = -1;
@@ -41,32 +38,38 @@ void	cast_ray(t_window *window)
 		increment_angle(&all_stuff);
 	}
 	ennemy(textures, &all_stuff, window);
-	compteur++;
+	fps->compteur++;
 }
 
-void	is_player_out_of_bouds(t_player_pos *player, t_window *window)
+void	draw_and_count_fps(t_player_pos *player, t_window *win)
 {
-	(void)(window);
+	t_fps			*fps;
+	int				temps;
 
-	if ((int)player->y > window->data.ptr.height)
-		player->y = 1;
-	else if ((int)player->y <= 0)
-		player->y = (window->data.ptr.height - 1);
-	else if ((int)player->x > window->data.ptr.width)
-		player->x = 1;
-	else if ((int)player->x <= 0)
-		player->x = (window->data.ptr.width - 1);
+	fps = get_fps_instance();
+	if (((double)(fps->end - fps->start) / CLOCKS_PER_SEC) > 1.5)
+	{
+		fps->start += ((double)(fps->end - fps->start)) / 2;
+		fps->t_compteur /= 2;
+	}
+	cast_ray(win);
+	fps->end = clock();
+	fps->t_compteur++;
+	temps = 0;
+	temps = (int)(fps->t_compteur / ((double)(fps->end - fps->start)
+				/ CLOCKS_PER_SEC));
+	draw_map(win, player, get_map_instance());
+	mlx_put_image_to_win(win->mlx_ptr, win->win_ptr,
+		win->img_ptr, 0, 0);
+	fps->str = ft_strjoin("Fps = ", ft_itoa(temps));
+	mlx_string_put(win->mlx_ptr, win->win_ptr, 1800, 50, 0xFFFFFF, fps->str);
 }
 
-/* A normer !!!! */
 void	draw_player(t_window *window)
 {	
 	t_player_pos	*player;
-	static	clock_t						start;
-	static	clock_t						end;
-	static	int							t_compteur = 0;
-	static	t_line						ceilling;
-	static	t_line						floor;
+	static t_line	ceilling;
+	static t_line	floor;
 
 	player = get_player_instance();
 	if (!ceilling.width)
@@ -78,24 +81,7 @@ void	draw_player(t_window *window)
 	draw_line(floor, window->img_ptr,
 		mlx_get_color_value(window->mlx_ptr, window->floor), 0);
 	is_player_out_of_bouds(player, window);
-	if (((double)(end - start) / CLOCKS_PER_SEC) > 1.5)
-	{
-		start = clock();
-		t_compteur = 0;
-	}
-	cast_ray(window);
-	
-	end = clock();
-	t_compteur++;
-	int temps = 0;
-	temps = (int)(t_compteur / ((double)(end - start) / CLOCKS_PER_SEC));
-
-	draw_map(window, player, get_map_instance());
-	mlx_put_image_to_window(window->mlx_ptr, window->win_ptr,
-		window->img_ptr, 0, 0);
-	char *str;
-	str = ft_strjoin("Fps = ", ft_itoa(temps));
-	mlx_string_put(window->mlx_ptr, window->win_ptr, 1800, 50, 0xFFFFFFFF, str);
+	draw_and_count_fps(player, window);
 	update_mlx_infos(window->mlx_ptr, window->win_ptr, window->img_ptr);
 }
 
@@ -110,13 +96,8 @@ int	main(int ac, char **av)
 	if (!create_window(&window))
 		return (0);
 	update_mlx_infos(&window.mlx_ptr, &window.win_ptr, &window.img_ptr);
-	init_textures(&window, "./textures/door.xpm");
-	all_start = clock();
+	init_textures(&window, "./textures/door.xpm", "./textures/ennemy.xpm");
 	initializer_audio(&window);
-	window.win.mouse_x = 0;
-	window.win.mouse_y = 0;
-	window.ennemy.x = 41;
-	window.ennemy.y = 12;
 	pthread_create(&window.sound.audio, NULL, (void (*))play_music, &window);
 	mlx_loop_hook(window.mlx_ptr, &move_player, &window);
 	mlx_hook(window.win_ptr, 17, KeyPressMask, &destroy_window, &window);

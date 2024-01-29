@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 20:36:44 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/29 13:52:46 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/29 15:17:22 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,16 @@ int	handle_no_event(void *window)
 {
 	(void)(window);
 	return (0);
+}
+
+void	is_player_out_of_bouds(t_player_pos *player, t_window *window)
+{
+	if ((int)player->y > window->data.ptr.height)
+		player->y = 1;
+	else if ((int)player->y <= 0)
+		player->y = (window->data.ptr.height - 1);
+	else if ((int)player->x > window->data.ptr.width)
+		player->x = 1;
+	else if ((int)player->x <= 0)
+		player->x = (window->data.ptr.width - 1);
 }
