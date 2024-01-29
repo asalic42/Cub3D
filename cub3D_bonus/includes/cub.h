@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
+/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:57:25 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/29 15:29:15 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/29 15:38:27 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,23 @@ typedef struct s_parse
 	char	*buffer;
 	char	**map;
 }				t_parse;
+
+typedef struct s_ennemy
+{
+	int		*savex;
+	int 	*savey;
+	char	*cross_count;
+	char	*from_pass;
+	char	dir;
+	int		bad_posx[10];
+	int		bad_posy[10];
+	int		play_posx;
+	int		play_posy;
+	int 	x;
+	int 	y;
+	int		ennemies;
+	int		crosspass;	
+}				t_ennemy;
 
 typedef struct s_ptr
 {
@@ -184,7 +201,6 @@ char			*cut_from(char *str, char cut);
 
 /* * * * * TAB MAP * * * */
 char			**ft_maptab(char *map, t_data *data, t_window *window);
-void			print_tab(char **tab);
 char			*go_map(t_parse *put, t_data *data, t_window *window, int tour);
 
 /* * * * MAIN CORE * * * */
@@ -193,5 +209,8 @@ void			init_data(t_window *window, char *av);
 /* * * * * BONUS * * * * */
 void			play_music(void *data);
 void			initializer_audio(t_window *window);
+int				parsing_ennemy(char **map, t_window *window, t_ennemy *enmy);
+int				pos_ennemy_player(char **map, t_window *window);
+char			**ft_strdup_double(char **str);
 
 #endif
