@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 14:14:19 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/29 15:35:28 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/29 15:39:37 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@ void	print_map_color(char **map, int x, int y);
 
 int	pos_ennemy_player(char **map, t_window *window)
 {
-    t_ennemy    enmy;
+    t_parse_ennemy    enmy;
 	char		**save_map;
 	int	x;
 	int	y;
@@ -59,7 +59,7 @@ int	pos_ennemy_player(char **map, t_window *window)
 	return (1);
 }
 
-int	is_already_pass(t_ennemy *enmy, int x, int y)
+int	is_already_pass(t_parse_ennemy *enmy, int x, int y)
 {
 	int i;
 
@@ -73,7 +73,7 @@ int	is_already_pass(t_ennemy *enmy, int x, int y)
 	return (1);
 }
 
-int	is_cross_pass(char **map, int x, int y, t_ennemy *enmy, char dir)
+int	is_cross_pass(char **map, int x, int y, t_parse_ennemy *enmy, char dir)
 {
 	if (map[y] && map[y][x] && (map[y][x] == 'N' || map[y][x] == 'S' || map[y][x] == 'E' || \
 		map[y][x] == 'W'))
@@ -83,7 +83,7 @@ int	is_cross_pass(char **map, int x, int y, t_ennemy *enmy, char dir)
 	return (1);
 }
 
-int	cross_pass(char **map, t_ennemy *enmy)
+int	cross_pass(char **map, t_parse_ennemy *enmy)
 {
 	enmy->crosspass = 0;
 	if (!is_cross_pass(map, enmy->x, enmy->y +1, enmy, 'n') || !is_cross_pass(map, enmy->x, enmy->y -1, enmy, 's') \
@@ -92,7 +92,7 @@ int	cross_pass(char **map, t_ennemy *enmy)
 	return (1);
 }
 
-int parsing_ennemy(char **map, t_window *window, t_ennemy *enmy)
+int parsing_ennemy(char **map, t_window *window, t_parse_ennemy *enmy)
 {
 	int			i;
 
