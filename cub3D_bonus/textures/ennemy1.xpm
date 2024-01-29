@@ -1,7 +1,7 @@
 /* XPM */
 static const char *ZW5uZW15[] = {
 /* columns rows colors chars-per-pixel */
-"40 40 7 1 ",
+"40 30 7 1 ",
 "  c black",
 ". c #750C0F",
 "X c #9E1116",
@@ -24,16 +24,6 @@ static const char *ZW5uZW15[] = {
 "ooooooooooooooo XXXXXXX oooooooooooooooo",
 "oooooooooooooo XXXX      ooooooooooooooo",
 "oooooooooooooo XXX ++@@@@ oooooooooooooo",
-"ooooooooooooo .XX +++@@@@@ ooooooooooooo",
-"ooooooooooooo .XX +++@@@@@ ooooooooooooo",
-"ooooooooooooo .XX +++@@@@@ ooooooooooooo",
-"ooooooooooooo .XX +++@@@@@ ooooooooooooo",
-"ooooooooooooo .XX +++@@@@@ ooooooooooooo",
-"ooooooooooooo .XX +++@@@@@ ooooooooooooo",
-"ooooooooooooo .XX +++@@@@@ ooooooooooooo",
-"ooooooooooooo .XX +++@@@@@ ooooooooooooo",
-"ooooooooooooo .XX +++@@@@@ ooooooooooooo",
-"ooooooooooooo .XX +++@@@@@ ooooooooooooo",
 "ooooooooooooo .XX +++@@@@@ ooooooooooooo",
 "ooooooooooooo .XX OO++++++ ooooooooooooo",
 "ooooooooooo   .XXX OOOOOOO ooooooooooooo",
