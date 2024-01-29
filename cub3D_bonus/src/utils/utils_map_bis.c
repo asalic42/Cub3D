@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:15:34 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/23 18:27:47 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/29 15:24:29 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*loop_gnl(t_parse *parser)
 
 int	print_error(char *str)
 {
-	ft_printf("%s\n", str);
+	ft_printf(RED"%s\n"NC, str);
 	return (0);
 }
 
@@ -53,4 +53,48 @@ void	init_data(t_window *window, char *av)
 	window->data.ptr.height = countmap_y(av);
 	countmap_x(av, window);
 	ft_maptab(av, &window->data, window);
+}
+
+int		ft_double_len(char **str)
+{
+	int i;
+	int j;
+	int	count;
+	
+	count = 0;
+	i = 0;
+	while (str[i])
+	{
+		j = 0;
+		while (str[i][j])
+		{	
+			count ++;
+			j ++;
+		}
+		i ++;
+	}
+	return (count);
+}
+
+char	**ft_strdup_double(char **str)
+{
+	char **dest;
+	int i;
+	int	j;
+
+	i = 0;
+	dest = ft_malloc(ft_double_len(str) * sizeof(char *));
+	while (str[i])
+	{
+		j = 0;
+		dest[i] = ft_malloc((ft_strlen(str[i]) +1) * sizeof(char));
+		while (str[i][j])
+		{
+			dest[i][j] = str[i][j];
+			j ++;
+		}
+		dest[i][j] = '\0';
+		i ++;
+	}
+	return (dest);
 }
