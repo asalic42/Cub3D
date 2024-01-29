@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:57:25 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/25 18:07:28 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/29 15:29:15 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ typedef struct s_window
 	t_keys	keys;
 	t_mouse	win;
 	t_ennemy	ennemy;
+	bool		stop;
 }	t_window;
 
 /* * * * ERROR HANDLE * * * */

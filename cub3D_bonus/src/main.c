@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/29 15:22:01 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/29 15:31:57 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int	main(int ac, char **av)
 	if (!create_window(&window))
 		return (0);
 	update_mlx_infos(&window.mlx_ptr, &window.win_ptr, &window.img_ptr);
-	init_textures(&window, "./textures/door.xpm", "./textures/ennemy.xpm");
+	init_textures(&window, "./textures/door_eye_blood.xpm", "./textures/ennemy1.xpm");
 	initializer_audio(&window);
 	pthread_create(&window.sound.audio, NULL, (void (*))play_music, &window);
 	mlx_loop_hook(window.mlx_ptr, &move_player, &window);
@@ -104,7 +104,6 @@ int	main(int ac, char **av)
 	mlx_hook(window.win_ptr, KeyPress, 0, &key_press, &window);
 	mlx_hook(window.win_ptr, KeyRelease, KeyReleaseMask, &key_release, &window);
 	mlx_loop(window.mlx_ptr);
-	pthread_join(window.sound.audio, NULL);
 	destroy_window(&window);
 	return (1);
 }

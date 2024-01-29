@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 15:42:22 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/29 14:58:53 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/29 15:28:19 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	countmap_x(char	*mappy, t_window *window)
 	}
 	map.buffer = NULL;
 	close(map.fd);
-	ft_printf("final width = %d\n", window->data.ptr.width);
 }
 
 //Count of height
@@ -81,7 +80,6 @@ int	countmap_y(char	*mappy)
 	while (map.buffer)
 		map.buffer = get_next_line(map.fd);
 	close(map.fd);
-	ft_printf("height = %d\n", height);
 	return (height);
 }
 

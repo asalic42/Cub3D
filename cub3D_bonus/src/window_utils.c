@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:30:50 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/29 14:57:42 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/29 15:33:24 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,8 @@ int	create_window(t_window *window)
 int	destroy_window(t_window *window)
 {
 	free_mlx_infos();
-	(void)window;
+	window->stop = true;
+	pthread_join(window->sound.audio, NULL);
 	if (window->sound.wav_buffer)
 		SDL_FreeWAV(window->sound.wav_buffer);
 	if (window->sound.audio_device)
