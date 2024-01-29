@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 15:55:48 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/29 15:01:28 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/29 18:09:16 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	handle_error(t_window *window, char *map)
 		ft_printf(RED"Error : wrong map\n"NC);
 		error_cases();
 	}
-	if (!pos_ennemy_player(window->data.ptr.map, window))
+	if (!ennemy_parse(window->data.ptr.map, window))
 		error_cases();
 }
 

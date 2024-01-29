@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:57:25 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/29 15:39:47 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/29 19:02:24 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef struct s_parse_ennemy
 	int 	*savey;
 	char	*cross_count;
 	char	*from_pass;
+	char	**map;
 	char	dir;
 	int		bad_posx[10];
 	int		bad_posy[10];
@@ -76,6 +77,7 @@ typedef struct s_parse_ennemy
 	int		play_posy;
 	int 	x;
 	int 	y;
+	int		i;
 	int		ennemies;
 	int		crosspass;	
 }				t_parse_ennemy;
@@ -209,8 +211,17 @@ void			init_data(t_window *window, char *av);
 /* * * * * BONUS * * * * */
 void			play_music(void *data);
 void			initializer_audio(t_window *window);
-int				parsing_ennemy(char **map, t_window *window, t_parse_ennemy *enmy);
-int				pos_ennemy_player(char **map, t_window *window);
+
+int				ennemy_parse(char **map, t_window *window);
+void			ennemy_init(t_window *window, t_parse_ennemy *enmy, char **map);
+void			pos_ennemy_player(t_parse_ennemy *enmy);
+int				ennemy_parse_loop(char **map, t_parse_ennemy *enmy);
+int				parsing_ennemy(t_parse_ennemy *enmy);
+void		    go_north(t_parse_ennemy *enmy);
+void		    go_west(t_parse_ennemy *enmy);
+void		    go_south(t_parse_ennemy *enmy);
+void		    go_east(t_parse_ennemy *enmy);
+int				go_nowhere(t_parse_ennemy *enmy);
 char			**ft_strdup_double(char **str);
 
 #endif
