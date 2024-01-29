@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_textures_to_screen.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 21:09:49 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/23 19:08:18 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/29 14:23:41 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ void	texture_to_screen(t_stuff_for_ray_casting *all_stuff,
 	while (variables.y < end_y && variables.y < HEIGHT)
 	{
 		variables.tex_y = (int)(variables.texture_position);
-
 		variables.value = xpm->xpm_data
 			+ (variables.tex_y * xpm->width + variables.tex_x) * (4);
 		variables.pixel = img_data
 			+ (variables.y * (WIDTH) + variables.current_x) * (4);
 		*(unsigned int *)variables.pixel = *(unsigned int *)variables.value;
-		*(unsigned int *)(variables.pixel + 4) = *(unsigned int *)variables.value;
+		*(unsigned int *)(variables.pixel + 4)
+			= *(unsigned int *)variables.value;
 		variables.texture_position += variables.texture_step;
 		variables.y++;
 	}

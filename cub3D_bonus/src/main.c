@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/29 10:38:38 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/29 14:23:54 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,6 @@ int	compteur = 0;
 
 clock_t						all_start;
 clock_t						all_end;
-
-float normalizeAngle(float angle) {
-    while (angle < 0) angle += 2 * PI;
-    while (angle >= 2 * PI) angle -= 2 * PI;
-    return angle;
-}
 
 void	cast_ray(t_window *window)
 {
@@ -46,76 +40,7 @@ void	cast_ray(t_window *window)
 		wich_texture(comp, textures, window, &all_stuff);
 		increment_angle(&all_stuff);
 	}
-	float x_vector, y_vector;
-	x_vector = window->ennemy.x - all_stuff.player->x;
-	y_vector = window->ennemy.y - all_stuff.player->y;
-	float lenght = sqrt(x_vector * x_vector + y_vector * y_vector);
-	x_vector /= lenght;
-	y_vector /= lenght;
-	float target_angle = atan2(y_vector, x_vector);
-	float relative_angle = target_angle - all_stuff.player->a;
-	relative_angle = normalizeAngle(relative_angle) * 180/PI;
-	if (relative_angle > 325 && relative_angle < 360)
-		relative_angle -= 360;
-	relative_angle *= -1;
-	relative_angle += 35;
-	relative_angle = 70 - relative_angle;
-	int save = relative_angle * (960 / 70);
-	if (relative_angle >= 0 && relative_angle <= 70)
-	{
-		float	dist = (distance(all_stuff.player->x, all_stuff.player->y, window->ennemy.x, window->ennemy.y));
-		all_stuff.line_h = (HEIGHT) / dist;
-		float texture_step = (float)textures->xpm_ennemy.height / all_stuff.line_h;
-		int start_x, end_x;
-		float position_x = 0;
-		start_x = save * 2;
-		end_x = start_x + all_stuff.line_h;
-		if (start_x < 0)
-		{
-			position_x = texture_step * start_x;
-			start_x += -start_x;
-		}
-		while (start_x < end_x && start_x < WIDTH)
-		{
-			if (dist < all_stuff.lenght_tab[start_x/2])
-			{
-				int		end_y, y;
-				int		tex_x;
-				int		tex_y;
-				float	texture_position;
-				y = (HEIGHT) / 2 - all_stuff.line_h / 2;
-				end_y = y + all_stuff.line_h;
-				tex_x = (int)(position_x);
-				texture_position = 0;
-				if (y < 0)
-				{
-					texture_position = texture_step * y;
-					y += -y;
-				}
-				if (texture_position < 0)
-					texture_position = 0;
-				char		*value;
-				char		*pixel;
-				while (y < end_y && y < HEIGHT)
-				{
-					tex_y = (int)(texture_position);
-			
-					value = textures->xpm_ennemy.xpm_data
-						+ (tex_y * textures->xpm_ennemy.width + tex_x) * (4);
-					if (*(unsigned int *)value != 0x00FF00)
-					{
-						pixel = window->img_data + (y * (WIDTH) + start_x) * (4);
-						*(unsigned int *)pixel = *(unsigned int *)value;
-						*(unsigned int *)(pixel + 4) = *(unsigned int *)value;
-					}
-					texture_position += texture_step;
-					y++;
-				}
-			}
-			position_x += texture_step;
-			start_x++;
-		}
-	}
+	ennemy(textures, &all_stuff, window);
 	compteur++;
 }
 

@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:28:16 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/25 18:03:07 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/29 13:53:27 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@ void	init_textures_two(t_window *window, char *door)
 			&textures->xpm_door.width, &textures->xpm_door.height);
 	textures->xpm_door.xpm_data = mlx_get_data_addr(textures->xpm_door.xpm, \
 		&tmp_p.bits_per_pixel, &tmp_p.size_line, &tmp_p.endian);
-	textures->xpm_ennemy.xpm = mlx_xpm_file_to_image(mlx->mlx_ptr, "./textures/ennemy.xpm",
-			&textures->xpm_ennemy.width, &textures->xpm_ennemy.height);
+	textures->xpm_ennemy.xpm = mlx_xpm_file_to_image(mlx->mlx_ptr,
+			"./textures/ennemy.xpm", &textures->xpm_ennemy.width,
+			&textures->xpm_ennemy.height);
 	textures->xpm_ennemy.xpm_data = mlx_get_data_addr(textures->xpm_ennemy.xpm, \
 		&tmp_p.bits_per_pixel, &tmp_p.size_line, &tmp_p.endian);
 }

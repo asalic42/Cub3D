@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 17:34:24 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/26 12:13:24 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/29 14:19:07 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,8 +133,33 @@ typedef struct s_minimap
 	int		cptr_y;
 	int		cptr_x;
 	t_line	line;
+	int		my;
 }	t_minimap;
 
+typedef	struct s_print_ennemy
+{
+	float	x_vector;
+	float	y_vector;
+	float	lenght;
+	float	target_angle;
+	float	relative_angle;
+	int		save;
+	float	dist;
+	float	texture_step;
+	int		start_x;
+	int		end_x;
+	float	position_x;
+	int		end_y, y;
+	int		tex_x;
+	int		tex_y;
+	float	texture_position;
+	char	*value;
+	char	*pixel;
+}	t_print_ennemy;
+
+
+float			normalize_angle(float angle);
+void			ennemy(t_textures_path *textures, t_stuff_for_ray_casting *all_stuff, t_window *window);
 int				handle_no_event(void *window);
 void			draw_map(t_window *window, t_player_pos	*player, t_map *map);
 void			colision(t_player_pos *player, float dx, float dy);

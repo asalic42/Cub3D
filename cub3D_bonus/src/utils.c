@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 20:36:44 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/23 18:02:51 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/29 13:52:46 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	find_player(t_map *map, t_player_pos *player, char **char_map)
 		y ++;
 	}
 }
+
 int	handle_no_event(void *window)
 {
 	(void)(window);
