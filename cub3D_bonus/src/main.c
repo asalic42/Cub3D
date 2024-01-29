@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/29 15:19:30 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/29 15:22:01 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	draw_and_count_fps(t_player_pos *player, t_window *win)
 	temps = (int)(fps->t_compteur / ((double)(fps->end - fps->start)
 				/ CLOCKS_PER_SEC));
 	draw_map(win, player, get_map_instance());
-	mlx_put_image_to_win(win->mlx_ptr, win->win_ptr,
+	mlx_put_image_to_window(win->mlx_ptr, win->win_ptr,
 		win->img_ptr, 0, 0);
 	fps->str = ft_strjoin("Fps = ", ft_itoa(temps));
 	mlx_string_put(win->mlx_ptr, win->win_ptr, 1800, 50, 0xFFFFFF, fps->str);

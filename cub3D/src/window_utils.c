@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:30:50 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/23 15:09:56 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/29 14:57:35 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,7 @@ int	create_window(t_window *window)
 
 int	destroy_window(t_window *window)
 {
-	all_end = clock();
 	free_mlx_infos();
 	(void)window;
-	printf("avg time by frame = %f, %d total frames rendered, average of %f fps\n", prout / compteur, compteur, compteur / ((double)(all_end - all_start) / CLOCKS_PER_SEC));
 	exit(EXIT_SUCCESS);
 }

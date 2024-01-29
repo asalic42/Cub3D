@@ -1,17 +1,5 @@
 {
 	"files.associations": {
-		"unistd.h": "c",
-		"rectangle.h": "c",
-		"main.h": "c",
-		"stdio.h": "c",
-		"basique_mlx_needed.h": "c",
-		"mlx.h": "c",
-		"line.h": "c",
-		"forme.h": "c",
-		"cub.h": "c",
-		"stdlib.h": "c",
-		"x.h": "c",
-		"mlx_int.h": "c",
-		"pthread.h": "c"
+		"main.h": "c"
 	}
 }
