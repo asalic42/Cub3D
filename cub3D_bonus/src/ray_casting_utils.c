@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:11:12 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/26 14:13:47 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/29 10:26:43 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ int	comp_distance(t_stuff_for_ray_casting *all_stuff)
 	int	return_value;
 
 	return_value = 0;
-	if (all_stuff->dist_v < all_stuff->dist_h)
+	if (all_stuff->dist_v <= all_stuff->dist_h)
 	{
 		all_stuff->dist_t = all_stuff->dist_v;
 		if (all_stuff->horizontal_xo < 0)
