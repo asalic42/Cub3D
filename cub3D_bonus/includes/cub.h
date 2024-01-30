@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:57:25 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/30 15:44:52 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/30 16:01:58 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ typedef struct s_parse_ennemy
 	char	*from_pass;
 	char	**map;
 	char	dir;
-	int		bad_posx[10];
-	int		bad_posy[10];
+	int		bad_posx[20];
+	int		bad_posy[20];
 	int		play_posx;
 	int		play_posy;
 	int 	x;

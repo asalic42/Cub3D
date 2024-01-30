@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 14:14:19 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/30 15:52:23 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/30 16:02:53 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ int	ennemy_parse(char **map, t_window *window)
 	t_parse_ennemy	enmy;
 
 	pos_ennemy_player(&enmy, map);
+	printf("enenmies : %d\n", enmy.ennemies);
+	if (enmy.ennemies > 20)
+		return (print_error("Error : too many ennemies (max : 20)\n"));
 	if (!ennemy_parse_loop(map, &enmy, window))
 		return (0);
 	return (1);
