@@ -6,15 +6,15 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:14:04 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/29 18:41:59 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/30 15:53:29 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/main.h"
 
-void    go_north(t_parse_ennemy *enmy)
+void	go_north(t_parse_ennemy *enmy)
 {
-    if (enmy->crosspass > 1)
+	if (enmy->crosspass > 1)
 	{
 		if (enmy->cross_count[enmy->i] != '\0')
 			enmy->i ++;
@@ -27,9 +27,9 @@ void    go_north(t_parse_ennemy *enmy)
 	enmy->dir = 's';
 }
 
-void    go_west(t_parse_ennemy *enmy)
+void	go_west(t_parse_ennemy *enmy)
 {
-    if (enmy->crosspass > 1)
+	if (enmy->crosspass > 1)
 	{
 		if (enmy->cross_count[enmy->i] != '\0')
 			enmy->i ++;
@@ -42,9 +42,9 @@ void    go_west(t_parse_ennemy *enmy)
 	enmy->dir = 'e';
 }
 
-void    go_south(t_parse_ennemy *enmy)
+void	go_south(t_parse_ennemy *enmy)
 {
-    if (enmy->crosspass > 1)
+	if (enmy->crosspass > 1)
 	{
 		if (enmy->cross_count[enmy->i] != '\0')
 			enmy->i ++;
@@ -57,9 +57,9 @@ void    go_south(t_parse_ennemy *enmy)
 	enmy->dir = 'n';
 }
 
-void    go_east(t_parse_ennemy *enmy)
+void	go_east(t_parse_ennemy *enmy)
 {
-    if (enmy->crosspass > 1)
+	if (enmy->crosspass > 1)
 	{
 		if (enmy->cross_count[enmy->i] != '\0')
 			enmy->i ++;

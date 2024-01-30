@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:57:25 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/29 19:02:24 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/30 15:44:52 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,15 +213,18 @@ void			play_music(void *data);
 void			initializer_audio(t_window *window);
 
 int				ennemy_parse(char **map, t_window *window);
-void			ennemy_init(t_window *window, t_parse_ennemy *enmy, char **map);
-void			pos_ennemy_player(t_parse_ennemy *enmy);
-int				ennemy_parse_loop(char **map, t_parse_ennemy *enmy);
-int				parsing_ennemy(t_parse_ennemy *enmy);
+void			ennemy_init(t_window *window, t_parse_ennemy *enmy);
+void			pos_ennemy_player(t_parse_ennemy *enmy, char **map);
+int				ennemy_parse_loop(char **map, t_parse_ennemy *enmy, t_window *window);
+int				parsing_ennemy(t_parse_ennemy *enmy, char **map, t_window *window);
 void		    go_north(t_parse_ennemy *enmy);
 void		    go_west(t_parse_ennemy *enmy);
 void		    go_south(t_parse_ennemy *enmy);
 void		    go_east(t_parse_ennemy *enmy);
 int				go_nowhere(t_parse_ennemy *enmy);
+int				choose_path(t_parse_ennemy *enmy);
+int				cross_pass(t_parse_ennemy *enmy);
+int				is_already_pass(t_parse_ennemy *enmy, int x, int y);
 char			**ft_strdup_double(char **str);
 
 #endif
