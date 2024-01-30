@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:57:25 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/30 16:01:58 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/30 16:23:31 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,26 +129,33 @@ typedef struct s_mouse
 	int		mouse_y;
 }				t_mouse;
 
+typedef struct s_menu
+{
+	void	*img_ptr;
+	void	*img_data;
+}				t_menu;
+
 typedef struct s_window
 {
-	void	*mlx_ptr;
-	void	*win_ptr;
-	void	*img_ptr;
-	char	*img_data;
-	int		bits;
-	int		size_line_img;
-	int		endian;
-	t_data	data;
-	char	*north;
-	char	*south;
-	char	*west;
-	char	*east;
-	int		floor;
-	int		ceiling;
-	t_music	sound;
-	t_keys	keys;
-	t_mouse	win;
+	void		*mlx_ptr;
+	void		*win_ptr;
+	void		*img_ptr;
+	char		*img_data;
+	int			bits;
+	int			size_line_img;
+	int			endian;
+	t_data		data;
+	char		*north;
+	char		*south;
+	char		*west;
+	char		*east;
+	int			floor;
+	int			ceiling;
+	t_music		sound;
+	t_keys		keys;
+	t_mouse		win;
 	t_ennemy	ennemy;
+	t_menu		menu;
 	bool		stop;
 }	t_window;
 

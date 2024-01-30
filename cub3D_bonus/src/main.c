@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
+/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/29 15:31:57 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/30 16:23:51 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,22 @@ void	draw_player(t_window *window)
 	update_mlx_infos(window->mlx_ptr, window->win_ptr, window->img_ptr);
 }
 
+int	create_menu(t_window *window)
+{
+	window->menu.img_ptr = mlx_new_image(window->mlx_ptr, WIDTH, HEIGHT);
+	if (window->img_ptr == NULL)
+		return (perror("Une erreur s'est produite "), mlx_destroy_window
+			(window->mlx_ptr, window->win_ptr), mlx_destroy_display
+			(window->mlx_ptr), free(window->mlx_ptr), 0);
+	window->img_data = mlx_get_data_addr(window->img_ptr, &(window->bits),
+				&(window->size_line_img), &(window->endian));
+	if (window->menu.img_data == NULL)
+		return (perror("Une erreur s'est produite "), mlx_destroy_image
+			(window->mlx_ptr, window->img_ptr), mlx_destroy_window
+			(window->mlx_ptr, window->win_ptr), mlx_destroy_display
+			(window->mlx_ptr), free(window->mlx_ptr), 0);
+}
+
 int	main(int ac, char **av)
 {
 	t_window	window;
@@ -92,6 +108,8 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		return (print_error(RED "Error : not enought args\n" NC));
 	start_garbage();
+	if (!create_menu(&window))
+		return (0);
 	handle_error(&window, av[1]);
 	if (!create_window(&window))
 		return (0);
