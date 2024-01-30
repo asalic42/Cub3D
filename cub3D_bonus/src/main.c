@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/29 15:31:57 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/30 17:51:24 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	cast_ray(t_window *window)
 		left_or_right(&all_stuff, window);
 		find_closest_vertical_intersection(&all_stuff, window);
 		comp = comp_distance(&all_stuff);
-		all_stuff.lenght_tab[all_stuff.r] = (int)all_stuff.dist_t;
+		all_stuff.lenght_tab[all_stuff.r] = all_stuff.dist_t;
 		calculate_line_height(&all_stuff, window);
 		wich_texture(comp, textures, window, &all_stuff);
 		increment_angle(&all_stuff);

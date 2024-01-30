@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:57:25 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/29 18:26:51 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/30 15:04:38 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,7 @@ typedef struct s_window
 	t_music		sound;
 	t_keys		keys;
 	t_mouse		win;
-	t_ennemy	ennemies[128];
+	t_ennemy	ennemies[20];
 	int			ennemies_count;
 	bool		stop;
 }	t_window;

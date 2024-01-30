@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_casting_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:11:12 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/29 15:38:38 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/30 16:05:29 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ int	comp_distance(t_stuff_for_ray_casting *all_stuff)
 	if (all_stuff->map->map[(int)all_stuff->ry * all_stuff->map->x + \
 		(int)all_stuff->rx] == 3)
 		return_value = 5;
-	if (all_stuff->map->map[(int)all_stuff->ry * all_stuff->map->x + \
+	else if (all_stuff->map->map[(int)all_stuff->ry * all_stuff->map->x + \
 		(int)all_stuff->rx] == 5)
 		return_value = 6;
 	return (return_value);

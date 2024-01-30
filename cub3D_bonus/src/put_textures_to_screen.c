@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_textures_to_screen.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 21:09:49 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/29 15:38:33 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/30 16:41:40 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	calculations(t_put_texture_to_img_data *variables,
 	{
 		variables->texture_position = variables->texture_step
 			* (-variables->y);
-		variables->y += -variables->y;
+		variables->y -= variables->y;
 	}
 }
 
