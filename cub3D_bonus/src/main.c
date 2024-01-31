@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
+/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/30 17:51:24 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/31 18:31:20 by raphael          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	cast_ray(t_window *window)
 		left_or_right(&all_stuff, window);
 		find_closest_vertical_intersection(&all_stuff, window);
 		comp = comp_distance(&all_stuff);
-		all_stuff.lenght_tab[all_stuff.r] = all_stuff.dist_t;
+		all_stuff.lenght_tab[all_stuff.r] = all_stuff.line_h;
 		calculate_line_height(&all_stuff, window);
 		wich_texture(comp, textures, window, &all_stuff);
 		increment_angle(&all_stuff);
@@ -73,9 +73,9 @@ void	draw_player(t_window *window)
 
 	player = get_player_instance();
 	if (!ceilling.width)
-		ceilling = init_rectangle(0, 0, (WIDTH), (HEIGHT) / 2);
+		ceilling = init_rectangle(0, 0, (WIDTH), (HEIGHT) / 1.9);
 	if (!floor.width)
-		floor = init_rectangle(0, (HEIGHT) / 2, WIDTH, HEIGHT);
+		floor = init_rectangle(0, (HEIGHT) / 1.9, WIDTH, HEIGHT);
 	draw_line(ceilling, window->img_ptr,
 		mlx_get_color_value(window->mlx_ptr, window->ceiling), 0);
 	draw_line(floor, window->img_ptr,
@@ -97,8 +97,8 @@ int	main(int ac, char **av)
 		return (0);
 	update_mlx_infos(&window.mlx_ptr, &window.win_ptr, &window.img_ptr);
 	init_textures(&window, "./textures/door_eye_blood.xpm", "./textures/ennemy1.xpm");
-	initializer_audio(&window);
-	pthread_create(&window.sound.audio, NULL, (void (*))play_music, &window);
+	//initializer_audio(&window);
+	// pthread_create(&window.sound.audio, NULL, (void (*))play_music, &window);
 	mlx_loop_hook(window.mlx_ptr, &move_player, &window);
 	mlx_hook(window.win_ptr, 17, KeyPressMask, &destroy_window, &window);
 	mlx_hook(window.win_ptr, KeyPress, 0, &key_press, &window);

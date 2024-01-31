@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_casting_utils2.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
+/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:24:20 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/30 16:27:48 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/01/31 18:31:27 by raphael          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ void	calculate_line_height(t_stuff_for_ray_casting *all_stuff,
 	if (all_stuff->ca > 2 * PI)
 		all_stuff->ca -= 2 * PI;
 	all_stuff->dist_t = all_stuff->dist_t * cos(all_stuff->ca) / 1.5;
-	all_stuff->line_h = (HEIGHT) / all_stuff->dist_t;
-	all_stuff->line_off = (HEIGHT) / 2 - all_stuff->line_h / 2;
+	all_stuff->line_h = (HEIGHT) / (all_stuff->dist_t);
+	all_stuff->line_off = (HEIGHT) / 1.9 - all_stuff->line_h / 2;
 }
 
 void	increment_angle(t_stuff_for_ray_casting *all_stuff)
