@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/30 16:23:51 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/31 16:59:40 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,20 +85,20 @@ void	draw_player(t_window *window)
 	update_mlx_infos(window->mlx_ptr, window->win_ptr, window->img_ptr);
 }
 
-int	create_menu(t_window *window)
+void	create_menu(t_window *window)
 {
-	window->menu.img_ptr = mlx_new_image(window->mlx_ptr, WIDTH, HEIGHT);
-	if (window->img_ptr == NULL)
-		return (perror("Une erreur s'est produite "), mlx_destroy_window
-			(window->mlx_ptr, window->win_ptr), mlx_destroy_display
-			(window->mlx_ptr), free(window->mlx_ptr), 0);
-	window->img_data = mlx_get_data_addr(window->img_ptr, &(window->bits),
-				&(window->size_line_img), &(window->endian));
-	if (window->menu.img_data == NULL)
-		return (perror("Une erreur s'est produite "), mlx_destroy_image
-			(window->mlx_ptr, window->img_ptr), mlx_destroy_window
-			(window->mlx_ptr, window->win_ptr), mlx_destroy_display
-			(window->mlx_ptr), free(window->mlx_ptr), 0);
+	t_mlx_stuff *mlx;
+	
+	mlx = get_mlx_ptr();
+	window->menu.img_data = mlx_xpm_file_to_image(mlx->mlx_ptr, "./textures/menu_bis.xpm",
+			&window->menu.width, &window->menu.height);
+	mlx_put_image_to_window(window->mlx_ptr, window->win_ptr, window->menu.img_data, 0, 0);
+	usleep(1000000);
+	// mettre un hook de clic de souris
+	// ! WARNING !: les px d'apres sont calcule avec y bas > y haut et x left < x right
+	// lorsque la souris clique entre : x(402px, 585px) et y(284px, 265px) -> start the game
+	// 								  :	x(464px, 510px) et y(342px, 321px) -> exit
+	mlx_destroy_image(mlx->mlx_ptr, window->menu.img_data);
 }
 
 int	main(int ac, char **av)
@@ -108,12 +108,11 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		return (print_error(RED "Error : not enought args\n" NC));
 	start_garbage();
-	if (!create_menu(&window))
-		return (0);
 	handle_error(&window, av[1]);
 	if (!create_window(&window))
 		return (0);
 	update_mlx_infos(&window.mlx_ptr, &window.win_ptr, &window.img_ptr);
+	create_menu(&window);
 	init_textures(&window, "./textures/door_eye_blood.xpm", "./textures/ennemy1.xpm");
 	initializer_audio(&window);
 	pthread_create(&window.sound.audio, NULL, (void (*))play_music, &window);

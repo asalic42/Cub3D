@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:57:25 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/30 16:23:31 by asalic           ###   ########.fr       */
+/*   Updated: 2024/01/31 16:36:12 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,8 @@ typedef struct s_menu
 {
 	void	*img_ptr;
 	void	*img_data;
+	int		height;
+	int		width;
 }				t_menu;
 
 typedef struct s_window
