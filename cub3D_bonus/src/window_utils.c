@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
+/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:30:50 by rciaze            #+#    #+#             */
-/*   Updated: 2024/02/01 11:40:52 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/02/01 15:37:15 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,20 @@ int	destroy_window(t_window *window)
 		SDL_CloseAudioDevice(window->sound.audio_device);
 	if (window->sound.init)
 		SDL_Quit();
+	exit(EXIT_SUCCESS);
+}
+
+int	exit_menu(t_window *window)
+{
+	t_mlx_stuff		*mlx_infos;
+
+	mlx_infos = get_mlx_ptr();
+	if (window->menu.img_data)
+		mlx_destroy_image(mlx_infos->mlx_ptr, window->menu.img_data);
+	mlx_destroy_window(mlx_infos->mlx_ptr, mlx_infos->win_ptr);
+	ft_printf(GREEN"Window is closing\n"NC);
+	mlx_destroy_display(mlx_infos->mlx_ptr);
+	free(mlx_infos->mlx_ptr);
+	free_garbage();
 	exit(EXIT_SUCCESS);
 }

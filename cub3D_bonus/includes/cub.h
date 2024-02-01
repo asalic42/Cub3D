@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
+/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:57:25 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/30 15:04:38 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/02/01 15:35:32 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,15 @@ typedef struct s_parse_ennemy
 	int 	*savey;
 	char	*cross_count;
 	char	*from_pass;
+	char	**map;
 	char	dir;
-	int		bad_posx[10];
-	int		bad_posy[10];
+	int		bad_posx[20];
+	int		bad_posy[20];
 	int		play_posx;
 	int		play_posy;
 	int 	x;
 	int 	y;
+	int		i;
 	int		ennemies;
 	int		crosspass;	
 }				t_parse_ennemy;
@@ -128,6 +130,14 @@ typedef struct s_mouse
 	int		mouse_y;
 }				t_mouse;
 
+typedef struct s_menu
+{
+	void	*img_ptr;
+	void	*img_data;
+	int		height;
+	int		width;
+}				t_menu;
+
 typedef struct s_window
 {
 	void		*mlx_ptr;
@@ -149,6 +159,7 @@ typedef struct s_window
 	t_mouse		win;
 	t_ennemy	ennemies[20];
 	int			ennemies_count;
+	t_menu		menu;
 	bool		stop;
 }	t_window;
 
@@ -211,8 +222,22 @@ void			init_data(t_window *window, char *av);
 /* * * * * BONUS * * * * */
 void			play_music(void *data);
 void			initializer_audio(t_window *window);
-int				parsing_ennemy(char **map, t_window *window, t_parse_ennemy *enmy);
-int				pos_ennemy_player(char **map, t_window *window);
+
+int				ennemy_parse(char **map, t_window *window);
+void			ennemy_init(t_window *window, t_parse_ennemy *enmy);
+void			pos_ennemy_player(t_parse_ennemy *enmy, char **map);
+int				ennemy_parse_loop(char **map, t_parse_ennemy *enmy, t_window *window);
+int				parsing_ennemy(t_parse_ennemy *enmy, char **map, t_window *window);
+void		    go_north(t_parse_ennemy *enmy);
+void		    go_west(t_parse_ennemy *enmy);
+void		    go_south(t_parse_ennemy *enmy);
+void		    go_east(t_parse_ennemy *enmy);
+int				go_nowhere(t_parse_ennemy *enmy);
+int				choose_path(t_parse_ennemy *enmy);
+int				cross_pass(t_parse_ennemy *enmy);
+int				is_already_pass(t_parse_ennemy *enmy, int x, int y);
 char			**ft_strdup_double(char **str);
+
+int				exit_menu(t_window *window);
 
 #endif
