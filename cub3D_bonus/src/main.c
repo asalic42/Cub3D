@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2024/02/01 14:29:47 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/02/01 14:41:11 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void	cast_ray(t_window *window)
 	fps = get_fps_instance();
 	init_ray(&all_stuff, window);
 	textures = get_textures_instance();
-	all_stuff.r = 150;
+	all_stuff.r = 300 / (WIDTH / NB_OF_STRIPES);
 	all_stuff.player = get_player_instance();
-	while (++all_stuff.r < NB_OF_STRIPES - 150)
+	while (++all_stuff.r < NB_OF_STRIPES - 300 / (WIDTH / NB_OF_STRIPES))
 	{
 		init_distances(&all_stuff);
 		up_or_down(&all_stuff, window);

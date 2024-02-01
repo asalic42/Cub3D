@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 17:34:24 by asalic            #+#    #+#             */
-/*   Updated: 2024/02/01 14:29:45 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/02/01 15:18:30 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 # define PI3 4.71238898025
 # define DR 0.0006363179
 # define R_FOV 1.22173
-# define NB_OF_STRIPES 960
+# define NB_OF_STRIPES 1920
 # define WIDTH 1920
 # define HEIGHT 1010
 
@@ -162,6 +162,7 @@ typedef	struct s_print_ennemy
 	char	*value;
 	char	*pixel;
 	int		i;
+	int		width;
 }	t_print_ennemy;
 
 typedef	struct s_fps

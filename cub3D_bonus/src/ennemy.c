@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 11:27:15 by rciaze            #+#    #+#             */
-/*   Updated: 2024/02/01 14:10:33 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/02/01 15:17:46 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	x_loop(t_window *window, t_print_ennemy *data, t_textures_path *textures
 	while (data->start_x < data->end_x && data->start_x < WIDTH - 300)
 	{
 		if (data->start_x >= 300 && (all_stuff->line_h
-			> all_stuff->lenght_tab [data->start_x]))
+			> all_stuff->lenght_tab [data->start_x / data->width]))
 		{
 			data->y = (HEIGHT / 1.9) - all_stuff->line_h / 2;
 			data->end_y = data->y + all_stuff->line_h;
@@ -84,17 +84,12 @@ void	x_loop(t_window *window, t_print_ennemy *data, t_textures_path *textures
 void	calculate_distance(t_window *window, t_print_ennemy *data, t_textures_path *textures
 	, t_stuff_for_ray_casting *all_stuff)
 {
-	data->dist = window->ennemies[data->i].dist_to_player;
-	all_stuff->line_h = (HEIGHT + 650) / data->dist;
+	data->dist = window->ennemies[data->i].dist_to_player * 0.7647059;
+	all_stuff->line_h = (HEIGHT) / data->dist;
 	data->texture_step = (float)textures->xpm_ennemy.height
 		/ all_stuff->line_h;
 	data->position_x = 0;
-	
-	data->start_x = data->save * 2;
-	//if (window->ennemies[data->i].x > 38)
-	//{
-	//	printf("%f ", data->target_angle);
-	//}
+	data->start_x = data->save * (WIDTH / NB_OF_STRIPES) - all_stuff->line_h / 2;
 	data->end_x = data->start_x + all_stuff->line_h;	
 }
 
@@ -108,6 +103,7 @@ void	ennemy(t_textures_path *textures, t_stuff_for_ray_casting *all_stuff,
 {
 	t_print_ennemy	data;
 
+	data.width = WIDTH / NB_OF_STRIPES;
 	data.i = -1;
 	while (++data.i < window->ennemies_count)
 		window->ennemies[data.i].dist_to_player = distance(all_stuff->player->x,

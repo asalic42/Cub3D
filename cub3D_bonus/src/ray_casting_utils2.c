@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:24:20 by rciaze            #+#    #+#             */
-/*   Updated: 2024/02/01 14:30:26 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/02/01 14:58:30 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	init_ray(t_stuff_for_ray_casting *all_stuff, t_window *window)
 	(void)(window);
 	all_stuff->player = get_player_instance();
 	all_stuff->map = get_map_instance();
-	all_stuff->ra = all_stuff->player->a - R_FOV / 2 + (R_FOV / NB_OF_STRIPES * 150);
+	all_stuff->ra = all_stuff->player->a - R_FOV / 2 + (R_FOV / NB_OF_STRIPES * (300 / (WIDTH / NB_OF_STRIPES)));
 	all_stuff->ra = normalize_angle(all_stuff->ra);
 }
 
@@ -46,9 +46,9 @@ void	calculate_line_height(t_stuff_for_ray_casting *all_stuff,
 	// all_stuff->ca = atan2(all_stuff->player->a, all_stuff->ra);
 	all_stuff->ca = all_stuff->ra - all_stuff->player->a;
 	all_stuff->ca = normalize_angle(all_stuff->ca);
-	all_stuff->dist_t *= cos(all_stuff->ca) * 0.764705882353;
+	all_stuff->dist_t *= cos(all_stuff->ca) * 0.7647059;
 	all_stuff->line_h = (HEIGHT) / (all_stuff->dist_t);
-	all_stuff->line_off = (HEIGHT) / 2 - all_stuff->line_h / 2;
+	all_stuff->line_off = (HEIGHT) / 1.9 - all_stuff->line_h / 2;
 }
 
 void	increment_angle(t_stuff_for_ray_casting *all_stuff)
