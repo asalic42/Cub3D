@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:57:25 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/31 16:36:12 by asalic           ###   ########.fr       */
+/*   Updated: 2024/02/01 15:05:18 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,5 +235,7 @@ int				choose_path(t_parse_ennemy *enmy);
 int				cross_pass(t_parse_ennemy *enmy);
 int				is_already_pass(t_parse_ennemy *enmy, int x, int y);
 char			**ft_strdup_double(char **str);
+
+int				exit_menu(t_window *window);
 
 #endif
