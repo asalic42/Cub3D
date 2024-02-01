@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2024/02/01 15:07:40 by asalic           ###   ########.fr       */
+/*   Updated: 2024/02/01 15:30:46 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void	create_menu(t_window window)
 	t_mlx_stuff *mlx;
 	
 	mlx = get_mlx_ptr();
-	window.menu.img_data = mlx_xpm_file_to_image(mlx->mlx_ptr, "./textures/menu_bis.xpm",
+	window.menu.img_data = mlx_xpm_file_to_image(mlx->mlx_ptr, "./textures/new_menu.xpm",
 			&window.menu.width, &window.menu.height);
 	mlx_put_image_to_window(window.mlx_ptr, window.win_ptr, window.menu.img_data, 0, 0);
 	mlx_hook(window.win_ptr, ButtonPress, ButtonPressMask, &button_press, &window);
