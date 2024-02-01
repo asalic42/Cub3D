@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:24:20 by rciaze            #+#    #+#             */
-/*   Updated: 2024/02/01 14:58:30 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/02/01 17:55:09 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	calculate_line_height(t_stuff_for_ray_casting *all_stuff,
 	t_window *window)
 {
 	(void)(window);
-	// all_stuff->ca = atan2(all_stuff->player->a, all_stuff->ra);
 	all_stuff->ca = all_stuff->ra - all_stuff->player->a;
 	all_stuff->ca = normalize_angle(all_stuff->ca);
 	all_stuff->dist_t *= cos(all_stuff->ca) * 0.7647059;

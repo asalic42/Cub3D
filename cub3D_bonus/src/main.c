@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2024/02/01 15:38:21 by asalic           ###   ########.fr       */
+/*   Updated: 2024/02/01 20:41:06 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,12 @@ void	cast_ray(t_window *window)
 	fps->compteur++;
 }
 
+
 void	draw_and_count_fps(t_player_pos *player, t_window *win)
 {
 	t_fps			*fps;
 	int				temps;
+	static int		w_cmpt;
 
 	fps = get_fps_instance();
 	if (((double)(fps->end - fps->start) / CLOCKS_PER_SEC) > 1.5)
@@ -62,6 +64,22 @@ void	draw_and_count_fps(t_player_pos *player, t_window *win)
 	mlx_put_image_to_window(win->mlx_ptr, win->win_ptr,
 		win->img_ptr, 0, 0);
 	fps->str = ft_strjoin("Fps = ", ft_itoa(temps));
+	if (!w_cmpt)
+		w_cmpt = -1;
+	if (win->anim_bool)
+	{
+		win->anim_bool = false;
+		w_cmpt = 1;
+	}		
+	if (w_cmpt > 0)
+	{
+		w_cmpt++;
+		if (w_cmpt > 5)
+			w_cmpt = -1;
+		print_weapon(win, &get_textures_instance()->xpm_weapon_firing, -1);
+	}
+	else
+		print_weapon(win, &get_textures_instance()->xpm_weapon, -1);
 	mlx_string_put(win->mlx_ptr, win->win_ptr, 1800, 50, 0xFFFFFF, fps->str);
 }
 

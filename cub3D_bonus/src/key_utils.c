@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:32:15 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/24 15:29:44 by raphael          ###   ########.fr       */
+/*   Updated: 2024/02/01 17:42:05 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,7 @@ int	key_press(int keycode, t_window *window)
 		window->keys.left = true;
 	if (!window->keys.right && keycode == 65363)
 		window->keys.right = true;
+	if (keycode == 65507)
+		shot_fired(window);
 	return (0);
 }

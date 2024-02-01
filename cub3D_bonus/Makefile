@@ -6,7 +6,7 @@
 #    By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/21 18:01:21 by asalic            #+#    #+#              #
-#    Updated: 2024/02/01 15:18:41 by rciaze           ###   ########.fr        #
+#    Updated: 2024/02/01 19:01:08 by rciaze           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,9 +44,9 @@ $(PATH_MLX) :
 	@make -s -C minilibx-linux/	
 
 $(PATH_LIBFT) :
-	@make -s -C libft
+	@make -s -C libft/
 clean	:
-	@make -s clean -C libft
+	@make -s clean -C libft/
 	@make -s clean -C minilibx-linux/
 	@rm -rf $(OBJ) $(OBJ_DIR)
 	@echo $(BOLD)$(LIGHT_GREEN)"Clean Done !\n"$(RESET)

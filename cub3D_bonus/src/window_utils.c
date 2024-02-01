@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:30:50 by rciaze            #+#    #+#             */
-/*   Updated: 2024/02/01 15:37:15 by asalic           ###   ########.fr       */
+/*   Updated: 2024/02/01 20:21:59 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int	create_window(t_window *window)
 		return (0);
 	mapp->x = window->data.ptr.width;
 	mapp->y = window->data.ptr.height;
+	mapp->mp = mapp->x * mapp->y;
 	player = get_player_instance();
 	find_player(mapp, player, window->data.ptr.map);
 	player->dx = cos(player->a) * 0.16;
@@ -70,6 +71,7 @@ int	create_window(t_window *window)
 	window->keys.right = false;
 	window->win.mouse_x = 0;
 	window->win.mouse_y = 0;
+	window->anim_bool = false;
 	return (1);
 }
 

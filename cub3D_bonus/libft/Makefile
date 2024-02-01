@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: asalic <asalic@student.42.fr>              +#+  +:+       +#+         #
+#    By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/15 12:06:39 by rciaze            #+#    #+#              #
-#    Updated: 2024/01/11 05:50:17 by asalic           ###   ########.fr        #
+#    Updated: 2024/02/01 18:59:14 by rciaze           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,8 @@ all : $(NAME)
 CLEANF = rm -f *.o
 
 SRCS =	ft_atoi.c \
+garbage.c \
+ft_malloc.c \
 ft_tolower.c \
 ft_toupper.c \
 ft_itoa.c \

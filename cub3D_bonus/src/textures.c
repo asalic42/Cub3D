@@ -6,19 +6,18 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:28:16 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/29 14:42:33 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/02/01 20:41:02 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/main.h"
 
-void	init_textures_two(t_window *window, char *door, char *ennemy)
+void	init_textures_two(t_window *window, char *door, char *ennemy, t_mlx_stuff *mlx)
 {
 	t_textures_path	*textures;
-	t_mlx_stuff		*mlx;
 	t_tmp_pixel		tmp_p;
+	int				i;
 
-	mlx = get_mlx_ptr();
 	textures = get_textures_instance();
 	mlx_string_put(mlx->mlx_ptr, mlx->win_ptr, 50, 200, 0xFF00AA, \
 		"Loading east texture ...");
@@ -36,6 +35,24 @@ void	init_textures_two(t_window *window, char *door, char *ennemy)
 		&textures->xpm_ennemy.width, &textures->xpm_ennemy.height);
 	textures->xpm_ennemy.xpm_data = mlx_get_data_addr(textures->xpm_ennemy.xpm, \
 		&tmp_p.bits_per_pixel, &tmp_p.size_line, &tmp_p.endian);
+
+	textures->xpm_weapon.xpm = mlx_xpm_file_to_image(mlx->mlx_ptr, "./textures/weapon.xpm", \
+		&textures->xpm_weapon.width, &textures->xpm_weapon.height);
+	textures->xpm_weapon.xpm_data = mlx_get_data_addr(textures->xpm_weapon.xpm, \
+		&tmp_p.bits_per_pixel, &tmp_p.size_line, &tmp_p.endian);
+	
+	textures->xpm_weapon_firing.xpm = mlx_xpm_file_to_image(mlx->mlx_ptr, "./textures/weapon_firing.xpm", \
+		&textures->xpm_weapon_firing.width, &textures->xpm_weapon_firing.height);
+	textures->xpm_weapon_firing.xpm_data = mlx_get_data_addr(textures->xpm_weapon_firing.xpm, \
+		&tmp_p.bits_per_pixel, &tmp_p.size_line, &tmp_p.endian);
+	
+	textures->xpm_ennemy_dead.xpm = mlx_xpm_file_to_image(mlx->mlx_ptr, "./textures/ennemy_dead.xpm", \
+		&textures->xpm_ennemy_dead.width, &textures->xpm_ennemy_dead.height);
+	textures->xpm_ennemy_dead.xpm_data = mlx_get_data_addr(textures->xpm_ennemy_dead.xpm, \
+		&tmp_p.bits_per_pixel, &tmp_p.size_line, &tmp_p.endian);
+	i = -1;
+	while (++i < window->ennemies_count)	
+		window->ennemies[i].tex = &textures->xpm_ennemy;
 }
 
 void	init_textures(t_window *window, char *door, char *ennemy)
@@ -64,5 +81,5 @@ void	init_textures(t_window *window, char *door, char *ennemy)
 			&textures->xpm3.width, &textures->xpm3.height);
 	textures->xpm3.xpm_data = mlx_get_data_addr(textures->xpm3.xpm,
 			&tmp_p.bits_per_pixel, &tmp_p.size_line, &tmp_p.endian);
-	init_textures_two(window, door, ennemy);
+	init_textures_two(window, door, ennemy, mlx);
 }

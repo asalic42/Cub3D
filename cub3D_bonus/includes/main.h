@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 17:34:24 by asalic            #+#    #+#             */
-/*   Updated: 2024/02/01 16:34:49 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/02/01 20:20:00 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MAIN_H
 
 # include "../minilibx-linux/mlx.h"
+# include "../libft/libft.h"
 # include "forme.h"
 # include "cub.h"
 # include <X11/X.h>
@@ -40,11 +41,53 @@
 # define WIDTH 1920
 # define HEIGHT 1010
 
-
-
 extern int			compteur;
 extern clock_t		all_start;
 extern clock_t		all_end;
+
+
+typedef struct s_music
+{
+	pthread_t			audio;
+	int					init;
+	SDL_AudioSpec		wav_spec;
+	SDL_AudioDeviceID	audio_device;
+	Uint32				wav_lenght;
+	Uint8				*wav_buffer;
+}				t_music;
+
+typedef struct s_keys
+{
+	bool	w;
+	bool	a;
+	bool	s;
+	bool	d;
+	bool	e;
+	bool	right;
+	bool	left;
+}				t_keys;
+
+typedef struct s_mouse
+{
+	int		mouse_x;
+	int		mouse_y;
+}				t_mouse;
+
+typedef struct s_menu
+{
+	void	*img_ptr;
+	void	*img_data;
+	int		height;
+	int		width;
+}				t_menu;
+
+typedef struct s_ptr
+{
+	int			width;
+	int			height;
+	char		**map;
+}				t_ptr;
+
 typedef struct s_player_pos
 {
 	float	x;
@@ -80,6 +123,9 @@ typedef struct s_textures_path
 	t_texture_details	xpm4;
 	t_texture_details	xpm_door;
 	t_texture_details	xpm_ennemy;
+	t_texture_details	xpm_ennemy_dead;
+	t_texture_details	xpm_weapon;
+	t_texture_details	xpm_weapon_firing;
 }	t_textures_path;
 
 typedef struct s_stuff_for_ray_casting
@@ -142,6 +188,13 @@ typedef struct s_minimap
 	int		my;
 }	t_minimap;
 
+typedef struct s_data
+{
+	int		x;
+	int		y;
+	t_ptr	ptr;
+}				t_data;
+
 typedef	struct s_print_ennemy
 {
 	float		x_vector;
@@ -174,7 +227,73 @@ typedef	struct s_fps
 	char	*str;
 }	t_fps;
 
+typedef	struct s_ennemy
+{
+	float				x;
+	float				y;
+	float				dist_to_player;
+	t_texture_details	*tex;
+}	t_ennemy;
 
+typedef struct s_window
+{
+	void		*mlx_ptr;
+	void		*win_ptr;
+	void		*img_ptr;
+	char		*img_data;
+	int			bits;
+	int			size_line_img;
+	int			endian;
+	t_data		data;
+	char		*north;
+	char		*south;
+	char		*west;
+	char		*east;
+	int			floor;
+	int			ceiling;
+	t_music		sound;
+	t_keys		keys;
+	t_mouse		win;
+	t_ennemy	ennemies[20];
+	int			ennemies_count;
+	t_menu		menu;
+	bool		stop;
+	bool		anim_bool;
+}	t_window;
+
+typedef struct s_parse
+{
+	int		x;
+	int		y;
+	int		count_dir;
+	int		fd;
+	char	*buffer;
+	char	**map;
+}				t_parse;
+
+typedef struct s_parse_ennemy
+{
+	int		*savex;
+	int 	*savey;
+	char	*cross_count;
+	char	*from_pass;
+	char	**map;
+	char	dir;
+	int		bad_posx[20];
+	int		bad_posy[20];
+	int		play_posx;
+	int		play_posy;
+	int 	x;
+	int 	y;
+	int		i;
+	int		ennemies;
+	int		crosspass;	
+}				t_parse_ennemy;
+
+
+
+void			shot_fired(t_window *window);
+void			print_weapon(t_window *window, t_texture_details *xpm, int j);
 int				comparator(const void* p, const void* p2);
 int				size_of_array(t_window *window);
 t_fps			*get_fps_instance(void);
@@ -226,4 +345,81 @@ void			calculate_line_height(t_stuff_for_ray_casting *all_stuff, \
 					t_window *window);
 void			increment_angle(t_stuff_for_ray_casting *all_stuff);
 void			is_player_out_of_bouds(t_player_pos *player, t_window *window);
+
+/* * * * ERROR HANDLE * * * */
+void			error_files(char *cub);
+void			handle_error(t_window *window, char *map);
+void			count_error(t_parse *map, int fd);
+int				error_cases(void);
+int				print_error(char *str);
+
+/* * * * CHECK ERRORS * * * */
+int				is_goodext(char *cub);
+int				end_filename(char *cub);
+int				is_goodfile(char *cub);
+int				only_one_thing(char *check_line, int i, int len_player);
+int				error_map(char *map);
+
+//Parsing
+int				map_up_n_down(char **map, t_data *data);
+int				is_zero(int y, char **map, t_data *data);
+int				first_line(t_data *data, char **map);
+int				main_parse(char **map, t_data *data);
+int				is_space(t_data *data, char **map);
+int				contour_check(t_data *data, char **map);
+int				is_contour(int x, int y, char **map, t_data *data);
+int				is_mapfile(char *map, t_window *window);
+char			*loop_gnl(t_parse *parser);
+
+int				is_good_color(char *comp, char *str, t_window *window);
+int				is_good_txture(char *comp, char *str, t_window *window);
+char			*convert_rgb_to_hexa(char **rgb);
+long			hexa_to_decimal(const char *hexadecimal);
+
+/* * * * GARBAGE * * * */
+t_garbage		*start_garbage(void);
+t_garbage_lst	*new_elmt(void *pointer_to);
+void			garbage_add(void *pointer);
+void			free_garbage(void);
+void			add_d_t_garbage(void **double_array, int len);
+t_garbage		*get_garbage(void);
+void			*ft_malloc(size_t size);
+void			malloc_failure(void);
+
+/* * * * UTILS * * * */
+int				is_in_char(char c);
+int				countmap_y(char	*mappy);
+void			countmap_x(char	*mappy, t_window *window);
+void			is_in_char_error(t_parse map, int fd, int width);
+int				init_count(char *mappy, t_parse *map);
+char			*cut_until(char *str, char cut);
+char			*cut_from(char *str, char cut);
+
+/* * * * * TAB MAP * * * */
+char			**ft_maptab(char *map, t_data *data, t_window *window);
+char			*go_map(t_parse *put, t_data *data, t_window *window, int tour);
+
+/* * * * MAIN CORE * * * */
+void			init_data(t_window *window, char *av);
+
+/* * * * * BONUS * * * * */
+void			play_music(void *data);
+void			initializer_audio(t_window *window);
+
+int				ennemy_parse(char **map, t_window *window);
+void			ennemy_init(t_window *window, t_parse_ennemy *enmy);
+void			pos_ennemy_player(t_parse_ennemy *enmy, char **map);
+int				ennemy_parse_loop(char **map, t_parse_ennemy *enmy, t_window *window);
+int				parsing_ennemy(t_parse_ennemy *enmy, char **map, t_window *window);
+void		    go_north(t_parse_ennemy *enmy);
+void		    go_west(t_parse_ennemy *enmy);
+void		    go_south(t_parse_ennemy *enmy);
+void		    go_east(t_parse_ennemy *enmy);
+int				go_nowhere(t_parse_ennemy *enmy);
+int				choose_path(t_parse_ennemy *enmy);
+int				cross_pass(t_parse_ennemy *enmy);
+int				is_already_pass(t_parse_ennemy *enmy, int x, int y);
+char			**ft_strdup_double(char **str);
+
+int				exit_menu(t_window *window);
 #endif
