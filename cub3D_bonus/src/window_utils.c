@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:30:50 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/29 17:34:29 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/02/01 11:40:52 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ int	create_window(t_window *window)
 	mapp->y = window->data.ptr.height;
 	player = get_player_instance();
 	find_player(mapp, player, window->data.ptr.map);
-	player->dx = cos(player->a) * 0.08;
-	player->dy = sin(player->a) * 0.08;
+	player->dx = cos(player->a) * 0.16;
+	player->dy = sin(player->a) * 0.16;
 	window->keys.a = false;
 	window->keys.s = false;
 	window->keys.w = false;

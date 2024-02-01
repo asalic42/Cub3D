@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ennemy.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 11:27:15 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/31 18:54:34 by raphael          ###   ########.fr       */
+/*   Updated: 2024/02/01 14:10:33 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,23 +29,26 @@ void	calculate_angle(t_window *window, t_print_ennemy *data,
 	data->relative_angle *= -1;
 	data->relative_angle += 35;
 	data->relative_angle = 70 - data->relative_angle;
-	data->save = data->relative_angle * (960 / 70);
+	data->save = data->relative_angle * (NB_OF_STRIPES / 70);
 }
 
 void	draw_ennemy(t_window *window, t_print_ennemy *data,
 	t_textures_path *textures)
 {
-	while (data->y < data->end_y && data->y < HEIGHT)
+	while (data->y < data->end_y && data->y < HEIGHT - 150)
 	{
-		data->tex_y = (int)(data->texture_position);
-		data->value = textures->xpm_ennemy.xpm_data
-			+ (data->tex_y * textures->xpm_ennemy.width + data->tex_x) * (4);
-		if (*(unsigned int *)data->value != 0x00FF00)
+		if (data->y > 150)
 		{
-			data->pixel = window->img_data + (data->y * WIDTH
-					+ data->start_x) * 4;
-			*(unsigned int *)data->pixel = *(unsigned int *)data->value;
-			*(unsigned int *)(data->pixel + 4) = *(unsigned int *)data->value;
+			data->tex_y = (int)(data->texture_position);
+			data->value = textures->xpm_ennemy.xpm_data
+				+ (data->tex_y * textures->xpm_ennemy.width + data->tex_x) * (4);
+			if (*(unsigned int *)data->value != 0x00FF00)
+			{
+				data->pixel = window->img_data + (data->y * WIDTH
+						+ data->start_x) * 4;
+				*(unsigned int *)data->pixel = *(unsigned int *)data->value;
+				*(unsigned int *)(data->pixel + 4) = *(unsigned int *)data->value;
+			}
 		}
 		data->texture_position += data->texture_step;
 		data->y++;
@@ -55,10 +58,10 @@ void	draw_ennemy(t_window *window, t_print_ennemy *data,
 void	x_loop(t_window *window, t_print_ennemy *data, t_textures_path *textures
 	, t_stuff_for_ray_casting *all_stuff)
 {
-	while (data->start_x < data->end_x && data->start_x < WIDTH)
+	while (data->start_x < data->end_x && data->start_x < WIDTH - 300)
 	{
-		if (data->start_x >= 0 && (all_stuff->line_h
-			> all_stuff->lenght_tab [data->start_x / 2]))
+		if (data->start_x >= 300 && (all_stuff->line_h
+			> all_stuff->lenght_tab [data->start_x]))
 		{
 			data->y = (HEIGHT / 1.9) - all_stuff->line_h / 2;
 			data->end_y = data->y + all_stuff->line_h;

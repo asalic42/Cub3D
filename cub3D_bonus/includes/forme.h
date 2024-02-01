@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 19:03:42 by raphael           #+#    #+#             */
-/*   Updated: 2024/01/19 17:21:55 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/02/01 11:44:23 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,6 @@
 # include "basique_mlx_needed.h"
 
 # define ESC		65307
-
-# define WIDTH 1920
-# define HEIGHT 1010
 
 typedef struct s_rectangle
 {

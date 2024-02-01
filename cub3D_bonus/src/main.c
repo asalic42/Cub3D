@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/31 18:31:20 by raphael          ###   ########.fr       */
+/*   Updated: 2024/02/01 14:29:47 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void	cast_ray(t_window *window)
 	fps = get_fps_instance();
 	init_ray(&all_stuff, window);
 	textures = get_textures_instance();
-	all_stuff.r = -1;
+	all_stuff.r = 150;
 	all_stuff.player = get_player_instance();
-	while (++all_stuff.r < 960)
+	while (++all_stuff.r < NB_OF_STRIPES - 150)
 	{
 		init_distances(&all_stuff);
 		up_or_down(&all_stuff, window);
@@ -73,9 +73,9 @@ void	draw_player(t_window *window)
 
 	player = get_player_instance();
 	if (!ceilling.width)
-		ceilling = init_rectangle(0, 0, (WIDTH), (HEIGHT) / 1.9);
+		ceilling = init_rectangle(300, 150, (WIDTH) - 300, (HEIGHT) / 1.9);
 	if (!floor.width)
-		floor = init_rectangle(0, (HEIGHT) / 1.9, WIDTH, HEIGHT);
+		floor = init_rectangle(300, (HEIGHT) / 1.9, WIDTH - 300, HEIGHT - 150);
 	draw_line(ceilling, window->img_ptr,
 		mlx_get_color_value(window->mlx_ptr, window->ceiling), 0);
 	draw_line(floor, window->img_ptr,
@@ -97,6 +97,8 @@ int	main(int ac, char **av)
 		return (0);
 	update_mlx_infos(&window.mlx_ptr, &window.win_ptr, &window.img_ptr);
 	init_textures(&window, "./textures/door_eye_blood.xpm", "./textures/ennemy1.xpm");
+	t_line prout = init_rectangle(0, 0, WIDTH, HEIGHT);
+	draw_line(prout, window.img_ptr, 0x690000, 0);
 	//initializer_audio(&window);
 	// pthread_create(&window.sound.audio, NULL, (void (*))play_music, &window);
 	mlx_loop_hook(window.mlx_ptr, &move_player, &window);

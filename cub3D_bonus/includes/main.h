@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 17:34:24 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/30 17:51:20 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/02/01 14:29:45 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,12 @@
 # define PI2 1.57079632675
 # define PI3 4.71238898025
 # define DR 0.0006363179
+# define R_FOV 1.22173
+# define NB_OF_STRIPES 960
+# define WIDTH 1920
+# define HEIGHT 1010
+
+
 
 extern int			compteur;
 extern clock_t		all_start;
@@ -109,7 +115,7 @@ typedef struct s_stuff_for_ray_casting
 	unsigned int	color;
 	t_player_pos	*player;
 	t_map			*map;
-	float				lenght_tab[960];
+	float			lenght_tab[1920];
 }	t_stuff_for_ray_casting;
 
 typedef struct s_put_texture_to_img_data
