@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 11:27:15 by rciaze            #+#    #+#             */
-/*   Updated: 2024/02/01 15:17:46 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/02/01 16:37:11 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ void	draw_ennemy(t_window *window, t_print_ennemy *data,
 		{
 			data->tex_y = (int)(data->texture_position);
 			data->value = textures->xpm_ennemy.xpm_data
-				+ (data->tex_y * textures->xpm_ennemy.width + data->tex_x) * (4);
+				+ (data->tex_y * textures->xpm_ennemy.width + data->tex_x) * 4;
 			if (*(unsigned int *)data->value != 0x00FF00)
 			{
 				data->pixel = window->img_data + (data->y * WIDTH
 						+ data->start_x) * 4;
-				*(unsigned int *)data->pixel = *(unsigned int *)data->value;
-				*(unsigned int *)(data->pixel + 4) = *(unsigned int *)data->value;
+				*(unsigned int *)data->pixel = *data->value;
+				*(unsigned int *)(data->pixel + 4) = *data->value;
 			}
 		}
 		data->texture_position += data->texture_step;
@@ -61,7 +61,7 @@ void	x_loop(t_window *window, t_print_ennemy *data, t_textures_path *textures
 	while (data->start_x < data->end_x && data->start_x < WIDTH - 300)
 	{
 		if (data->start_x >= 300 && (all_stuff->line_h
-			> all_stuff->lenght_tab [data->start_x / data->width]))
+				> all_stuff->lenght_tab [data->start_x / data->width]))
 		{
 			data->y = (HEIGHT / 1.9) - all_stuff->line_h / 2;
 			data->end_y = data->y + all_stuff->line_h;
@@ -81,21 +81,16 @@ void	x_loop(t_window *window, t_print_ennemy *data, t_textures_path *textures
 	}
 }
 
-void	calculate_distance(t_window *window, t_print_ennemy *data, t_textures_path *textures
-	, t_stuff_for_ray_casting *all_stuff)
+void	calculate_distance(t_window *window, t_print_ennemy *data,
+	t_textures_path *textures, t_stuff_for_ray_casting *all_stuff)
 {
 	data->dist = window->ennemies[data->i].dist_to_player * 0.7647059;
 	all_stuff->line_h = (HEIGHT) / data->dist;
 	data->texture_step = (float)textures->xpm_ennemy.height
 		/ all_stuff->line_h;
 	data->position_x = 0;
-	data->start_x = data->save * (WIDTH / NB_OF_STRIPES) - all_stuff->line_h / 2;
-	data->end_x = data->start_x + all_stuff->line_h;	
-}
-
-int comparator(const void* p, const void* p2)
-{
-	return (((t_ennemy *)p)->dist_to_player < ((t_ennemy *)p2)->dist_to_player);
+	data->start_x = data->save * WIDTH / NB_OF_STRIPES - all_stuff->line_h / 2;
+	data->end_x = data->start_x + all_stuff->line_h;
 }
 
 void	ennemy(t_textures_path *textures, t_stuff_for_ray_casting *all_stuff,
@@ -107,9 +102,10 @@ void	ennemy(t_textures_path *textures, t_stuff_for_ray_casting *all_stuff,
 	data.i = -1;
 	while (++data.i < window->ennemies_count)
 		window->ennemies[data.i].dist_to_player = distance(all_stuff->player->x,
-			all_stuff->player->y, window->ennemies[data.i].x,
-			window->ennemies[data.i].y);
-	qsort((void *)window->ennemies, sizeof(window->ennemies) / sizeof(*window->ennemies) / 20 * window->ennemies_count, sizeof(*window->ennemies), comparator);
+				all_stuff->player->y, window->ennemies[data.i].x,
+				window->ennemies[data.i].y);
+	qsort(window->ennemies, size_of_array(window), sizeof(*window->ennemies),
+		comparator);
 	data.i = -1;
 	while (++data.i < window->ennemies_count)
 	{

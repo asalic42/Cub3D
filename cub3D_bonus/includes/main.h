@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 17:34:24 by asalic            #+#    #+#             */
-/*   Updated: 2024/02/01 15:35:37 by asalic           ###   ########.fr       */
+/*   Updated: 2024/02/01 16:34:49 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,25 +144,25 @@ typedef struct s_minimap
 
 typedef	struct s_print_ennemy
 {
-	float	x_vector;
-	float	y_vector;
-	float	lenght;
-	float	target_angle;
-	float	relative_angle;
-	int		save;
-	float	dist;
-	float	texture_step;
-	int		start_x;
-	int		end_x;
-	float	position_x;
-	int		end_y, y;
-	int		tex_x;
-	int		tex_y;
-	float	texture_position;
-	char	*value;
-	char	*pixel;
-	int		i;
-	int		width;
+	float		x_vector;
+	float		y_vector;
+	float		lenght;
+	float		target_angle;
+	float		relative_angle;
+	int			save;
+	float		dist;
+	float		texture_step;
+	int			start_x;
+	int			end_x;
+	float		position_x;
+	int			end_y, y;
+	int			tex_x;
+	int			tex_y;
+	float		texture_position;
+	unsigned	*value;
+	char		*pixel;
+	int			i;
+	int			width;
 }	t_print_ennemy;
 
 typedef	struct s_fps
@@ -175,6 +175,8 @@ typedef	struct s_fps
 }	t_fps;
 
 
+int				comparator(const void* p, const void* p2);
+int				size_of_array(t_window *window);
 t_fps			*get_fps_instance(void);
 float			normalize_angle(float angle);
 void			ennemy(t_textures_path *textures, t_stuff_for_ray_casting *all_stuff, t_window *window);
