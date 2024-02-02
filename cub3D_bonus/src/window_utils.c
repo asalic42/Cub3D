@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:30:50 by rciaze            #+#    #+#             */
-/*   Updated: 2024/02/01 15:37:15 by asalic           ###   ########.fr       */
+/*   Updated: 2024/02/02 18:09:19 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,10 +94,12 @@ int	exit_menu(t_window *window)
 	mlx_infos = get_mlx_ptr();
 	if (window->menu.img_data)
 		mlx_destroy_image(mlx_infos->mlx_ptr, window->menu.img_data);
+	if (mlx_infos->img_ptr)
+		mlx_destroy_image(mlx_infos->mlx_ptr, mlx_infos->img_ptr);
 	mlx_destroy_window(mlx_infos->mlx_ptr, mlx_infos->win_ptr);
 	ft_printf(GREEN"Window is closing\n"NC);
 	mlx_destroy_display(mlx_infos->mlx_ptr);
-	free(mlx_infos->mlx_ptr);
 	free_garbage();
+	free(mlx_infos->mlx_ptr);
 	exit(EXIT_SUCCESS);
 }
