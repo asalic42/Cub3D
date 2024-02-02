@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2024/02/02 18:47:09 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/02/02 19:09:18 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,8 +122,7 @@ void	start_game(t_window *window)
 	t_mlx_stuff *mlx;
 
 	mlx = get_mlx_ptr();
-	if (window->menu.img_data)
-		mlx_destroy_image(mlx->mlx_ptr, window->menu.img_data);
+	mlx_destroy_image(mlx->mlx_ptr, window->menu.img_data);
 	init_textures(window, "./textures/door_eye_blood.xpm", "./textures/ennemy1.xpm");
 	t_line prout = init_rectangle(0, 0, WIDTH, HEIGHT);
 	draw_line(prout, window->img_ptr, 0x690000, 0);
@@ -139,24 +138,56 @@ void	start_game(t_window *window)
 
 int	button_press(int mousepress, int x, int y, t_window *window)
 {
-	if (mousepress == 1 && (x >= 801 && x <= 1171 && y >= 529 && y <= 570))
+	if (mousepress == 1 && x >= 786 && x <= 1186 && y >= 523 && y <= 576)
 		start_game(window);
-	else if (mousepress == 1 && (x >= 926 && x <= 1022 && y >= 641 && y <= 685))
+	else if (mousepress == 1 && x >= 915 && x <= 1031 && y >= 635 && y <= 692)	
 		exit_menu(window);
 	return (0);
 }
 
-void	create_menu(t_window window)
+int	mouse_pos(t_window *window)
+{
+	t_mlx_stuff *mlx;
+
+	mlx = get_mlx_ptr();
+	mlx_mouse_get_pos(window->mlx_ptr, window->win_ptr, \
+	&window->win.mouse_x, &window->win.mouse_y);
+	if (window->win.mouse_x >= 786 && window->win.mouse_x <= 1186 &&window->win.mouse_y >= 523 && window->win.mouse_y <= 576)
+	{
+		mlx_destroy_image(mlx->mlx_ptr, window->menu.img_data);
+		window->menu.img_data = mlx_xpm_file_to_image(mlx->mlx_ptr, "./textures/start_choose.xpm",
+			&window->menu.width, &window->menu.height);
+		mlx_put_image_to_window(window->mlx_ptr, window->win_ptr, window->menu.img_data, 0, 0);
+	}
+	else if (window->win.mouse_x >= 915 && window->win.mouse_x <= 1031 && window->win.mouse_y >= 635 && window->win.mouse_y <= 692)
+	{
+		mlx_destroy_image(mlx->mlx_ptr, window->menu.img_data);
+		window->menu.img_data = mlx_xpm_file_to_image(mlx->mlx_ptr, "./textures/exit_choose.xpm",
+			&window->menu.width, &window->menu.height);
+		mlx_put_image_to_window(window->mlx_ptr, window->win_ptr, window->menu.img_data, 0, 0);
+	}
+	else
+	{
+		mlx_destroy_image(mlx->mlx_ptr, window->menu.img_data);
+		window->menu.img_data = mlx_xpm_file_to_image(mlx->mlx_ptr, "./textures/new_menu.xpm",
+			&window->menu.width, &window->menu.height);
+		mlx_put_image_to_window(window->mlx_ptr, window->win_ptr, window->menu.img_data, 0, 0);
+	}
+	return (1);
+}
+
+void	create_menu(t_window *window)
 {
 	t_mlx_stuff *mlx;
 	
 	mlx = get_mlx_ptr();
-	window.menu.img_data = mlx_xpm_file_to_image(mlx->mlx_ptr, "./textures/new_menu.xpm",
-			&window.menu.width, &window.menu.height);
-	mlx_put_image_to_window(window.mlx_ptr, window.win_ptr, window.menu.img_data, 0, 0);
-	mlx_hook(window.win_ptr, ButtonPress, ButtonPressMask, &button_press, &window);
-	mlx_hook(window.win_ptr, 17, ButtonPressMask, &exit_menu, &window);
-	mlx_loop(window.mlx_ptr);
+	window->menu.img_data = mlx_xpm_file_to_image(mlx->mlx_ptr, "./textures/new_menu.xpm",
+			&window->menu.width, &window->menu.height);
+	mlx_put_image_to_window(window->mlx_ptr, window->win_ptr, window->menu.img_data, 0, 0);
+	mlx_loop_hook(window->mlx_ptr, &mouse_pos, window);
+	mlx_hook(window->win_ptr, ButtonPress, ButtonPressMask, &button_press, window);
+	mlx_hook(window->win_ptr, 17, ButtonPressMask, &exit_menu, window);
+	mlx_loop(window->mlx_ptr);
 }
 
 int	main(int ac, char **av)
@@ -170,6 +201,6 @@ int	main(int ac, char **av)
 	if (!create_window(&window))
 		return (0);
 	update_mlx_infos(&window.mlx_ptr, &window.win_ptr, &window.img_ptr);
-	create_menu(window);
+	create_menu(&window);
 	return (1);
 }
