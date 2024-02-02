@@ -1,5 +1,9 @@
 {
 	"files.associations": {
-		"main.h": "c"
+		"main.h": "c",
+		"libft.h": "c",
+		"mlx.h": "c",
+		"forme.h": "c",
+		"stdio.h": "c"
 	}
 }
