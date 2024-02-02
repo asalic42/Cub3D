@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2024/02/01 15:38:21 by asalic           ###   ########.fr       */
+/*   Updated: 2024/02/02 17:19:43 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,9 +107,9 @@ void	start_game(t_window *window)
 
 int	button_press(int mousepress, int x, int y, t_window *window)
 {
-	if (mousepress == 1 && (x >= 801 && x <= 1171 && y >= 529 && y <= 570))
+	if (mousepress == 1 && (x >= 786 && x <= 1186 && y >= 523 && y <= 576))
 		start_game(window);
-	else if (mousepress == 1 && (x >= 926 && x <= 1022 && y >= 641 && y <= 685))
+	else if (mousepress == 1 && (x >= 915 && x <= 1031 && y >= 635 && y <= 692))
 		exit_menu(window);
 	return (0);
 }
