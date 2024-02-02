@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:32:15 by rciaze            #+#    #+#             */
-/*   Updated: 2024/02/01 17:42:05 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/02/02 10:30:39 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ void	colision(t_player_pos *player, float dx, float dy)
 	i = -1;
 	while (++i < 7)
 	{
-		mx = (int)(player->x + (i * player->dx));
-		my = (int)(player->y + (i * player->dy));
+		mx = (int)(player->x + (i * dx));
+		my = (int)(player->y + (i * dy));
 		mp = my * map->x + mx;
 		if (map->map[mp] == 1 || map->map[mp] == 3)
 		{
-			player->x -= dx;
 			player->y -= dy;
+			player->x -= dx;
 			break ;
 		}
 	}
