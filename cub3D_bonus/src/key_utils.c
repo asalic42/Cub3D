@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:32:15 by rciaze            #+#    #+#             */
-/*   Updated: 2024/02/02 10:30:39 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/02/02 16:58:20 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,38 @@ void	colision(t_player_pos *player, float dx, float dy)
 	int		my;
 	int		mp;
 	int		i;
+	bool	prout = false;
+	// int savey = player->y;
+	// int savex = player->x;
 
 	map = get_map_instance();
 	i = -1;
-	while (++i < 7)
+	while (++i < 3)
 	{
-		mx = (int)(player->x + (i * dx));
-		my = (int)(player->y + (i * dy));
-		mp = my * map->x + mx;
-		if (map->map[mp] == 1 || map->map[mp] == 3)
-		{
-			player->y -= dy;
-			player->x -= dx;
-			break ;
-		}
+		// mx = (int)(player->x + (i * dx));
+		// my = (int)(player->y + (i * dy));
+		// mp = my * map->x + mx;
+		// if (map->map[mp] == 1 || map->map[mp] == 3)
+		// {
+			mx = (int)(player->x + (i * dx));
+			my = (int)(player->y);
+			mp = my * map->x + mx;
+			if (map->map[mp] == 1 || map->map[mp] == 3 || map->map[mp] == 5)
+			{
+				player->x -= dx;
+				prout = true;
+			}
+			my = (int)(player->x);
+			my = (int)(player->y + (i * dy));
+			mp = my * map->x + mx;
+			if (map->map[mp] == 1 || map->map[mp] == 3 || map->map[mp] == 5)
+			{
+				player->y -= dy;
+				prout = true;
+			}
+			if (prout)
+				break;
+		// }
 	}
 }
 
@@ -58,6 +76,7 @@ static void	open_door(void)
 	t_map			*map;
 	t_player_pos	*player;
 	int				i;
+	int				mp;
 
 	player = get_player_instance();
 	map = get_map_instance();
@@ -66,15 +85,15 @@ static void	open_door(void)
 	{
 		map->mx = (int)(player->x + (i * player->dx));
 		map->my = (int)(player->y + (i * player->dy));
-		map->mp = map->my * map->x + map->mx;
-		if (map->map[map->mp] == 3)
+		mp = map->my * map->x + map->mx;
+		if (map->map[mp] == 3)
 		{
-			map->map[map->mp] = 4;
+			map->map[mp] = 4;
 			break ;
 		}
-		else if (map->map[map->mp] == 4)
+		else if (map->map[mp] == 4)
 		{
-			map->map[map->mp] = 3;
+			map->map[mp] = 3;
 			break ;
 		}
 	}

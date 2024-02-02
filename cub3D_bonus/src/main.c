@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2024/02/01 20:41:06 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/02/02 18:47:09 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,23 @@ void	draw_and_count_fps(t_player_pos *player, t_window *win)
 	if (w_cmpt > 0)
 	{
 		w_cmpt++;
-		if (w_cmpt > 5)
+		if (w_cmpt < 6)
+			print_weapon(win, &get_textures_instance()->xpm_weapon_firing1, -1);
+		else if (w_cmpt < 12)
+			print_weapon(win, &get_textures_instance()->xpm_weapon_firing2, -1);
+		else if (w_cmpt < 18)
+			print_weapon(win, &get_textures_instance()->xpm_weapon_firing6, -1);
+		else if (w_cmpt < 24)
+			print_weapon(win, &get_textures_instance()->xpm_weapon_firing4, -1);
+		else if (w_cmpt < 30)
+			print_weapon(win, &get_textures_instance()->xpm_weapon_firing5, -1);
+		else if (w_cmpt < 36)
+			print_weapon(win, &get_textures_instance()->xpm_weapon_firing6, -1);
+		if (w_cmpt > 36)
+		{
+			print_weapon(win, &get_textures_instance()->xpm_weapon, -1);
 			w_cmpt = -1;
-		print_weapon(win, &get_textures_instance()->xpm_weapon_firing, -1);
+		}
 	}
 	else
 		print_weapon(win, &get_textures_instance()->xpm_weapon, -1);

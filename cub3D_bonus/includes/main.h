@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 17:34:24 by asalic            #+#    #+#             */
-/*   Updated: 2024/02/01 20:20:00 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/02/02 18:52:30 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,12 @@ typedef struct s_textures_path
 	t_texture_details	xpm_ennemy;
 	t_texture_details	xpm_ennemy_dead;
 	t_texture_details	xpm_weapon;
-	t_texture_details	xpm_weapon_firing;
+	t_texture_details	xpm_weapon_firing1;
+	t_texture_details	xpm_weapon_firing2;
+	t_texture_details	xpm_weapon_firing3;
+	t_texture_details	xpm_weapon_firing4;
+	t_texture_details	xpm_weapon_firing5;
+	t_texture_details	xpm_weapon_firing6;
 }	t_textures_path;
 
 typedef struct s_stuff_for_ray_casting

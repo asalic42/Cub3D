@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 11:27:15 by rciaze            #+#    #+#             */
-/*   Updated: 2024/02/01 19:45:11 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/02/02 18:48:33 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void	ennemy(t_textures_path *textures, t_stuff_for_ray_casting *all_stuff,
 		calculate_angle(window, &data, all_stuff);
 		if (data.relative_angle >= 0 && data.relative_angle <= 70)
 		{
-			calculate_distance(window, &data, &textures->xpm_ennemy, all_stuff);
+			calculate_distance(window, &data, window->ennemies[data.i].tex, all_stuff);
 			x_loop(window, &data, window->ennemies[data.i].tex, all_stuff);
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:28:16 by rciaze            #+#    #+#             */
-/*   Updated: 2024/02/01 20:41:02 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/02/02 18:06:28 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,37 @@ void	init_textures_two(t_window *window, char *door, char *ennemy, t_mlx_stuff *
 	textures->xpm_weapon.xpm_data = mlx_get_data_addr(textures->xpm_weapon.xpm, \
 		&tmp_p.bits_per_pixel, &tmp_p.size_line, &tmp_p.endian);
 	
-	textures->xpm_weapon_firing.xpm = mlx_xpm_file_to_image(mlx->mlx_ptr, "./textures/weapon_firing.xpm", \
-		&textures->xpm_weapon_firing.width, &textures->xpm_weapon_firing.height);
-	textures->xpm_weapon_firing.xpm_data = mlx_get_data_addr(textures->xpm_weapon_firing.xpm, \
+	textures->xpm_weapon_firing1.xpm = mlx_xpm_file_to_image(mlx->mlx_ptr, "./textures/weapon_frame1.xpm", \
+		&textures->xpm_weapon_firing1.width, &textures->xpm_weapon_firing1.height);
+	textures->xpm_weapon_firing1.xpm_data = mlx_get_data_addr(textures->xpm_weapon_firing1.xpm, \
 		&tmp_p.bits_per_pixel, &tmp_p.size_line, &tmp_p.endian);
 	
-	textures->xpm_ennemy_dead.xpm = mlx_xpm_file_to_image(mlx->mlx_ptr, "./textures/ennemy_dead.xpm", \
+	textures->xpm_weapon_firing2.xpm = mlx_xpm_file_to_image(mlx->mlx_ptr, "./textures/weapon_frame2.xpm", \
+		&textures->xpm_weapon_firing2.width, &textures->xpm_weapon_firing2.height);
+	textures->xpm_weapon_firing2.xpm_data = mlx_get_data_addr(textures->xpm_weapon_firing2.xpm, \
+		&tmp_p.bits_per_pixel, &tmp_p.size_line, &tmp_p.endian);
+
+	textures->xpm_weapon_firing3.xpm = mlx_xpm_file_to_image(mlx->mlx_ptr, "./textures/weapon_frame3.xpm", \
+		&textures->xpm_weapon_firing3.width, &textures->xpm_weapon_firing3.height);
+	textures->xpm_weapon_firing3.xpm_data = mlx_get_data_addr(textures->xpm_weapon_firing3.xpm, \
+		&tmp_p.bits_per_pixel, &tmp_p.size_line, &tmp_p.endian);
+	
+	textures->xpm_weapon_firing4.xpm = mlx_xpm_file_to_image(mlx->mlx_ptr, "./textures/weapon_frame4.xpm", \
+		&textures->xpm_weapon_firing4.width, &textures->xpm_weapon_firing4.height);
+	textures->xpm_weapon_firing4.xpm_data = mlx_get_data_addr(textures->xpm_weapon_firing4.xpm, \
+		&tmp_p.bits_per_pixel, &tmp_p.size_line, &tmp_p.endian);
+		
+	textures->xpm_weapon_firing5.xpm = mlx_xpm_file_to_image(mlx->mlx_ptr, "./textures/weapon_frame5.xpm", \
+		&textures->xpm_weapon_firing5.width, &textures->xpm_weapon_firing5.height);
+	textures->xpm_weapon_firing5.xpm_data = mlx_get_data_addr(textures->xpm_weapon_firing5.xpm, \
+		&tmp_p.bits_per_pixel, &tmp_p.size_line, &tmp_p.endian);
+
+	textures->xpm_weapon_firing6.xpm = mlx_xpm_file_to_image(mlx->mlx_ptr, "./textures/weapon_frame6.xpm", \
+		&textures->xpm_weapon_firing6.width, &textures->xpm_weapon_firing6.height);
+	textures->xpm_weapon_firing6.xpm_data = mlx_get_data_addr(textures->xpm_weapon_firing6.xpm, \
+		&tmp_p.bits_per_pixel, &tmp_p.size_line, &tmp_p.endian);
+
+	textures->xpm_ennemy_dead.xpm = mlx_xpm_file_to_image(mlx->mlx_ptr, "./textures/ded.xpm", \
 		&textures->xpm_ennemy_dead.width, &textures->xpm_ennemy_dead.height);
 	textures->xpm_ennemy_dead.xpm_data = mlx_get_data_addr(textures->xpm_ennemy_dead.xpm, \
 		&tmp_p.bits_per_pixel, &tmp_p.size_line, &tmp_p.endian);

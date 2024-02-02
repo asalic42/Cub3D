@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:13:32 by rciaze            #+#    #+#             */
-/*   Updated: 2024/02/01 20:29:53 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/02/02 18:48:25 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ void	print_weapon(t_window *window, t_texture_details *xpm, int j)
 	unsigned	*value;
 	int			i;
 
-	x = 576;
+	x = 830;
 	while (++j < xpm->width * 2)
 	{
-		y = 428;
+		y = 556;
 		i = -1;
 		while (++i < xpm->height * 2)
 		{
@@ -34,9 +34,9 @@ void	print_weapon(t_window *window, t_texture_details *xpm, int j)
 				*(unsigned int *)pixel = *value;
 				*(unsigned int *)(pixel + 4) = *value;
 			}
-			y++;
+			y ++;
 		}
-		x++;
+		x ++;
 	}
 }
 
@@ -57,16 +57,19 @@ void	shot_fired(t_window *window)
 	t_player_pos	*player = get_player_instance();
 	t_map			*map = get_map_instance();
 	int				mp;
-	float			mx;
-	float			my;
+	int				mx;
+	int				my;
 	int				j = 0;
 	int				i;
 	t_textures_path *tex = get_textures_instance();
 
-	my = player->y;
-	mx = player->x;
+	my = (int)player->y;
+	mx = (int)player->x;
 	mp = (int)(my * map->x + mx);
 	window->anim_bool = true;
+	//printf("mp = %d, map->mp = %d\n", mp, map->mp);
+	//printf("ctrlpressed with height = %d, width = %d\n", map->y, map->x);
+	//printf("my = %d, mx = %d\n", my, mx);
 	while (mp > 0 && mp < map->mp && map->map[mp] != 1 && map->map[mp] != 3)
 	{
 		j++;
@@ -80,5 +83,4 @@ void	shot_fired(t_window *window)
 			break;
 		}
 	}
-	// if (map->map[mp] == 5)
 }
