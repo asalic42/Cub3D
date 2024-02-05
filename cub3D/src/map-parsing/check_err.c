@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_err.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 15:55:48 by asalic            #+#    #+#             */
-/*   Updated: 2024/02/05 14:29:05 by raphael          ###   ########.fr       */
+/*   Updated: 2024/02/05 17:15:24 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,10 @@ void	handle_error(t_window *window, char *map)
 	error_files(map);
 	if (!is_mapfile(map, window))
 		error_cases();
+	if (!init_data(window, map))
+		error_cases();
 	if (!error_map(map))
 		error_cases();
-	init_data(window, map);
 	window->data.y = 0;
 	window->data.x = 0;
 	if (!map_up_n_down(window->data.ptr.map, &window->data))

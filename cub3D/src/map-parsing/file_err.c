@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 15:53:38 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/23 18:31:58 by asalic           ###   ########.fr       */
+/*   Updated: 2024/02/05 18:13:11 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,5 @@ void	count_error(t_parse *map, int fd)
 		map->buffer = NULL;
 		close(fd);
 	}
-	ft_printf(RED"Error : Longueur infinie ou nulle\n"NC);
 	error_cases();
 }
