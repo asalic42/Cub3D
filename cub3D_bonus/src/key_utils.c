@@ -6,7 +6,7 @@
 /*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:32:15 by rciaze            #+#    #+#             */
-/*   Updated: 2024/02/05 16:54:02 by raphael          ###   ########.fr       */
+/*   Updated: 2024/02/05 17:07:49 by raphael          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ int	key_press(int keycode, t_window *window)
 	if (!window->keys.right && keycode == 65363)
 		window->keys.right = true;
 	if (keycode == 65507)
-		shot_fired(window);
+		shot_fired(window, get_player_instance(), get_map_instance(), \
+			get_textures_instance());
 	return (0);
 }

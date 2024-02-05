@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
+/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:30:50 by rciaze            #+#    #+#             */
-/*   Updated: 2024/02/02 19:09:25 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/02/05 16:58:13 by raphael          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	create_window(t_window *window)
 
 	fps_init();
 	mapp = get_map_instance();
-	mapp->map = simple_tab_int(window->data.ptr.map, window);
+	mapp->map = simple_tab_int(window->data.ptr.map, window, -1);
 	if (!mlx_init_stuff(window))
 		return (0);
 	mapp->x = window->data.ptr.width;

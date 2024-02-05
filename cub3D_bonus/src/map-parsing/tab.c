@@ -6,7 +6,7 @@
 /*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 16:55:21 by asalic            #+#    #+#             */
-/*   Updated: 2024/02/05 14:03:54 by raphael          ###   ########.fr       */
+/*   Updated: 2024/02/05 16:58:05 by raphael          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,14 +82,12 @@ int	add_to_tab_int(char c)
 		return (c - 48);
 }
 
-int	*simple_tab_int(char **char_map, t_window *window)
+int	*simple_tab_int(char **char_map, t_window *window, int y)
 {
 	int	*int_map;
 	int	x;
-	int	y;
 	int	i;
 
-	y = -1;
 	i = 0;
 	int_map = ft_malloc((window->data.ptr.height * window->data.ptr.width) * \
 	sizeof(int));

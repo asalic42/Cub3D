@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_err.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 15:55:48 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/29 18:09:16 by asalic           ###   ########.fr       */
+/*   Updated: 2024/02/05 16:57:41 by raphael          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	is_mapfile(char *map, t_window *window)
 	while (buff && i < 6)
 	{
 		if (is_buffer_good(buff))
-		{	
+		{
 			if (i > 3 && !is_good_color(tab_dir[i], buff, window))
 				break ;
 			if (i < 4 && !is_good_txture(tab_dir[i], buff, window))

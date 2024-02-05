@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotation.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
+/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 18:51:28 by asalic            #+#    #+#             */
-/*   Updated: 2024/02/01 15:05:37 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/02/05 17:00:06 by raphael          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	keys_rotation(t_player_pos *player, t_window *window, \
 	}
 	if (window->keys.right || window->win.mouse_x > current_x)
 	{
-	if (window->win.mouse_x < current_x)
+		if (window->win.mouse_x < current_x)
 			player->a += 0.02;
 		else
 			player->a += 0.05;

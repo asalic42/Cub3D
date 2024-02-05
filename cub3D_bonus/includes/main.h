@@ -6,7 +6,7 @@
 /*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:26:27 by raphael           #+#    #+#             */
-/*   Updated: 2024/02/05 16:47:43 by raphael          ###   ########.fr       */
+/*   Updated: 2024/02/05 17:09:00 by raphael          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,7 +225,7 @@ typedef struct s_parse
 	char	**map;
 }				t_parse;
 
-int				*simple_tab_int(char **char_map, t_window *window);
+int				*simple_tab_int(char **char_map, t_window *window, int y);
 int				map_up_n_down(char **map, t_data *data);
 int				is_zero(int y, char **map, t_data *data);
 int				first_line(t_data *data, char **map);
@@ -301,7 +301,9 @@ int				cross_pass(t_parse_ennemy *enmy);
 int				is_already_pass(t_parse_ennemy *enmy, int x, int y);
 
 /* * * * WEAPON * * * */
-void			shot_fired(t_window *window);
+
+void			shot_fired(t_window *window, t_player_pos *player, t_map *map, \
+					t_textures_path *tex)
 void			print_weapon(t_window *window, t_texture_details *xpm, int j);
 
 /* * * * MOVEMENT * * * */

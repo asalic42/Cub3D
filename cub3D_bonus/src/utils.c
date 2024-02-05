@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
+/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 20:36:44 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/29 17:43:48 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/02/05 17:05:39 by raphael          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	is_player_out_of_bouds(t_player_pos *player, t_window *window)
 }
 
 float	normalize_angle(float angle)
-{	
+{
 	while (angle < 0)
 		angle += 2 * PI;
 	while (angle >= 2 * PI)
