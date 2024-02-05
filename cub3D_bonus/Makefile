@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+         #
+#    By: raphael <raphael@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/21 18:01:21 by asalic            #+#    #+#              #
-#    Updated: 2024/02/01 19:01:08 by rciaze           ###   ########.fr        #
+#    Updated: 2024/02/05 13:24:07 by raphael          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CFLAGS		= -Wall -Wextra -Werror -g3
 LIBS		= -Lminilibx-linux -lmlx -Llibft -lft -lSDL2 -lXext -lX11 -lm -O2
 PATH_MLX	= minilibx-linux/libmlx.a
 PATH_LIBFT	= libft/libft.a
-INCLUDES	= minilibx-linux/mlx.h libft/libft.h includes/main.h includes/cub.h includes/forme.h includes/basique_mlx_needed.h
+INCLUDES	= minilibx-linux/mlx.h libft/libft.h includes/main.h includes/forme.h includes/basique_mlx_needed.h
 
 SRCS_DIR = src src/design_p src/map-parsing src/formes src/utils
 SRCS	:= $(foreach dir,$(SRCS_DIR),$(wildcard $(dir)/*.c)) $(SRCS)
