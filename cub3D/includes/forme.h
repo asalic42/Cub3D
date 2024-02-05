@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   forme.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
+/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 19:03:42 by raphael           #+#    #+#             */
-/*   Updated: 2024/01/18 21:15:09 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/02/05 14:19:40 by raphael          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define ESC		65307
 
 # define WIDTH 1920
-# define HEIGHT 1080
+# define HEIGHT 1010
 
 typedef struct s_rectangle
 {

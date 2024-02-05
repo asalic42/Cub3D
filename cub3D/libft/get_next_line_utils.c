@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 11:38:34 by rciaze            #+#    #+#             */
-/*   Updated: 2023/12/19 14:31:45 by asalic           ###   ########.fr       */
+/*   Updated: 2024/02/05 14:36:20 by raphael          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 char	*ft_substr_gnl(char *s, unsigned int start, size_t len)
 {
-	int i;
-	int j;
-	char		 *str;
-	int			 len2;
+	int		i;
+	int		j;
+	char	*str;
+	int		len2;
 
 	len2 = ft_strlen(s);
 	if (!s)
@@ -55,7 +55,7 @@ char	*ft_strjoin_gnl(char *s1, char *s2)
 	while (s1[++i])
 		str[i] = s1[i];
 	while (s2[i - len])
-	{	
+	{
 		str[i] = s2[-len + i];
 		i++;
 	}
@@ -82,4 +82,3 @@ char	*ft_strdup_gnl(const char *s)
 	str[i] = '\0';
 	return (str);
 }
-

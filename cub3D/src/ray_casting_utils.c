@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_casting_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
+/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:11:12 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/19 13:21:45 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/02/05 14:29:42 by raphael          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	up_or_down(t_stuff_for_ray_casting *all_stuff, t_window *window)
 {
 	(void)(window);
 	if (all_stuff->ra > PI)
-	{	
+	{
 		all_stuff->ry = (((int)all_stuff->player->y / 1) * 1) - 0.0001;
 		all_stuff->rx = (all_stuff->player->y - all_stuff->ry)
 			* all_stuff->a_tan + all_stuff->player->x;

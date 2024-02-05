@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_color.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 15:50:21 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/23 18:32:06 by asalic           ###   ########.fr       */
+/*   Updated: 2024/02/05 14:26:52 by raphael          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ int	is_good_color(char *comp, char *str, t_window *window)
 	while (str[i] && (str[i] == ' ' || str[i] == '\t'))
 		i ++;
 	dot_split = ft_split(cut_from(str + i, ' '), ',');
-	ft_printf("je suis la et split vaut : %s\n", dot_split[0]);
 	tour = 0;
 	while (dot_split[tour])
 	{

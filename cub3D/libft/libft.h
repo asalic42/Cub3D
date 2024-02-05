@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 11:15:43 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/11 05:52:38 by asalic           ###   ########.fr       */
+/*   Updated: 2024/02/05 14:37:29 by raphael          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <fcntl.h>
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1
-# endif 
+
 typedef struct s_list
 {
 	void			*content;
@@ -96,4 +96,5 @@ char	*go_malloc(size_t size);
 // char	*ft_strjoin(char *s1, char *s2);
 char	*dup_to_n(char *str, int c);
 char	*find_n(char *str);
-#endif
+
+# endif

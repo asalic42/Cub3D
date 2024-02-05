@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
+/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 21:15:27 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/19 13:17:54 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/02/05 14:28:20 by raphael          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,7 @@
 # define PI 3.1415926535
 # define PI2 1.57079632675
 # define PI3 4.71238898025
-# define DR 0.00054541666
-
-extern double	prout;
-extern int		compteur;
-extern	clock_t						all_start;
-extern	clock_t						all_end;
+# define DR 0.0006363179
 
 typedef struct s_player_pos
 {

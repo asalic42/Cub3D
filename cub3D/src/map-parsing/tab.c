@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tab.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 16:55:21 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/23 18:31:44 by asalic           ###   ########.fr       */
+/*   Updated: 2024/02/05 14:29:10 by raphael          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ char	**ft_maptab(char *map, t_data *data, t_window *window)
 	realmap[y] = NULL;
 	close(put.fd);
 	data->ptr.map = realmap;
-	print_tab(realmap);
 	return (realmap);
 }
 

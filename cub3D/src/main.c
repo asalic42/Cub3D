@@ -3,25 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
+/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/19 13:23:08 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/02/05 14:33:45 by raphael          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/main.h"
 
-double prout;int compteur = 0;
-
-clock_t						all_start;
-clock_t						all_end;
-
 void	cast_ray(t_window *window)
 {
 	t_stuff_for_ray_casting		all_stuff;
-	clock_t						start;
-	clock_t						end;
 	int							comp;
 	t_textures_path				*textures;
 
@@ -29,7 +22,6 @@ void	cast_ray(t_window *window)
 	textures = get_textures_instance();
 	all_stuff.r = -1;
 	all_stuff.player = get_player_instance();
-	start = clock();
 	while (++all_stuff.r < 1920)
 	{
 		init_distances(&all_stuff);
@@ -42,9 +34,6 @@ void	cast_ray(t_window *window)
 		wich_texture(comp, textures, window, &all_stuff);
 		increment_angle(&all_stuff);
 	}
-	end = clock();
-	prout = (double)(end - start) / CLOCKS_PER_SEC;
-	compteur++;
 }
 
 void	is_player_out_of_bouds(t_player_pos *player, t_window *window)
@@ -61,7 +50,7 @@ void	is_player_out_of_bouds(t_player_pos *player, t_window *window)
 }
 
 void	draw_player(t_window *window)
-{	
+{
 	t_player_pos	*player;
 
 	player = get_player_instance();
@@ -88,7 +77,6 @@ int	main(int ac, char **av)
 		return (0);
 	update_mlx_infos(&window.mlx_ptr, &window.win_ptr, &window.img_ptr);
 	init_textures(window.north, window.west, window.south, window.east);
-	all_start = clock();
 	mlx_loop_hook(window.mlx_ptr, &move_player, &window);
 	mlx_hook(window.win_ptr, 17, KeyPressMask, &destroy_window, &window);
 	mlx_hook(window.win_ptr, KeyPress, 0, &key_press, &window);

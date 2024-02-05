@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
+/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 18:15:26 by rciaze            #+#    #+#             */
-/*   Updated: 2022/12/02 11:37:56 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/02/05 14:34:52 by raphael          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	ft_printf(const char *str, ...)
 	}
 	va_end(list);
 	return (len);
-}	
+}
 
 /* int	main(void)
 {

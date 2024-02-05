@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
+/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:57:25 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/18 21:21:48 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/02/05 14:28:41 by raphael          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 /* * * * STRUCTURES * * * */
 
 typedef struct s_garbage_lst
-{	
+{
 	void					*pointer;
 	struct s_garbage_lst	*next;	
 }t_garbage_lst;

@@ -4,6 +4,8 @@
 		"libft.h": "c",
 		"mlx.h": "c",
 		"forme.h": "c",
-		"stdio.h": "c"
+		"stdio.h": "c",
+		"stdlib.h": "c",
+		"unistd.h": "c"
 	}
 }
