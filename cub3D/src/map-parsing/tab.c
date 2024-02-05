@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 16:55:21 by asalic            #+#    #+#             */
-/*   Updated: 2024/02/05 17:40:10 by asalic           ###   ########.fr       */
+/*   Updated: 2024/02/05 18:05:19 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ char	**ft_maptab(char *map, t_data *data, t_window *window)
 	data->ptr.map = realmap;
 	return (realmap);
 }
-
 
 int	*simple_tab_int(char **char_map, t_window *window)
 {

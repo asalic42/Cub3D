@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 13:48:19 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/23 18:14:51 by asalic           ###   ########.fr       */
+/*   Updated: 2024/02/05 18:37:49 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	error_map(char *map)
 		while (check_line[++i] && check_line[i] != '\n')
 		{
 			if (!is_in_char(check_line[i]))
-				return (0);
+				return (print_error(RED "Error : forbidden element\n"NC));
 			len_player = only_one_thing(check_line, i, len_player);
 			if (len_player == 1)
 				return (0);

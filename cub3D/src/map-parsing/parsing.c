@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 12:38:31 by asalic            #+#    #+#             */
-/*   Updated: 2024/02/05 17:39:47 by asalic           ###   ########.fr       */
+/*   Updated: 2024/02/05 18:04:42 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ char	*loop_gnl(t_parse *parser)
 				break ;
 			else if (buf && buf[i] == '1')
 				return (buf);
-			else if (buf[i] && buf[i] != ' ' && buf[i] != '\t' && buf[i] != '\n')
+			else if (buf[i] && buf[i] != ' ' && buf[i] != '\t' && buf[i] \
+			!= '\n')
 				return (NULL);
 			i ++;
 		}

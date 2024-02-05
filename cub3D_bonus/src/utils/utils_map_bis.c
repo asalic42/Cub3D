@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:15:34 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/29 15:24:29 by asalic           ###   ########.fr       */
+/*   Updated: 2024/02/05 18:54:26 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ char	*loop_gnl(t_parse *parser)
 				break ;
 			else if (buf && buf[i] == '1')
 				return (buf);
+			else if (buf[i] && buf[i] != ' ' && buf[i] != '\t' && buf[i] \
+			!= '\n')
+				return (NULL);
 			i ++;
 		}
 		buf = get_next_line(parser->fd);
@@ -45,14 +48,16 @@ int	print_error(char *str)
 	return (0);
 }
 
-void	init_data(t_window *window, char *av)
+int	init_data(t_window *window, char *av)
 {
 	window->data.x = 0;
 	window->data.y = 0;
 	window->data.ptr.width = 0;
 	window->data.ptr.height = countmap_y(av);
-	countmap_x(av, window);
+	if (!countmap_x(av, window))
+		return (0);
 	ft_maptab(av, &window->data, window);
+	return (1);
 }
 
 int		ft_double_len(char **str)

@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:15:34 by asalic            #+#    #+#             */
-/*   Updated: 2024/02/05 17:02:52 by asalic           ###   ########.fr       */
+/*   Updated: 2024/02/05 18:29:43 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,13 @@ int	init_data(t_window *window, char *av)
 	if (!countmap_x(av, window))
 		return (0);
 	ft_maptab(av, &window->data, window);
+	return (1);
+}
+
+int	is_in_char(char c)
+{
+	if (c != '1' && c != '0' && c != 'N' && c != 'W' && c != 'E'
+		&& c != 'S' && c != ' ')
+		return (0);
 	return (1);
 }
