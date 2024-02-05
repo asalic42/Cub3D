@@ -6,7 +6,7 @@
 /*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:26:27 by raphael           #+#    #+#             */
-/*   Updated: 2024/02/05 14:10:16 by raphael          ###   ########.fr       */
+/*   Updated: 2024/02/05 16:47:43 by raphael          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -327,7 +327,7 @@ void			create_menu(t_window *window);
 int				exit_menu(t_window *window);
 
 /* * * * PLAYER * * * */
-void			colision(t_player_pos *player, float dx, float dy);
+void			colision(t_player_pos *player, float dx, float dy, t_map *map);
 void			draw_player(t_window *window);
 void			find_player(t_map *map, t_player_pos *player, char **char_map);
 void			is_player_out_of_bouds(t_player_pos *player, t_window *window);

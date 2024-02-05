@@ -3,54 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   key_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
+/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:32:15 by rciaze            #+#    #+#             */
-/*   Updated: 2024/02/02 16:58:20 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/02/05 16:54:02 by raphael          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/main.h"
 
-void	colision(t_player_pos *player, float dx, float dy)
+void	colision(t_player_pos *player, float dx, float dy, t_map *map)
 {
-	t_map	*map;
 	int		mx;
 	int		my;
 	int		mp;
 	int		i;
-	bool	prout = false;
-	// int savey = player->y;
-	// int savex = player->x;
+	bool	prout;
 
-	map = get_map_instance();
+	prout = false;
 	i = -1;
-	while (++i < 3)
+	while (++i < 5)
 	{
-		// mx = (int)(player->x + (i * dx));
-		// my = (int)(player->y + (i * dy));
-		// mp = my * map->x + mx;
-		// if (map->map[mp] == 1 || map->map[mp] == 3)
-		// {
-			mx = (int)(player->x + (i * dx));
-			my = (int)(player->y);
-			mp = my * map->x + mx;
-			if (map->map[mp] == 1 || map->map[mp] == 3 || map->map[mp] == 5)
-			{
-				player->x -= dx;
-				prout = true;
-			}
-			my = (int)(player->x);
-			my = (int)(player->y + (i * dy));
-			mp = my * map->x + mx;
-			if (map->map[mp] == 1 || map->map[mp] == 3 || map->map[mp] == 5)
-			{
-				player->y -= dy;
-				prout = true;
-			}
-			if (prout)
-				break;
-		// }
+		mx = (int)(player->x + (i * dx));
+		mp = (int)(player->y) * map->x + mx;
+		if (map->map[mp] == 1 || map->map[mp] == 3 || map->map[mp] == 5)
+		{
+			player->x -= dx;
+			prout = true;
+		}
+		my = (int)(player->y + (i * dy));
+		mp = my * map->x + (int)(player->x);
+		if (map->map[mp] == 1 || map->map[mp] == 3 || map->map[mp] == 5)
+		{
+			player->y -= dy;
+			prout = true;
+		}
+		if (prout)
+			break ;
 	}
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_casting_utils2.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
+/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:24:20 by rciaze            #+#    #+#             */
-/*   Updated: 2024/02/01 17:55:09 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/02/05 16:52:36 by raphael          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void	init_ray(t_stuff_for_ray_casting *all_stuff, t_window *window)
 	(void)(window);
 	all_stuff->player = get_player_instance();
 	all_stuff->map = get_map_instance();
-	all_stuff->ra = all_stuff->player->a - R_FOV / 2 + (R_FOV / NB_OF_STRIPES * (300 / (WIDTH / NB_OF_STRIPES)));
+	all_stuff->ra = all_stuff->player->a - R_FOV / 2 + (R_FOV / NB_OF_STRIPES \
+		* (300 / (WIDTH / NB_OF_STRIPES)));
 	all_stuff->ra = normalize_angle(all_stuff->ra);
 }
 

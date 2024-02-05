@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_textures_to_screen.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
+/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 21:09:49 by rciaze            #+#    #+#             */
-/*   Updated: 2024/02/01 14:08:21 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/02/05 16:52:23 by raphael          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,4 @@ void	wich_texture(int comp, t_textures_path *textures, t_window *window,
 	else if (comp == 5)
 		texture_to_screen(all_stuff, &textures->xpm_door, window->img_data, \
 		comp);
-	//else if (comp == 6)
-	//	texture ennemy;
 }

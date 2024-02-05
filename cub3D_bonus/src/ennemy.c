@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ennemy.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
+/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 11:27:15 by rciaze            #+#    #+#             */
-/*   Updated: 2024/02/02 18:48:33 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/02/05 16:52:04 by raphael          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ void	draw_ennemy(t_window *window, t_print_ennemy *data,
 	}
 }
 
-void	x_loop(t_window *window, t_print_ennemy *data, t_texture_details *texture
-	, t_stuff_for_ray_casting *all_stuff)
+void	x_loop(t_window *window, t_print_ennemy *data, t_texture_details \
+	*texture, t_stuff_for_ray_casting *all_stuff)
 {
 	while (data->start_x < data->end_x && data->start_x < WIDTH - 300)
 	{
@@ -113,7 +113,8 @@ void	ennemy(t_textures_path *textures, t_stuff_for_ray_casting *all_stuff,
 		calculate_angle(window, &data, all_stuff);
 		if (data.relative_angle >= 0 && data.relative_angle <= 70)
 		{
-			calculate_distance(window, &data, window->ennemies[data.i].tex, all_stuff);
+			calculate_distance(window, &data, window->ennemies[data.i].tex, \
+				all_stuff);
 			x_loop(window, &data, window->ennemies[data.i].tex, all_stuff);
 		}
 	}

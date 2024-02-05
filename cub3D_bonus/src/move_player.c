@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:40:31 by rciaze            #+#    #+#             */
-/*   Updated: 2024/01/25 18:51:54 by asalic           ###   ########.fr       */
+/*   Updated: 2024/02/05 16:50:26 by raphael          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,14 @@ void	move_up(t_player_pos *player, t_window *window)
 		{
 			player->x += player->dx / 1.5;
 			player->y += player->dy / 1.5;
-			colision(player, player->dx / 1.5, player->dy / 1.5);
+			colision(player, player->dx / 1.5, player->dy / 1.5, \
+				get_map_instance());
 		}
 		else
 		{
 			player->x += player->dx;
 			player->y += player->dy;
-			colision(player, player->dx, player->dy);
+			colision(player, player->dx, player->dy, get_map_instance());
 		}
 	}
 }
@@ -60,13 +61,14 @@ void	move_down(t_player_pos *player, t_window *window)
 		{
 			player->x -= player->dx / 1.5;
 			player->y -= player->dy / 1.5;
-			colision(player, -(player->dx / 1.5), -(player->dy / 1.5));
+			colision(player, -(player->dx / 1.5), -(player->dy / 1.5), \
+				get_map_instance());
 		}
 		else
 		{
 			player->x -= player->dx;
 			player->y -= player->dy;
-			colision(player, -(player->dx), -(player->dy));
+			colision(player, -(player->dx), -(player->dy), get_map_instance());
 		}
 	}
 }
@@ -77,12 +79,12 @@ void	move_right_left(t_player_pos *player, t_window *window)
 	{
 		player->y -= player->dx;
 		player->x += player->dy;
-		colision(player, player->dy, -player->dx);
+		colision(player, player->dy, -player->dx, get_map_instance());
 	}
 	if (window->keys.d)
 	{
 		player->y += player->dx;
 		player->x -= player->dy;
-		colision(player, -player->dy, player->dx);
+		colision(player, -player->dy, player->dx, get_map_instance());
 	}
 }
