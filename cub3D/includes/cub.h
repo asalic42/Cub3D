@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:57:25 by asalic            #+#    #+#             */
-/*   Updated: 2024/02/05 14:28:41 by raphael          ###   ########.fr       */
+/*   Updated: 2024/02/05 17:40:14 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct s_parse
 {
 	int		x;
 	int		y;
+	int		len_space;
 	int		count_dir;
 	int		fd;
 	char	*buffer;
@@ -147,18 +148,17 @@ void			malloc_failure(void);
 /* * * * UTILS * * * */
 int				is_in_char(char c);
 int				countmap_y(char	*mappy);
-void			countmap_x(char	*mappy, t_window *window);
-void			is_in_char_error(t_parse map, int fd, int width);
+int				countmap_x(char	*mappy, t_window *window);
+void			is_in_char_error(t_parse *map, int fd, int width);
 int				init_count(char *mappy, t_parse *map);
 char			*cut_until(char *str, char cut);
 char			*cut_from(char *str, char cut);
 
 /* * * * * TAB MAP * * * */
 char			**ft_maptab(char *map, t_data *data, t_window *window);
-void			print_tab(char **tab);
 char			*go_map(t_parse *put, t_data *data, t_window *window, int tour);
 
 /* * * * MAIN CORE * * * */
-void			init_data(t_window *window, char *av);
+int			init_data(t_window *window, char *av);
 
 #endif
