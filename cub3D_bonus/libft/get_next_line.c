@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 11:38:36 by rciaze            #+#    #+#             */
-/*   Updated: 2023/12/19 14:42:23 by asalic           ###   ########.fr       */
+/*   Updated: 2024/02/06 19:49:35 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ char	*cut_cut_cut3(char **str, char **buffer_string, int i)
 	temp2 = ft_strdup_gnl(str[0]);
 	c = i + 1;
 	count2 = ft_strlen(temp) + ft_strlen(temp2);
-	buffer_string[0] = ft_substr_gnl(ft_strjoin_gnl(str[0], buffer_string[0]), 0, c);
+	buffer_string[0] = ft_substr_gnl(ft_strjoin_gnl(str[0], \
+		buffer_string[0]), 0, c);
 	str[0] = ft_substr_gnl(ft_strjoin_gnl(temp2, temp), c, count2 - c);
 	return (buffer_string[0]);
 }
@@ -56,7 +57,8 @@ char	*cut_cut_cut2(char **str, char **buffer_string, int i)
 	temp2 = ft_strdup_gnl(str[0]);
 	c = i + ft_strlen(temp2) + 1;
 	count2 = ft_strlen(temp) + ft_strlen(temp2);
-	buffer_string[0] = ft_substr_gnl(ft_strjoin_gnl(str[0], buffer_string[0]), 0, c);
+	buffer_string[0] = ft_substr_gnl(ft_strjoin_gnl(str[0], \
+		buffer_string[0]), 0, c);
 	str[0] = ft_substr_gnl(ft_strjoin_gnl(temp2, temp), c, count2 - c);
 	return (buffer_string[0]);
 }

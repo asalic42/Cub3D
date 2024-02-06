@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 11:38:34 by rciaze            #+#    #+#             */
-/*   Updated: 2023/12/19 14:31:45 by asalic           ###   ########.fr       */
+/*   Updated: 2024/02/06 19:48:22 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 char	*ft_substr_gnl(char *s, unsigned int start, size_t len)
 {
-	int i;
-	int j;
-	char		 *str;
-	int			 len2;
+	int		i;
+	int		j;
+	int		len2;
+	char	*str;
 
 	len2 = ft_strlen(s);
 	if (!s)
@@ -82,4 +82,3 @@ char	*ft_strdup_gnl(const char *s)
 	str[i] = '\0';
 	return (str);
 }
-
