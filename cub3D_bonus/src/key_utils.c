@@ -3,46 +3,52 @@
 /*                                                        :::      ::::::::   */
 /*   key_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:32:15 by rciaze            #+#    #+#             */
-/*   Updated: 2024/02/05 17:07:49 by raphael          ###   ########.fr       */
+/*   Updated: 2024/02/06 17:58:32 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/main.h"
 
+static void	detect_colision(float dx, int mp, t_map *map, t_player_pos *player)
+{
+	if (map->map[mp] == 1 || map->map[mp] == 3 || map->map[mp] == 5)
+	{
+		player->x -= dx;
+		map->boum = true;
+	}
+}
+
+/* Detect if there is a collision between the player and a wall */
 void	colision(t_player_pos *player, float dx, float dy, t_map *map)
 {
 	int		mx;
 	int		my;
 	int		mp;
 	int		i;
-	bool	prout;
 
-	prout = false;
+	map->boum = false;
 	i = -1;
 	while (++i < 5)
 	{
 		mx = (int)(player->x + (i * dx));
 		mp = (int)(player->y) * map->x + mx;
-		if (map->map[mp] == 1 || map->map[mp] == 3 || map->map[mp] == 5)
-		{
-			player->x -= dx;
-			prout = true;
-		}
+		detect_colision(dx, mp, map, player);
 		my = (int)(player->y + (i * dy));
 		mp = my * map->x + (int)(player->x);
 		if (map->map[mp] == 1 || map->map[mp] == 3 || map->map[mp] == 5)
 		{
 			player->y -= dy;
-			prout = true;
+			map->boum = true;
 		}
-		if (prout)
+		if (map->boum)
 			break ;
 	}
 }
 
+/* Key released handle */
 int	key_release(int keycode, t_window *window)
 {
 	if (window->keys.w && keycode == 'w')
@@ -60,6 +66,7 @@ int	key_release(int keycode, t_window *window)
 	return (1);
 }
 
+/* Check if the door is open or close an change it */
 static void	open_door(void)
 {
 	t_map			*map;
@@ -88,6 +95,7 @@ static void	open_door(void)
 	}
 }
 
+/* Key press handle */
 int	key_press(int keycode, t_window *window)
 {
 	if (keycode == 65307)

@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:36:22 by raphael           #+#    #+#             */
-/*   Updated: 2024/02/06 15:50:04 by asalic           ###   ########.fr       */
+/*   Updated: 2024/02/06 17:54:50 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_map
 	int		x;
 	int		y;
 	int		*map;
+	bool	boum;
 }	t_map;
 
 typedef struct s_texture_details
