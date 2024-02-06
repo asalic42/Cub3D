@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 11:16:59 by wolf              #+#    #+#             */
-/*   Updated: 2024/02/06 10:39:16 by asalic           ###   ########.fr       */
+/*   Updated: 2024/02/06 12:20:44 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	free_mlx_infos(void)
 	mlx_destroy_image(mlx_infos->mlx_ptr, textures->xpm4.xpm);
 	mlx_destroy_image(mlx_infos->mlx_ptr, textures->xpm_door.xpm);
 	mlx_destroy_image(mlx_infos->mlx_ptr, textures->xpm_ennemy.xpm);
+	mlx_destroy_image(mlx_infos->mlx_ptr, textures->xpm_ennemy_animated.xpm);
 	mlx_destroy_image(mlx_infos->mlx_ptr, textures->xpm_ennemy_dead.xpm);
 	mlx_destroy_image(mlx_infos->mlx_ptr, textures->xpm_weapon.xpm);
 	mlx_destroy_image(mlx_infos->mlx_ptr, textures->xpm_weapon_firing1.xpm);
@@ -66,7 +67,6 @@ void	free_mlx_infos(void)
 	mlx_destroy_image(mlx_infos->mlx_ptr, textures->xpm_weapon_firing4.xpm);
 	mlx_destroy_image(mlx_infos->mlx_ptr, textures->xpm_weapon_firing5.xpm);
 	mlx_destroy_image(mlx_infos->mlx_ptr, textures->xpm_weapon_firing6.xpm);
-
 	if (mlx_infos->img_ptr)
 		mlx_destroy_image(mlx_infos->mlx_ptr, mlx_infos->img_ptr);
 	mlx_destroy_window(mlx_infos->mlx_ptr, mlx_infos->win_ptr);
