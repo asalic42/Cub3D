@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2024/02/06 10:33:49 by asalic           ###   ########.fr       */
+/*   Updated: 2024/02/06 11:23:47 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	cast_ray(t_window *window)
 	ennemy(textures, &all_stuff, window);
 	fps->compteur++;
 }
-
 
 void	draw_and_count_fps(t_player_pos *player, t_window *win)
 {
@@ -195,6 +194,13 @@ int	mouse_pos(t_window *window)
 	return (1);
 }
 
+int esc_keypress(int keycode, t_window *window)
+{
+	if (keycode == 65307)
+		return (exit_menu(window));
+	return (0);
+}
+
 void	create_menu(t_window *window)
 {
 	t_mlx_stuff *mlx;
@@ -206,6 +212,7 @@ void	create_menu(t_window *window)
 	mlx_loop_hook(window->mlx_ptr, &mouse_pos, window);
 	mlx_hook(window->win_ptr, ButtonPress, ButtonPressMask, &button_press, window);
 	mlx_hook(window->win_ptr, 17, ButtonPressMask, &exit_menu, window);
+	mlx_hook(window->win_ptr, KeyPress, KeyPressMask, &esc_keypress, window);
 	mlx_loop(window->mlx_ptr);
 }
 
