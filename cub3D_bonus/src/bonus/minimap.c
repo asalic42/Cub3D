@@ -6,16 +6,11 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 17:20:04 by rciaze            #+#    #+#             */
-/*   Updated: 2024/02/06 13:22:37 by asalic           ###   ########.fr       */
+/*   Updated: 2024/02/06 16:17:33 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/main.h"
-#define W 0xFFFFFF
-#define WALL 0x555555
-#define O_D 0x3333FF
-#define C_D 0x7777CC
-#define GREY 0xBBBBBB
+#include "../../includes/main.h"
 
 void	draw_squares(t_window *window, t_minimap *mini, t_map *map,
 	t_player_pos *player)

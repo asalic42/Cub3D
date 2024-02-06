@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   weapon.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:13:32 by rciaze            #+#    #+#             */
-/*   Updated: 2024/02/05 17:09:44 by raphael          ###   ########.fr       */
+/*   Updated: 2024/02/06 16:17:26 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/main.h"
+#include "../../includes/main.h"
 
 void	print_weapon(t_window *window, t_texture_details *xpm, int j)
 {

@@ -6,16 +6,16 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:36:22 by raphael           #+#    #+#             */
-/*   Updated: 2024/02/06 12:18:32 by asalic           ###   ########.fr       */
+/*   Updated: 2024/02/06 15:50:04 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	DESIGN_PATTERN_H
+#ifndef DESIGN_PATTERN_H
 # define DESIGN_PATTERN_H
 
-#include <time.h>
+# include <time.h>
 
-typedef	struct s_fps
+typedef struct s_fps
 {
 	clock_t	start;
 	clock_t	end;

@@ -6,11 +6,11 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 11:27:15 by rciaze            #+#    #+#             */
-/*   Updated: 2024/02/06 12:18:53 by asalic           ###   ########.fr       */
+/*   Updated: 2024/02/06 16:17:06 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/main.h"
+#include "../../includes/main.h"
 
 void	calculate_angle(t_window *window, t_print_ennemy *data,
 	t_stuff_for_ray_casting *all_stuff)

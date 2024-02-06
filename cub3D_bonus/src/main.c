@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2024/02/06 12:18:05 by asalic           ###   ########.fr       */
+/*   Updated: 2024/02/06 16:29:53 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void	draw_player(t_window *window)
 	update_mlx_infos(window->mlx_ptr, window->win_ptr, window->img_ptr);
 }
 
-static void	reset(t_window *window)
+void	reset(t_window *window)
 {
 	t_mlx_stuff		*mlx_infos;
 

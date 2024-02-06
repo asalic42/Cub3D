@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ennemy2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
+/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 17:48:34 by rciaze            #+#    #+#             */
-/*   Updated: 2024/02/01 16:31:28 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/02/06 16:17:09 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/main.h"
+#include "../../includes/main.h"
 
 int	comparator(const void *p, const void *p2)
 {
