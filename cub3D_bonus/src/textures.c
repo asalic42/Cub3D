@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
+/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:28:16 by rciaze            #+#    #+#             */
-/*   Updated: 2024/02/06 15:41:00 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/02/06 17:25:29 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,10 @@ void	init_textures_two(t_window *window, char *door, char *ennemy, t_mlx_stuff *
 	textures->xpm_ennemy.xpm = mlx_xpm_file_to_image(mlx->mlx_ptr, ennemy, \
 		&textures->xpm_ennemy.width, &textures->xpm_ennemy.height);
 	textures->xpm_ennemy.xpm_data = mlx_get_data_addr(textures->xpm_ennemy.xpm, \
+		&tmp_p.bits_per_pixel, &tmp_p.size_line, &tmp_p.endian);
+	textures->xpm_ennemy_animated.xpm = mlx_xpm_file_to_image(mlx->mlx_ptr, "./textures/ennemy2.xpm", \
+		&textures->xpm_ennemy_animated.width, &textures->xpm_ennemy_animated.height);
+	textures->xpm_ennemy_animated.xpm_data = mlx_get_data_addr(textures->xpm_ennemy_animated.xpm, \
 		&tmp_p.bits_per_pixel, &tmp_p.size_line, &tmp_p.endian);
 	mlx_string_put(mlx->mlx_ptr, mlx->win_ptr, 50, 350, 0xFF00AA, \
 		"Loading dead ennemy texture ...");

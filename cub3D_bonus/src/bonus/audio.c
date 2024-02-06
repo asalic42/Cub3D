@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   audio.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 19:02:46 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/31 17:41:24 by raphael          ###   ########.fr       */
+/*   Updated: 2024/02/06 16:17:00 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/main.h"
+#include "../../includes/main.h"
 
 t_window	*get_window_instance(void)
 {

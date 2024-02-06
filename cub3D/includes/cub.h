@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:57:25 by asalic            #+#    #+#             */
-/*   Updated: 2024/02/05 17:40:14 by asalic           ###   ########.fr       */
+/*   Updated: 2024/02/06 16:34:41 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,6 @@ char			**ft_maptab(char *map, t_data *data, t_window *window);
 char			*go_map(t_parse *put, t_data *data, t_window *window, int tour);
 
 /* * * * MAIN CORE * * * */
-int			init_data(t_window *window, char *av);
+int				init_data(t_window *window, char *av);
 
 #endif

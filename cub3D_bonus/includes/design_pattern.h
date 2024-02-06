@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   design_pattern.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:36:22 by raphael           #+#    #+#             */
-/*   Updated: 2024/02/05 13:40:12 by raphael          ###   ########.fr       */
+/*   Updated: 2024/02/06 15:50:04 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	DESIGN_PATTERN_H
+#ifndef DESIGN_PATTERN_H
 # define DESIGN_PATTERN_H
 
-#include <time.h>
+# include <time.h>
 
-typedef	struct s_fps
+typedef struct s_fps
 {
 	clock_t	start;
 	clock_t	end;
@@ -59,6 +59,7 @@ typedef struct s_textures_path
 	t_texture_details	xpm4;
 	t_texture_details	xpm_door;
 	t_texture_details	xpm_ennemy;
+	t_texture_details	xpm_ennemy_animated;
 	t_texture_details	xpm_ennemy_dead;
 	t_texture_details	xpm_weapon;
 	t_texture_details	xpm_weapon_firing1;

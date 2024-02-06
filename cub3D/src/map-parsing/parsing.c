@@ -6,41 +6,11 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 12:38:31 by asalic            #+#    #+#             */
-/*   Updated: 2024/02/05 18:04:42 by asalic           ###   ########.fr       */
+/*   Updated: 2024/02/06 16:36:10 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/main.h"
-
-/* Loop of gnl while it isn't the description of the map */
-char	*loop_gnl(t_parse *parser)
-{
-	int		i;
-	char	*buf;
-
-	i = 0;
-	buf = get_next_line(parser->fd);
-	while (buf)
-	{
-		i = 0;
-		while (buf[i])
-		{
-			while (buf[i] && (buf[i] == ' ' || buf[i] == '\t'))
-				i ++;
-			if (buf[i] == 'N' || buf[i] == 'S' || buf[i] == 'W' \
-			|| buf[i] == 'E' || buf[i] == 'F' || buf[i] == 'C')
-				break ;
-			else if (buf && buf[i] == '1')
-				return (buf);
-			else if (buf[i] && buf[i] != ' ' && buf[i] != '\t' && buf[i] \
-			!= '\n')
-				return (NULL);
-			i ++;
-		}
-		buf = get_next_line(parser->fd);
-	}
-	return (buf);
-}
 
 //If value == SPACE : check if around him, there is only 1
 // or SPACE or limits of the map
@@ -59,11 +29,19 @@ int	is_contour(int x, int y, char **map, t_data *data)
 
 int	contour_check(t_data *data, char **map)
 {
+	if (!is_contour(data->x -1, data->y +1, map, data))
+		return (0);
 	if (!is_contour(data->x -1, data->y, map, data))
+		return (0);
+	if (!is_contour(data->x -1, data->y -1, map, data))
 		return (0);
 	if (!is_contour(data->x, data->y +1, map, data))
 		return (0);
 	if (!is_contour(data->x, data->y -1, map, data))
+		return (0);
+	if (!is_contour(data->x +1, data->y +1, map, data))
+		return (0);
+	if (!is_contour(data->x +1, data->y -1, map, data))
 		return (0);
 	if (!is_contour(data->x +1, data->y, map, data))
 		return (0);
