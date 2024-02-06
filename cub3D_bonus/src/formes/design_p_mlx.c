@@ -3,21 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   design_p_mlx.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 11:16:59 by wolf              #+#    #+#             */
-/*   Updated: 2024/02/06 12:28:55 by asalic           ###   ########.fr       */
+/*   Updated: 2024/02/06 18:32:20 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/main.h"
-
-t_mlx_stuff	*mlx_instance(void)
-{
-	static t_mlx_stuff	instance;
-
-	return (&instance);
-}
 
 void	update_mlx_infos(void *mlx_ptr, void *win_ptr, void *img_ptr)
 {

@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2024/02/06 18:24:19 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/02/06 18:29:13 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,8 @@ void	reset(t_window *window)
 void	start_game(t_window *window)
 {
 	reset(window);
-	init_textures(window, "./textures/door_eye_blood.xpm", "./textures/ennemy1.xpm");
+	init_textures(window, "./textures/door_eye_blood.xpm", \
+		"./textures/ennemy1.xpm");
 	t_line prout = init_rectangle(0, 0, WIDTH, HEIGHT);
 	draw_line(prout, window->img_ptr, 0x690000, 0);
 	initializer_audio(window);

@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 16:55:21 by asalic            #+#    #+#             */
-/*   Updated: 2024/02/06 18:18:46 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/02/06 18:33:02 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int	*simple_tab_int(char **char_map, t_window *window, int y)
 			{
 				window->ennemies[window->ennemies_count].x = x + 0.5;
 				window->ennemies[window->ennemies_count].y = y + 0.5;
-				window->ennemies[i - 1].is_ded = false;
+				window->ennemies[window->ennemies_count].is_ded = false;
 				window->ennemies_count++;
 			}
 			i ++;

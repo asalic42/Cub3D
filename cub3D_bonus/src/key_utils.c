@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:32:15 by rciaze            #+#    #+#             */
-/*   Updated: 2024/02/06 17:52:24 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/02/06 18:29:00 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	colision(t_player_pos *player, float dx, float dy, t_map *map)
 	mp = my * map->x + (int)(player->x);
 	if (map->map[mp] == 1 || map->map[mp] == 3 || map->map[mp] == 5)
 		player->y -= dy;
-
 }
 
 int	key_release(int keycode, t_window *window)

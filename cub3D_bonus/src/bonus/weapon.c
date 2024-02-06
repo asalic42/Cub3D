@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:13:32 by rciaze            #+#    #+#             */
-/*   Updated: 2024/02/06 18:24:23 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/02/06 18:29:29 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	weapon_animation(t_window *window)
 	if (w_cmpt > 0)
 		if_s_weapon(&w_cmpt, window);
 	else
-		print_weapon(window, &get_textures_instance()->xpm_weapon, -1);	
+		print_weapon(window, &get_textures_instance()->xpm_weapon, -1);
 }
 
 void	print_weapon(t_window *window, t_texture_details *xpm, int j)
