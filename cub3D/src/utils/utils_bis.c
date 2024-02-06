@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:15:34 by asalic            #+#    #+#             */
-/*   Updated: 2024/02/05 18:29:43 by asalic           ###   ########.fr       */
+/*   Updated: 2024/02/06 16:36:16 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,49 @@ int	is_in_char(char c)
 		&& c != 'S' && c != ' ')
 		return (0);
 	return (1);
+}
+
+static int	in_loop_gnl(char *buf, int count)
+{
+	int	i;
+
+	i = 0;
+	while (buf[i])
+	{
+		while (buf[i] && (buf[i] == ' ' || buf[i] == '\t'))
+			i ++;
+		if (buf[i] == 'N' || buf[i] == 'S' || buf[i] == 'W' \
+		|| buf[i] == 'E' || buf[i] == 'F' || buf[i] == 'C')
+		{
+			count ++;
+			break ;
+		}
+		else if (buf && buf[i] == '1')
+			return (-2);
+		else if (buf[i] && buf[i] != ' ' && buf[i] != '\t' && buf[i] \
+		!= '\n')
+			return (-1);
+		i ++;
+	}
+	return (count);
+}
+
+/* Loop of gnl while it isn't the description of the map */
+char	*loop_gnl(t_parse *parser)
+{
+	char	*buf;
+	int		count;
+
+	buf = get_next_line(parser->fd);
+	count = 0;
+	while (buf)
+	{
+		count = in_loop_gnl(buf, count);
+		if (count == -2)
+			return (buf);
+		if (count > 6 || count == -1)
+			return (NULL);
+		buf = get_next_line(parser->fd);
+	}
+	return (buf);
 }
