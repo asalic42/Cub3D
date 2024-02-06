@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2024/02/06 16:43:28 by asalic           ###   ########.fr       */
+/*   Updated: 2024/02/06 18:24:19 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void	draw_and_count_fps(t_player_pos *player, t_window *win)
 {
 	t_fps			*fps;
 	int				temps;
-	static int		w_cmpt;
 
 	fps = get_fps_instance();
 	if (((double)(fps->end - fps->start) / CLOCKS_PER_SEC) > 1.5)
@@ -63,36 +62,8 @@ void	draw_and_count_fps(t_player_pos *player, t_window *win)
 	mlx_put_image_to_window(win->mlx_ptr, win->win_ptr,
 		win->img_ptr, 0, 0);
 	fps->str = ft_strjoin("Fps = ", ft_itoa(temps));
-	if (!w_cmpt)
-		w_cmpt = -1;
-	if (win->anim_bool)
-	{
-		win->anim_bool = false;
-		w_cmpt = 1;
-	}		
-	if (w_cmpt > 0)
-	{
-		w_cmpt++;
-		if (w_cmpt < 6)
-			print_weapon(win, &get_textures_instance()->xpm_weapon_firing1, -1);
-		else if (w_cmpt < 12)
-			print_weapon(win, &get_textures_instance()->xpm_weapon_firing2, -1);
-		else if (w_cmpt < 18)
-			print_weapon(win, &get_textures_instance()->xpm_weapon_firing6, -1);
-		else if (w_cmpt < 24)
-			print_weapon(win, &get_textures_instance()->xpm_weapon_firing4, -1);
-		else if (w_cmpt < 30)
-			print_weapon(win, &get_textures_instance()->xpm_weapon_firing5, -1);
-		else if (w_cmpt < 36)
-			print_weapon(win, &get_textures_instance()->xpm_weapon_firing6, -1);
-		if (w_cmpt > 36)
-		{
-			print_weapon(win, &get_textures_instance()->xpm_weapon, -1);
-			w_cmpt = -1;
-		}
-	}
-	else
-		print_weapon(win, &get_textures_instance()->xpm_weapon, -1);
+	ennemy_animation(win);
+	weapon_animation(win);
 	mlx_string_put(win->mlx_ptr, win->win_ptr, 1800, 50, 0xFFFFFF, fps->str);
 }
 
@@ -137,10 +108,7 @@ void	reset(t_window *window)
 
 void	start_game(t_window *window)
 {
-	t_mlx_stuff *mlx;
-
 	reset(window);
-	mlx = get_mlx_ptr();
 	init_textures(window, "./textures/door_eye_blood.xpm", "./textures/ennemy1.xpm");
 	t_line prout = init_rectangle(0, 0, WIDTH, HEIGHT);
 	draw_line(prout, window->img_ptr, 0x690000, 0);

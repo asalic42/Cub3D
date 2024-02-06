@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:26:27 by raphael           #+#    #+#             */
-/*   Updated: 2024/02/06 17:18:46 by asalic           ###   ########.fr       */
+/*   Updated: 2024/02/06 18:24:40 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # define DR 0.0006363179
 # define R_FOV 1.22173
 
-# define NB_OF_STRIPES 1920
-# define WIDTH 1920
+# define NB_OF_STRIPES 1820
+# define WIDTH 1820
 # define HEIGHT 1010
 
 # define NC       "\x1b[0m"
@@ -80,6 +80,7 @@ typedef struct s_ennemy
 	float				x;
 	float				y;
 	float				dist_to_player;
+	bool				is_ded;
 	t_texture_details	*tex;
 }	t_ennemy;
 
@@ -272,6 +273,7 @@ void			create_menu(t_window *window);
 int				exit_menu(t_window *window);
 
 /* * * * ENNEMY * * * */
+void			ennemy_animation(t_window *window);
 int				comparator(const void *p, const void *p2);
 void			pos_ennemy_player(t_parse_ennemy *enmy, char **map);
 int				ennemy_parse_loop(char **map, t_parse_ennemy *enmy, \
@@ -360,6 +362,8 @@ void			initializer_audio(t_window *window);
 
 /* * * * WEAPON * * * */
 
+void			if_s_weapon(int *w_cmpt, t_window *window);
+void			weapon_animation(t_window *window);
 void			shot_fired(t_window *window, t_player_pos *player, t_map *map, \
 					t_textures_path *tex);
 void			print_weapon(t_window *window, t_texture_details *xpm, int j);

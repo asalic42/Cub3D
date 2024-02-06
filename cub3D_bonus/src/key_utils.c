@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:32:15 by rciaze            #+#    #+#             */
-/*   Updated: 2024/02/05 17:07:49 by raphael          ###   ########.fr       */
+/*   Updated: 2024/02/06 17:52:24 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,30 +17,16 @@ void	colision(t_player_pos *player, float dx, float dy, t_map *map)
 	int		mx;
 	int		my;
 	int		mp;
-	int		i;
-	bool	prout;
 
-	prout = false;
-	i = -1;
-	while (++i < 5)
-	{
-		mx = (int)(player->x + (i * dx));
-		mp = (int)(player->y) * map->x + mx;
-		if (map->map[mp] == 1 || map->map[mp] == 3 || map->map[mp] == 5)
-		{
-			player->x -= dx;
-			prout = true;
-		}
-		my = (int)(player->y + (i * dy));
-		mp = my * map->x + (int)(player->x);
-		if (map->map[mp] == 1 || map->map[mp] == 3 || map->map[mp] == 5)
-		{
-			player->y -= dy;
-			prout = true;
-		}
-		if (prout)
-			break ;
-	}
+	mx = (int)(player->x + dx);
+	mp = (int)(player->y) * map->x + mx;
+	if (map->map[mp] == 1 || map->map[mp] == 3 || map->map[mp] == 5)
+		player->x -= dx;
+	my = (int)(player->y + dy);
+	mp = my * map->x + (int)(player->x);
+	if (map->map[mp] == 1 || map->map[mp] == 3 || map->map[mp] == 5)
+		player->y -= dy;
+
 }
 
 int	key_release(int keycode, t_window *window)
@@ -70,7 +56,7 @@ static void	open_door(void)
 	player = get_player_instance();
 	map = get_map_instance();
 	i = -1;
-	while (++i < 30)
+	while (++i < 20)
 	{
 		map->mx = (int)(player->x + (i * player->dx));
 		map->my = (int)(player->y + (i * player->dy));
