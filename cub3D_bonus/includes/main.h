@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:26:27 by raphael           #+#    #+#             */
-/*   Updated: 2024/02/05 19:02:25 by asalic           ###   ########.fr       */
+/*   Updated: 2024/02/06 09:54:45 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -304,7 +304,7 @@ int				is_already_pass(t_parse_ennemy *enmy, int x, int y);
 /* * * * WEAPON * * * */
 
 void			shot_fired(t_window *window, t_player_pos *player, t_map *map, \
-					t_textures_path *tex)
+					t_textures_path *tex);
 void			print_weapon(t_window *window, t_texture_details *xpm, int j);
 
 /* * * * MOVEMENT * * * */

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
+/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:21:28 by rciaze            #+#    #+#             */
-/*   Updated: 2024/02/02 19:09:18 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/02/06 10:33:49 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,12 +117,31 @@ void	draw_player(t_window *window)
 	update_mlx_infos(window->mlx_ptr, window->win_ptr, window->img_ptr);
 }
 
+static void	reset(t_window *window)
+{
+	t_mlx_stuff		*mlx_infos;
+
+	mlx_infos = get_mlx_ptr();
+	mlx_destroy_image(mlx_infos->mlx_ptr, window->menu.img_data);
+	if (mlx_infos->img_ptr)
+		mlx_destroy_image(mlx_infos->mlx_ptr, mlx_infos->img_ptr);
+	mlx_destroy_window(mlx_infos->mlx_ptr, mlx_infos->win_ptr);
+	mlx_destroy_display(mlx_infos->mlx_ptr);
+	free(mlx_infos->mlx_ptr);
+	if (!create_window(window))
+	{
+		free_garbage();
+		exit(EXIT_FAILURE);
+	}
+	update_mlx_infos(&window->mlx_ptr, &window->win_ptr, &window->img_ptr);
+}
+
 void	start_game(t_window *window)
 {
 	t_mlx_stuff *mlx;
 
+	reset(window);
 	mlx = get_mlx_ptr();
-	mlx_destroy_image(mlx->mlx_ptr, window->menu.img_data);
 	init_textures(window, "./textures/door_eye_blood.xpm", "./textures/ennemy1.xpm");
 	t_line prout = init_rectangle(0, 0, WIDTH, HEIGHT);
 	draw_line(prout, window->img_ptr, 0x690000, 0);
