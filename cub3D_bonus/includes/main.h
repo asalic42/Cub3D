@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:26:27 by raphael           #+#    #+#             */
-/*   Updated: 2024/02/06 16:28:45 by asalic           ###   ########.fr       */
+/*   Updated: 2024/02/06 17:18:46 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,22 +145,22 @@ typedef struct s_window
 	char		*img_data;
 	int			bits;
 	int			size_line_img;
+	int			ennemies_count;
 	int			endian;
-	t_data		data;
 	char		*north;
 	char		*south;
 	char		*west;
 	char		*east;
 	int			floor;
 	int			ceiling;
+	bool		anim_bool;
+	bool		stop;
 	t_music		sound;
 	t_keys		keys;
 	t_mouse		win;
 	t_ennemy	ennemies[20];
-	int			ennemies_count;
 	t_menu		menu;
-	bool		stop;
-	bool		anim_bool;
+	t_data		data;
 }	t_window;
 
 /* * * * RAY CASTING * * * */
