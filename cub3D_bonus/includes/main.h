@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:26:27 by raphael           #+#    #+#             */
-/*   Updated: 2024/02/06 19:08:15 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/02/06 19:19:07 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +162,7 @@ typedef struct s_window
 	t_ennemy	ennemies[20];
 	t_menu		menu;
 	t_data		data;
+	int			end;
 }	t_window;
 
 /* * * * RAY CASTING * * * */
@@ -273,6 +274,7 @@ void			create_menu(t_window *window);
 int				exit_menu(t_window *window);
 
 /* * * * ENNEMY * * * */
+void			is_ded(t_window *window, int i, t_textures_path *tex);
 void			ennemy_animation(t_window *window);
 int				comparator(const void *p, const void *p2);
 void			pos_ennemy_player(t_parse_ennemy *enmy, char **map);

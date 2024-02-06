@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:30:50 by rciaze            #+#    #+#             */
-/*   Updated: 2024/02/05 16:58:13 by raphael          ###   ########.fr       */
+/*   Updated: 2024/02/06 19:13:33 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	fps_init(void)
 
 int	create_window(t_window *window)
 {
-	t_player_pos	*player;
 	t_map			*mapp;
 
 	fps_init();
@@ -59,10 +58,9 @@ int	create_window(t_window *window)
 	mapp->x = window->data.ptr.width;
 	mapp->y = window->data.ptr.height;
 	mapp->mp = mapp->x * mapp->y;
-	player = get_player_instance();
-	find_player(mapp, player, window->data.ptr.map);
-	player->dx = cos(player->a) * 0.16;
-	player->dy = sin(player->a) * 0.16;
+	find_player(mapp, get_player_instance(), window->data.ptr.map);
+	get_player_instance()->dx = cos(get_player_instance()->a) * 0.16;
+	get_player_instance()->dy = sin(get_player_instance()->a) * 0.16;
 	window->keys.a = false;
 	window->keys.s = false;
 	window->keys.w = false;
@@ -72,6 +70,7 @@ int	create_window(t_window *window)
 	window->win.mouse_x = 0;
 	window->win.mouse_y = 0;
 	window->anim_bool = false;
+	window->end = 0;
 	return (1);
 }
 
