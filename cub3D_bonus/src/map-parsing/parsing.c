@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
+/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 12:38:31 by asalic            #+#    #+#             */
-/*   Updated: 2024/01/29 15:28:15 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/02/06 15:45:45 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,19 @@ int	is_contour(int x, int y, char **map, t_data *data)
 
 int	contour_check(t_data *data, char **map)
 {
+	if (!is_contour(data->x -1, data->y +1, map, data))
+		return (0);
 	if (!is_contour(data->x -1, data->y, map, data))
+		return (0);
+	if (!is_contour(data->x -1, data->y -1, map, data))
 		return (0);
 	if (!is_contour(data->x, data->y +1, map, data))
 		return (0);
 	if (!is_contour(data->x, data->y -1, map, data))
+		return (0);
+	if (!is_contour(data->x +1, data->y +1, map, data))
+		return (0);
+	if (!is_contour(data->x +1, data->y -1, map, data))
 		return (0);
 	if (!is_contour(data->x +1, data->y, map, data))
 		return (0);
