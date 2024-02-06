@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:26:27 by raphael           #+#    #+#             */
-/*   Updated: 2024/02/06 17:18:46 by asalic           ###   ########.fr       */
+/*   Updated: 2024/02/06 19:19:07 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ typedef struct s_ennemy
 	float				x;
 	float				y;
 	float				dist_to_player;
+	bool				is_ded;
 	t_texture_details	*tex;
 }	t_ennemy;
 
@@ -161,6 +162,7 @@ typedef struct s_window
 	t_ennemy	ennemies[20];
 	t_menu		menu;
 	t_data		data;
+	int			end;
 }	t_window;
 
 /* * * * RAY CASTING * * * */
@@ -272,6 +274,8 @@ void			create_menu(t_window *window);
 int				exit_menu(t_window *window);
 
 /* * * * ENNEMY * * * */
+void			is_ded(t_window *window, int i, t_textures_path *tex);
+void			ennemy_animation(t_window *window);
 int				comparator(const void *p, const void *p2);
 void			pos_ennemy_player(t_parse_ennemy *enmy, char **map);
 int				ennemy_parse_loop(char **map, t_parse_ennemy *enmy, \
@@ -310,6 +314,7 @@ int				error_cases(void);
 int				print_error(char *str);
 
 /* * * * PARSING * * * */
+int				ft_double_len(char **str);
 int				map_up_n_down(char **map, t_data *data);
 int				is_zero(int y, char **map, t_data *data);
 int				first_line(t_data *data, char **map);
@@ -347,7 +352,8 @@ void			left_or_right(t_stuff_for_ray_casting *all_stuff, \
 void			find_closest_vertical_intersection(
 					t_stuff_for_ray_casting *all_stuff, t_window *window);
 float			distance(float ax, float ay, float bx, float by);
-int				comp_distance(t_stuff_for_ray_casting *all_stuff);
+int				comp_distance(t_stuff_for_ray_casting *all_stuff, \
+					int comp_distance);
 float			distance(float ax, float ay, float bx, float by);
 void			init_ray(t_stuff_for_ray_casting *all_stuff, \
 					t_window *window);
@@ -360,6 +366,8 @@ void			initializer_audio(t_window *window);
 
 /* * * * WEAPON * * * */
 
+void			if_s_weapon(int *w_cmpt, t_window *window);
+void			weapon_animation(t_window *window);
 void			shot_fired(t_window *window, t_player_pos *player, t_map *map, \
 					t_textures_path *tex);
 void			print_weapon(t_window *window, t_texture_details *xpm, int j);

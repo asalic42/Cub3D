@@ -6,20 +6,11 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:32:15 by rciaze            #+#    #+#             */
-/*   Updated: 2024/02/06 17:58:32 by asalic           ###   ########.fr       */
+/*   Updated: 2024/02/06 19:24:32 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/main.h"
-
-static void	detect_colision(float dx, int mp, t_map *map, t_player_pos *player)
-{
-	if (map->map[mp] == 1 || map->map[mp] == 3 || map->map[mp] == 5)
-	{
-		player->x -= dx;
-		map->boum = true;
-	}
-}
 
 /* Detect if there is a collision between the player and a wall */
 void	colision(t_player_pos *player, float dx, float dy, t_map *map)
@@ -27,25 +18,15 @@ void	colision(t_player_pos *player, float dx, float dy, t_map *map)
 	int		mx;
 	int		my;
 	int		mp;
-	int		i;
 
-	map->boum = false;
-	i = -1;
-	while (++i < 5)
-	{
-		mx = (int)(player->x + (i * dx));
-		mp = (int)(player->y) * map->x + mx;
-		detect_colision(dx, mp, map, player);
-		my = (int)(player->y + (i * dy));
-		mp = my * map->x + (int)(player->x);
-		if (map->map[mp] == 1 || map->map[mp] == 3 || map->map[mp] == 5)
-		{
-			player->y -= dy;
-			map->boum = true;
-		}
-		if (map->boum)
-			break ;
-	}
+	mx = (int)(player->x + dx);
+	mp = (int)(player->y) * map->x + mx;
+	if (map->map[mp] == 1 || map->map[mp] == 3 || map->map[mp] == 5)
+		player->x -= dx;
+	my = (int)(player->y + dy);
+	mp = my * map->x + (int)(player->x);
+	if (map->map[mp] == 1 || map->map[mp] == 3 || map->map[mp] == 5)
+		player->y -= dy;
 }
 
 /* Key released handle */
@@ -77,7 +58,7 @@ static void	open_door(void)
 	player = get_player_instance();
 	map = get_map_instance();
 	i = -1;
-	while (++i < 30)
+	while (++i < 20)
 	{
 		map->mx = (int)(player->x + (i * player->dx));
 		map->my = (int)(player->y + (i * player->dy));

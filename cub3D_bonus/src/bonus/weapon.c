@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   weapon.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:13:32 by rciaze            #+#    #+#             */
-/*   Updated: 2024/02/06 17:25:44 by asalic           ###   ########.fr       */
+/*   Updated: 2024/02/06 19:18:54 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,20 @@ int	is_on_ennemy(float my, float mx, t_window *window)
 
 	j = -1;
 	while (++j < window->ennemies_count)
-	{
-		printf("Looking at ennemy %d\n", j);
 		if ((int)(mx) == (int)(window->ennemies[j].x) && (int)(my) == \
 			(int)(window->ennemies[j].y))
 			return (j + 1);
-	}
 	return (0);
+}
+
+void	is_ded(t_window *window, int i, t_textures_path *tex)
+{
+	window->ennemies[i - 1].tex = &tex->xpm_ennemy_dead;
+	if (!window->ennemies[i - 1].is_ded)
+	{
+		window->end++;
+		window->ennemies[i - 1].is_ded = true;
+	}
 }
 
 void	shot_fired(t_window *window, t_player_pos *player, t_map *map, \
@@ -78,7 +85,7 @@ void	shot_fired(t_window *window, t_player_pos *player, t_map *map, \
 		i = is_on_ennemy(my, mx, window);
 		if (i)
 		{
-			window->ennemies[i - 1].tex = &tex->xpm_ennemy_dead;
+			is_ded(window, i, tex);
 			break ;
 		}
 	}
