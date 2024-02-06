@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_map_bis.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:15:34 by asalic            #+#    #+#             */
-/*   Updated: 2024/02/06 09:53:57 by asalic           ###   ########.fr       */
+/*   Updated: 2024/02/06 19:07:43 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,27 +94,4 @@ int	ft_double_len(char **str)
 		i ++;
 	}
 	return (count);
-}
-
-char	**ft_strdup_double(char **str)
-{
-	char	**dest;
-	int		i;
-	int		j;
-
-	i = 0;
-	dest = ft_malloc(ft_double_len(str) * sizeof(char *));
-	while (str[i])
-	{
-		j = 0;
-		dest[i] = ft_malloc((ft_strlen(str[i]) + 1) * sizeof(char));
-		while (str[i][j])
-		{
-			dest[i][j] = str[i][j];
-			j ++;
-		}
-		dest[i][j] = '\0';
-		i ++;
-	}
-	return (dest);
 }

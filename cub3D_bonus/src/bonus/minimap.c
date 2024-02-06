@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 17:20:04 by rciaze            #+#    #+#             */
-/*   Updated: 2024/02/06 16:17:33 by asalic           ###   ########.fr       */
+/*   Updated: 2024/02/06 18:47:33 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,20 @@ void	draw_squares(t_window *window, t_minimap *mini, t_map *map,
 	while (++mini->i < (int)player->x + 9)
 	{
 		mini->my = mini->j * map->x + mini->i;
-		if (mini->j < 0 || mini->j > map->y - 1|| mini->i < 0 || mini->i > map->x - 1)
-		{
-			draw_line(init_rectangle(mini->cptr_x, mini->cptr_y, mini->cptr_x \
-				+ 14, mini->cptr_y + 16), window->img_ptr, GREY, 0);
-		}
-		else if (mini->i >= 0 && mini->j >= 0 && mini->i < map->x && \
-			mini->i == (int)player->x && mini->j == (int)player->y)
+		if (mini->j < 0 || mini->j > map->y - 1 || mini->i < 0 || \
+			mini->i > map->x - 1)
+			draw_line(init_rectangle(mini->cptr_x, mini->cptr_y, mini->cptr_x
+					+ 14, mini->cptr_y + 16), window->img_ptr, GREY, 0);
+		else if (mini->i == (int)player->x && mini->j == (int)player->y)
 			draw_line(init_rectangle(mini->cptr_x, mini->cptr_y, mini->cptr_x
 					+ 14, mini->cptr_y + 16), window->img_ptr, W, 0);
-		else if (mini->i >= 0 && mini->j >= 0 && mini->i < map->x && \
-		map->map[mini->my] == 1)
+		else if (map->map[mini->my] == 1)
 			draw_line(init_rectangle(mini->cptr_x, mini->cptr_y, mini->cptr_x
 					+ 14, mini->cptr_y + 16), window->img_ptr, WALL, 0);
-		else if (mini->i >= 0 && mini->j >= 0 && mini->i < map->x && \
-		map->map[mini->my] == 3)
+		else if (map->map[mini->my] == 3)
 			draw_line(init_rectangle(mini->cptr_x, mini->cptr_y, mini->cptr_x
 					+ 14, mini->cptr_y + 16), window->img_ptr, O_D, 0);
-		else if (mini->i >= 0 && mini->j >= 0 && mini->i < map->x && \
-		map->map[mini->my] == 4)
+		else if (map->map[mini->my] == 4)
 			draw_line(init_rectangle(mini->cptr_x, mini->cptr_y, mini->cptr_x
 					+ 14, mini->cptr_y + 16), window->img_ptr, C_D, 0);
 		else

@@ -6,7 +6,7 @@
 /*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:26:27 by raphael           #+#    #+#             */
-/*   Updated: 2024/02/06 18:24:40 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/02/06 19:08:15 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # define DR 0.0006363179
 # define R_FOV 1.22173
 
-# define NB_OF_STRIPES 1820
-# define WIDTH 1820
+# define NB_OF_STRIPES 1920
+# define WIDTH 1920
 # define HEIGHT 1010
 
 # define NC       "\x1b[0m"
@@ -312,6 +312,7 @@ int				error_cases(void);
 int				print_error(char *str);
 
 /* * * * PARSING * * * */
+int				ft_double_len(char **str);
 int				map_up_n_down(char **map, t_data *data);
 int				is_zero(int y, char **map, t_data *data);
 int				first_line(t_data *data, char **map);
@@ -349,7 +350,8 @@ void			left_or_right(t_stuff_for_ray_casting *all_stuff, \
 void			find_closest_vertical_intersection(
 					t_stuff_for_ray_casting *all_stuff, t_window *window);
 float			distance(float ax, float ay, float bx, float by);
-int				comp_distance(t_stuff_for_ray_casting *all_stuff);
+int				comp_distance(t_stuff_for_ray_casting *all_stuff, \
+					int comp_distance);
 float			distance(float ax, float ay, float bx, float by);
 void			init_ray(t_stuff_for_ray_casting *all_stuff, \
 					t_window *window);

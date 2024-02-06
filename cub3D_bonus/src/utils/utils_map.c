@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 15:42:22 by asalic            #+#    #+#             */
-/*   Updated: 2024/02/05 18:56:08 by asalic           ###   ########.fr       */
+/*   Updated: 2024/02/06 19:07:50 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,12 +112,4 @@ int	countmap_y(char	*mappy)
 		map.buffer = get_next_line(map.fd);
 	close(map.fd);
 	return (height);
-}
-
-int	is_in_char(char c)
-{
-	if (c != '1' && c != '0' && c != 'N' && c != 'W' && c != 'E'
-		&& c != 'S' && c != ' ' && c != 'D' && c != 'B')
-		return (print_error(RED "Error : forbidden element\n"NC));
-	return (1);
 }

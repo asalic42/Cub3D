@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_casting_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:11:12 by rciaze            #+#    #+#             */
-/*   Updated: 2024/02/05 16:51:20 by raphael          ###   ########.fr       */
+/*   Updated: 2024/02/06 19:00:24 by rciaze           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,11 +123,8 @@ void	find_closest_vertical_intersection(
 	}
 }
 
-int	comp_distance(t_stuff_for_ray_casting *all_stuff)
+int	comp_distance(t_stuff_for_ray_casting *all_stuff, int return_value)
 {
-	int	return_value;
-
-	return_value = 0;
 	if (all_stuff->dist_v <= all_stuff->dist_h)
 	{
 		all_stuff->dist_t = all_stuff->dist_v;
