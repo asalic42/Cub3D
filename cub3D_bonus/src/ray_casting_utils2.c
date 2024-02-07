@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_casting_utils2.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:24:20 by rciaze            #+#    #+#             */
-/*   Updated: 2024/02/05 16:52:36 by raphael          ###   ########.fr       */
+/*   Updated: 2024/02/07 12:50:29 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	init_ray(t_stuff_for_ray_casting *all_stuff, t_window *window)
 	all_stuff->ra = all_stuff->player->a - R_FOV / 2 + (R_FOV / NB_OF_STRIPES \
 		* (300 / (WIDTH / NB_OF_STRIPES)));
 	all_stuff->ra = normalize_angle(all_stuff->ra);
+	all_stuff->lenght_tab = ft_malloc(sizeof(int) * NB_OF_STRIPES);
 }
 
 void	init_distances(t_stuff_for_ray_casting *all_stuff)

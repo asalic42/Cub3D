@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 11:27:15 by rciaze            #+#    #+#             */
-/*   Updated: 2024/02/06 16:17:06 by asalic           ###   ########.fr       */
+/*   Updated: 2024/02/07 12:58:29 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ void	x_loop(t_window *window, t_print_ennemy *data, t_texture_details \
 {
 	while (data->start_x < data->end_x && data->start_x < WIDTH - 300)
 	{
-		if (data->start_x >= 300 && (all_stuff->line_h
-				> all_stuff->lenght_tab [data->start_x / data->width]))
+		if (data->start_x >= 300 && all_stuff->line_h > \
+			all_stuff->lenght_tab[data->start_x / data->width])
 		{
 			data->y = (HEIGHT / 1.9) - all_stuff->line_h / 2;
 			data->end_y = data->y + all_stuff->line_h;

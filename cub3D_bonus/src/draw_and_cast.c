@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 19:05:22 by rciaze            #+#    #+#             */
-/*   Updated: 2024/02/07 11:08:08 by asalic           ###   ########.fr       */
+/*   Updated: 2024/02/07 12:57:39 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void	cast_ray(t_window *window)
 	fps = get_fps_instance();
 	init_ray(&all_stuff, window);
 	textures = get_textures_instance();
-	all_stuff.r = 300 / (WIDTH / NB_OF_STRIPES);
+	all_stuff.r = 300 / (WIDTH / NB_OF_STRIPES) - 1;
 	all_stuff.player = get_player_instance();
-	while (++all_stuff.r < NB_OF_STRIPES - 300 / (WIDTH / NB_OF_STRIPES))
+	while (++all_stuff.r < (NB_OF_STRIPES - 300) / (WIDTH / NB_OF_STRIPES))
 	{
 		init_distances(&all_stuff);
 		up_or_down(&all_stuff, window);
@@ -44,7 +44,7 @@ void	cast_ray(t_window *window)
 /* Count the number of the ennemies left in the map */
 static void	count_ennemies_left(t_window *win)
 {
-	char 			*count_ennemy;
+	char	*count_ennemy;
 
 	count_ennemy = ft_strjoin("Ennemies left : ", \
 		ft_itoa(win->ennemies_count - win->end));

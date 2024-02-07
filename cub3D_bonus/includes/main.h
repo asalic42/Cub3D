@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
+/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:26:27 by raphael           #+#    #+#             */
-/*   Updated: 2024/02/06 19:19:07 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/02/07 12:49:36 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,7 +199,7 @@ typedef struct s_stuff_for_ray_casting
 	unsigned int	color;
 	t_player_pos	*player;
 	t_map			*map;
-	float			lenght_tab[1920];
+	float			*lenght_tab;
 }	t_stuff_for_ray_casting;
 
 /* * * * PARSING * * * */
