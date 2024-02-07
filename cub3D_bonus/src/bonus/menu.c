@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   menu.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
+/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 19:06:32 by rciaze            #+#    #+#             */
-/*   Updated: 2024/02/06 19:06:59 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/02/07 11:09:13 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/main.h"
+#include "../../includes/main.h"
 
 int	button_press(int mousepress, int x, int y, t_window *window)
 {

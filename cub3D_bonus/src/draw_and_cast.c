@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_and_cast.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
+/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 19:05:22 by rciaze            #+#    #+#             */
-/*   Updated: 2024/02/06 19:07:02 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/02/07 11:08:08 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,18 @@ void	cast_ray(t_window *window)
 	fps->compteur++;
 }
 
+/* Count the number of the ennemies left in the map */
+static void	count_ennemies_left(t_window *win)
+{
+	char 			*count_ennemy;
+
+	count_ennemy = ft_strjoin("Ennemies left : ", \
+		ft_itoa(win->ennemies_count - win->end));
+	mlx_string_put(win->mlx_ptr, win->win_ptr, 1800, 100, 0xFFFFFF, \
+		count_ennemy);
+}
+
+/* Count the number of fps and animate ennemies and the weapon */
 void	draw_and_count_fps(t_player_pos *player, t_window *win)
 {
 	t_fps			*fps;
@@ -64,6 +76,7 @@ void	draw_and_count_fps(t_player_pos *player, t_window *win)
 	fps->str = ft_strjoin("Fps = ", ft_itoa(temps));
 	ennemy_animation(win);
 	weapon_animation(win);
+	count_ennemies_left(win);
 	mlx_string_put(win->mlx_ptr, win->win_ptr, 1800, 50, 0xFFFFFF, fps->str);
 }
 
