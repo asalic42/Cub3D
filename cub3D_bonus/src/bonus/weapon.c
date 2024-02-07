@@ -6,7 +6,7 @@
 /*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:13:32 by rciaze            #+#    #+#             */
-/*   Updated: 2024/02/07 10:59:42 by asalic           ###   ########.fr       */
+/*   Updated: 2024/02/07 11:28:08 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void	is_ded(t_window *window, int i, t_textures_path *tex)
 	if (!window->ennemies[i - 1].is_ded)
 	{
 		window->end++;
-		printf("ennemy->count : %d | end : %d\n", window->ennemies_count, window->end);
 		window->ennemies[i - 1].is_ded = true;
 	}
 }

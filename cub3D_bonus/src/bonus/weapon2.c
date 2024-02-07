@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   weapon2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciaze <rciaze@student.42.fr>              +#+  +:+       +#+        */
+/*   By: asalic <asalic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 19:17:30 by rciaze            #+#    #+#             */
-/*   Updated: 2024/02/06 19:21:54 by rciaze           ###   ########.fr       */
+/*   Updated: 2024/02/07 11:29:28 by asalic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ void	if_s_weapon(int *w_cmpt, t_window *window)
 	{
 		print_weapon(window, &get_textures_instance()->xpm_weapon, -1);
 		if (window->end == window->ennemies_count)
+		{
+			printf(CYAN"\tYOU WIN\n\n"NC);
 			destroy_window(window);
+		}
 		*w_cmpt = -1;
 	}
 }
